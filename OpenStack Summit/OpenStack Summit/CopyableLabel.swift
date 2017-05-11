@@ -30,7 +30,7 @@ final class CopyableLabel: UILabel {
         isUserInteractionEnabled = true
     }
     
-    fileprivate func setup() {
+    private func setup() {
         
         isUserInteractionEnabled = true
         addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CopyableLabel.showMenu(_:))))

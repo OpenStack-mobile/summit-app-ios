@@ -33,7 +33,7 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
     
     // MARK: - Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         assert(self.venue != nil, "No venue set")
         

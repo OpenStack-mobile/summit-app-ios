@@ -58,7 +58,7 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         set { userDefaults.set(newValue, forKey: Key.hadPasscode.rawValue) }
     }
     
-    fileprivate enum Key: String {
+    private enum Key: String {
         
         case member = "CoreSummit.UserDefaultsSessionStorage.Key.Member"
         case hadPasscode = "CoreSummit.UserDefaultsSessionStorage.Key.HadPasscode"

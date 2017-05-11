@@ -89,7 +89,7 @@ public extension Notification {
             }
         }
         
-        fileprivate enum Prefix: String {
+        private enum Prefix: String {
             
             case summit, member, event, team, attendees, speakers, everyone
             

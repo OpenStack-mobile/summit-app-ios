@@ -37,14 +37,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     lazy var venuesViewController: VenuesViewController = VenuesViewController()
     lazy var speakersViewController: SpeakersViewController = R.storyboard.people.speakersViewController()!
     
-    fileprivate var unreadNotificationsObserver: Int?
-    fileprivate var unreadTeamMessagesObserver: Int?
+    private var unreadNotificationsObserver: Int?
+    private var unreadTeamMessagesObserver: Int?
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Accessors
     
-    fileprivate(set) var name: String {
+    private(set) var name: String {
         
         get {
             return nameLabel.text ?? ""
@@ -54,7 +54,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    fileprivate(set) var pictureURL: String = "" {
+    private(set) var pictureURL: String = "" {
         
         didSet {
             
@@ -191,7 +191,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - Private Methods
     
-    fileprivate func hasAccess(to menuItem: MenuItem) -> Bool {
+    private func hasAccess(to menuItem: MenuItem) -> Bool {
         
         let currentMemberRole = Store.shared.memberRole
         
@@ -205,7 +205,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
 
-    fileprivate func unselectMenuItems() {
+    private func unselectMenuItems() {
         
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
@@ -215,7 +215,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         inboxButton.alpha = 0.5
     }
     
-    fileprivate func highlight(_ item: MenuItem) {
+    private func highlight(_ item: MenuItem) {
         
         let _ = self.view
         
@@ -241,11 +241,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     }
     
     @inline(__always)
-    fileprivate func hideMenu() {
+    private func hideMenu() {
         revealViewController().revealToggle(self)
     }
     
-    fileprivate func reloadMenu() {
+    private func reloadMenu() {
         
         let loginTitle = hasAccess(to: .login) ? "LOG IN" : "LOG OUT"
         loginButton.setTitle(loginTitle, for: UIControlState())
@@ -255,7 +255,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         myProfileButton.isHidden = hasAccess(to: .myProfile) == false
     }
     
-    fileprivate func reloadInboxCounter() {
+    private func reloadInboxCounter() {
         
         let unreadCount = PushNotificationManager.shared.unreadCount
         
@@ -267,12 +267,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     // MARK: Navigation
     
     @inline(__always)
-    fileprivate func navigateToHome() {
+    private func navigateToHome() {
         
         toggleMenuSelection(eventsButton)
     }
     
-    fileprivate func showUserProfile() {
+    private func showUserProfile() {
         
         if let memberManagedObject = Store.shared.authenticatedMember {
             
@@ -346,7 +346,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(myProfileViewController)
     }
     
-    fileprivate func show(_ viewController: UIViewController) {
+    private func show(_ viewController: UIViewController) {
         
         let revealViewController = self.revealViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -356,7 +356,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: Login / Logout
     
-    fileprivate func login() {
+    private func login() {
         
         let summit = SummitManager.shared.summit.value
         
@@ -440,7 +440,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    fileprivate func logout() {
+    private func logout() {
         
         Store.shared.logout()
         
@@ -526,7 +526,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - Notifications
     
-    @objc fileprivate func revokedAccess(_ notification: Notification) {
+    @objc private func revokedAccess(_ notification: Notification) {
         
         // logout in case its not cleared
         Store.shared.session.clear()

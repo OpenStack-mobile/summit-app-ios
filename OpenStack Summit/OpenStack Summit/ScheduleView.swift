@@ -16,7 +16,7 @@ final class ScheduleView: UIView {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noEventsLabel: UILabel!
     @IBOutlet weak var nowButton: UIButton!
-    @IBOutlet fileprivate weak var nowWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var nowWidthConstraint: NSLayoutConstraint!
     
     var nowButtonEnabled: Bool = true {
         

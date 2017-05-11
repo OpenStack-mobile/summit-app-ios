@@ -66,7 +66,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         // set summit info
         

@@ -20,9 +20,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) var titleHeader: EventDetailTitleHeader!
-    @IBOutlet fileprivate(set) var feedBackHeader: EventDetailFeedbackHeader!
-    @IBOutlet fileprivate(set) var emptyFeedbackView: UIView!
+    @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
+    @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
+    @IBOutlet private(set) var emptyFeedbackView: UIView!
     
     // MARK: - Properties
     
@@ -34,17 +34,17 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - Private Properties
     
-    fileprivate var eventCache: Event!
-    fileprivate var eventDetail: EventDetail!
-    fileprivate var data = [Detail]()
-    fileprivate var entityController: EntityController<Event>!
+    private var eventCache: Event!
+    private var eventDetail: EventDetail!
+    private var data = [Detail]()
+    private var entityController: EntityController<Event>!
     
-    fileprivate var reviewsVisibility: ReviewsVisibility = .none
-    fileprivate var loadingFeedback = false
-    fileprivate var loadingAverageRating = false
-    fileprivate var feedbackList = [FeedbackDetail]()
-    fileprivate var loadedAllFeedback = false
-    fileprivate var currentFeedbackPage: Page<Feedback>?
+    private var reviewsVisibility: ReviewsVisibility = .none
+    private var loadingFeedback = false
+    private var loadingAverageRating = false
+    private var feedbackList = [FeedbackDetail]()
+    private var loadedAllFeedback = false
+    private var currentFeedbackPage: Page<Feedback>?
     
     // MARK: - Loading
     
@@ -184,7 +184,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         guard let event = self.event
             else { fatalError("No identifier set") }
@@ -279,7 +279,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.userActivity = userActivity
     }
     
-    fileprivate func loadFeedback() {
+    private func loadFeedback() {
         
         guard loadingFeedback == false && loadedAllFeedback == false
             else { return }
@@ -316,7 +316,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    fileprivate func loadAverageRating() {
+    private func loadAverageRating() {
         
         guard loadingAverageRating == false
             else { return }
@@ -349,7 +349,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    fileprivate func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.speakers.rawValue, "\(indexPath.section) is not speaker section")
         
@@ -363,7 +363,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.separatorInset = UIEdgeInsets.zero
     }
     
-    fileprivate func configure(cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
         
@@ -374,7 +374,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.dateLabel.text = feedback.date
     }
     
-    fileprivate func configureAverageRatingView() {
+    private func configureAverageRatingView() {
         
         feedBackHeader.averageRatingLabel.isHidden = loadingAverageRating
         feedBackHeader.averageRatingView.isHidden = loadingAverageRating
@@ -392,7 +392,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    fileprivate func configureReviewCountView() {
+    private func configureReviewCountView() {
         
         if loadingFeedback {
             
@@ -742,47 +742,47 @@ final class EventDetailTitleHeader: UIView {
     
     static let estimatedHeight: CGFloat = 200.0
     
-    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var trackLabel: UILabel!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var favoriteButton: EventDetailActionButton!
-    @IBOutlet fileprivate(set) weak var scheduleButton: EventDetailActionButton!
-    @IBOutlet fileprivate(set) weak var rateButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var favoriteButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var scheduleButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
 }
 
 final class EventDetailFeedbackHeader: UIView {
     
     static let height: CGFloat = 60.0
     
-    @IBOutlet fileprivate(set) weak var reviewsLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var averageRatingView: CosmosView!
-    @IBOutlet fileprivate(set) weak var averageRatingLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var reviewsLabel: UILabel!
+    @IBOutlet private(set) weak var averageRatingView: CosmosView!
+    @IBOutlet private(set) weak var averageRatingLabel: UILabel!
+    @IBOutlet private(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailVideoTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var videoImageView: UIImageView!
-    @IBOutlet fileprivate(set) weak var playButton: UIButton!
-    @IBOutlet fileprivate(set) weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var videoImageView: UIImageView!
+    @IBOutlet private(set) weak var playButton: UIButton!
+    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var eventDayLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var eventTimeLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var willRecordImageView: UIImageView!
-    @IBOutlet fileprivate(set) weak var descriptionTextView: UITextView!
-    @IBOutlet fileprivate(set) weak var sponsorsLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate(set) weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var eventDayLabel: UILabel!
+    @IBOutlet private(set) weak var eventTimeLabel: UILabel!
+    @IBOutlet private(set) weak var willRecordImageView: UIImageView!
+    @IBOutlet private(set) weak var descriptionTextView: UITextView!
+    @IBOutlet private(set) weak var sponsorsLabel: UILabel!
+    @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
 }
 
 final class EventDetailTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var sectionLabel: UILabel!
+    @IBOutlet private(set) weak var sectionLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var valueLabel: UILabel!
+    @IBOutlet private(set) weak var valueLabel: UILabel!
 }
 
 final class EventDetailDownloadAttachmentTableViewCell: UITableViewCell {
@@ -792,11 +792,11 @@ final class EventDetailDownloadAttachmentTableViewCell: UITableViewCell {
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var reviewLabel: UILabel!
+    @IBOutlet private(set) weak var reviewLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var ratingView: CosmosView!
+    @IBOutlet private(set) weak var ratingView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

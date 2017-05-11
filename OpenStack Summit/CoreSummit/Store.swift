@@ -175,7 +175,7 @@ public final class Store {
         return http
     }
     
-    fileprivate func configOAuthAccounts() {
+    private func configOAuthAccounts() {
         
         let hasPasscode = deviceHasPasscode
         
@@ -235,7 +235,7 @@ public final class Store {
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
     }
     
-    fileprivate func createOAuthModule(_ config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
+    private func createOAuthModule(_ config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
         var session: OAuth2Session
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
@@ -253,7 +253,7 @@ public final class Store {
     
     // MARK: Notifications
     
-    @objc fileprivate func mergeChangesFromContextDidSaveNotification(_ notification: Foundation.Notification) {
+    @objc private func mergeChangesFromContextDidSaveNotification(_ notification: Foundation.Notification) {
         
         self.managedObjectContext.performAndWait {
             
@@ -264,7 +264,7 @@ public final class Store {
         }
     }
     
-    @objc fileprivate func revokedAccess(_ notification: Foundation.Notification) {
+    @objc private func revokedAccess(_ notification: Foundation.Notification) {
         
         self.session.clear()
         

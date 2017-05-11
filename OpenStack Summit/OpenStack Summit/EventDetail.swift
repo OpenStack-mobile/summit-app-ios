@@ -123,7 +123,7 @@ public struct EventDetail: CoreDataDecodable {
         
         let summit = Summit(managedObject: event.summit)
         
-        let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
+        let webpageURLString = Event(managedObject: event).toWebpage(summit)
         
         guard let webpageURL = NSURL(string: webpageURLString)
             else { fatalError("Invalid URL \(webpageURLString)") }
@@ -158,7 +158,7 @@ public extension EventDetail {
         
         public let isModerator: Bool
                 
-        fileprivate init(speaker: Speaker, isModerator: Bool = false) {
+        private init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier
             self.firstName = speaker.firstName

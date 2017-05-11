@@ -44,7 +44,7 @@ import UIKit
     
     // MARK: - Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         // cornerRadius
         layer.cornerRadius = cornerRadius

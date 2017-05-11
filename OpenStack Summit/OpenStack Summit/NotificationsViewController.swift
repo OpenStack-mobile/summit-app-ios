@@ -16,7 +16,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - Properties
     
-    fileprivate lazy var dateFormatter: DateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
        
         let dateFormatter = DateFormatter()
         
@@ -27,7 +27,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return dateFormatter
     }()
     
-    fileprivate var unreadNotificationsObserver: Int?
+    private var unreadNotificationsObserver: Int?
     
     // MARK: - Loading
     
@@ -100,7 +100,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         let sort = [NSSortDescriptor(key: "channel", ascending: true), NSSortDescriptor(key: "id", ascending: false)]
         
@@ -116,14 +116,14 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         self.tableView.reloadData()
     }
     
-    fileprivate subscript (indexPath: IndexPath) -> Notification {
+    private subscript (indexPath: IndexPath) -> Notification {
         
         let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Notification.ManagedObject
         
         return Notification(managedObject: managedObject)
     }
     
-    fileprivate func configure(cell: NotificationTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: NotificationTableViewCell, at indexPath: IndexPath) {
         
         let notification = self[indexPath]
         
@@ -136,7 +136,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created)
     }
     
-    fileprivate func unreadNotificationsChanged(_ newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
+    private func unreadNotificationsChanged(_ newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
         
         let managedObjects = (self.fetchedResultsController.fetchedObjects ?? []) as! [NotificationManagedObject]
         

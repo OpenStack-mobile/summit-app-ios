@@ -31,9 +31,9 @@ let AppEnvironment: Environment = {
 
 #elseif os(watchOS)
     #if Production
-    let AppEnvironment = Environment.Production
+    let AppEnvironment = Environment.production
     #elseif Staging
-    let AppEnvironment = Environment.Staging
+    let AppEnvironment = Environment.staging
     #endif
 #endif
 

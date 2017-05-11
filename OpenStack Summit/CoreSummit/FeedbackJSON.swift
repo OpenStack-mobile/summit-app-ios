@@ -10,7 +10,7 @@ import JSON
 
 extension Feedback: JSONDecodable {
     
-    fileprivate enum JSONKey: String {
+    private enum JSONKey: String {
         
         case id, event_id, rate, note, created_date, owner
     }
@@ -38,7 +38,7 @@ extension Feedback: JSONDecodable {
 
 extension MemberResponse.Feedback: JSONDecodable {
     
-    fileprivate enum JSONKey: String {
+    private enum JSONKey: String {
         
         case id, event_id, rate, note, created_date, owner_id
     }

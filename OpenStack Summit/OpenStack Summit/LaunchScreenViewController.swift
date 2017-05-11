@@ -14,21 +14,21 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet fileprivate(set) weak var summitView: UIView!
+    @IBOutlet private(set) weak var summitView: UIView!
     
-    @IBOutlet fileprivate(set) weak var summitDateLabel: UILabel!
+    @IBOutlet private(set) weak var summitDateLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var summitNameLabel: UILabel!
+    @IBOutlet private(set) weak var summitNameLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet fileprivate(set) weak var loginButton: UIButton!
+    @IBOutlet private(set) weak var loginButton: UIButton!
     
-    @IBOutlet fileprivate(set) weak var guestButton: UIButton!
+    @IBOutlet private(set) weak var guestButton: UIButton!
     
-    @IBOutlet fileprivate(set) weak var summitsButton: UIButton!
+    @IBOutlet private(set) weak var summitsButton: UIButton!
     
     // MARK: - Properties
     
@@ -104,7 +104,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         let _ = view
         
@@ -190,7 +190,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         dispatch_after(delayTime, dispatch_get_main_queue()) { completion?(revealViewController) }
     }
     
-    fileprivate func loadSummits() {
+    private func loadSummits() {
         
         state = .loadingSummits
         
@@ -242,7 +242,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    fileprivate func loadData() {
+    private func loadData() {
         
         guard isDataLoaded == false
             else { state = .dataLoaded; return }

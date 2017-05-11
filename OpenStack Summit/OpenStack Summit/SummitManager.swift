@@ -24,11 +24,11 @@ final class SummitManager {
     
     lazy var summit: Observable<Identifier> = self.initSummit()
     
-    fileprivate let userDefaults: UserDefaults
+    private let userDefaults: UserDefaults
     
     // MARK: - Initialization
     
-    fileprivate init(userDefaults: UserDefaults = UserDefaults.standard) {
+    private init(userDefaults: UserDefaults = UserDefaults.standard) {
         
         self.userDefaults = userDefaults
     }
@@ -36,7 +36,7 @@ final class SummitManager {
     // MARK: - Private Methods
     
     @inline(__always)
-    fileprivate func initSummit() -> Observable<Identifier> {
+    private func initSummit() -> Observable<Identifier> {
         
         let summit = userDefaults.integer(forKey: PreferenceKey.summit.rawValue)
         
@@ -48,7 +48,7 @@ final class SummitManager {
     }
     
     @inline(__always)
-    fileprivate func summitChanged(_ newValue: Identifier, oldValue: Identifier) {
+    private func summitChanged(_ newValue: Identifier, oldValue: Identifier) {
         
         userDefaults.setObject(newValue, forKey: PreferenceKey.summit.rawValue)
         userDefaults.synchronize()

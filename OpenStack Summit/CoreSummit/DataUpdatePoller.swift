@@ -30,7 +30,7 @@ public final class DataUpdatePoller {
     
     // MARK: - Private Properties
     
-    fileprivate var timer: Timer?
+    private var timer: Timer?
     
     // MARK: - Initialization
     
@@ -61,7 +61,7 @@ public final class DataUpdatePoller {
         timer?.invalidate()
     }
     
-    @objc fileprivate func pollServer() {
+    @objc private func pollServer() {
         
         // dont poll if not connectivity
         #if os(iOS) || os(tvOS) || os(OSX)

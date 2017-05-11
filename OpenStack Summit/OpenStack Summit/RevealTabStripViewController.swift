@@ -56,7 +56,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - Private Methods
     
-    fileprivate func reloadBarButtonItems() {
+    private func reloadBarButtonItems() {
         
         guard forwardChildBarButtonItems else { return }
         

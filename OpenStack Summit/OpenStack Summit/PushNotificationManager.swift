@@ -24,18 +24,18 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     // Alerts for messages belonging to this team will be excluded.
     public var teamMessageAlertFilter: Identifier?
     
-    fileprivate var summitObserver: Int!
+    private var summitObserver: Int!
     
-    fileprivate var teamsFetchedResultsController: NSFetchedResultsController?
+    private var teamsFetchedResultsController: NSFetchedResultsController?
     
-    fileprivate var teams: Set<Identifier> {
+    private var teams: Set<Identifier> {
         
         return (teamsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
-    fileprivate var eventsFetchedResultsController: NSFetchedResultsController?
+    private var eventsFetchedResultsController: NSFetchedResultsController?
     
-    fileprivate var events: Set<Identifier> {
+    private var events: Set<Identifier> {
         
         return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
@@ -49,7 +49,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     private(set) var subscribedTopics = Set<Notification.Topic>()
     
-    fileprivate let userDefaults = UserDefaults.standard
+    private let userDefaults = UserDefaults.standard
     
     var unreadCount: Int { return unreadNotifications.value.count + unreadTeamMessages.value.count }
     
@@ -66,7 +66,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate init(store: Store = Store.shared) {
+    private init(store: Store = Store.shared) {
         
         self.store = store
         
@@ -306,7 +306,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    fileprivate func subscribe(to topic: Notification.Topic) {
+    private func subscribe(to topic: Notification.Topic) {
         
         FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
         
@@ -316,7 +316,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    fileprivate func unsubscribe(from topic: Notification.Topic) {
+    private func unsubscribe(from topic: Notification.Topic) {
         
         FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
         
@@ -326,14 +326,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    fileprivate func unsubscribeAll() {
+    private func unsubscribeAll() {
         
         log?("Will unsubscribe from all topics")
         
         subscribedTopics.forEach { unsubscribe(from: $0) }
     }
     
-    fileprivate func startObservingTeams() {
+    private func startObservingTeams() {
         
         // fetch member's teams
         
@@ -354,7 +354,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         teams.forEach { subscribe(to: .team($0)) }
     }
     
-    fileprivate func startObservingUser() {
+    private func startObservingUser() {
         
         let member = self.store.authenticatedMember
         
@@ -388,14 +388,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         }
     }
     
-    fileprivate func summitChanged(_ newValue: Identifier, oldValue: Identifier) {
+    private func summitChanged(_ newValue: Identifier, oldValue: Identifier) {
         
         unsubscribe(from: .summit(oldValue))
         subscribe(to: .summit(newValue))
     }
     
     @inline(__always)
-    fileprivate func initUnreadNotifications(_ preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
+    private func initUnreadNotifications(_ preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
         
         let storedValue = userDefaults.objectForKey(preferenceKey.rawValue) as? [Int] ?? []
         
@@ -406,7 +406,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         return observable
     }
     
-    fileprivate func unreadNotificationsChanged(new newValue: Set<Identifier>, old oldValue: Set<Identifier>, key preferenceKey: PreferenceKey) {
+    private func unreadNotificationsChanged(new newValue: Set<Identifier>, old oldValue: Set<Identifier>, key preferenceKey: PreferenceKey) {
         
         userDefaults.setObject(Array(newValue), forKey: preferenceKey.rawValue)
         userDefaults.synchronize()
@@ -421,7 +421,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    fileprivate func resetUnreadNotifications() {
+    private func resetUnreadNotifications() {
         
         unreadNotifications.value = []
         unreadTeamMessages.value = []
@@ -511,19 +511,19 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Notifications
     
-    @objc fileprivate func loggedIn(_ notification: Notification) {
+    @objc private func loggedIn(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc fileprivate func loggedOut(_ notification: Notification) {
+    @objc private func loggedOut(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc fileprivate func forcedLoggedOut(_ notification: Notification) {
+    @objc private func forcedLoggedOut(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
@@ -581,7 +581,7 @@ public protocol PushNotification {
 
 public struct TeamMessageNotification: PushNotification {
     
-    fileprivate enum Key: String {
+    private enum Key: String {
         
         case from, id, type, body, from_id, from_first_name, from_last_name, created_at
     }
@@ -640,7 +640,7 @@ public extension TeamMessage {
 
 public struct GeneralNotification: PushNotification {
     
-    fileprivate enum Key: String {
+    private enum Key: String {
         
         case from, to, id, type, body, summit_id, channel, created_at, event_id, title
     }

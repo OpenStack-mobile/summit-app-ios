@@ -48,7 +48,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         mapView.removeAllAnnotations()
         

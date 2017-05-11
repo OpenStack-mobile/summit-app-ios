@@ -43,7 +43,7 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateButtonBarViewLayout() {
+    private func updateButtonBarViewLayout() {
         
         if collectionViewFlowLayout == nil {
             

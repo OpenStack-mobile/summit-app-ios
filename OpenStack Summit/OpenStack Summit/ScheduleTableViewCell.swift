@@ -12,11 +12,11 @@ final class ScheduleTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) weak var dateTimeLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var nameLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var trackLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var statusImageView: UIImageView!
-    @IBOutlet fileprivate(set) weak var contextMenuButton: UIButton!
+    @IBOutlet private(set) weak var dateTimeLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
+    @IBOutlet private(set) weak var statusImageView: UIImageView!
+    @IBOutlet private(set) weak var contextMenuButton: UIButton!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -23,14 +23,14 @@ public final class PageController<Item> {
     
     public let operationQueue: OperationQueue
     
-    public fileprivate(set) var pages = [Page<Item>]() {
+    public private(set) var pages = [Page<Item>]() {
         
         didSet { updateItems(oldValue) }
     }
     
-    public fileprivate(set) var items = [PageControllerData<Item>]()
+    public private(set) var items = [PageControllerData<Item>]()
     
-    public fileprivate(set) var isLoading: Bool = false
+    public private(set) var isLoading: Bool = false
     
     public var cacheLoaded: Bool {
         
@@ -146,7 +146,7 @@ public final class PageController<Item> {
     // MARK: - Private Methods
     
     @inline(__always)
-    fileprivate func updateItems(_ oldValue: [Page<Item>]) {
+    private func updateItems(_ oldValue: [Page<Item>]) {
         
         // reset if loaded from cache previously
         if oldValue.isEmpty && items.isEmpty == false {

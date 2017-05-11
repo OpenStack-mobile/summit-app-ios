@@ -14,9 +14,9 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - Properties
     
-    fileprivate var filters = [Section]()
+    private var filters = [Section]()
     
-    fileprivate var filterObserver: Int?
+    private var filterObserver: Int?
     
     // MARK: - Loading
     
@@ -76,7 +76,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         let scheduleFilter = FilterManager.shared.filter.value
         
@@ -146,14 +146,14 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    fileprivate subscript (indexPath: IndexPath) -> Item {
+    private subscript (indexPath: IndexPath) -> Item {
         
         let section = self.filters[indexPath.section]
         
         return section.items[indexPath.row]
     }
     
-    fileprivate func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
         
         let item = self[indexPath]
         
@@ -173,7 +173,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    fileprivate func configure(header headerView: TableViewHeaderView, for section: Int) {
+    private func configure(header headerView: TableViewHeaderView, for section: Int) {
         
         let filterCategory = self.filters[section].category
         
@@ -244,8 +244,8 @@ private extension GeneralScheduleFilterViewController {
 
 final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var circleView: UIView!
-    @IBOutlet fileprivate(set) weak var circleContainerView: UIView!
-    @IBOutlet fileprivate(set) weak var nameLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var enabledSwitch: UISwitch!
+    @IBOutlet private(set) weak var circleView: UIView!
+    @IBOutlet private(set) weak var circleContainerView: UIView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var enabledSwitch: UISwitch!
 }

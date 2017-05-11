@@ -16,9 +16,9 @@ final class NotificationDetailViewController: UITableViewController {
     
     var notification: Notification!
     
-    fileprivate var data = [[Data]]()
+    private var data = [[Data]]()
     
-    fileprivate lazy var dateFormatter: DateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
         let dateFormatter = DateFormatter()
         
@@ -73,7 +73,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         assert(isViewLoaded, "View must be loaded")
         

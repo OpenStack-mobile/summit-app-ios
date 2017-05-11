@@ -57,14 +57,14 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     // MARK: - Private Methods
     
-    fileprivate subscript (indexPath: IndexPath) -> Speaker {
+    private subscript (indexPath: IndexPath) -> Speaker {
         
         let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speaker.ManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
-    fileprivate func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         let person = self[indexPath]
         

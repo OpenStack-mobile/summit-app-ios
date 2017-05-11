@@ -24,11 +24,11 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     // MARK: - Properties
     
-    fileprivate(set) var sending = false
+    private(set) var sending = false
     
-    fileprivate var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController!
     
-    fileprivate lazy var placeholderMemberImage = R.image.genericUserAvatar()!
+    private lazy var placeholderMemberImage = R.image.genericUserAvatar()!
     
     // MARK: - Loading
     
@@ -69,7 +69,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         guard let teamManagedObject = try! TeamManagedObject.find(team, context: Store.shared.managedObjectContext)
             else { fatalError("Team not in cache") }
@@ -92,14 +92,14 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         self.tableView!.reloadData()
     }
     
-    fileprivate subscript (indexPath: IndexPath) -> TeamMessage {
+    private subscript (indexPath: IndexPath) -> TeamMessage {
         
         let managedObject = self.fetchedResultsController!.objectAtIndexPath(indexPath) as! TeamMessageManagedObject
         
         return TeamMessage(managedObject: managedObject)
     }
     
-    fileprivate subscript (data indexPath: IndexPath) -> (name: String, body: String, image: URL?) {
+    private subscript (data indexPath: IndexPath) -> (name: String, body: String, image: URL?) {
         
         let message = self[indexPath]
         
@@ -125,7 +125,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return (name, message.body, imageURL)
     }
     
-    fileprivate func configure(cell: MessageTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: MessageTableViewCell, at indexPath: IndexPath) {
         
         let managedObject = self.fetchedResultsController.object(at: indexPath)
         
@@ -162,20 +162,20 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         cell.transform = self.tableView!.transform
     }
     
-    @objc fileprivate func textInputbarDidMove(_ notification: Notification) {
+    @objc private func textInputbarDidMove(_ notification: Notification) {
         
         
     }
     
     // MARK: Notifications
     
-    fileprivate func registerNotifications() {
+    private func registerNotifications() {
         
         NotificationCenter.default.addObserver(self.tableView!, selector: #selector(UITableView.reloadData), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textInputbarDidMove), name: SLKTextInputbarDidMoveNotification, object: nil)
     }
     
-    fileprivate func stopNotifications() {
+    private func stopNotifications() {
         
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.removeObserver(self.tableView!)

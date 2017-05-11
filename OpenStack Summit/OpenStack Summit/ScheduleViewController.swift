@@ -30,15 +30,15 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     final lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    final fileprivate(set) var summitTimeZoneOffset: Int = 0
+    final private(set) var summitTimeZoneOffset: Int = 0
     
-    final fileprivate(set) var dayEvents = [ScheduleItem]()
+    final private(set) var dayEvents = [ScheduleItem]()
     
-    final fileprivate(set) var nowSelected = false
+    final private(set) var nowSelected = false
             
-    fileprivate var filterObserver: Int?
+    private var filterObserver: Int?
     
-    fileprivate var didSelectDate = false
+    private var didSelectDate = false
     
     // MARK: - Accessors
     
@@ -216,7 +216,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: Private Methods
     
-    fileprivate func updateUI(_ summit: Summit) {
+    private func updateUI(_ summit: Summit) {
         
         let scheduleFilter = FilterManager.shared.filter.value
                 
@@ -261,7 +261,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         reloadSchedule()
     }
     
-    fileprivate func reloadSchedule() {
+    private func reloadSchedule() {
         
         guard self.scheduleView.dayPicker.selectedDate != nil else { return }
         
@@ -370,7 +370,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    fileprivate func configure(cell: ScheduleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: ScheduleTableViewCell, at indexPath: IndexPath) {
         
         let index = indexPath.row
         let event = dayEvents[index]
@@ -407,7 +407,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), for: .touchUpInside)
     }
     
-    fileprivate func filterUpdated() {
+    private func filterUpdated() {
         
         // force view load
         let _ = self.view
@@ -416,7 +416,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     }
     
     @inline(__always)
-    fileprivate func nowEventIndex() -> Int? {
+    private func nowEventIndex() -> Int? {
         
         let now = Date()
         
@@ -512,7 +512,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Notifications
     
-    fileprivate func registerNotifications() {
+    private func registerNotifications() {
         
         NotificationCenter.defaultCenter().addObserver(
             self,
@@ -533,23 +533,23 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             object: Store.shared.managedObjectContext)
     }
     
-    fileprivate func stopNotifications() {
+    private func stopNotifications() {
         
         NotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedIn.rawValue, object: nil)
         NotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedOut.rawValue, object: nil)
     }
     
-    @objc fileprivate func loggedIn(_ notification: Notification) {
+    @objc private func loggedIn(_ notification: Notification) {
         
         self.scheduleView.tableView.reloadData()
     }
     
-    @objc fileprivate func loggedOut(_ notification: Notification) {
+    @objc private func loggedOut(_ notification: Notification) {
         
         self.scheduleView.tableView.reloadData()
     }
     
-    @objc fileprivate func managedObjectContextObjectsDidChange(_ notification: Notification) {
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
         
         self.reloadSchedule()
     }

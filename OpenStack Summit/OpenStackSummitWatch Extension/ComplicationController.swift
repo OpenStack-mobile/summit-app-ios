@@ -166,7 +166,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Private Methods
     
-    fileprivate func template(for complication: CLKComplication, with entry: TimelineEntry) -> CLKComplicationTemplate {
+    private func template(for complication: CLKComplication, with entry: TimelineEntry) -> CLKComplicationTemplate {
         
         switch complication.family {
             
@@ -249,7 +249,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         }
     }
     
-    fileprivate func entry(for date: Date) -> TimelineEntry {
+    private func entry(for date: Date) -> TimelineEntry {
         
         guard let summit = Store.shared.cache
             else { return .none }
@@ -287,7 +287,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Notifications
     
-    @objc fileprivate func complicationServerActiveComplicationsDidChange(_ notification: Notification) {
+    @objc private func complicationServerActiveComplicationsDidChange(_ notification: Foundation.Notification) {
         
         ComplicationController.reloadComplications()
     }
@@ -343,7 +343,7 @@ extension Summit {
     
     var timelineDates: [Date] {
         
-        return schedule.reduce([Date](), combine: {
+        return schedule.reduce([Date](), {
             
             var newDates = $0.0
             
@@ -359,15 +359,15 @@ extension Summit {
             
             return newDates
         })
-        .sort()
+        .sorted()
     }
     
     func dates(after date: Date, limit: Int = Int.max) -> [Date] {
         
-        var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = self.schedule.reduce([Date](), { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 > date })
         
-        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+        dates = dates.reduce([Date](), { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
             .sorted(by: { $0.0 > $0.1 })
         
@@ -376,10 +376,10 @@ extension Summit {
     
     func dates(before date: Date, limit: Int = Int.max) -> [Date] {
         
-        var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = self.schedule.reduce([Date](), { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 < date })
         
-        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+        dates = dates.reduce([Date](), { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
             .sorted(by: { $0.0 < $0.1 })
         

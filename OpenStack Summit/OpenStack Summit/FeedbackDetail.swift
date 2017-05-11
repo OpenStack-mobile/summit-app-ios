@@ -36,7 +36,7 @@ public struct FeedbackDetail {
     
     // MARK: - Static Methods
     
-    fileprivate static func timeAgoSinceDate(_ date: Date, numericDates: Bool) -> String {
+    private static func timeAgoSinceDate(_ date: Date, numericDates: Bool) -> String {
         
         let calendar = Calendar.current
         let now = Date()

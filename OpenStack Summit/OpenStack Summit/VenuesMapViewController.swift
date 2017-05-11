@@ -16,7 +16,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     // MARK: - Properties
     
     var mapView: GMSMapView!
-    fileprivate(set) var dictionary = [GMSMarker: Int]()
+    private(set) var dictionary = [GMSMarker: Int]()
     
     // MARK: - Loading
     
@@ -36,7 +36,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         /// get Internal Venues with Coordinates
         

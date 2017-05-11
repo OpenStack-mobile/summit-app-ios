@@ -38,10 +38,10 @@ extension Store {
         let fileManager = FileManager.default
         
         #if os(iOS) || os(watchOS) || os(OSX)
-            let folderURL = try! fileManager.url(for: .cachesDirectory,
-                                                 in: .userDomainMask,
-                                                 appropriateFor: nil,
-                                                         create: false)
+        let folderURL = try! fileManager.url(for: .cachesDirectory,
+                                             in: .userDomainMask,
+                                             appropriateFor: nil,
+                                             create: false)
         #elseif os(tvOS)
             
         let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroup)!
@@ -52,7 +52,7 @@ extension Store {
             
         #endif
         
-        let fileURL = folderURL.URLByAppendingPathComponent("data.sqlite", isDirectory: false)!
+        let fileURL = folderURL.appendingPathComponent("data.sqlite", isDirectory: false)
         
         return fileURL
     }()
@@ -61,10 +61,10 @@ extension Store {
         
         func createStore() throws -> NSPersistentStore {
             
-            return try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
-                                                              configuration: nil,
-                                                              URL: Store.fileURL,
-                                                              options: nil)
+            return try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+                                                      configurationName: nil,
+                                                      at: Store.fileURL,
+                                                      options: nil)
         }
         
         var store: NSPersistentStore!
@@ -87,15 +87,15 @@ extension Store {
         
         let url = self.fileURL
         
-        if NSFileManager.defaultManager().fileExistsAtPath(url.path!) {
+        if FileManager.default.fileExists(atPath: url.path) {
             
             // delete file
-            try NSFileManager.defaultManager().removeItemAtURL(url)
+            try FileManager.default.removeItem(at: url)
         }
         
         if let (psc, persistentStore) = store {
             
-            try psc.removePersistentStore(persistentStore)
+            try psc.remove(persistentStore)
         }
     }
     

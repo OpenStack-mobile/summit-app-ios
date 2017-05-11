@@ -46,9 +46,9 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var speaker: Speaker!
+    private(set) var speaker: Speaker!
     
-    fileprivate lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier) ?? false }) ?? []
+    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier)}) ?? []
     
     // MARK: - Loading
     
@@ -69,9 +69,9 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
-                                AppActivityUserInfo.identifier.rawValue: speaker.identifier]
+                                AppActivityUserInfo.identifier.rawValue: speaker.identifier] as [String : Any]
         
-        let webpageURL = URL(string: speaker.toWebpageURL(Store.shared.cache!))!
+        let webpageURL = speaker.toWebpage(Store.shared.cache!)
         
         updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: webpageURL)
     }
@@ -91,17 +91,17 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
             
             let event = events[0]
             
-            pushControllerWithName(EventDetailInterfaceController.identifier, context: Context(event))
+            pushController(withName: EventDetailInterfaceController.identifier, context: Context(event))
             
         } else {
             
-            pushControllerWithName(EventsInterfaceController.identifier, context: Context(events))
+            pushController(withName: EventsInterfaceController.identifier, context: Context(events))
         }
     }
     
     // MARK: - Private Functions
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         nameLabel.setText(speaker.name)
         

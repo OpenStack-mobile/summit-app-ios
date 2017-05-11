@@ -81,7 +81,7 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         tableView.setHidden(Store.shared.cache == nil)
         loadingImageView.setHidden(Store.shared.cache != nil)
@@ -99,7 +99,7 @@ final class MenuInterfaceController: WKInterfaceController {
         }
     }
     
-    fileprivate func loadData() {
+    private func loadData() {
         
         print("Loading Summit data")
         

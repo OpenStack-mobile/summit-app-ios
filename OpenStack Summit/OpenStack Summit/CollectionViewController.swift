@@ -16,7 +16,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     
     final var fetchedResultsController: NSFetchedResultsController!
     
-    final fileprivate var changes = [Change]()
+    final private var changes = [Change]()
     
     // MARK: - UICollectionViewDataSource
     

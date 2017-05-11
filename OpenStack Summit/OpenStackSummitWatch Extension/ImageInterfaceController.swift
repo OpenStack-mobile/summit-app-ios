@@ -22,7 +22,7 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var image: Image!
+    private(set) var image: Image!
     
     // MARK: - Loading
     
@@ -56,7 +56,7 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         guard let imageURL = URL(string: image.url)
             else { return }
@@ -78,7 +78,7 @@ final class ImageInterfaceController: WKInterfaceController {
             
             // show alert image
             
-            guard case .Data = response else {
+            guard case .data = response else {
                 
                 controller.imageView.setImageNamed("alert")
                 return

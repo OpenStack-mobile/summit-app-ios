@@ -33,7 +33,7 @@ public struct EventDetail {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
-    public let webpageURL: Foundation.URL
+    public let webpageURL: URL
     
     // MARK: - Initialization
     
@@ -92,7 +92,7 @@ public struct EventDetail {
         
         self.video = event.videos.first
         
-        self.webpageURL = NSURL(string: event.toWebpageURL(summit))!
+        self.webpageURL = event.toWebpage(summit)
     }
 }
 
@@ -118,28 +118,28 @@ internal extension EventDetail {
     
     static func getTime(_ event: Event, summit: Summit) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: summit.timeZone);
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
     static func getDateTime(_ event: Event, summit: Summit) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: summit.timeZone);
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }

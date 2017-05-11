@@ -18,7 +18,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - Properties
     
-    fileprivate(set) var feedbackList = [FeedbackDetail]()
+    private(set) var feedbackList = [FeedbackDetail]()
     
     // MARK: - Loading
     
@@ -37,7 +37,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - Private Methods
     
-    fileprivate func reloadData() {
+    private func reloadData() {
         
         // Get Logged Member Given Feedback
         feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(managedObject: $0) }
@@ -45,7 +45,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         tableView.reloadData()
     }
     
-    fileprivate func configure(cell: FeedbackTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: FeedbackTableViewCell, at indexPath: IndexPath) {
         
         let feedback = feedbackList[indexPath.row]
         cell.eventName = feedback.eventName

@@ -51,7 +51,7 @@ open class SweetAlert: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func setupContentView() {
+    private func setupContentView() {
         contentView.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         contentView.layer.cornerRadius = 5.0
         contentView.layer.masksToBounds = true
@@ -63,7 +63,7 @@ open class SweetAlert: UIViewController {
         view.addSubview(contentView)
     }
     
-    fileprivate func setupTitleLabel() {
+    private func setupTitleLabel() {
         titleLabel.text = ""
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
@@ -71,7 +71,7 @@ open class SweetAlert: UIViewController {
         titleLabel.textColor = UIColor.colorFromRGB(0x575757)
     }
     
-    fileprivate func setupSubtitleTextView() {
+    private func setupSubtitleTextView() {
         subTitleTextView.text = ""
         subTitleTextView.textAlignment = .center
         subTitleTextView.font = UIFont(name: kFont, size:16)
@@ -79,7 +79,7 @@ open class SweetAlert: UIViewController {
         subTitleTextView.isEditable = false
     }
     
-    fileprivate func resizeAndRelayout() {
+    private func resizeAndRelayout() {
         let mainScreenBounds = UIScreen.main.bounds
         self.view.frame.size = mainScreenBounds.size
         let x: CGFloat = kWidthMargin
@@ -330,7 +330,7 @@ open class SweetAlert: UIViewController {
         }) 
     }
     
-    fileprivate struct SweetAlertContext {
+    private struct SweetAlertContext {
         static var shouldNotAnimate = false
     }
 }
@@ -368,7 +368,7 @@ class CancelAnimatedView: AnimatableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate var outlineCircle: CGPath  {
+    private var outlineCircle: CGPath  {
         let path = UIBezierPath()
         let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
         let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
@@ -377,7 +377,7 @@ class CancelAnimatedView: AnimatableView {
         return path.cgPath
     }
     
-    fileprivate var crossPath: CGPath  {
+    private var crossPath: CGPath  {
         let path = UIBezierPath()
         let factor:CGFloat = self.frame.size.width / 5.0
         path.move(to: CGPoint(x: self.frame.size.height/2.0-factor,y: self.frame.size.height/2.0-factor))
@@ -388,7 +388,7 @@ class CancelAnimatedView: AnimatableView {
         return path.cgPath
     }
     
-    fileprivate func setupLayers() {
+    private func setupLayers() {
         circleLayer.path = outlineCircle
         circleLayer.fillColor = UIColor.clear.cgColor;
         circleLayer.strokeColor = UIColor.colorFromRGB(0xF27474).cgColor;

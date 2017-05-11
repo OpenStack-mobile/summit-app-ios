@@ -36,7 +36,7 @@ public final class EntityController<Decodable: CoreDataDecodable> {
     
     // MARK: - Private Properties
     
-    fileprivate let privateController: PrivateEntityController
+    private let privateController: PrivateEntityController
     
     // MARK: - Initialization
     

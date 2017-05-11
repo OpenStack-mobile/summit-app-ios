@@ -18,8 +18,8 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - Properties
     
-    fileprivate(set) var internalVenueList = [VenueListItem]()
-    fileprivate(set) var externalVenueList = [VenueListItem]()
+    private(set) var internalVenueList = [VenueListItem]()
+    private(set) var externalVenueList = [VenueListItem]()
     
     // MARK: - Loading
     
@@ -35,7 +35,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - Private Methods
     
-    fileprivate func reloadData() {
+    private func reloadData() {
         
         let summit = SummitManager.shared.summit.value
         
@@ -47,14 +47,14 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         tableView.reloadData()
     }
     
-    fileprivate func configure(cell: VenueListTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: VenueListTableViewCell, at indexPath: IndexPath) {
         
         let venue = externalVenueList[indexPath.row]
         cell.name = venue.name
         cell.address = venue.address
     }
     
-    fileprivate func configure(cell: InternalVenueListTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: InternalVenueListTableViewCell, at indexPath: IndexPath) {
         
         let venue = internalVenueList[indexPath.row]
         cell.name = venue.name

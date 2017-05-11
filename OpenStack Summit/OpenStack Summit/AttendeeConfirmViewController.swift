@@ -19,24 +19,24 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    fileprivate var input: Input = .orderNumber {
+    private var input: Input = .orderNumber {
         
         didSet { configureView() }
     }
     
-    fileprivate var cells = [Cell]()
+    private var cells = [Cell]()
     
-    fileprivate var attendees = [NonConfirmedAttendee]() {
+    private var attendees = [NonConfirmedAttendee]() {
         
         didSet { configureView() }
     }
     
-    fileprivate var selectedAttendee: NonConfirmedAttendee? {
+    private var selectedAttendee: NonConfirmedAttendee? {
         
         didSet { updateActionButtons() }
     }
     
-    fileprivate var orderNumber: Int? {
+    private var orderNumber: Int? {
         
         didSet { updateActionButtons() }
     }
@@ -91,7 +91,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         let inputCell: Cell
         
@@ -107,7 +107,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         updateActionButtons()
     }
     
-    fileprivate func resignResponder(_ view: UIView) {
+    private func resignResponder(_ view: UIView) {
         
         view.resignFirstResponder()
         
@@ -115,7 +115,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     }
     
     @inline(__always)
-    fileprivate func updateActionButtons() {
+    private func updateActionButtons() {
         
         // update UI
         if let actionButtonsCellIndex = cells.index(of: .action) {
@@ -124,7 +124,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         }
     }
     
-    fileprivate func orderConfirm() {
+    private func orderConfirm() {
         
         guard let orderNumber = self.orderNumber
             else { fatalError("No order number set") }
@@ -187,7 +187,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         }
     }
     
-    fileprivate func selectAttendee() {
+    private func selectAttendee() {
         
         guard let selectedAttendee = self.selectedAttendee,
             let orderNumber = self.orderNumber
@@ -377,16 +377,16 @@ private extension AttendeeConfirmViewController {
 
 final class AttendeeConfirmOrderTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var textField: UITextField!
+    @IBOutlet private(set) weak var textField: UITextField!
 }
 
 final class AttendeeConfirmSelectionTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var pickerView: UIPickerView!
+    @IBOutlet private(set) weak var pickerView: UIPickerView!
 }
 
 final class AttendeeConfirmActionTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var confirmButton: Button!
+    @IBOutlet private(set) weak var confirmButton: Button!
 }
 

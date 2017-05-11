@@ -192,7 +192,7 @@ extension EventViewController {
         }
     }
     
-    fileprivate func setScheduledLocally(_ value: Bool, for event: Identifier) {
+    private func setScheduledLocally(_ value: Bool, for event: Identifier) {
         
         guard let attendee = Store.shared.authenticatedMember?.attendeeRole
             else { return }
@@ -211,9 +211,9 @@ extension EventViewController {
         }
     }
     
-    fileprivate typealias EventRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
+    private typealias EventRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
     
-    fileprivate func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
+    private func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
         
         let completion: (Swift.Error?) -> () = { [weak self] (response) in
             

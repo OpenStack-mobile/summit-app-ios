@@ -13,10 +13,10 @@ final class PeopleTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate weak var moderatorLabel: UILabel!
-    @IBOutlet fileprivate weak var nameLabel : UILabel!
-    @IBOutlet fileprivate weak var titleLabel : UILabel!
-    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
+    @IBOutlet private weak var moderatorLabel: UILabel!
+    @IBOutlet private weak var nameLabel : UILabel!
+    @IBOutlet private weak var titleLabel : UILabel!
+    @IBOutlet private weak var pictureImageView: UIImageView!
     
     // MARK: - Loading
     

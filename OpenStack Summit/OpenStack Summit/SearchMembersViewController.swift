@@ -20,9 +20,9 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
-    @IBOutlet fileprivate var cancelButton: UIBarButtonItem!
+    @IBOutlet private var cancelButton: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -33,7 +33,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     var selectedMember: (SearchMembersViewController, Member) -> () = { _ in }
     
-    fileprivate(set) var scope: Scope = .firstName
+    private(set) var scope: Scope = .firstName
     
     lazy var pageController: PageController<Member> = PageController(fetch: self.fetch)
     
@@ -73,7 +73,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - Private Methods
     
-    fileprivate func fetch(_ page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
+    private func fetch(_ page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         // dont make request for empty search filter
         guard let searchText = self.searchBar.text where searchText.isEmpty == false
@@ -94,7 +94,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
-    fileprivate func configure(cell: PeopleTableViewCell, with member: Member) {
+    private func configure(cell: PeopleTableViewCell, with member: Member) {
         
         cell.name = member.name
         cell.pictureURL = member.pictureURL
@@ -115,7 +115,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         self.navigationItem.leftBarButtonItem = didCancel != nil ? cancelButton : nil
     }

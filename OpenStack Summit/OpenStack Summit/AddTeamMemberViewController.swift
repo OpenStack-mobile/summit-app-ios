@@ -16,35 +16,35 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate weak var selectedMemberCell: SelectTeamMemberTableViewCell!
+    @IBOutlet private weak var selectedMemberCell: SelectTeamMemberTableViewCell!
     
-    @IBOutlet fileprivate weak var adminPermissionCell: UITableViewCell!
+    @IBOutlet private weak var adminPermissionCell: UITableViewCell!
     
-    @IBOutlet fileprivate weak var readPermissionCell: UITableViewCell!
+    @IBOutlet private weak var readPermissionCell: UITableViewCell!
     
-    @IBOutlet fileprivate weak var writePermissionCell: UITableViewCell!
+    @IBOutlet private weak var writePermissionCell: UITableViewCell!
     
-    @IBOutlet fileprivate weak var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var doneBarButtonItem: UIBarButtonItem!
     
     // MARK: - Properties
     
     var team: Identifier!
     
-    fileprivate(set) var permission: TeamPermission? {
+    private(set) var permission: TeamPermission? {
         
         didSet { if isViewLoaded { configureView() } }
     }
     
-    fileprivate(set) var member: Member? {
+    private(set) var member: Member? {
         
         didSet { if isViewLoaded { configureView() } }
     }
     
-    fileprivate lazy var permissionCells: [UITableViewCell] = [self.adminPermissionCell,
+    private lazy var permissionCells: [UITableViewCell] = [self.adminPermissionCell,
                                                            self.readPermissionCell,
                                                            self.writePermissionCell]
     
-    fileprivate var teamCache: Team!
+    private var teamCache: Team!
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
@@ -95,7 +95,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         guard let team = try! Team.find(self.team, context: Store.shared.managedObjectContext)
             else { fatalError("Team not present") }
@@ -135,7 +135,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         self.doneBarButtonItem.enabled = self.member != nil && self.permission != nil
     }
     
-    fileprivate func cell(for permission: TeamPermission) -> UITableViewCell {
+    private func cell(for permission: TeamPermission) -> UITableViewCell {
         
         switch permission {
         case .admin: return adminPermissionCell
@@ -144,7 +144,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         }
     }
     
-    fileprivate func permission(for cell: UITableViewCell) -> TeamPermission {
+    private func permission(for cell: UITableViewCell) -> TeamPermission {
         
         switch cell {
         case adminPermissionCell: return .admin
@@ -156,7 +156,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - SearchMembersViewControllerDelegate
     
-    fileprivate func searchMembersViewController(_ searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
+    private func searchMembersViewController(_ searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
         
         guard teamCache.permission(for: member.identifier) == nil
             else { return }
@@ -211,10 +211,10 @@ private extension AddTeamMemberViewController {
 
 final class SelectTeamMemberTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var nameLabel : UILabel!
-    @IBOutlet fileprivate(set) weak var titleLabel : UILabel!
-    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
-    @IBOutlet fileprivate(set) weak var selectMemberLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel : UILabel!
+    @IBOutlet private(set) weak var titleLabel : UILabel!
+    @IBOutlet private weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var selectMemberLabel: UILabel!
     
     var pictureURL: String = "" {
         

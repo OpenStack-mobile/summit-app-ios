@@ -25,7 +25,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    fileprivate lazy var dateFormatter: DateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -65,7 +65,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - Private Methods
     
-    fileprivate func configure(cell: TeamInvitationTableViewCell, with invitation: Invitation) {
+    private func configure(cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
         cell.teamLabel.text = invitation.team.name
         
@@ -74,7 +74,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created)
     }
     
-    fileprivate func accept(_ invitation: Invitation) {
+    private func accept(_ invitation: Invitation) {
         
         showActivityIndicator()
         
@@ -117,7 +117,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         }
     }
     
-    fileprivate func decline(_ invitation: Invitation) {
+    private func decline(_ invitation: Invitation) {
         
         showActivityIndicator()
         

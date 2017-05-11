@@ -35,7 +35,7 @@ extension Track: JSONDecodable {
 
 extension MemberResponse.Track: JSONDecodable {
     
-    fileprivate typealias JSONKey = Track.JSONKey
+    private typealias JSONKey = Track.JSONKey
     
     public init?(json JSONValue: JSON.Value) {
         

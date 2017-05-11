@@ -15,7 +15,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) var headerView: PersonDetailHeaderView!
+    @IBOutlet private(set) var headerView: PersonDetailHeaderView!
     
     // MARK: - Properties
     
@@ -58,11 +58,11 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Private Properties
     
-    fileprivate var loadingTableView = false
+    private var loadingTableView = false
     
-    fileprivate var data = [Data]()
+    private var data = [Data]()
     
-    fileprivate var showNonConfirmedWarning = false
+    private var showNonConfirmedWarning = false
     
     // MARK: - Loading
     
@@ -144,7 +144,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         // fetch profile
         
@@ -188,7 +188,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
-    fileprivate func configureView<T: Person>(with person: T) {
+    private func configureView<T: Person>(with person: T) {
         
         // configure header
         
@@ -256,7 +256,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            personURL = URL(string: speaker.toWebpageURL(summit))
+            personURL = URL(string: speaker.toWebpage(summit))
             userActivity.webpageURL = personURL
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
@@ -272,7 +272,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
-    fileprivate func setupToolbar() {
+    private func setupToolbar() {
         
         navigationController?.toolbar.barTintColor = UIColor(hexString: "#FAD438")!
         navigationController?.toolbar.isTranslucent = false
@@ -433,11 +433,11 @@ public enum PersonIdentifier {
 
 final class PersonDetailHeaderView: UIView {
     
-    @IBOutlet fileprivate(set) weak var imageView: UIImageView!
+    @IBOutlet private(set) weak var imageView: UIImageView!
     
-    @IBOutlet fileprivate(set) weak var nameLabel: CopyableLabel!
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet fileprivate(set) weak var titleLabel: CopyableLabel!
+    @IBOutlet private(set) weak var titleLabel: CopyableLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -449,21 +449,21 @@ final class PersonDetailHeaderView: UIView {
 
 final class PersonDetailLinksTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var twitterView: PersonDetailLinkView!
+    @IBOutlet private(set) weak var twitterView: PersonDetailLinkView!
     
-    @IBOutlet fileprivate(set) weak var ircView: PersonDetailLinkView!
+    @IBOutlet private(set) weak var ircView: PersonDetailLinkView!
     
-    @IBOutlet fileprivate(set) weak var linkedInView: PersonDetailLinkView!
+    @IBOutlet private(set) weak var linkedInView: PersonDetailLinkView!
 }
 
 final class PersonDetailLinkView: UIStackView {
     
-    @IBOutlet fileprivate(set) weak var label: CopyableLabel!
+    @IBOutlet private(set) weak var label: CopyableLabel!
 }
 
 final class PersonDetailDescriptionTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var textView: UITextView!
+    @IBOutlet private(set) weak var textView: UITextView!
     
     override func layoutSubviews() {
         super.layoutSubviews()

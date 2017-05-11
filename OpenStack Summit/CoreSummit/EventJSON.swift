@@ -130,7 +130,7 @@ public extension Event {
 
 extension MemberResponse.Event: JSONDecodable {
     
-    fileprivate typealias JSONKey = Event.JSONKey
+    private typealias JSONKey = Event.JSONKey
     
     public init?(json JSONValue: JSON.Value) {
         

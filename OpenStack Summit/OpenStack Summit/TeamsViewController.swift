@@ -53,7 +53,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [], systemActions: false)
     }()
     
-    fileprivate var unreadTeamMessagesObserver: Int?
+    private var unreadTeamMessagesObserver: Int?
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
@@ -105,13 +105,13 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - Private Methods
     
-    fileprivate func loadFromCache() -> [Team] {
+    private func loadFromCache() -> [Team] {
         
         return try! Team.all(Store.shared.managedObjectContext)
     }
     
     @inline(__always)
-    fileprivate func configure(cell: TeamCell, with team: Team) {
+    private func configure(cell: TeamCell, with team: Team) {
         
         cell.nameLabel.text = team.name
         

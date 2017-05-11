@@ -12,9 +12,9 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate weak var nameLabel: UILabel!
-    @IBOutlet fileprivate weak var addressLabel: UILabel!
-    @IBOutlet fileprivate weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
     
     // MARK: - Accessors
     

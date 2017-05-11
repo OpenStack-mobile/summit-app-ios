@@ -48,7 +48,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var location: Location!
+    private(set) var location: Location!
     
     lazy var venue: Venue = {
         
@@ -91,7 +91,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: type.rawValue,
-                                AppActivityUserInfo.identifier.rawValue: location.identifier]
+                                AppActivityUserInfo.identifier.rawValue: location.identifier] as [String : Any]
         
         updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: nil)
     }
@@ -107,26 +107,26 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     @IBAction func showVenueImages(_ sender: AnyObject? = nil) {
         
-        showImages(venue.images.sort())
+        showImages(venue.images.sorted())
     }
     
     @IBAction func showMapImages(_ sender: AnyObject? = nil) {
         
-        showImages(venue.maps.sort())
+        showImages(venue.maps.sorted())
     }
         
     // MARK: - Private Methods
     
-    fileprivate func showImages(_ images: [Image]) {
+    private func showImages(_ images: [Image]) {
         
-        let names = [String](count: images.count, repeatedValue: ImageInterfaceController.identifier)
+        let names = [String](repeating: ImageInterfaceController.identifier, count: images.count)
         
         let contexts = images.map { Context($0) }
         
-        presentControllerWithNames(names, contexts: contexts)
+        presentController(withNames: names, contexts: contexts)
     }
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         switch location! {
             
@@ -140,7 +140,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         }
     }
     
-    fileprivate func configureView(for venue: Venue, room: VenueRoom? = nil) {
+    private func configureView(for venue: Venue, room: VenueRoom? = nil) {
         
         let name: String = room == nil ? venue.name : venue.name + " - " + room!.name
         
@@ -153,7 +153,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         descriptionSeparator.setHidden(venue.descriptionText == nil)
         
         if let descriptionText = venue.descriptionText,
-            let data = descriptionText.dataUsingEncoding(String.Encoding.utf8),
+            let data = descriptionText.data(using: String.Encoding.utf8),
             let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
@@ -202,7 +202,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
                 controller.imagesActivityIndicator.setHidden(true)
                 
                 // hide image view if no image
-                guard case .Data = response else {
+                guard case .data = response else {
                     
                     controller.imagesView.setHidden(true)
                     return
@@ -235,7 +235,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
                 controller.mapImagesActivityIndicator.setHidden(true)
                 
                 // hide image view if no image
-                guard case .Data = response else {
+                guard case .data = response else {
                     
                     controller.mapImagesView.setHidden(true)
                     return
@@ -257,7 +257,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
             
             mapView.setHidden(false)
             mapView.removeAllAnnotations()
-            mapView.addAnnotation(center, withPinColor: .Red)
+            mapView.addAnnotation(center, with: .red)
             mapView.setRegion(region)
             
         } else {

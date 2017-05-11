@@ -18,7 +18,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) weak var doneButton: UIBarButtonItem!
+    @IBOutlet private(set) weak var doneButton: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -71,12 +71,12 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         self.navigationItem.rightBarButtonItem = didFinish != nil ? doneButton : nil
     }
     
-    fileprivate func configure(cell: UITableViewCell, with summit: Summit) {
+    private func configure(cell: UITableViewCell, with summit: Summit) {
         
         cell.textLabel!.text = summit.name
         

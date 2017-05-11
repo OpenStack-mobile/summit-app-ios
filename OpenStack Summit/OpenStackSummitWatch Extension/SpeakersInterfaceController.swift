@@ -24,7 +24,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var speakers = [Speaker]() {
+    private(set) var speakers = [Speaker]() {
         
         didSet { updateUI() }
     }
@@ -93,7 +93,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         emptyLabel.setHidden(speakers.isEmpty == false)
         
@@ -109,7 +109,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     }
     
     /// Provide suggestions for the following language (e.g. `en-US`).
-    fileprivate func autosuggestions(for language: String) -> [String] {
+    private func autosuggestions(for language: String) -> [String] {
         
         #if DEBUG
         return ["Zhao", "Ben"]

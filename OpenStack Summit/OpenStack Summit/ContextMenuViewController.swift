@@ -197,7 +197,7 @@ extension ContextMenu {
 
 final class OpenInSafariActivity: UIActivity {
     
-    fileprivate var url: URL!
+    private var url: URL!
     
     override class var activityCategory : UIActivityCategory {
         
@@ -236,7 +236,7 @@ final class OpenInSafariActivity: UIActivity {
         self.activityDidFinish(completed)
     }
     
-    fileprivate func url(from activityItems: [AnyObject]) -> URL? {
+    private func url(from activityItems: [AnyObject]) -> URL? {
         
         return activityItems.first(where: { (item) in
             
@@ -255,7 +255,7 @@ final class OpenInSafariActivity: UIActivity {
 
 final class CopyLinkActivity: UIActivity {
     
-    fileprivate var url: URL!
+    private var url: URL!
     
     override class var activityCategory : UIActivityCategory {
         
@@ -294,7 +294,7 @@ final class CopyLinkActivity: UIActivity {
         self.activityDidFinish(true)
     }
     
-    fileprivate func url(from activityItems: [AnyObject]) -> URL? {
+    private func url(from activityItems: [AnyObject]) -> URL? {
         
         return activityItems.first(where: { (item) in
             

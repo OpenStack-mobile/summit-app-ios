@@ -20,12 +20,12 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var events = [Event]()
+    private(set) var events = [Event]()
     
-    fileprivate static let dateFormatter: DateFormatter = {
+    private static let dateFormatter: DateFormatter = {
        
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: Store.shared.cache!.timeZone)
+        dateFormatter.timeZone = TimeZone(identifier: Store.shared.cache!.timeZone)
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         
@@ -37,7 +37,7 @@ final class EventsInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sort()
+        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sorted()
         
         updateUI()
     }
@@ -62,17 +62,17 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         // configure cells
         
         tableView.setNumberOfRows(events.count, withRowType: EventCellController.identifier)
         
-        for (index, event) in events.enumerate() {
+        for (index, event) in events.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! EventCellController
+            let cell = tableView.rowController(at: index) as! EventCellController
             
-            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start)
+            let dateText = EventsInterfaceController.dateFormatter.string(from: event.start)
             let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
             
             cell.nameLabel.setText(event.name)

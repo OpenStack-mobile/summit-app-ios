@@ -86,7 +86,7 @@ extension Member: JSONDecodable {
 
 extension MemberResponse.Member: JSONDecodable {
     
-    fileprivate typealias JSONKey = Member.JSONKey
+    private typealias JSONKey = Member.JSONKey
     
     public init?(json JSONValue: JSON.Value) {
         

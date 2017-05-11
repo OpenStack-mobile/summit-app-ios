@@ -60,7 +60,7 @@ struct ScheduleFilter: Equatable {
     // MARK: - Properties
     
     /// Filters that have been enabled
-    fileprivate(set) var activeFilters = Set<Filter>() {
+    private(set) var activeFilters = Set<Filter>() {
         
         didSet {
             if oldValue.contains(.activeTalks) != activeFilters.contains(.activeTalks) {
@@ -71,10 +71,10 @@ struct ScheduleFilter: Equatable {
     }
     
     /// All possible filters
-    fileprivate(set) var allFilters = [FilterCategory: [Filter]]()
+    private(set) var allFilters = [FilterCategory: [Filter]]()
     
     /// Whether a selection has been made in the `Active Talks` filters.
-    fileprivate(set) var didChangeActiveTalks = false
+    private(set) var didChangeActiveTalks = false
     
     // MARK: - Methods
     
@@ -220,14 +220,14 @@ final class FilterManager {
     
     var filter = Observable(ScheduleFilter())
     
-    fileprivate var timer: Timer!
+    private var timer: Timer!
     
     deinit {
         
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate init() {
+    private init() {
         
         // update sections from Core Data
         filter.value.update()
@@ -243,17 +243,17 @@ final class FilterManager {
         SummitManager.shared.summit.observe(currentSummitChanged)
     }
     
-    @objc fileprivate func timerUpdate(_ sender: Timer) {
+    @objc private func timerUpdate(_ sender: Timer) {
         
         filter.value.updateActiveTalks()
     }
     
-    @objc fileprivate func managedObjectContextObjectsDidChange(_ notification: Notification) {
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
         
         self.filter.value.update()
     }
     
-    fileprivate func currentSummitChanged(_ summit: Identifier, oldValue: Identifier) {
+    private func currentSummitChanged(_ summit: Identifier, oldValue: Identifier) {
         
         self.filter.value.update()
     }

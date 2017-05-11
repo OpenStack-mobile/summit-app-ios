@@ -50,9 +50,9 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate var event: Event!
+    private var event: Event!
     
-    fileprivate var eventDetail: EventDetail!
+    private var eventDetail: EventDetail!
     
     // MARK: - Loading
     
@@ -73,10 +73,10 @@ final class EventDetailInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
+        let activityUserInfo: [String: Any] = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: eventDetail.identifier]
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: eventDetail.webpageURL)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo, webpageURL: eventDetail.webpageURL)
     }
     
     override func didDeactivate() {
@@ -116,7 +116,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         nameLabel.setText(eventDetail.name)
         dateLabel.setText(eventDetail.dateTime)

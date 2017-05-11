@@ -26,7 +26,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: - Accessors
     
-    fileprivate(set) var name: String {
+    private(set) var name: String {
         get {
             return nameLabel.text ?? ""
         }
@@ -35,7 +35,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
 
-    fileprivate(set) var location: String  {
+    private(set) var location: String  {
         get {
             return locationLabel.text ?? ""
         }
@@ -44,7 +44,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    fileprivate(set) var images = [String]() {
+    private(set) var images = [String]() {
         didSet {
             var imageInputs: [HanekeInputSource] = []		
             
@@ -63,7 +63,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    fileprivate(set) var maps = [String]() {
+    private(set) var maps = [String]() {
        didSet {
             var imageInputs: [HanekeInputSource] = []
         
@@ -137,7 +137,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         assert(self.venue != nil, "No venue set")
         

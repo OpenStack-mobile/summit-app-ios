@@ -17,23 +17,23 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) var addMemberBarButtonItem: UIBarButtonItem!
+    @IBOutlet private(set) var addMemberBarButtonItem: UIBarButtonItem!
     
-    @IBOutlet fileprivate(set) weak var nameTextField: UITextField!
+    @IBOutlet private(set) weak var nameTextField: UITextField!
     
     // MARK: - Properties
     
     var team: Identifier!
     
-    fileprivate var entityController: EntityController<Team>!
+    private var entityController: EntityController<Team>!
     
-    fileprivate var teamCache: Team!
+    private var teamCache: Team!
     
-    fileprivate var canEdit = false
+    private var canEdit = false
     
-    fileprivate var data = [(Section, [Cell])]()
+    private var data = [(Section, [Cell])]()
     
-    fileprivate static let dateFormatter: DateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         
         let formatter = DateFormatter()
         
@@ -103,7 +103,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - Private Methods
     
-    fileprivate func configureView(_ team: Team) {
+    private func configureView(_ team: Team) {
         
         guard let memberID = Store.shared.authenticatedMember?.identifier
             else { fatalError("Not logged in") }
@@ -167,7 +167,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         self.tableView.reloadData()
     }
     
-    fileprivate subscript (indexPath: IndexPath) -> Cell {
+    private subscript (indexPath: IndexPath) -> Cell {
         
         let section = self.data[indexPath.section]
         
@@ -176,7 +176,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         return rows[indexPath.row]
     }
     
-    fileprivate func wasDeleted() {
+    private func wasDeleted() {
         
         /** Presents an alert controller with the specified completion handlers.  */
         func showAlert(_ localizedText: String, okHandler: (() -> ())? = nil, retryHandler: (()-> ())? = nil) {

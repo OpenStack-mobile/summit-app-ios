@@ -17,11 +17,11 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) weak var searchBar: UISearchBar!
+    @IBOutlet private(set) weak var searchBar: UISearchBar!
     
-    @IBOutlet fileprivate(set) var emptyView: UIView!
+    @IBOutlet private(set) var emptyView: UIView!
     
-    @IBOutlet fileprivate(set) weak var emptyLabel: UILabel!
+    @IBOutlet private(set) weak var emptyLabel: UILabel!
     
     // MARK: - Properties
     
@@ -42,7 +42,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         }
     }
     
-    fileprivate var data: Data = .none {
+    private var data: Data = .none {
         
         didSet { configureView() }
     }
@@ -133,7 +133,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     // MARK: - Private Methods
     
-    fileprivate func searchTermChanged() {
+    private func searchTermChanged() {
         
         if searchTerm.isEmpty {
             
@@ -172,7 +172,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         }
     }
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         tableView.reloadData()
         
@@ -200,7 +200,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.tableFooterView = tableFooterView
     }
     
-    fileprivate func search<T: SearchViewControllerItem>(_ type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
+    private func search<T: SearchViewControllerItem>(_ type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
         
         let context = Store.shared.managedObjectContext
         
@@ -237,7 +237,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return (items, extend)
     }
     
-    fileprivate subscript(indexPath: IndexPath) -> Item {
+    private subscript(indexPath: IndexPath) -> Item {
         
         let section: SearchResult
         
@@ -252,7 +252,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return item
     }
     
-    fileprivate subscript(section index: Int) -> SearchResult {
+    private subscript(section index: Int) -> SearchResult {
         
         let section: SearchResult
         
@@ -265,7 +265,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return section
     }
     
-    fileprivate func configure(cell: ScheduleTableViewCell, with event: ScheduleItem) {
+    private func configure(cell: ScheduleTableViewCell, with event: ScheduleItem) {
         
         // set text
         cell.nameLabel.text = event.name
@@ -299,14 +299,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), for: .touchUpInside)
     }
     
-    fileprivate func configure(cell: PeopleTableViewCell, with speaker: Speaker) {
+    private func configure(cell: PeopleTableViewCell, with speaker: Speaker) {
         
         cell.name = speaker.name
         cell.title = speaker.title
         cell.pictureURL = speaker.pictureURL
     }
     
-    fileprivate func configure(cell: SearchResultTableViewCell, with track: Track) {
+    private func configure(cell: SearchResultTableViewCell, with track: Track) {
         
         cell.itemLabel.text = track.name
     }
@@ -451,7 +451,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
 
 final class SearchResultTableViewCell: UITableViewCell {
     
-    @IBOutlet fileprivate(set) weak var itemLabel: UILabel!
+    @IBOutlet private(set) weak var itemLabel: UILabel!
 }
 
 private extension SearchViewController {
@@ -500,9 +500,9 @@ private protocol SearchViewControllerItem: CoreDataDecodable {
 
 extension ScheduleItem: SearchViewControllerItem {
     
-    fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
+    private func toItem() -> SearchViewController.Item { return .event(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm)
     }
@@ -510,9 +510,9 @@ extension ScheduleItem: SearchViewControllerItem {
 
 extension Speaker: SearchViewControllerItem {
     
-    fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
+    private func toItem() -> SearchViewController.Item { return .speaker(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
     }
@@ -520,9 +520,9 @@ extension Speaker: SearchViewControllerItem {
 
 extension Track: SearchViewControllerItem {
     
-    fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
+    private func toItem() -> SearchViewController.Item { return .track(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(longLong: Int64(summit)), searchTerm)
     }

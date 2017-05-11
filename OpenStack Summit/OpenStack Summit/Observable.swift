@@ -23,9 +23,9 @@ public final class Observable<Value: Equatable> {
     
     // MARK: - Private Properties
     
-    fileprivate var observers = [Observer<Value>]()
+    private var observers = [Observer<Value>]()
     
-    fileprivate var nextID = 1
+    private var nextID = 1
     
     // MARK: - Initialization
     

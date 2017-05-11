@@ -267,7 +267,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Methods
     
-    fileprivate func connectToFcm() {
+    private func connectToFcm() {
         // Won't connect since there is no token
         guard FIRInstanceID.instanceID().token() != nil else {
             return;

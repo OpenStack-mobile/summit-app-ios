@@ -66,7 +66,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     // MARK: - Private Methods
     
     /// Provide suggestions for the following language (e.g. `en-US`).
-    fileprivate func autosuggestions(for language: String) -> [String] {
+    private func autosuggestions(for language: String) -> [String] {
         
         #if DEBUG
             return ["WAN", "OpenStack"]

@@ -22,9 +22,9 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - Properties
     
-    fileprivate var summitCache: Summit?
+    private var summitCache: Summit?
     
-    fileprivate var sections = [Section]()
+    private var sections = [Section]()
     
     // MARK: - Loading
     
@@ -106,7 +106,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         // setup sections
         
@@ -163,7 +163,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    fileprivate func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
+    private func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -171,7 +171,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    fileprivate func configure(cell: AboutNameCell) {
+    private func configure(cell: AboutNameCell) {
         
         guard let summit = self.summitCache
             else { fatalError("No summit cache") }
@@ -200,7 +200,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    fileprivate func open(url: URL) {
+    private func open(url: URL) {
         
         if UIApplication.shared.canOpenURL(url) {
             

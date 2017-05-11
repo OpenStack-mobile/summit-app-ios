@@ -20,9 +20,9 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    fileprivate(set) var dates = [Date]()
+    private(set) var dates = [Date]()
     
-    fileprivate static let dateFormatter: DateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         
         let dateFormatter = DateFormatter()
         
@@ -55,19 +55,19 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         // load dates
         
         let summit = Store.shared.cache!
         
-        let dayCount = summit.end.mt_daysSinceDate(summit.start)
+        let dayCount = (summit.end as NSDate).mt_days(since: summit.start)
         
         self.dates = [Date]()
         
         for index in 0 ..< dayCount {
             
-            let date = summit.start.mt_dateDaysAfter(index)
+            let date = (summit.start as NSDate).mt_dateDays(after: index) as Date
             
             dates.append(date)
         }
@@ -101,7 +101,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         let events = Store.shared.cache?.schedule.filter({
             
-            return $0.start.mt_isBetweenDate(startDate, andDate: endDate)
+            return ($0.start as NSDate).mt_isBetweenDate(startDate, andDate: endDate)
         })
         
         return Context(events)

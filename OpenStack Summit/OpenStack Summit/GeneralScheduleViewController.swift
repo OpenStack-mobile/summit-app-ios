@@ -22,9 +22,9 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - Properties
     
-    fileprivate(set) var filterButton: UIBarButtonItem!
+    private(set) var filterButton: UIBarButtonItem!
     
-    fileprivate(set) var activeFilterIndicator = false {
+    private(set) var activeFilterIndicator = false {
         
         didSet {
             
@@ -35,7 +35,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         }
     }
     
-    fileprivate var filterObserver: Int?
+    private var filterObserver: Int?
     
     // MARK: - Loading
     
@@ -232,7 +232,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - Private Methods
     
-    fileprivate func filterChanged(_ filter: ScheduleFilter, oldValue: ScheduleFilter) {
+    private func filterChanged(_ filter: ScheduleFilter, oldValue: ScheduleFilter) {
         
         if self.navigationController?.topViewController === self {
             

@@ -18,15 +18,15 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - IB Outlets
     
-    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
     
-    @IBOutlet fileprivate(set) weak var ratingView: CosmosView!
+    @IBOutlet private(set) weak var ratingView: CosmosView!
     
-    @IBOutlet fileprivate(set) weak var reviewTextView: UITextView!
+    @IBOutlet private(set) weak var reviewTextView: UITextView!
     
-    @IBOutlet fileprivate(set) weak var sendButton: Button!
+    @IBOutlet private(set) weak var sendButton: Button!
     
-    @IBOutlet fileprivate(set) weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var bottomViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     
@@ -37,11 +37,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
          didSet { if isViewLoaded { configureView() } }
     }
     
-    fileprivate var mode: Mode = .new
+    private var mode: Mode = .new
     
-    fileprivate let placeHolderText = "Write a Review..."
+    private let placeHolderText = "Write a Review..."
     
-    fileprivate let minimumBottomSpace: CGFloat = 100
+    private let minimumBottomSpace: CGFloat = 100
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
@@ -169,7 +169,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - Private Methods
     
-    fileprivate func configureView() {
+    private func configureView() {
         
         if let feedbackManagedObject = Store.shared.authenticatedMember?.feedback(for: self.event) {
             
@@ -194,7 +194,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         }
     }
     
-    fileprivate func configureView(with event: Event, feedback: Feedback? = nil) {
+    private func configureView(with event: Event, feedback: Feedback? = nil) {
         
         self.titleLabel.text = event.name
         
@@ -236,7 +236,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - Notifications
     
-    @objc fileprivate func registerKeyboardNotifications() {
+    @objc private func registerKeyboardNotifications() {
         
         NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardDidShow),
@@ -249,12 +249,12 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                                                          object: nil)
     }
     
-    @objc fileprivate func unregisterKeyboardNotifications() {
+    @objc private func unregisterKeyboardNotifications() {
         
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc fileprivate func keyboardDidShow(_ notification: Notification) {
+    @objc private func keyboardDidShow(_ notification: Notification) {
         
         let userInfo: NSDictionary = notification.userInfo!
         var keyboardRect = userInfo.object(forKey: UIKeyboardFrameBeginUserInfoKey)!.cgRectValue
@@ -265,7 +265,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         view.updateConstraints()
     }
     
-    @objc fileprivate func keyboardWillHide(_ notification: Notification) {
+    @objc private func keyboardWillHide(_ notification: Notification) {
         
         bottomViewHeightConstraint.constant = minimumBottomSpace
         view.updateConstraints()
