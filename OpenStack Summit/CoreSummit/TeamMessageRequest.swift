@@ -44,7 +44,7 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try message.save(context)
+                let _ = try message.save(context)
                 
                 try context.validateAndSave()
             }

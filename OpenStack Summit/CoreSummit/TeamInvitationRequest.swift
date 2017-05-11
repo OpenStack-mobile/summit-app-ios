@@ -99,7 +99,7 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try response.page.items.save(context)
+                let _ = try response.page.items.save(context)
                 
                 try context.validateAndSave()
             }

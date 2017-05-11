@@ -101,7 +101,7 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
         
-        let summitID = 22  // Boston 2017
+        let summitID: Identifier = 22  // Boston 2017
         
         let date = Date() - (60*60*24*30) // last month
         
@@ -115,7 +115,7 @@ final class StoreTests: XCTestCase {
                 
                 XCTFail("\(error)");
                 
-            case .Value:
+            case .value:
                 
                 break
             }

@@ -121,7 +121,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: CoreSummit.Predicate) throws -> Int {
+    func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: Predicate) throws -> Int {
         
         return try count(managedObjectType, predicate: predicate.toFoundation())
     }

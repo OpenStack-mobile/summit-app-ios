@@ -108,7 +108,7 @@ public extension Notification {
             }
         }
         
-        private static func parse(string: String, with prefix: String) -> Notification.Topic? {
+        private static func parse(_ string: String, with prefix: String) -> Notification.Topic? {
             
             let rawValue = string
             
@@ -174,7 +174,7 @@ public extension Notification {
             
             func parseCollection() -> Topic? {
                 
-                let prefixString = rawValue.stringByReplacingOccurrencesOfString(topicPrefixString, withString: "")
+                let prefixString = rawValue.replacingOccurrences(of: topicPrefixString, with: "")
                 
                 guard let prefix = Prefix(rawValue: prefixString)
                     else { return nil }

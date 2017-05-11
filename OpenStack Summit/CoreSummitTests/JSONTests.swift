@@ -274,10 +274,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("DataUpdates13")
         
-        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+        guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Video(JSONValue: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Video(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -285,10 +285,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("DataUpdates14")
         
-        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+        guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Slide(JSONValue: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Slide(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -296,10 +296,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("DataUpdates15")
         
-        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+        guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Link(JSONValue: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Link(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -307,10 +307,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("DataUpdates16")
         
-        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+        guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Event.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
 }

@@ -54,7 +54,7 @@ public extension Store {
                 
                 let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [], invitations: [])
                 
-                try team.save(context)
+                let _ = try team.save(context)
                 
                 try context.validateAndSave()
                 
@@ -133,7 +133,7 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try entity.save(context)
+                let _ = try entity.save(context)
                 
                 try context.validateAndSave()
             }
@@ -206,7 +206,7 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try page.items.save(context)
+                let _ = try page.items.save(context)
                 
                 try context.validateAndSave()
             }

@@ -27,7 +27,7 @@ public final class VideoManagedObject: Entity {
     
     @NSManaged public var highlighted: Bool
     
-    @NSManaged public var dataUploaded: NSDate
+    @NSManaged public var dataUploaded: Date
     
     @NSManaged public var event: EventManagedObject
 }
@@ -42,11 +42,11 @@ extension Video: CoreDataDecodable {
         self.displayOnSite = managedObject.displayOnSite
         self.featured = managedObject.featured
         self.youtube = managedObject.youtube
-        self.event = managedObject.event.identifier
-        self.order = Int(managedObject.order)
-        self.views = Int(managedObject.views)
+        self.event = managedObject.event.id
+        self.order = managedObject.order
+        self.views = managedObject.views
         self.highlighted = managedObject.highlighted
-        self.dataUploaded = Date(foundation: managedObject.dataUploaded)
+        self.dataUploaded = managedObject.dataUploaded
     }
 }
 
@@ -64,7 +64,7 @@ extension Video: CoreDataEncodable {
         managedObject.order = Int64(order)
         managedObject.views = Int64(views)
         managedObject.highlighted = highlighted
-        managedObject.dataUploaded = dataUploaded.toFoundation()
+        managedObject.dataUploaded = dataUploaded
         managedObject.event = try context.relationshipFault(event)
         
         managedObject.didCache()

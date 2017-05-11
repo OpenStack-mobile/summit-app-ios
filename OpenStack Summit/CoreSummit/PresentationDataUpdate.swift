@@ -12,7 +12,7 @@ public extension Presentation {
         
         public let identifier: Identifier
         
-        public let level: Presentation.Level?
+        public let level: Level?
         
         public let moderator: Identifier?
         

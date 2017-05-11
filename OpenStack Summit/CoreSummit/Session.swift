@@ -51,21 +51,6 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         }
     }
     
-    public var name: String? {
-        
-        get { return userDefaults.string(forKey: Key.name.rawValue) }
-        
-        set {
-            
-            guard let stringValue = newValue
-                else { userDefaults.removeObject(forKey: Key.name.rawValue); return }
-            
-            userDefaults.set(stringValue as NSString, forKey: Key.name.rawValue)
-            
-            userDefaults.synchronize()
-        }
-    }
-    
     public var hadPasscode: Bool {
         
         get { return userDefaults.bool(forKey: Key.hadPasscode.rawValue) }

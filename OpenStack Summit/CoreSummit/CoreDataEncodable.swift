@@ -14,7 +14,6 @@ public protocol CoreDataEncodable {
     
     associatedtype ManagedObject: NSManagedObject
     
-    @discardableResult
     func save(_ context: NSManagedObjectContext) throws -> ManagedObject
 }
 

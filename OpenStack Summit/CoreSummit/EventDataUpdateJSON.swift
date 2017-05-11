@@ -96,7 +96,7 @@ extension Event.DataUpdate: JSONDecodable {
         
         if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
+            guard let slides = Slide.from(json: slidesJSONArray)
                 else { return nil }
             
             self.slides = Set(slides)
@@ -108,7 +108,7 @@ extension Event.DataUpdate: JSONDecodable {
         
         if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
+            guard let links = Link.from(json: linksJSONArray)
                 else { return nil }
             
             self.links = Set(links)

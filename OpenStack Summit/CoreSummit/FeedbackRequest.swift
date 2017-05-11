@@ -40,7 +40,7 @@ public extension Store {
                 guard let _ = try EventManagedObject.find(event, context: context)
                     else { return }
                 
-                try page.items.save(context)
+                let _ = try page.items.save(context)
                 
                 try context.validateAndSave()
             }

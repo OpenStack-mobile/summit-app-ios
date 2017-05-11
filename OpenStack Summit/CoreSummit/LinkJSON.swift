@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Link {
     
@@ -18,7 +18,7 @@ public extension Link {
 
 extension Link: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
@@ -39,8 +39,8 @@ extension Link: JSONDecodable {
         // optional
         self.name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String ?? ""
         
-        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-            where descriptionText.isEmpty == false {
+        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
+            descriptionText.isEmpty == false {
             
             self.descriptionText = descriptionText
             

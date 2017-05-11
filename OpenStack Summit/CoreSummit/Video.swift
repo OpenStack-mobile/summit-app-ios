@@ -26,9 +26,9 @@ public struct Video: PresentationMaterial {
     
     public var dataUploaded: Date
     
-    public var order: Int
+    public var order: Int64
     
-    public var views: Int
+    public var views: Int64
     
     public var event: Identifier
 }

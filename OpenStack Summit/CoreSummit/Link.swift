@@ -18,7 +18,7 @@ public struct Link: PresentationMaterial {
     
     public var featured: Bool
     
-    public var order: Int
+    public var order: Int64
     
     public var link: String
     

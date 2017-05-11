@@ -101,7 +101,7 @@ public extension Event {
         
         if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
+            guard let slides = Slide.from(json: slidesJSONArray)
                 else { return nil }
             
             self.slides = Set(slides)
@@ -113,7 +113,7 @@ public extension Event {
         
         if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
+            guard let links = Link.from(json: linksJSONArray)
                 else { return nil }
             
             self.links = Set(links)
@@ -224,7 +224,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
+            guard let slides = Slide.from(json: slidesJSONArray)
                 else { return nil }
             
             self.slides = slides
@@ -236,7 +236,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
+            guard let links = Link.from(json: linksJSONArray)
                 else { return nil }
             
             self.links = links

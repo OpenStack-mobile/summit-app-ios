@@ -10,6 +10,7 @@ import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 import CoreData
+import Predicate
 
 public extension Store {
     
@@ -27,9 +28,9 @@ public extension Store {
             }
             
             // delete all notifications except 'EVERYBODY' type
-            let notifications = try context.managedObjects(NotificationManagedObject.self, predicate: "channel" != CoreSummit.Notification.Channel.everyone.rawValue)
+            let notifications = try context.managedObjects(NotificationManagedObject.self, predicate: #keyPath(NotificationManagedObject.channel) != CoreSummit.Notification.Channel.everyone.rawValue)
             
-            notifications.forEach { context.deleteObject($0) }
+            notifications.forEach { context.delete($0) }
             
             try context.validateAndSave()
         }
