@@ -211,9 +211,9 @@ extension EventViewController {
         }
     }
     
-    private typealias EventRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
+    private typealias EventRequest = (_ summit: Identifier?, _ event: Identifier, _ completion: (Error?) -> ()) -> ()
     
-    private func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
+    private func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: @escaping () -> ()) {
         
         let completion: (Swift.Error?) -> () = { [weak self] (response) in
             
@@ -284,7 +284,7 @@ extension EventViewController {
         
         Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.mainQueue.addOperationWithBlock {
                 
                 guard let controller = self else { return }
                 

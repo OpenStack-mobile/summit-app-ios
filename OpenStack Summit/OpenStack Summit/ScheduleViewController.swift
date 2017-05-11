@@ -244,8 +244,8 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let oldSelectedDate = self.selectedDate
         
         if  let defaultStart = summit.defaultStart?,
-            let defaultDay = self.availableDates.first(where: { $0.mt_isWithinSameDay(defaultStart) })
-            where summitActive == false && self.didSelectDate == false {
+            let defaultDay = self.availableDates.first(where: { $0.mt_isWithinSameDay(defaultStart) }),
+            summitActive == false && self.didSelectDate == false {
             
             self.selectedDate = defaultDay
             

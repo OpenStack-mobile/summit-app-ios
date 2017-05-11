@@ -34,8 +34,8 @@ extension SummitActivityHandling {
         }
         
         // show data
-        guard let components = url.pathComponents
-            where components.count >= 6
+        guard let components = url.pathComponents,
+            components.count >= 6
             else { return false }
         
         let typeString = components[4]
@@ -58,8 +58,8 @@ extension SummitActivityHandling {
     /// Opens URL of custom scheme.
     func openSchemeURL(_ url: Foundation.URL) -> Bool {
         
-        guard let typeString = url.host, let components = url.pathComponents
-            where components.count >= 2
+        guard let typeString = url.host, let components = url.pathComponents,
+            components.count >= 2
             else { return false }
         
         let identifierString = components[1]

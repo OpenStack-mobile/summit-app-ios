@@ -34,7 +34,7 @@ struct ServiceURL {
         
         let components = NSURLComponents()
         
-        components.scheme = self.dynamicType.scheme
+        components.scheme = type(of: self).scheme
         
         components.queryItems = [NSURLQueryItem(name: QueryItem.identifier.rawValue, value: "\(identifier)")]
         

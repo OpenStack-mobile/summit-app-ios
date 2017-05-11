@@ -130,7 +130,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         biographySeparator.setHidden(speaker.biography == nil)
         
         if let descriptionText = speaker.biography,
-            let data = descriptionText.dataUsingEncoding(String.Encoding.utf8),
+            let data = descriptionText.data(using: String.Encoding.utf8),
             let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             biographyLabel.setText(attributedString.string)

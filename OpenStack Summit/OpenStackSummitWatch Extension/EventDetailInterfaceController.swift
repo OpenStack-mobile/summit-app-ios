@@ -94,11 +94,11 @@ final class EventDetailInterfaceController: WKInterfaceController {
             
             let speaker = eventDetail.speakers[0]
             
-            pushControllerWithName(SpeakerDetailInterfaceController.identifier, context: Context(speaker))
+            pushController(withName: SpeakerDetailInterfaceController.identifier, context: Context(speaker))
             
         } else {
             
-            pushControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
+            pushController(withName: SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
         }
     }
     
@@ -111,7 +111,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         guard let location = summit.locations.with(locationID)
             else { fatalError("Invalid location \(locationID)") }
         
-        self.pushControllerWithName(VenueDetailInterfaceController.identifier, context: Context(location))
+        self.pushController(withName: VenueDetailInterfaceController.identifier, context: Context(location))
     }
     
     // MARK: - Private Methods

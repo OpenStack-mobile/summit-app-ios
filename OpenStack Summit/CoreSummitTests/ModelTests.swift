@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import SwiftFoundation
 @testable import CoreSummit
 
 final class ModelTests: XCTestCase {

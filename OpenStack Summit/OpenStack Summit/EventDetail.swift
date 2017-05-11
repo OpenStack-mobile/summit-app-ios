@@ -96,8 +96,8 @@ public struct EventDetail: CoreDataDecodable {
         
         var speakers = [SpeakerDetail]()
         
-        if let managedObject = event.presentation.moderator
-            where managedObject.id > 0 {
+        if let managedObject = event.presentation.moderator,
+            managedObject.id > 0 {
             
             let moderatorSpeaker = CoreSummit.Speaker(managedObject: managedObject)
             let speakerDetail = SpeakerDetail(speaker: moderatorSpeaker, isModerator: true)

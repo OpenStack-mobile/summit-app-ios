@@ -43,7 +43,7 @@ extension Event: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         attributeSet.startDate = start
@@ -59,7 +59,7 @@ extension Event: CoreSpotlightSearchable {
             attributeSet.contentDescription = attributedString.string
         }
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -72,7 +72,7 @@ extension Speaker: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         attributeSet.contentDescription = title
@@ -86,7 +86,7 @@ extension Speaker: CoreSpotlightSearchable {
             attributeSet.thumbnailData = NSData(contentsOfURL: imageURL)
         }*/
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -99,7 +99,7 @@ extension Video: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
@@ -112,7 +112,7 @@ extension Video: CoreSpotlightSearchable {
         
         attributeSet.local = false
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -125,7 +125,7 @@ extension Venue: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
@@ -138,11 +138,11 @@ extension Venue: CoreSpotlightSearchable {
         
         attributeSet.country = country
         attributeSet.city = city
-        attributeSet.longitude = location?.longitude
-        attributeSet.latitude = location?.latitude
+        attributeSet.longitude = location?.longitude as NSNumber?
+        attributeSet.latitude = location?.latitude as NSNumber?
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -155,7 +155,7 @@ extension VenueRoom: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
@@ -168,7 +168,7 @@ extension VenueRoom: CoreSpotlightSearchable {
         
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 

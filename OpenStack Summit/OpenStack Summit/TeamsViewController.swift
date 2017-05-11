@@ -21,7 +21,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     lazy var contextMenu: ContextMenu = {
         
-        let createTeam = ContextMenu.Action(activityType: "\(self.dynamicType).CreateTeam", image: nil, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+        let createTeam = ContextMenu.Action(activityType: "\(type(of: self)).CreateTeam", image: nil, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController in
             
             let createTeamViewController = R.storyboard.teams.createTeamViewController()!
             
@@ -37,7 +37,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             return navigationController
             }))
         
-        let viewInvitations = ContextMenu.Action(activityType: "\(self.dynamicType).TeamInvitations", image: nil, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+        let viewInvitations = ContextMenu.Action(activityType: "\(type(of: self)).TeamInvitations", image: nil, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController in
             
             let teamInvitationsViewController = R.storyboard.teams.teamInvitationsViewController()!
             

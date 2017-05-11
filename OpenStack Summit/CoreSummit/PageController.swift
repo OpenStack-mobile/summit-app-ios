@@ -15,7 +15,7 @@ public final class PageController<Item> {
     
     public let perPage: Int
     
-    public var fetch: (_ page: Int, _ perPage: Int, _ response: (ErrorValue<Page<Item>>) -> ()) -> ()
+    public var fetch: (_ page: Int, _ perPage: Int, _ response: @escaping (ErrorValue<Page<Item>>) -> ()) -> ()
     
     public var cached: (() -> [Item])?
     

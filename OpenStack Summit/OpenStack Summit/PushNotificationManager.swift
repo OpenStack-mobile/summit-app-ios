@@ -614,8 +614,8 @@ public struct TeamMessageNotification: PushNotification {
             let fromIDString = pushNotification[Key.from_id.rawValue] as? String,
             let fromID = Int(fromIDString),
             let fromFirstName = pushNotification[Key.from_first_name.rawValue] as? String,
-            let fromLastName = pushNotification[Key.from_last_name.rawValue] as? String
-            where type == self.dynamicType.type
+            let fromLastName = pushNotification[Key.from_last_name.rawValue] as? String,
+            type == type(of: self).type
             else { return nil }
         
         self.identifier = identifier
@@ -675,8 +675,8 @@ public struct GeneralNotification: PushNotification {
             let summitIDString = pushNotification[Key.summit_id.rawValue] as? String,
             let summitID = Int(summitIDString),
             let channelString = pushNotification[Key.channel.rawValue] as? String,
-            let channel = Notification.Channel(rawValue: channelString)
-            where type == self.dynamicType.type
+            let channel = Notification.Channel(rawValue: channelString),
+            type == type(of: self).type
             else { return nil }
         
         self.identifier = identifier

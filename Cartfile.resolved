@@ -1,5 +1,5 @@
 github "marketplacer/Cosmos" "9.0.0"
-github "Haneke/HanekeSwift" "v0.10.1"
+github "OpenStack-Mobile/HanekeSwift" "e97c06307fd8cd5b3a03875d0950d73db688f2bd"
 github "zvonicek/ImageSlideshow" "1.3.0"
 github "JonasGessner/JGProgressHUD" "v1.4.1"
 github "PureSwift/JSON" "7bf16bd1aa2de84325102b57a1c24aea928010ea"

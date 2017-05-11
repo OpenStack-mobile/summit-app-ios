@@ -190,8 +190,8 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         // set description
         if let htmlString = person.biography,
             let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            where attributedString.string.isEmpty == false {
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            attributedString.string.isEmpty == false {
             
             self.descriptionView.hidden = false
             

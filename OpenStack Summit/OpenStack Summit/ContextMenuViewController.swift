@@ -206,7 +206,7 @@ final class OpenInSafariActivity: UIActivity {
     
     override var activityType : String? {
         
-        return "\(self.dynamicType)"
+        return "\(type(of: self))"
     }
     
     override var activityTitle : String? {
@@ -240,7 +240,7 @@ final class OpenInSafariActivity: UIActivity {
         
         return activityItems.first(where: { (item) in
             
-            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+            if let url = item as? URL, UIApplication.shared.canOpenURL(url) {
                 
                 return true
                 
@@ -264,7 +264,7 @@ final class CopyLinkActivity: UIActivity {
     
     override var activityType : String? {
         
-        return "\(self.dynamicType)"
+        return "\(type(of: self))"
     }
     
     override var activityTitle : String? {
@@ -298,7 +298,7 @@ final class CopyLinkActivity: UIActivity {
         
         return activityItems.first(where: { (item) in
             
-            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+            if let url = item as? NSURL, UIApplication.sharedApplication().canOpenURL(url) {
                 
                 return true
                 

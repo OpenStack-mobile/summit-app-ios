@@ -76,8 +76,9 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     private func fetch(_ page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         // dont make request for empty search filter
-        guard let searchText = self.searchBar.text where searchText.isEmpty == false
-            else { completion(.Value(.empty)); return }
+        guard let searchText = self.searchBar.text,
+            searchText.isEmpty == false
+            else { completion(.value(.empty)); return }
         
         let filter = MemberListRequest.Filter(value: searchText, property: scope)
         

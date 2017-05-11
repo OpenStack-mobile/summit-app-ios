@@ -3709,7 +3709,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/WatchOS/SwiftFoundation.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearOAuth2.framework",
@@ -3846,7 +3845,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/iOS/SwiftFoundation.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Rswift.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Haneke.framework",
@@ -3859,7 +3857,6 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/JGProgressHUD.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MTDates.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Cosmos.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/AHKActionSheet.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SlackTextViewController.framework",

@@ -120,8 +120,8 @@ internal extension ScheduleItem {
     static func getLocation(_ event: EventManagedObject) -> String {
         
         // only show after date
-        guard let startShowingVenues = event.summit.startShowingVenues
-            where Date().mt_isAfter(startShowingVenues)
+        guard let startShowingVenues = event.summit.startShowingVenues,
+            Date().mt_isAfter(startShowingVenues)
             else { return "" }
         
         var location = ""
@@ -158,8 +158,8 @@ internal extension ScheduleItem {
     @inline(__always)
     static func getTrackGroupColor(_ event: EventManagedObject) -> String {
         
-        guard let track = event.track
-            where track.groups.isEmpty == false
+        guard let track = event.track,
+            track.groups.isEmpty == false
             else { return "" }
         
         let trackGroups = track.groups.sort { $0.0.id < $0.1.id }
