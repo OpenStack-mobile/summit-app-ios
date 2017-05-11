@@ -8,10 +8,11 @@
 
 import Foundation
 import CoreData
+import AeroGearHttp
 
 public extension Store {
     
-    func favorite(_ isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (Swift.Error?) -> ()) {
+    func favorite(_ isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/summits/\(summit)/members/me/favorites/\(event)"
         
@@ -21,7 +22,9 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        let requestCompletion: (AnyObject?, NSError?) -> () = { (responseObject, error) in
+        let httpMethod: HttpMethod = isFavorite ? .post : .delete
+        
+        http.request(method: httpMethod, path: url) { (responseObject, error) in
             
             if error == nil {
                 
@@ -45,15 +48,6 @@ public extension Store {
             }
             
             completion(error)
-        }
-        
-        if isFavorite {
-            
-            http.POST(url, completionHandler: requestCompletion)
-            
-        } else {
-            
-            http.DELETE(url, completionHandler: requestCompletion)
         }
     }
 }

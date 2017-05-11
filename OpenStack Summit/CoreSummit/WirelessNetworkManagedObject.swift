@@ -31,7 +31,7 @@ extension WirelessNetwork: CoreDataDecodable {
         self.name = managedObject.name
         self.password = managedObject.password
         self.descriptionText = managedObject.descriptionText
-        self.summit = managedObject.summit.identifier
+        self.summit = managedObject.summit.id
     }
 }
 

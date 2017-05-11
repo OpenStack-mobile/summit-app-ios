@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
+    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -33,7 +33,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.POST(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .post, path: URL) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -52,10 +52,10 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
     
-    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
+    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -76,7 +76,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .delete, path: URL) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -95,10 +95,10 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
     
-    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
+    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -119,7 +119,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .delete, path: URL) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -138,6 +138,6 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
 }

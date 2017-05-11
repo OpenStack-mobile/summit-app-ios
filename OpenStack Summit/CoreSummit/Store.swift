@@ -45,7 +45,7 @@ public final class Store {
     public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
     
     /// Request queue
-    fileprivate let requestQueue: OperationQueue = {
+    private let requestQueue: OperationQueue = {
         
         let queue = OperationQueue()
         
@@ -247,7 +247,7 @@ public final class Store {
         
         session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
         
-        return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
+        return AccountManager.addAccount(with: config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
     // MARK: Notifications

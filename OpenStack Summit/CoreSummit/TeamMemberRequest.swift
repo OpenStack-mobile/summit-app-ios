@@ -9,10 +9,14 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func add(member memberIdentifier: Identifier, to team: Identifier, permission: TeamPermission = .read, completion: (ErrorValue<Identifier>) -> ()) {
+    func add(member memberIdentifier: Identifier,
+             to team: Identifier,
+             permission: TeamPermission = .read,
+             completion: @escaping (ErrorValue<Identifier>) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/members/\(memberIdentifier)"
         
@@ -20,7 +24,7 @@ public extension Store {
         
         let http = self.createHTTP(.openIDJSON)
         
-        http.POST(url, parameters: ["permission": permission.rawValue]) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: ["permission": permission.rawValue]) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -36,7 +40,7 @@ public extension Store {
         }
     }
     
-    func remove(member identifier: Identifier, from team: Identifier, completion: (Swift.Error?) -> ()) {
+    func remove(member identifier: Identifier, from team: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/members/\(identifier)"
         
@@ -46,7 +50,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(url) { (responseObject, error) in
+        http.request(method: .delete, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil

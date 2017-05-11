@@ -9,10 +9,11 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func create(team name: String, description: String?, completion: (ErrorValue<Team>) -> ()) {
+    func create(team name: String, description: String?, completion: @escaping (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams"
         
@@ -22,7 +23,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         
         jsonDictionary["name"] = name.toOpenStackEncoding()!
         
@@ -30,7 +31,7 @@ public extension Store {
             jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
-        http.POST(url, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -63,7 +64,7 @@ public extension Store {
         }
     }
     
-    func update(team identifier: Identifier, name: String, description: String? = nil, completion: (Swift.Error?) -> ()) {
+    func update(team identifier: Identifier, name: String, description: String? = nil, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         
@@ -73,7 +74,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         
         jsonDictionary["name"] = name.toOpenStackEncoding()!
         
@@ -81,7 +82,7 @@ public extension Store {
             jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
-        http.PUT(url, parameters: jsonDictionary)  { (responseObject, error) in
+        http.request(method: .put, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -119,7 +120,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -152,7 +153,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(url) { (responseObject, error) in
+        http.request(method: .delete, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -178,7 +179,7 @@ public extension Store {
                perPage: Int = 10,
                completion: (ErrorValue<Page<Team>>) -> ()) {
         
-        let urlComponents = URLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
+        var urlComponents = URLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
         
         var queryItems = [URLQueryItem]()
         queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
@@ -186,13 +187,13 @@ public extension Store {
         queryItems.append(URLQueryItem(name: "expand", value: "owner,members,member,groups"))
         urlComponents.queryItems = queryItems
         
-        let url = urlComponents.url!.absoluteString!
+        let url = urlComponents.url!.absoluteString
         
         let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil

@@ -33,7 +33,7 @@ extension VenueFloor: CoreDataDecodable {
         self.descriptionText = managedObject.descriptionText
         self.number = Int(managedObject.number)
         self.imageURL = managedObject.imageURL
-        self.venue = managedObject.venue.identifier
+        self.venue = managedObject.venue.id
         self.rooms = managedObject.rooms.identifiers
     }
 }

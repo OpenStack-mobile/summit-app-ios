@@ -22,7 +22,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -59,7 +59,7 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil

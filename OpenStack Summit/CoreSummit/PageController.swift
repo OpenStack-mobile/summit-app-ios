@@ -39,7 +39,7 @@ public final class PageController<Item> {
     
     // MARK: - Initialization
     
-    public init(fetch: (_ page: Int, _ perPage: Int, _ response: (ErrorValue<Page<Item>>) -> ()) -> (),
+    public init(fetch: @escaping (_ page: Int, _ perPage: Int, _ response: (ErrorValue<Page<Item>>) -> ()) -> (),
                 perPage: Int = 10,
                 operationQueue: OperationQueue = OperationQueue.main) {
         
@@ -71,7 +71,7 @@ public final class PageController<Item> {
         
         callback.willLoadData()
         
-        fetch(page: nextPage, perPage: perPage) { [weak self] (response) in
+        fetch(nextPage, perPage) { [weak self] (response) in
             
             guard let controller = self else { return }
             

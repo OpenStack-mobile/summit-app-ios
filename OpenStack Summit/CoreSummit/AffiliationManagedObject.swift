@@ -57,8 +57,8 @@ extension Affiliation: CoreDataEncodable {
         
         let managedObject = try cached(context)
 
-        managedObject.start = start?
-        managedObject.end = end?
+        managedObject.start = start
+        managedObject.end = end
         managedObject.isCurrent = isCurrent
         managedObject.member = try context.relationshipFault(member)
         managedObject.organization = try context.relationshipFault(organization)

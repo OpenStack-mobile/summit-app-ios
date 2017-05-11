@@ -89,7 +89,7 @@ public extension NSManagedObjectContext {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entity.name!)
         
         fetchRequest.predicate = predicate
         
@@ -97,7 +97,7 @@ public extension NSManagedObjectContext {
         
         fetchRequest.fetchLimit = limit
         
-        return try self.fetch(fetchRequest) as! [ManagedObject]
+        return try self.fetch(fetchRequest)
     }
     
     @inline(__always)
@@ -111,7 +111,7 @@ public extension NSManagedObjectContext {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entity.name!)
         
         fetchRequest.resultType = .countResultType
         
