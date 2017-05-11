@@ -16,10 +16,10 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     override init() {
         super.init()
         
-        print("Initialized \(self.dynamicType)")
+        print("Initialized \(type(of: self))")
         
         #if DEBUG
-        WKInterfaceDevice.currentDevice().playHaptic(WKHapticType.Click) // haptic only for debugging
+        WKInterfaceDevice.current().play(.click) // haptic only for debugging
         #endif
         
         NotificationCenter.default.addObserver(self, selector: #selector(complicationServerActiveComplicationsDidChange), name: NSNotification.Name.CLKComplicationServerActiveComplicationsDidChange, object: self)
@@ -33,7 +33,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                     print("Reloading complication \(complication.description)...")
                 }
                 #if DEBUG
-                WKInterfaceDevice.currentDevice().playHaptic(WKHapticType.Click) // haptic only for debugging
+                WKInterfaceDevice.current().play(.click) // haptic only for debugging
                 #endif
             }
         }
@@ -101,7 +101,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let template = self.template(for: complication, with: entry)
         
-        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start? ?? Date(), complicationTemplate: template)
+        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start ?? Date(), complicationTemplate: template)
         
         handler(complicationEntry)
     }
@@ -148,18 +148,18 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start
+        let date = Store.shared.cache?.schedule.sorted(by: { $0.0.start < $0.1.start }).first?.start
         
-        print("Timeline Start Date: \(date)")
+        print("Timeline Start Date: \(date?.description ?? "none")")
         
         handler(date)
     }
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.end
+        let date = Store.shared.cache?.schedule.sorted(by: { $0.0.start > $0.1.start }).first?.end
         
-        print("Timeline End Date: \(date)")
+        print("Timeline End Date: \(date?.description ?? "none")")
         
         handler(date)
     }
@@ -261,14 +261,14 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         // get sorted events
         var events = summit.schedule
             .filter({ $0.start >= date }) // only events that start after the specified date
-            .sort({ $0.0.start < $0.1.start })
+            .sorted(by: { $0.0.start < $0.1.start })
         
         guard events.isEmpty == false
             else { return .none }
         
         // timeframe smallest and closest to requested date
         let startDate = events.first!.start
-        let endDate = events.sort({ $0.0.end < $0.1.end }).first!.end
+        let endDate = events.sorted(by: { $0.0.end < $0.1.end }).first!.end
         
         // get events that are within the timeframe
         events = summit.schedule.filter { $0.start <= startDate && $0.end >= endDate }
@@ -369,7 +369,7 @@ extension Summit {
         
         dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
-            .sort({ $0.0 > $0.1 })
+            .sorted(by: { $0.0 > $0.1 })
         
         return dates
     }
@@ -381,7 +381,7 @@ extension Summit {
         
         dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
-            .sort({ $0.0 < $0.1 })
+            .sorted(by: { $0.0 < $0.1 })
         
         return dates
     }

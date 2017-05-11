@@ -164,7 +164,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         
         // try to get existing window
         if let existingController = childContentWindowControllers
-            .firstMatching({ ($0 as? ContentController)?.contentIdentifier == identifier
+            .first(where: { ($0 as? ContentController)?.contentIdentifier == identifier
                 && ($0 as? ContentController)?.dynamicType.contentType == contentType }) {
             
             windowController = existingController

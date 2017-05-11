@@ -120,7 +120,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let now = Date()
         
-        guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
+        guard let today = self.availableDates.first(where: { $0.mt_isWithinSameDay(now) })
             else { return }
         
         (self.scheduleView.dayPicker.value(forKey: "daysCollectionView") as! UICollectionView).reloadData()
@@ -244,14 +244,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let oldSelectedDate = self.selectedDate
         
         if  let defaultStart = summit.defaultStart?,
-            let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
+            let defaultDay = self.availableDates.first(where: { $0.mt_isWithinSameDay(defaultStart) })
             where summitActive == false && self.didSelectDate == false {
             
             self.selectedDate = defaultDay
             
         } else if self.didSelectDate == false || self.availableDates.contains(self.selectedDate) == false {
             
-            self.selectedDate = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(today) }) ?? self.availableDates.first
+            self.selectedDate = self.availableDates.first(where: { $0.mt_isWithinSameDay(today) }) ?? self.availableDates.first
             
         } else {
             

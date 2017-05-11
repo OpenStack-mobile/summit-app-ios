@@ -26,7 +26,7 @@ extension SummitActivityHandling {
         // perform search
         if url.pathComponents?.last == "global-search",
             let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
-            let searchQuery = urlComponents.queryItems?.firstMatching({ $0.name == "t" && ($0.value ?? "").isEmpty == false }),
+            let searchQuery = urlComponents.queryItems?.first(where: { $0.name == "t" && ($0.value ?? "").isEmpty == false }),
             let searchTerm = searchQuery.value {
             
             self.search(searchTerm)

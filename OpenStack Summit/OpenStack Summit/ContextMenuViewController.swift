@@ -238,7 +238,7 @@ final class OpenInSafariActivity: UIActivity {
     
     fileprivate func url(from activityItems: [AnyObject]) -> URL? {
         
-        return activityItems.firstMatching({ (item) in
+        return activityItems.first(where: { (item) in
             
             if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
                 
@@ -296,7 +296,7 @@ final class CopyLinkActivity: UIActivity {
     
     fileprivate func url(from activityItems: [AnyObject]) -> URL? {
         
-        return activityItems.firstMatching({ (item) in
+        return activityItems.first(where: { (item) in
             
             if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
                 

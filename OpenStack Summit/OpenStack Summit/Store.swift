@@ -33,14 +33,14 @@ extension Store {
         return store
     }
     
-    static let fileURL: NSURL = {
+    static let fileURL: URL = {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
         #if os(iOS) || os(watchOS) || os(OSX)
-        let folderURL = try! fileManager.URLForDirectory(NSSearchPathDirectory.CachesDirectory,
-                                                         inDomain: NSSearchPathDomainMask.UserDomainMask,
-                                                         appropriateForURL: nil,
+            let folderURL = try! fileManager.url(for: .cachesDirectory,
+                                                 in: .userDomainMask,
+                                                 appropriateFor: nil,
                                                          create: false)
         #elseif os(tvOS)
             

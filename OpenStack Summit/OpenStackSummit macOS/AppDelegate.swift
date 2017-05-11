@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Properties
     
-    lazy var mainWindowController: MainWindowController = NSApp.windows.firstMatching({ $0.windowController is MainWindowController })!.windowController as! MainWindowController
+    lazy var mainWindowController: MainWindowController = NSApp.windows.first(where: { $0.windowController is MainWindowController })!.windowController as! MainWindowController
     
     // MARK: - NSApplicationDelegate
 

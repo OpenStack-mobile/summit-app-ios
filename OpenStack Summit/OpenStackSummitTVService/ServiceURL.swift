@@ -23,7 +23,7 @@ struct ServiceURL {
     init?(url: NSURL) {
         
         guard let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false),
-            let identifierString = components.queryItems?.firstMatching({ $0.name == QueryItem.identifier.rawValue })?.value,
+            let identifierString = components.queryItems?.first(where: { $0.name == QueryItem.identifier.rawValue })?.value,
             let identifier = Int(identifierString)
             else { return nil }
         

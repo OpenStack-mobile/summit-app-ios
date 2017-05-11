@@ -86,7 +86,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         
         if let venueID = self.selectedVenue,
             let venue = try! Venue.find(venueID, context: Store.shared.managedObjectContext),
-            let selectedAnnotation = mapView.annotations.firstMatching({ $0.coordinate.latitude == Double(venue.latitude ?? "") && $0.coordinate.longitude == Double(venue.longitude ?? "") }) {
+            let selectedAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == Double(venue.latitude ?? "") && $0.coordinate.longitude == Double(venue.longitude ?? "") }) {
             
             mapView.selectAnnotation(selectedAnnotation, animated: true)
         }
@@ -127,14 +127,14 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
             
         case .Delete:
             
-            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier })
+            guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier })
                 else { return }
             
             mapView.removeAnnotation(annotation)
             
         case .Update:
             
-            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
+            guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
                 else { return }
             
             if annotation.coordinate.latitude == location.latitude

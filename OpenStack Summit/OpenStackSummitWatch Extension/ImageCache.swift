@@ -16,7 +16,7 @@ public final class ImageCache {
     
     // MARK: - Properties
     
-    fileprivate let internalCache = NSCache()
+    fileprivate let internalCache = NSCache<NSString, NSData>()
     
     public var urlSession = URLSession.shared
     
@@ -43,7 +43,7 @@ public final class ImageCache {
         internalCache.removeAllObjects()
     }
     
-    public func load(_ url: URL, completion: (Response) -> ()) {
+    public func load(_ url: URL, completion: @escaping (Response) -> ()) {
         
         // attempt to get from cache first
         if let cachedImageData = self[url] {
@@ -80,14 +80,16 @@ public final class ImageCache {
     
     public subscript (url: URL) -> Data? {
         
-        get { return internalCache.object(forKey: url.absoluteString!) as? Data }
+        get { return internalCache.object(forKey: url.absoluteString as NSString) as Data? }
         
         set {
             
-            guard let newData = newValue
-                else { internalCache.removeObject(forKey: url.absoluteString!); return }
+            let key = url.absoluteString as NSString
             
-            internalCache.setObject(newData, forKey: url.absoluteString!)
+            guard let newData = newValue
+                else { internalCache.removeObject(forKey: key); return }
+            
+            internalCache.setObject(newData as NSData, forKey: key)
         }
     }
 }

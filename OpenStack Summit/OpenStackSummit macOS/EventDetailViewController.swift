@@ -237,7 +237,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             let calendar: EKCalendar
             
-            if let existingCalendar = calendarEventStore.calendarsForEntityType(.Event).firstMatching({ $0.title == calendarListTitle }) {
+            if let existingCalendar = calendarEventStore.calendarsForEntityType(.Event).first(where: { $0.title == calendarListTitle }) {
                 
                 calendar = existingCalendar
                 

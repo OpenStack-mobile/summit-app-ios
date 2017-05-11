@@ -8,18 +8,18 @@
 
 public enum Level: String, Comparable {
     
-    case Beginner
-    case Intermediate
-    case Advanced
-    case NotApplicable = "N/A"
+    case beginner = "Beginner"
+    case intermediate = "Intermediate"
+    case advanced = "Advanced"
+    case notApplicable = "N/A"
     
     public var order: Int {
         
         switch self {
-        case .Beginner: return 0
-        case .Intermediate: return 1
-        case .Advanced: return 2
-        case .NotApplicable: return 3
+        case .beginner:         return 0
+        case .intermediate:     return 1
+        case .advanced:         return 2
+        case .notApplicable:    return 3
         }
     }
 }

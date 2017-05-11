@@ -42,7 +42,7 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
         let fetchedVideos = try! context.managedObjects(VideoManagedObject.self,predicate: NSPredicate(format: "id IN %@", recentlyPlayed))
         
         // sort videos
-        let videos = recentlyPlayed.map { playedVideo in fetchedVideos.firstMatching({ $0.identifier == playedVideo })! }
+        let videos = recentlyPlayed.map { playedVideo in fetchedVideos.first(where: { $0.identifier == playedVideo })! }
         
         return videos.map { $0.toContentItem() }
     }

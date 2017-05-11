@@ -49,7 +49,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
                 
                 for string in inputText {
                     
-                    if $0.name.localizedCaseInsensitiveContainsString(string) {
+                    if $0.name.localizedCaseInsensitiveContains(string) {
                         
                         return true
                     }
@@ -59,7 +59,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
                 
             })
             
-            self.pushControllerWithName(EventsInterfaceController.identifier, context: Context(filteredEvents))
+            self.pushController(withName: EventsInterfaceController.identifier, context: Context(filteredEvents))
         }
     }
     

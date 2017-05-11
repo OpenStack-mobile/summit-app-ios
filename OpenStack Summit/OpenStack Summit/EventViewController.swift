@@ -332,7 +332,7 @@ extension EventViewController {
             
             let calendar: EKCalendar
             
-            if let existingCalendar = eventStore.calendars(for: .event).firstMatching({ $0.title == calendarListTitle }) {
+            if let existingCalendar = eventStore.calendars(for: .event).first(where: { $0.title == calendarListTitle }) {
                 
                 calendar = existingCalendar
                 
