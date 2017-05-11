@@ -15,11 +15,11 @@ public extension Store {
     
     func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: @escaping (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
         
-        let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
+        let uri = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
         let http = self.createHTTP(.serviceAccount)
         
-        let url = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         http.request(method: .get, path: url) { (responseObject, error) in
             

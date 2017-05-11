@@ -187,7 +187,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.showErrorMessage(error)
                         
@@ -224,14 +224,14 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     print("Error getting summits: \(error)")
                     
                     // try again
                     controller.loadSummits()
                     
-                case let .Value(page):
+                case let .value(page):
                     
                     guard let latestSummit = page.items.last
                         else { fatalError("No summits") }
@@ -281,14 +281,14 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     print("Error loading summit \(summitID): \(error)")
                     
                     // try again
                     controller.loadData()
                     
-                case let .Value(summit):
+                case let .value(summit):
                     
                     assert(controller.isDataLoaded)
                     

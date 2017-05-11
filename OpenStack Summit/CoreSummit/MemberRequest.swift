@@ -15,15 +15,15 @@ public extension Store {
     
     func currentMember(for summit: Identifier, completion: @escaping (ErrorValue<MemberResponse.Member>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
+        let uri = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.request(method: .get, path: URL, parameters: nil, completionHandler: { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -43,7 +43,7 @@ public extension Store {
             
             // success
             completion(.value(member))
-        })
+        }
     }
 }
 

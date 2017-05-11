@@ -10,9 +10,9 @@ import XCTest
 import Foundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = [6, 7, 22]
+let SummitJSONIdentifiers: [Identifier] = [6, 7, 22]
 
-let MemberJSONIdentifiers = 1 ... 3
+let MemberJSONIdentifiers: CountableClosedRange<Identifier> = 1 ... 3
 
 final class JSONTests: XCTestCase {
     
@@ -95,8 +95,8 @@ final class JSONTests: XCTestCase {
         XCTAssert(dataUpdates.count == 1, "\(dataUpdates.count) DataUpdate. Should be 1")
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = EventDataUpdate(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Event.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -123,8 +123,8 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = SummitDataUpdate(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Summit.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -143,11 +143,11 @@ final class JSONTests: XCTestCase {
         
         for dataUpdate in dataUpdates {
             
-            guard dataUpdate.operation == .Update,
+            guard dataUpdate.operation == .update,
                 let dataUpdateEntity = dataUpdate.entity,
-                case let .JSON(entityJSON) = dataUpdateEntity,
+                case let .json(entityJSON) = dataUpdateEntity,
                 let type = dataUpdate.className.type,
-                let _ = type.init(json: .Object(entityJSON))
+                let _ = type.init(json: .object(entityJSON))
                 else { XCTFail("Could not decode \(dataUpdate.className) from JSON"); return }
         }
     }
@@ -164,8 +164,8 @@ final class JSONTests: XCTestCase {
         XCTAssert(dataUpdates.count == 1, "\(dataUpdates.count) DataUpdate. Should be 1")
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = VenueRoomDataUpdate(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = VenueRoom.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -183,11 +183,11 @@ final class JSONTests: XCTestCase {
         for dataUpdate in dataUpdates {
             
             guard let dataUpdateEntity = dataUpdate.entity,
-                case let .JSON(entityJSON) = dataUpdateEntity,
+                case let .json(entityJSON) = dataUpdateEntity,
                 dataUpdate.className == .MySchedule
                 else { continue }
             
-            guard let _ = EventDataUpdate(json: .Object(entityJSON))
+            guard let _ = Event.DataUpdate(json: .object(entityJSON))
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }
@@ -204,8 +204,8 @@ final class JSONTests: XCTestCase {
         XCTAssert(dataUpdates.count == 1, "\(dataUpdates.count) DataUpdates. Should be 1")
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = GroupEventDataUpdate(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = GroupEventDataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -223,11 +223,11 @@ final class JSONTests: XCTestCase {
         for dataUpdate in dataUpdates {
             
             guard let dataUpdateEntity = dataUpdate.entity,
-                case let .JSON(entityJSON) = dataUpdateEntity,
+                case let .json(entityJSON) = dataUpdateEntity,
                 dataUpdate.className == .SummitWIFIConnection
                 else { continue }
             
-            guard let _ = WirelessNetwork(json: .Object(entityJSON))
+            guard let _ = WirelessNetwork(json: .object(entityJSON))
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }
@@ -240,11 +240,11 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
         
         guard let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
+            case let .json(entityJSON) = dataUpdateEntity,
             dataUpdate.className == .MyFavorite
             else { XCTFail("Could not decode from JSON"); return }
         
-        guard let _ = EventDataUpdate(json: .Object(entityJSON))
+        guard let _ = Event.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -254,8 +254,8 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Venue(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Venue(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -265,8 +265,8 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
-            case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = TrackGroupDataUpdate(json: .Object(entityJSON))
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = TrackGroup.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
 }

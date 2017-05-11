@@ -9,18 +9,19 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
     func attendees(for ticketOrder: Int, summit: Identifier, completion: @escaping (ErrorValue<[NonConfirmedAttendee]>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/external-orders/\(ticketOrder)"
+        let uri = "/api/v1/summits/\(summit)/external-orders/\(ticketOrder)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
-        http.request(method: .get, path: URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -42,13 +43,13 @@ public extension Store {
     
     func confirmAttendee(for ticketOrder: Int, externalAttendee: Identifier, summit: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/external-orders/\(ticketOrder)/external-attendees/\(externalAttendee)/confirm"
+        let uri = "/api/v1/summits/\(summit)/external-orders/\(ticketOrder)/external-attendees/\(externalAttendee)/confirm"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
-        http.request(method: .post, path: URL) { (responseObject, error) in
+        http.request(method: .post, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil

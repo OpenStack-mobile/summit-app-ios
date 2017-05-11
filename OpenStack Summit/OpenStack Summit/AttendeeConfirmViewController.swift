@@ -139,7 +139,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 controller.dismissActivityIndicator()
                 
@@ -160,7 +160,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                     controller.showErrorMessage(error)
                 }
                 
-            case let .Value(attendees):
+            case let .value(attendees):
                 
                 controller.selectedAttendee = nil
                 controller.attendees = attendees
@@ -234,7 +234,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                             
                             switch response {
                                 
-                            case let .Error(error):
+                            case let .error(error):
                                 
                                 controller.showErrorMessage(error)
                                 

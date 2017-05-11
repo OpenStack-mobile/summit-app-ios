@@ -254,11 +254,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                         
                         switch response {
                             
-                        case let .Error(error):
+                        case let .error(error):
                             
                             self?.log?("Could not send message from local notification: \(error)")
                             
-                        case let .Value(newMessage):
+                        case let .value(newMessage):
                             
                             self?.log?("Sent message from local notification: \(newMessage)")
                         }

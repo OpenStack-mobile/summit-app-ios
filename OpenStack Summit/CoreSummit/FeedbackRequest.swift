@@ -9,14 +9,15 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func feedback(_ summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
+    func feedback(_ summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: @escaping (ErrorValue<Page<Feedback>>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
+        let uri = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.serviceAccount)
         
@@ -49,11 +50,11 @@ public extension Store {
         }
     }
     
-    func averageFeedback(_ summit: Identifier, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
+    func averageFeedback(_ summit: Identifier, event: Identifier, completion: @escaping (ErrorValue<Double>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
+        let uri = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.serviceAccount)
         
@@ -101,27 +102,27 @@ public extension Store {
         }
     }
     
-    func addFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
+    func addFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: @escaping (ErrorValue<Identifier>) -> ()) {
         
-        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
+        let uri = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.openIDJSON)
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
         
         let context = privateQueueManagedObjectContext
         
-        http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            let identifier = Int(responseObject as! String)!
+            let identifier = Identifier(responseObject as! String)!
             
             // create new feedback in cache
             try! context.performErrorBlockAndWait {
@@ -144,21 +145,21 @@ public extension Store {
         }
     }
     
-    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (Swift.Error?) -> ()) {
+    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: @escaping (Swift.Error?) -> ()) {
         
-        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
+        let uri = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.openIDJSON)
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
         
         let context = privateQueueManagedObjectContext
         
-        http.PUT(URL, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .put, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil

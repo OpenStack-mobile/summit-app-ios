@@ -109,7 +109,7 @@ final class MenuInterfaceController: WKInterfaceController {
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 print("Error loading summit: ", error)
                 
@@ -124,7 +124,7 @@ final class MenuInterfaceController: WKInterfaceController {
                             controller.loadData()
                 })])
                 
-            case let .Value(summit):
+            case let .value(summit):
                 
                 print("Fetched \(summit.name) summit")
                 

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import Foundation
+import JSON
 @testable import CoreSummit
 
 internal func loadJSON(_ filename: String) -> JSON.Value {
@@ -19,9 +19,10 @@ internal func loadJSON(_ filename: String) -> JSON.Value {
     
     let JSONString = try! String(contentsOfFile: resourcePath)
     
-    return JSON.Value(string: JSONString)!
+    return try! JSON.Value(string: JSONString)
 }
 
+@discardableResult
 internal func dump(_ dumpable: Any, _ outputFileName: String) -> String {
     
     var dumpString = ""
@@ -56,9 +57,9 @@ func createStore() throws -> Store {
     return try Store(environment: .Staging,
                      session: UserDefaultsSessionStorage(),
                      createPersistentStore: {
-                        try $0.addPersistentStoreWithType(NSInMemoryStoreType,
-                            configuration: nil,
-                            URL: nil,
+                        try $0.addPersistentStore(ofType: NSInMemoryStoreType,
+                            configurationName: nil,
+                            at: nil,
                             options: nil) },
                      deletePersistentStore: { _ in fatalError("Not needed") })
 }

@@ -82,11 +82,11 @@ final class EventDatesViewController: UITableViewController {
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.state = .error(error)
                         
-                    case let .Value(summit):
+                    case let .value(summit):
                         
                         controller.state = State(summit: summit)
                     }

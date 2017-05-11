@@ -196,14 +196,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
                     controller.toggleNoConnectivityMessage(true)
                     controller.toggleEventList(false)
                     
-                case let .Value(value):
+                case let .value(value):
                     
                     controller.updateUI(value)
                 }

@@ -37,15 +37,15 @@ public final class Store {
     
     // MARK: - Private / Internal Properties
     
-    fileprivate let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    private let persistentStoreCoordinator: NSPersistentStoreCoordinator
     
-    fileprivate var persistentStore: NSPersistentStore
+    private var persistentStore: NSPersistentStore
     
     /// The managed object context running on a background thread for asyncronous caching.
     public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
     
     /// Request queue
-    private let requestQueue: OperationQueue = {
+    internal let requestQueue: OperationQueue = {
         
         let queue = OperationQueue()
         
@@ -103,12 +103,14 @@ public final class Store {
         // config OAuth and HTTP
         configOAuthAccounts()
         
+        /* Removed from lib
         NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(revokedAccess),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        */
     }
     
     // MARK: - Accessors
@@ -241,13 +243,13 @@ public final class Store {
         
         if self.session.hadPasscode && !hasPasscode {
             
-            session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+            session = TrustedPersistentOAuth2Session(accountId: config.accountId!)
             session.clearTokens()
         }
         
-        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
+        session = hasPasscode ? TrustedPersistentOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session(accountId: config.accountId!)
         
-        return AccountManager.addAccount(with: config, session: session, moduleClass: OpenStackOAuth2Module.self)
+        return AccountManager.addAccountWith(config: config, moduleClass: OpenStackOAuth2Module.self, session: session)
     }
     
     // MARK: Notifications

@@ -9,10 +9,11 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func dataUpdates(_ summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -25,12 +26,12 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&last_event_id=\(latestDataUpdate)"
+        let uri = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&last_event_id=\(latestDataUpdate)"
         
-        dataUpdates(URI, completion: completion)
+        dataUpdates(uri, completion: completion)
     }
     
-    func dataUpdates(_ summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -43,9 +44,9 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
+        let uri = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
         
-        dataUpdates(URI, completion: completion)
+        dataUpdates(uri, completion: completion)
     }
 }
 
@@ -53,9 +54,9 @@ public extension Store {
 
 private extension Store {
     
-    func dataUpdates(_ URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ uri: String, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.isLoggedIn ? self.createHTTP(.openIDJSON) : self.createHTTP(.serviceAccount)
         

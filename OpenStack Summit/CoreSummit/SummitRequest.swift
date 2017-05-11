@@ -51,11 +51,11 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)?expand=schedule"
+        let uri = "/api/v1/summits/\(summitID)?expand=schedule"
         
         let http = self.createHTTP(.serviceAccount)
         
-        let url = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let context = privateQueueManagedObjectContext
         

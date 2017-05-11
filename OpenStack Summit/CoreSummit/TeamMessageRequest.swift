@@ -9,10 +9,11 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func send(_ message: String, to team: Identifier, priority: TeamMessage.Priority = .normal, completion: (ErrorValue<TeamMessage>) -> ()) {
+    func send(_ message: String, to team: Identifier, priority: TeamMessage.Priority = .normal, completion: @escaping (ErrorValue<TeamMessage>) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/messages"
         
@@ -22,12 +23,12 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        guard let member = self.authenticatedMember?.identifier
+        guard let member = self.authenticatedMember?.id
             else { fatalError("Must be logged in") }
         
         let messageASCII = message.toOpenStackEncoding()!
         
-        http.POST(url, parameters: ["body": messageASCII, "priority": priority.rawValue]) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: ["body": messageASCII, "priority": priority.rawValue]) { (responseObject, error) in
             
             // forward error
             guard error == nil

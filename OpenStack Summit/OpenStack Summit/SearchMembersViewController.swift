@@ -73,7 +73,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - Private Methods
     
-    fileprivate func fetch(_ page: Int, perPage: Int, completion: (ErrorValue<Page<Member>>) -> ()) {
+    fileprivate func fetch(_ page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         // dont make request for empty search filter
         guard let searchText = self.searchBar.text where searchText.isEmpty == false

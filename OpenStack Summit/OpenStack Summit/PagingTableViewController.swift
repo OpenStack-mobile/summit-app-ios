@@ -52,11 +52,11 @@ extension PagingTableViewController {
         
         switch response {
             
-        case let .Error(error):
+        case let .error(error):
             
             showErrorMessage(error, fileName: #file, lineNumber: #line)
             
-        case let .Value(changes):
+        case let .value(changes):
             
             let wasCached = pageController.cached != nil && pageController.pages.count == 1
             

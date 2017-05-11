@@ -110,7 +110,7 @@ public extension Store {
         }
     }
     
-    func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
+    func fetch(team identifier: Identifier, completion: @escaping (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member,groups"
         
@@ -143,7 +143,7 @@ public extension Store {
         }
     }
     
-    func delete(team identifier: Identifier, completion: (Swift.Error?) -> ()) {
+    func delete(team identifier: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         
@@ -177,7 +177,7 @@ public extension Store {
     
     func teams(page: Int = 1,
                perPage: Int = 10,
-               completion: (ErrorValue<Page<Team>>) -> ()) {
+               completion: @escaping (ErrorValue<Page<Team>>) -> ()) {
         
         var urlComponents = URLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
         

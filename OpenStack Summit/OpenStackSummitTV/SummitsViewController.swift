@@ -60,11 +60,11 @@ final class SummitsViewController: UITableViewController {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorAlert((error as NSError).localizedDescription, retryHandler: { controller.refresh() })
                     
-                case let .Value(value):
+                case let .value(value):
                     
                     controller.summits = value.items.sort { $0.0.start > $0.1.start }
                 }
@@ -161,7 +161,7 @@ final class SummitsViewController: UITableViewController {
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.showErrorAlert((error as NSError).localizedDescription)
                         

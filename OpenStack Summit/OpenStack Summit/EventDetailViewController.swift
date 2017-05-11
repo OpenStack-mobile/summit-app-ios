@@ -298,11 +298,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     print("Error loading feedback: \(error)")
                     
-                case let .Value(feedbackPage):
+                case let .value(feedbackPage):
                     
                     controller.currentFeedbackPage = feedbackPage
                     controller.loadedAllFeedback = feedbackPage.items.isEmpty
@@ -333,7 +333,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error)
                     

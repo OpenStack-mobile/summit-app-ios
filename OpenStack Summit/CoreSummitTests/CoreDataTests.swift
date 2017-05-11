@@ -79,7 +79,7 @@ final class CoreDataTests: XCTestCase {
         
         let eventEntity = model[EventManagedObject.self]!
         
-        let _ = try! context.findOrCreate(eventEntity, resourceID: 1, identifierProperty: Entity.identifierProperty)
+        let _ = try! context.findOrCreate(eventEntity, resourceID: 1 as NSNumber, identifierProperty: Entity.identifierProperty)
         
         do { try context.validateAndSave() }
         

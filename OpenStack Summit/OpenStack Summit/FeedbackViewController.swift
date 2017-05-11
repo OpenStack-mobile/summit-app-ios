@@ -131,7 +131,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.showErrorMessage(error)
                         

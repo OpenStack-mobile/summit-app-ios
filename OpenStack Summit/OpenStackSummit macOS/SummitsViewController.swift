@@ -66,7 +66,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error)
                     
