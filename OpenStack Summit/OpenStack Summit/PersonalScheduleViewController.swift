@@ -51,8 +51,8 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
             else { return [] }
         
         let events = attendeeRole.schedule
-            .filter({ $0.start >= startDate
-                && $0.end <= endDate })
+            .filter({ $0.start >= interval.start
+                && $0.end <= interval.end })
             .sort({ $0.0.start < $0.1.start })
         
         return ScheduleItem.from(managedObjects: events)

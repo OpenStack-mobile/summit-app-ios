@@ -43,6 +43,10 @@ public extension Event {
         
         public let videos: Set<Video>
         
+        public let slides: Set<Slide>
+        
+        public let links: Set<Link>
+        
         public let rsvp: String?
         
         public let attachment: String?

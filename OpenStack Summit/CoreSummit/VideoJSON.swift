@@ -22,11 +22,14 @@ extension Video: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
-            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let featured = JSONObject[JSONKey.featured.rawValue]?.rawValue as? Bool,
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
-            /* let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue, */
-            let youtube = JSONObject[JSONKey.youtube_id.rawValue]?.rawValue as? String
+            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue,
+            let youtube = JSONObject[JSONKey.youtube_id.rawValue]?.rawValue as? String,
+            let dataUploaded = JSONObject[JSONKey.data_uploaded.rawValue]?.integerValue,
+            let highlighted = JSONObject[JSONKey.highlighted.rawValue]?.rawValue as? Bool,
+            let views = JSONObject[JSONKey.views.rawValue]?.integerValue,
+            let order = JSONObject[JSONKey.order.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier

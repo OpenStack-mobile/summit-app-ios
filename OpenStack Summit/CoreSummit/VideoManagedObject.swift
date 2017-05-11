@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import struct SwiftFoundation.Date
 
 public final class VideoManagedObject: Entity {
     

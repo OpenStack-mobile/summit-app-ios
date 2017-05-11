@@ -136,41 +136,57 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
     }
     
     // HACK: implemented old delegate to make notifications work as is on iOS 10
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
+        // app was just brought from background to foreground
+        if application.applicationState == .Active {
+            
+            // called when push notification received in foreground
+            print("Recieved remote notification: \(userInfo)")
+            
+        } else {
+            
+            // called when push notification tapped
+            print("Tapped on remote notification: \(userInfo)")
+            
+            PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            
+            // redirect to inbox
+            
+            
+            /// force view load
+            let _ = self.revealViewController.view
+            let _ = self.menuViewController.view
+            let _ = self.revealViewController.frontViewController.view
+            let _ = self.launchScreenViewController.view
+            
+            if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
+                
+                if self.launchScreenViewController.willTransition {
+                    
+                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+                    
+                    dispatch_after(delayTime, dispatch_get_main_queue()) { self.menuViewController.showInbox() }
+                    
+                } else {
+                    
+                    self.launchScreenViewController.showRevealController() { self.menuViewController.showInbox() }
+                }
+                
+            } else {
+                
+                menuViewController.showInbox()
+            }
         }
         
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
-        
-        PushNotificationManager.shared.process(userInfo as! [String: String])
+        fetchCompletionHandler(.NoData)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
-        
-        PushNotificationManager.shared.process(userInfo as! [String: String])
-        
-        completionHandler(.newData)
-    }
-    
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         
         PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }

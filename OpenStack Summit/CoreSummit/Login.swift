@@ -24,8 +24,6 @@ public extension Store {
             if let member = try self.authenticatedMember(context) {
                 
                 context.delete(member)
-                
-                try context.validateAndSave()
             }
             
             // delete all notifications except 'EVERYBODY' type

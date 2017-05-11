@@ -21,11 +21,11 @@ extension Link: JSONDecodable {
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let featured = JSONObject[JSONKey.featured.rawValue]?.rawValue as? Bool,
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
-            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.rawValue as? Identifier,
-            let order = JSONObject[JSONKey.order.rawValue]?.rawValue as? Int,
+            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue,
+            let order = JSONObject[JSONKey.order.rawValue]?.integerValue,
             let link = JSONObject[JSONKey.link.rawValue]?.rawValue as? String
             else { return nil }
         

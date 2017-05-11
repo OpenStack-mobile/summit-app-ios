@@ -108,8 +108,13 @@ public extension Event {
             
         } else {
             
-        } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
-            let slides = String.from(json: slidesJSONArray) {
+            self.slides = []
+        }
+        
+        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+            
+            guard let links = Link.fromJSON(linksJSONArray)
+                else { return nil }
             
             self.links = Set(links)
             
@@ -226,8 +231,13 @@ extension MemberResponse.Event: JSONDecodable {
             
         } else {
             
-        } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
-            let slides = String.from(json: slidesJSONArray) {
+            self.slides = []
+        }
+        
+        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+            
+            guard let links = Link.fromJSON(linksJSONArray)
+                else { return nil }
             
             self.links = links
             

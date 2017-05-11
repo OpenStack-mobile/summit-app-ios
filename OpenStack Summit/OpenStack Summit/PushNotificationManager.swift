@@ -40,7 +40,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
-    fileprivate(set) var subscribedTopics = Set<Notification.Topic>()
+    private var notificationsFetchedResultsController: NSFetchedResultsController!
+    
+    private var notifications: Set<Identifier> {
+        
+        return (notificationsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+    }
+    
+    private(set) var subscribedTopics = Set<Notification.Topic>()
     
     fileprivate let userDefaults = UserDefaults.standard
     
@@ -112,7 +119,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         application.registerForRemoteNotifications()
     }
     
-    public func process(_ pushNotification: [String: String]) {
+    public func process(pushNotification: [String: AnyObject], unread: Bool = true) {
         
         let notification: PushNotification?
         
@@ -196,21 +203,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
-            // set as unread
-            unreadNotifications.value.insert(generalNotification.identifier)
-            
-            // show notification
-            
-            if backgroundState {
-                
-                let userNotification = UILocalNotification()
-                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
-                userNotification.alertTitle = generalNotification.event?.title
-                userNotification.alertBody = generalNotification.body
-                userNotification.fireDate = Date()
-                userNotification.category = UserNotificationCategory.generalNotification.rawValue
-                
-                UIApplication.shared.scheduleLocalNotification(userNotification)
+            if unread {
                 
                 // set as unread
                 unreadNotifications.value.insert(generalNotification.identifier)
@@ -487,6 +480,26 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             }
             
         } else if controller == notificationsFetchedResultsController {
+            
+            switch type {
+                
+            case .Delete:
+                
+                // remove unread notification from set since it was deleted
+                if unreadNotifications.value.contains(identifier) {
+                    
+                    unreadNotifications.value.remove(identifier)
+                }
+                
+            case .Insert, .Move, .Update: break
+            }
+            
+        } else {
+            
+            fatalError("Unknown fetched results controller \(controller)")
+        }
+        
+        switch type {
             
         case .insert: subscribe(to: topic)
             
