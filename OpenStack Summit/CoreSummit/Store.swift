@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -192,7 +191,7 @@ public final class Store {
         
         var serviceAccountScopes = ["\(environment.configuration.serverURL)/summits/read"]
         
-        if environment == .Staging {
+        if environment == .staging {
             
             // openID staging scopes
             

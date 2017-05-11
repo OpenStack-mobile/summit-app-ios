@@ -54,7 +54,7 @@ let outputDirectory: String = {
 
 func createStore() throws -> Store {
     
-    return try Store(environment: .Staging,
+    return try Store(environment: .staging,
                      session: UserDefaultsSessionStorage(),
                      createPersistentStore: {
                         try $0.addPersistentStore(ofType: NSInMemoryStoreType,

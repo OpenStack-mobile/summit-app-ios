@@ -28,8 +28,8 @@ public extension Environment {
     var configuration: Configuration.Type {
         
         switch self {
-        case .Staging: return CoreSummit.Staging.self
-        case .Production: return CoreSummit.Production.self
+        case .staging: return Staging.self
+        case .production: return Production.self
         }
     }
 }
