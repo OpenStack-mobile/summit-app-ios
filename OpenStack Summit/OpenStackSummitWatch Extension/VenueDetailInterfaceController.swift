@@ -184,8 +184,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         roomSeparator.setHidden(room?.name == nil)
         
         // set images
-        if let image = venue.images.first,
-            let imageURL = URL(string: image.url) {
+        if let imageURL = venue.images.sorted().first?.url {
             
             // show activity indicator
             imagesActivityIndicator.setImageNamed("Activity")
@@ -217,8 +216,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         }
         
         // set map images
-        if let image = venue.maps.first,
-            let imageURL = URL(string: image.url) {
+        if let imageURL = venue.maps.sorted().first?.url {
             
             // show activity indicator
             mapImagesActivityIndicator.setImageNamed("Activity")

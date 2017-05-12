@@ -46,7 +46,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         
         tableView.estimatedRowHeight = 98
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -73,7 +73,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - Private Methods
     
-    private func fetch(_ page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
+    private func fetch(page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         // dont make request for empty search filter
         guard let searchText = self.searchBar.text,
@@ -98,21 +98,21 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     private func configure(_ cell: PeopleTableViewCell, with member: Member) {
         
         cell.name = member.name
-        cell.pictureURL = member.pictureURL
+        cell.picture = member.picture
         
         switch self.scope {
             
         case .twitter:
             
-            cell.title = member.twitter
+            cell.title = member.twitter ?? ""
             
         case .irc:
             
-            cell.title = member.irc
+            cell.title = member.irc ?? ""
             
         case .firstName, .lastName:
             
-            cell.title = member.title
+            cell.title = member.title ?? ""
         }
     }
     

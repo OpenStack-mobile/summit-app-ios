@@ -63,7 +63,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 60
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.scheduleTableViewCell)
+        tableView.register(R.nib.scheduleTableViewCell)
         // https://github.com/mac-cain13/R.swift/issues/144
         tableView.register(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
         
@@ -75,7 +75,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     @IBAction func showEventContextMenu(_ sender: UIButton) {
         
-        let buttonOrigin = sender.convert(.zero, to: tableView)
+        let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
         let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         let item = self[indexPath]
         
@@ -500,9 +500,9 @@ private protocol SearchViewControllerItem: CoreDataDecodable {
 
 extension ScheduleItem: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .event(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
     }
@@ -510,9 +510,9 @@ extension ScheduleItem: SearchViewControllerItem {
 
 extension Speaker: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .speaker(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm, searchTerm)
     }
@@ -520,9 +520,9 @@ extension Speaker: SearchViewControllerItem {
 
 extension Track: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .track(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
         return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(value: Int64(summit)), searchTerm)
     }

@@ -147,7 +147,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     @IBAction func showEventContextMenu(_ sender: UIButton) {
         
-        let tableView = scheduleView.tableView
+        let tableView = scheduleView.tableView!
         let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
         let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         //let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
@@ -220,14 +220,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let scheduleFilter = FilterManager.shared.filter.value
                 
-        let timeZone = TimeZone(name: summit.timeZone)!
+        let timeZone = TimeZone(identifier: summit.timeZone)!
         
-        Date.mt_setTimeZone(timeZone)
+        NSDate.mt_setTimeZone(timeZone)
         
-        self.summitTimeZoneOffset = timeZone.secondsFromGMT
+        self.summitTimeZoneOffset = timeZone.secondsFromGMT()
         
-        self.startDate = summit.start.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
-        self.endDate = summit.end.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
+        self.startDate = ((summit.start as NSDate).mt_dateSeconds(after: self.summitTimeZoneOffset) as NSDate).mt_startOfCurrentDay()
+        self.endDate = ((summit.end as NSDate).mt_dateSeconds(after: self.summitTimeZoneOffset) as NSDate).mt_dateDays(after: 1)
         
         let today = Date()
         
@@ -244,14 +244,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let oldSelectedDate = self.selectedDate
         
         if  let defaultStart = summit.defaultStart,
-            let defaultDay = self.availableDates.first(where: { $0.mt_isWithinSameDay(defaultStart) }),
+            let defaultDay = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: defaultStart) }),
             summitActive == false && self.didSelectDate == false {
             
             self.selectedDate = defaultDay
             
         } else if self.didSelectDate == false || self.availableDates.contains(self.selectedDate) == false {
             
-            self.selectedDate = self.availableDates.first(where: { $0.mt_isWithinSameDay(today) }) ?? self.availableDates.first
+            self.selectedDate = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: today) }) ?? self.availableDates.first
             
         } else {
             
@@ -273,10 +273,10 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         // fetch new events
         
-        let offsetLocalTimeZone = TimeZone.localTimeZone().secondsFromGMT()
+        let offsetLocalTimeZone = Foundation.NSTimeZone.local.secondsFromGMT()
         
-        let startDate = self.selectedDate.mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
-        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
+        let startDate = (self.selectedDate! as NSDate).mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)!
+        let endDate = ((self.selectedDate! as NSDate).mt_endOfCurrentDay() as NSDate).mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)!
         
         let today = Date()
         
@@ -286,7 +286,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         if shoudHidePastTalks {
             
-            dailyScheduleStartDate = startDate.mt_is(after: today) ? startDate : today
+            dailyScheduleStartDate = (startDate as NSDate).mt_is(after: today) ? startDate : today
             
         } else {
             

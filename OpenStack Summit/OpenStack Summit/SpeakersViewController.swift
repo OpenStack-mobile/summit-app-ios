@@ -69,8 +69,8 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         let person = self[indexPath]
         
         cell.name = person.name
-        cell.title = person.title
-        cell.pictureURL = person.pictureURL
+        cell.title = person.title ?? ""
+        cell.picture = person.picture
     }
     
     // MARK: - UITableViewDataSource

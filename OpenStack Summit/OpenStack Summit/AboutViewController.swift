@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import Predicate
 import MessageUI
 
 final class AboutViewController: UITableViewController, RevealViewController, EmailComposerViewController {
@@ -40,7 +41,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "About the Summit"
-        userActivity.webpageURL = URL(string: AppEnvironment.configuration.webpageURL)
+        userActivity.webpageURL = AppEnvironment.configuration.webpage
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
         self.userActivity = userActivity
@@ -132,7 +133,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
                 
                 let sort = [NSSortDescriptor(key: "name", ascending: true)]
                 
-                let wirelessNetworks = try! WirelessNetwork.filter(("summit.id" == summit.identifier), sort: sort, context: Store.shared.managedObjectContext)
+                let wirelessNetworks = try! WirelessNetwork.filter((#keyPath(WirelessNetworkManagedObject.summit.id) == summit.identifier), sort: sort, context: Store.shared.managedObjectContext)
                 
                 if wirelessNetworks.isEmpty == false {
                     
@@ -142,13 +143,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             // setup handoff
             
-            userActivity?.webpageURL = URL(string: summit.webpageURL)!
+            userActivity?.webpageURL = summit.webpage
             
         } else {
             
             summitCache = nil
             
-            userActivity?.webpageURL = URL(string: AppEnvironment.configuration.webpageURL)!
+            userActivity?.webpageURL = AppEnvironment.configuration.webpage
         }
         
         var aboutCells = [AboutCell]()
@@ -185,7 +186,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         else {
             
             let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(name: summit.timeZone)
+            dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
             let stringDateFrom = dateFormatter.string(from: summit.start)
             

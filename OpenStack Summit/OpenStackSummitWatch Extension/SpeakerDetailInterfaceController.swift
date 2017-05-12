@@ -108,10 +108,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         titleLabel.setText(speaker.title)
         titleLabel.setHidden(speaker.title == nil)
         
-        if let url = URL(string: speaker.pictureURL) {
-            
-            imageView.loadCached(url)
-        }
+        imageView.loadCached(speaker.picture)
         
         twitterLabel.setText(speaker.twitter)
         twitterGroup.setHidden(speaker.twitter == nil)

@@ -39,7 +39,7 @@ public final class PageController<Item> {
     
     // MARK: - Initialization
     
-    public init(fetch: @escaping (_ page: Int, _ perPage: Int, _ response: (ErrorValue<Page<Item>>) -> ()) -> (),
+    public init(fetch: @escaping (_ page: Int, _ perPage: Int, _ response: @escaping (ErrorValue<Page<Item>>) -> ()) -> (),
                 perPage: Int = 10,
                 operationQueue: OperationQueue = OperationQueue.main) {
         

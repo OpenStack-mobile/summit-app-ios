@@ -46,9 +46,11 @@ extension VenueListItem: CoreDataDecodable {
         self.backgroundImageURL = venue.images.first?.url
         self.isInternal = venue.locationType == Venue.LocationType.Internal.rawValue
         
-        let floors = venue.floors.sorted { $0.number < $1.number }
-        self.maps = venue.maps.map { URL(string: $0.url) } + floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false }
-        self.images = venue.images.map { URL(string: $0.url)! }
+        let floors = VenueFloor.from(managedObjects: venue.floors).sorted { $0.number < $1.number }
+        
+        self.maps = Image.from(managedObjects: venue.maps).map { $0.url }
+        
+        self.images = Image.from(managedObjects: venue.images).map { $0.url }
         
         // location
         if let latitude = Double(venue.latitude ?? ""),

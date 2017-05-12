@@ -119,7 +119,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             
             name = member.name
             
-            imageURL = URL(string: member.pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSString.CompareOptions.LiteralSearch, range: nil))
+            imageURL = member.picture
         }
         
         return (name, message.body, imageURL)
@@ -162,7 +162,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         cell.transform = self.tableView!.transform
     }
     
-    @objc private func textInputbarDidMove(_ notification: Notification) {
+    @objc private func textInputbarDidMove(_ notification: Foundation.Notification) {
         
         
     }
@@ -206,7 +206,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return sending == false
     }
     
-    override func didPressRightButton(_ sender: AnyObject?) {
+    override func didPressRightButton(_ sender: Any?) {
         
         self.sending = true
         
@@ -224,7 +224,9 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
                     
                     controller.showErrorMessage(error)
                     
-                case .Value: break
+                case .value:
+                    
+                    break
                 }
             }
         }

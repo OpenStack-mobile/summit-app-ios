@@ -55,7 +55,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     @IBAction func filterChanged(_ sender: UISwitch) {
         
-        let buttonOrigin = sender.convert(.zero, to: tableView)
+        let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
         let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         let filter = self[indexPath].filter
         

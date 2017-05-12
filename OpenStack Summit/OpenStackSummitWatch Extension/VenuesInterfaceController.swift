@@ -56,7 +56,7 @@ final class VenuesInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: URL(string: summit.webpageURL + "/travel"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: summit.webpage.appendingPathComponent("travel"))
         }
     }
     
@@ -91,8 +91,7 @@ final class VenuesInterfaceController: WKInterfaceController {
             cell.nameLabel.setText(venue.name)
             cell.addressLabel.setText(venue.fullAddress)
             
-            if let image = venue.images.first,
-                let imageURL = URL(string: image.url) {
+            if let imageURL = venue.images.sorted().first?.url {
                 
                 // show activity indicator
                 cell.activityIndicator.setImageNamed("Activity")

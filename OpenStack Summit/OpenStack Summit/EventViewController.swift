@@ -45,7 +45,7 @@ extension EventViewController {
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
-        let url = event.webpageURL
+        let url = event.webpage
         
         var actions: [ContextMenu.Action] = []
         
@@ -174,7 +174,7 @@ extension EventViewController {
             let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
             
             // update cache immediately, add to schedule and open RSVP link
-            setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.sharedApplication().openURL(url) }
+            setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.shared.openURL(url) }
             
         // internal RSVPing
         case let (true, .some(url), false):
@@ -362,7 +362,7 @@ extension EventViewController {
             calendarEvent.startDate = event.start
             calendarEvent.endDate = event.end
             calendarEvent.timeZone = TimeZone(identifier: event.timeZone)
-            calendarEvent.url = event.webpageURL
+            calendarEvent.url = event.webpage
             calendarEvent.location = event.location
             
             if let data = event.eventDescription.data(using: String.Encoding.utf8),

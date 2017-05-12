@@ -23,17 +23,18 @@ extension VenueFloor: JSONDecodable {
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let number = JSONObject[JSONKey.number.rawValue]?.integerValue,
+            let numberInteger = JSONObject[JSONKey.number.rawValue]?.integerValue,
+            let number = Int16(exactly: numberInteger),
             let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
         self.name = name
-        self.number = Int(number)
+        self.number = number
         self.venue = venueIdentifier
         
         // optional
-        self.imageURL = JSONObject[JSONKey.image.rawValue]?.rawValue as? String
+        self.image = JSONObject[JSONKey.image.rawValue]?.urlValue
         
         if let roomsJSONArray = JSONObject[JSONKey.rooms.rawValue]?.arrayValue {
             

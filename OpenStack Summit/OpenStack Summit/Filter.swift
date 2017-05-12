@@ -222,9 +222,13 @@ final class FilterManager {
     
     private var timer: Timer!
     
+    private var summitObserver: Int
+    
     deinit {
         
         NotificationCenter.default.removeObserver(self)
+        
+        SummitManager.shared.summit.remove(summitObserver)
     }
     
     private init() {
@@ -234,13 +238,13 @@ final class FilterManager {
         
         timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
         
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
             name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
             object: Store.shared.managedObjectContext)
         
-        SummitManager.shared.summit.observe(currentSummitChanged)
+        self.summitObserver = SummitManager.shared.summit.observe(currentSummitChanged)
     }
     
     @objc private func timerUpdate(_ sender: Timer) {
@@ -248,7 +252,7 @@ final class FilterManager {
         filter.value.updateActiveTalks()
     }
     
-    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Foundation.Notification) {
         
         self.filter.value.update()
     }

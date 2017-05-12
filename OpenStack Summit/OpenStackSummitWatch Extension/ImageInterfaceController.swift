@@ -41,10 +41,7 @@ final class ImageInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        if let imageURL = URL(string: image.url) {
-            
-            updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: imageURL)
-        }
+        updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: image.url)
     }
     
     override func didDeactivate() {
@@ -58,9 +55,6 @@ final class ImageInterfaceController: WKInterfaceController {
     
     private func updateUI() {
         
-        guard let imageURL = URL(string: image.url)
-            else { return }
-        
         // show activity indicator
         activityIndicator.setImageNamed("Activity")
         activityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
@@ -68,7 +62,7 @@ final class ImageInterfaceController: WKInterfaceController {
         imageView.setHidden(true)
         
         // load image
-        imageView.loadCached(imageURL) { [weak self] (response) in
+        imageView.loadCached(image.url) { [weak self] (response) in
             
             guard let controller = self else { return }
             

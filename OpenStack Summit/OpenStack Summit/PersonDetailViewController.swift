@@ -26,14 +26,14 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     var contextMenu: ContextMenu {
         
-        var items = [AnyObject]()
+        var items = [Any]()
         
         if let url = self.userActivity?.webpageURL {
             
-            items.append(url as AnyObject)
+            items.append(url)
         }
         
-        items.append(self.headerView.nameLabel.text as NSString)
+        items.append(self.headerView.nameLabel.text ?? "")
         
         for data in self.data {
             

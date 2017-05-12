@@ -20,7 +20,7 @@ public protocol Configuration {
     static var serviceAccount: (client: String, secret: String) { get }
     
     /// OpenStack Summit Webpage URL.
-    static var webpageURL: String { get }
+    static var webpage: URL { get }
 }
 
 public extension Environment {

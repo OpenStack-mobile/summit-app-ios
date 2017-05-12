@@ -31,8 +31,8 @@ extension VenueFloor: CoreDataDecodable {
         self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
-        self.number = Int(managedObject.number)
-        self.imageURL = managedObject.imageURL
+        self.number = managedObject.number
+        self.image = URL(string: managedObject.imageURL ?? "")!
         self.venue = managedObject.venue.id
         self.rooms = managedObject.rooms.identifiers
     }
@@ -46,8 +46,8 @@ extension VenueFloor: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.number = Int16(number)
-        managedObject.imageURL = imageURL
+        managedObject.number = number
+        managedObject.imageURL = image?.absoluteString
         managedObject.venue = try context.relationshipFault(venue)
         managedObject.rooms = try context.relationshipFault(rooms)
         

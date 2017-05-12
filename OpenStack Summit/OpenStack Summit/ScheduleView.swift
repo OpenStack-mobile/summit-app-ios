@@ -99,14 +99,14 @@ final class ScheduleView: UIView {
         // configure day number (example: 23 or 1 or 45)
         let dayNumber = UILabel(frame: CGRect(x: 0.0, y: cell.contentView.frame.size.height / 3 * 2 - cell.contentView.frame.size.height / 6, width: cell.contentView.frame.size.width, height: cell.contentView.frame.size.height / 3))
         dayNumber.textAlignment = .center
-        dayNumber.text = "\(cell.date.mt_dayOfMonth())"
+        dayNumber.text = "\((cell.date as NSDate).mt_dayOfMonth())"
         cell.dayNumber = dayNumber
         cell.contentView.addSubview(dayNumber)
         
         // configure day name  (example: Thu, Чт)
         let dayName = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: cell.contentView.frame.size.width, height: cell.contentView.frame.size.height / 3 * 2))
         dayName.textAlignment = .center
-        dayName.text = cell.date.mt_stringFromDate(withFormat: "EEE", localized: true).uppercased()
+        dayName.text = (cell.date as NSDate).mt_stringFromDate(withFormat: "EEE", localized: true).uppercased()
         cell.dayName = dayName
         cell.contentView.addSubview(dayName)
         

@@ -84,7 +84,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
             slideshow.setScrollViewPage(page, animated: false)
         }
         
-        ctr.initialImageIndex = slideshow.scrollViewPage
+        //ctr.initialImageIndex = slideshow.scrollViewPage
         ctr.inputs = slideshow.images
         self.transitionDelegate = ZoomAnimatedTransitioningDelegate.init(slideshowView: slideshow, slideshowController: ctr)
         ctr.transitioningDelegate = self.transitionDelegate!

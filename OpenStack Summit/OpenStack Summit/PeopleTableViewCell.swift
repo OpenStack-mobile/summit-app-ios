@@ -54,31 +54,31 @@ final class PeopleTableViewCell: UITableViewCell {
         }
     }
     
-    var title: String!{
-        get {
-            return titleLabel.text
-        }
+    var title: String {
+        
+        get { return titleLabel.text ?? "" }
+        
         set {
             titleLabel.text = newValue
-            titleLabel.isHidden = (newValue ?? "").isEmpty
+            titleLabel.isHidden = newValue.isEmpty
         }
     }
     
-    var pictureURL: String = "" {
+    var picture: URL? {
         
         didSet {
             
-            let picUrlInternal: String
+            let placeholder = R.image.genericUserAvatar()!
             
-            picUrlInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
+            if let picture = self.picture {
+                
+                pictureImageView.hnk_setImageFromURL(picture, placeholder: placeholder)
+                
+            } else {
+                
+                pictureImageView.image = placeholder
+            }
             
-            if (!picUrlInternal.isEmpty) {
-                let placeholder = R.image.genericUserAvatar()!
-                pictureImageView.hnk_setImageFromURL(URL(string: picUrlInternal)!, placeholder: placeholder)
-            }
-            else {
-                pictureImageView.image = R.image.genericUserAvatar()!
-            }
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
             pictureImageView.clipsToBounds = true;
         }

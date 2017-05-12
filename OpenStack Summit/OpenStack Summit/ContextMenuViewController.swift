@@ -105,7 +105,7 @@ struct ContextMenu {
     
     var actions = [Action]()
     
-    var shareItems = [AnyObject]()
+    var shareItems = [Any]()
     
     var systemActions = true
 }

@@ -32,18 +32,9 @@ final class AboutInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        let webpageURL: Foundation.URL
+        let webpage = Store.shared.cache?.webpage ?? AppEnvironment.configuration.webpage
         
-        if let summit = Store.shared.cache {
-            
-             webpageURL = Foundation.URL(string: summit.webpageURL)!
-            
-        } else {
-            
-            webpageURL = Foundation.URL(string: AppEnvironment.configuration.webpageURL)!
-        }
-        
-        updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpageURL)
+        updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpage)
     }
     
     override func didDeactivate() {
