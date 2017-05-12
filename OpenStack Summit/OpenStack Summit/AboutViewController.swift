@@ -318,7 +318,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Swift.Error?) {
         
         dismiss(animated: true) {
             
@@ -358,18 +358,18 @@ private extension AboutViewController {
 
 final class WirelessNetworkCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: CopyableLabel!
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet weak var passwordLabel: CopyableLabel!
+    @IBOutlet private(set) weak var passwordLabel: CopyableLabel!
 }
 
 final class AboutNameCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: CopyableLabel!
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet weak var dateLabel: CopyableLabel!
+    @IBOutlet private(set) weak var dateLabel: CopyableLabel!
     
-    @IBOutlet weak var buildVersionLabel: CopyableLabel!
+    @IBOutlet private(set) weak var buildVersionLabel: CopyableLabel!
     
-    @IBOutlet weak var buildNumberLabel: CopyableLabel!
+    @IBOutlet private(set) weak var buildNumberLabel: CopyableLabel!
 }

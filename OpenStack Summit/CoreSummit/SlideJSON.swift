@@ -7,6 +7,7 @@
 //
 
 import JSON
+import struct Foundation.URL
 
 public extension Slide {
     
@@ -26,7 +27,7 @@ extension Slide: JSONDecodable {
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
             let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue,
             let order = JSONObject[JSONKey.order.rawValue]?.integerValue,
-            let link = JSONObject[JSONKey.link.rawValue]?.rawValue as? String
+            let link = JSONObject[JSONKey.link.rawValue]?.urlValue
             else { return nil }
         
         self.identifier = identifier

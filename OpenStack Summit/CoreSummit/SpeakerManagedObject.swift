@@ -44,7 +44,7 @@ extension Speaker: CoreDataDecodable {
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
         self.title = managedObject.title
-        self.pictureURL = managedObject.pictureURL
+        self.picture = URL(string: managedObject.pictureURL)!
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.biography = managedObject.biography
@@ -60,9 +60,9 @@ extension Speaker: CoreDataEncodable {
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.addressBookSectionName = addressBookSectionName
+        managedObject.addressBookSectionName = AddressBook.section(for: self)
         managedObject.title = title
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography

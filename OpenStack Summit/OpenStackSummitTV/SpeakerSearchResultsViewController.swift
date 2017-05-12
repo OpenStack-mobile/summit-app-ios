@@ -150,9 +150,9 @@ final class SpeakerTableViewCell: UITableViewCell {
     
     static let identifier = "SpeakerTableViewCell"
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
     
-    @IBOutlet weak var speakerImageView: UIImageView!
+    @IBOutlet private(set) weak var speakerImageView: UIImageView!
 }

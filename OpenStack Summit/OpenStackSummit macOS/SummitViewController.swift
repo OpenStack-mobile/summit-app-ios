@@ -15,15 +15,15 @@ final class SummitViewController: NSViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var contentView: NSView!
+    @IBOutlet private(set) weak var contentView: NSView!
     
-    @IBOutlet weak var emptyView: NSView!
+    @IBOutlet private(set) weak var emptyView: NSView!
     
-    @IBOutlet weak var nameLabel: NSTextField!
+    @IBOutlet private(set) weak var nameLabel: NSTextField!
     
-    @IBOutlet weak var dateLabel: NSTextField!
+    @IBOutlet private(set) weak var dateLabel: NSTextField!
     
-    @IBOutlet weak var wirelessNetworkButton: NSButton!
+    @IBOutlet private(set) weak var wirelessNetworkButton: NSButton!
     
     // MARK: - Properties
     

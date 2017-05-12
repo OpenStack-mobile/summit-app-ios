@@ -228,7 +228,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
 
 final class NotificationTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var notificationLabel: UILabel!
+    @IBOutlet private(set) weak var notificationLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
 }

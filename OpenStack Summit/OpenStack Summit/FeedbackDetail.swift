@@ -25,10 +25,10 @@ public struct FeedbackDetail {
     
     public init(managedObject feedback: FeedbackManagedObject) {
         
-        self.identifier = feedback.identifier
+        self.identifier = feedback.id
         self.rate = Int(feedback.rate)
         self.review = feedback.review
-        self.event = feedback.event.identifier
+        self.event = feedback.event.id
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
         self.member = Member(managedObject: feedback.member)
@@ -93,7 +93,7 @@ public struct FeedbackDetail {
                 return "A minute ago"
             }
         } else if (components.second! >= 3) {
-            return "\(components.second) seconds ago"
+            return "\(String(describing: components.second)) seconds ago"
         } else {
             return "Just now"
         }

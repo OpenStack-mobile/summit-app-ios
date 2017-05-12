@@ -20,7 +20,7 @@ public struct Slide: PresentationMaterial {
     
     public var order: Int64
     
-    public var link: String
+    public var link: URL
     
     public var event: Identifier
 }

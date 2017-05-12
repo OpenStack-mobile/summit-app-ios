@@ -16,7 +16,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
@@ -98,8 +98,8 @@ final class EventCellController: NSObject {
     
     static let identifier = "EventCell"
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
-    @IBOutlet weak var dateLabel: WKInterfaceLabel!
-    @IBOutlet weak var locationLabel: WKInterfaceLabel!
-    @IBOutlet weak var locationGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var dateLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationGroup: WKInterfaceGroup!
 }

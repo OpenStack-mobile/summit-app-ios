@@ -61,7 +61,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         #endif
         
         // validate R.swift on debug builds
-        R.assertValid()
+        #if DEBUG
+        try! R.validate()
+        #endif
         
         // configure global appearance
         SetAppearance()
@@ -87,7 +89,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Add observer for InstanceID token refresh callback.
         NotificationCenter.default.addObserver(self,
                                                          selector: #selector(self.tokenRefreshNotification),
-                                                         name: kFIRInstanceIDTokenRefreshNotification,
+                                                         name: .firInstanceIDTokenRefresh,
                                                          object: nil)
         
         connectToFcm()
@@ -121,7 +123,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error) {
         
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
@@ -147,16 +149,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             // called when push notification tapped
             print("Tapped on remote notification: \(userInfo)")
             
-            PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            PushNotificationManager.shared.process(pushNotification: userInfo as! [String: Any], unread: false)
             
             // redirect to inbox
-            self.view(.inbox)
+            self.view(screen: .inbox)
         }
-        
-        fetchCompletionHandler(.NoData)
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : Any], completionHandler: @escaping () -> Void) {
         
         PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }

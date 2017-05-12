@@ -61,7 +61,7 @@ public struct MemberResponse {
         
         public let gender: String?
         
-        public let pictureURL: String
+        public let picture: URL
         
         public let twitter: String?
         
@@ -201,7 +201,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
     return lhs.identifier == rhs.identifier
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.linkedIn == rhs.linkedIn

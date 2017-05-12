@@ -16,35 +16,35 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var addressLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var addressLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var descriptionSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var descriptionSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var descriptionLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var capacityLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var capacityLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var capacitySeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var capacitySeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var roomLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var roomLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var roomSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var roomSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var mapView: WKInterfaceMap!
+    @IBOutlet private(set) weak var mapView: WKInterfaceMap!
     
-    @IBOutlet weak var imagesButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var imagesButton: WKInterfaceButton!
     
-    @IBOutlet weak var imagesView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imagesView: WKInterfaceImage!
     
-    @IBOutlet weak var imagesActivityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var imagesActivityIndicator: WKInterfaceImage!
     
-    @IBOutlet weak var mapImagesButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var mapImagesButton: WKInterfaceButton!
     
-    @IBOutlet weak var mapImagesView: WKInterfaceImage!
+    @IBOutlet private(set) weak var mapImagesView: WKInterfaceImage!
     
-    @IBOutlet weak var mapImagesActivityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var mapImagesActivityIndicator: WKInterfaceImage!
     
     // MARK: - Properties
     

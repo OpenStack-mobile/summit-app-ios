@@ -13,9 +13,9 @@ final class VenueRoomDetailViewController: UIViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var capacityLabel: UILabel!
-    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var capacityLabel: UILabel!
+    @IBOutlet private(set) weak var pictureImageView: UIImageView!
     
     // MARK: - Properties
     

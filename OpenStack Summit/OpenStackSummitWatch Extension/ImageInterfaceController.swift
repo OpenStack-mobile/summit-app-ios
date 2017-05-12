@@ -16,9 +16,9 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var activityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var activityIndicator: WKInterfaceImage!
     
     // MARK: - Properties
     

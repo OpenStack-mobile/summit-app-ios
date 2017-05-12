@@ -7,6 +7,7 @@
 //
 
 import JSON
+import struct Foundation.URL
 
 public extension Image {
     
@@ -22,7 +23,8 @@ extension Image: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
-            let url = JSONObject[JSONKey.image_url.rawValue]?.rawValue as? String
+            let urlString = JSONObject[JSONKey.image_url.rawValue]?.rawValue as? String,
+            let url = URL(string: urlString)
             else { return nil }
         
         self.identifier = identifier

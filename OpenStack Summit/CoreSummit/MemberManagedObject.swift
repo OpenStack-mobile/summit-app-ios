@@ -52,7 +52,7 @@ extension Member: CoreDataDecodable {
         self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
-        self.pictureURL = managedObject.pictureURL
+        self.picture = URL(string: managedObject.pictureURL)!
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.linkedIn = managedObject.linkedIn
@@ -92,7 +92,7 @@ extension Member: CoreDataEncodable {
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
@@ -127,7 +127,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn

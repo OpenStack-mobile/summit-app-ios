@@ -20,7 +20,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var scheduleView: ScheduleView!
+    @IBOutlet private(set) weak var scheduleView: ScheduleView!
     
     // MARK: - Properties
     

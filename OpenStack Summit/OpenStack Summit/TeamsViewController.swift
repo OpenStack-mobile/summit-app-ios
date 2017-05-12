@@ -203,11 +203,11 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
 
 final class TeamCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet private(set) weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var unreadView: UIView!
+    @IBOutlet private(set) weak var unreadView: UIView!
     
-    @IBOutlet weak var unreadLabel: UILabel!
+    @IBOutlet private(set) weak var unreadLabel: UILabel!
 }

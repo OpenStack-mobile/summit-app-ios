@@ -541,5 +541,5 @@ private extension TeamDetailViewController {
 
 final class TeamDetailTextFieldTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet private(set) weak var textField: UITextField!
 }

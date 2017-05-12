@@ -18,7 +18,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet private(set) weak var mapView: MKMapView!
     
     // MARK: - Properties
     

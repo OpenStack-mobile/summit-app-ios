@@ -16,7 +16,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-     @IBOutlet weak var tableView: WKInterfaceTable!
+     @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     

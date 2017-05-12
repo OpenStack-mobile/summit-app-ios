@@ -7,6 +7,7 @@
 //
 
 import JSON
+import struct Foundation.URL
 
 private extension Member {
     
@@ -25,13 +26,13 @@ extension Member: JSONDecodable {
                 ?? JSONObject[JSONKey.id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
+            let picture = JSONObject[JSONKey.pic.rawValue]?.urlValue
             else { return nil }
         
         self.identifier = memberID
         self.firstName = firstName
         self.lastName = lastName
-        self.pictureURL = pictureURL
+        self.picture = picture
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
@@ -94,7 +95,7 @@ extension MemberResponse.Member: JSONDecodable {
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
+            let picture = JSONObject[JSONKey.pic.rawValue]?.urlValue,
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
             let groups = Group.from(json: groupsJSONArray),
             let groupEventsJSONArray = JSONObject[JSONKey.groups_events.rawValue]?.arrayValue,
@@ -108,7 +109,7 @@ extension MemberResponse.Member: JSONDecodable {
         self.identifier = identifier
         self.firstName = firstName
         self.lastName = lastName
-        self.pictureURL = pictureURL
+        self.picture = picture
         self.groups = groups
         self.groupEvents = groupEvents
         self.feedback = feedback

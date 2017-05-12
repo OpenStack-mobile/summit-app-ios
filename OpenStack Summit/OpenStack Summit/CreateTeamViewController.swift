@@ -17,9 +17,9 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet private(set) weak var nameTextField: UITextField!
     
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet private(set) weak var descriptionTextField: UITextField!
     
     // MARK: - Properties
     

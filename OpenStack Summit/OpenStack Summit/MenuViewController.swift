@@ -16,19 +16,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var searchTextView: UITextField!
-    @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet private(set) weak var searchTextView: UITextField!
+    @IBOutlet private(set) weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var loginButton: UIButton!
     
-    @IBOutlet weak var eventsButton: UIButton!
-    @IBOutlet weak var venuesButton: UIButton!
-    @IBOutlet weak var peopleButton: UIButton!
-    @IBOutlet weak var myProfileButton: UIButton!
-    @IBOutlet weak var aboutButton: UIButton!
-    @IBOutlet weak var inboxButton: UIButton!
-    @IBOutlet weak var inboxCounterView: UIView!
-    @IBOutlet weak var inboxCounterLabel: UILabel!
+    @IBOutlet private(set) weak var eventsButton: UIButton!
+    @IBOutlet private(set) weak var venuesButton: UIButton!
+    @IBOutlet private(set) weak var peopleButton: UIButton!
+    @IBOutlet private(set) weak var myProfileButton: UIButton!
+    @IBOutlet private(set) weak var aboutButton: UIButton!
+    @IBOutlet private(set) weak var inboxButton: UIButton!
+    @IBOutlet private(set) weak var inboxCounterView: UIView!
+    @IBOutlet private(set) weak var inboxCounterLabel: UILabel!
     
     // MARK: - Properties
     

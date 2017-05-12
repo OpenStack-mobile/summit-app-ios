@@ -16,9 +16,9 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var summitNameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var summitNameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var versionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var versionLabel: WKInterfaceLabel!
     
     // MARK: - Loading
     

@@ -15,14 +15,14 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var arrowImageView: UIImageView!
-    @IBOutlet weak var imagesSlideshow: ImageSlideshow!
-    @IBOutlet weak var imagesSlideshowHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mapsSlideshow: ImageSlideshow!
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet private(set) weak var scrollView: UIScrollView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var locationLabel: UILabel!
+    @IBOutlet private(set) weak var arrowImageView: UIImageView!
+    @IBOutlet private(set) weak var imagesSlideshow: ImageSlideshow!
+    @IBOutlet private(set) weak var imagesSlideshowHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var mapsSlideshow: ImageSlideshow!
+    @IBOutlet private(set) weak var mapView: GMSMapView!
     
     // MARK: - Accessors
     
@@ -44,42 +44,12 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    private(set) var images = [String]() {
-        didSet {
-            var imageInputs: [HanekeInputSource] = []		
-            
-            for image in images {
-                
-                #if DEBUG
-                    let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                #else
-                    let url = image
-                #endif
-                
-                imageInputs.append(HanekeInputSource(urlString: url)!)
-            }
-            
-            imagesSlideshow.setImageInputs(imageInputs)
-        }
+    private(set) var images = [URL]() {
+        didSet { configure(slideshow: imagesSlideshow, with: images) }
     }
     
-    private(set) var maps = [String]() {
-       didSet {
-            var imageInputs: [HanekeInputSource] = []
-        
-            for map in maps {
-                
-                #if DEBUG
-                    let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                #else
-                    let url = map
-                #endif
-                
-                imageInputs.append(HanekeInputSource(urlString: url)!)
-            }
-            
-            mapsSlideshow.setImageInputs(imageInputs)
-        }
+    private(set) var maps = [URL]() {
+        didSet { configure(slideshow: mapsSlideshow, with: maps) }
     }
     
     // MARK: - Properties
@@ -148,9 +118,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         self.location = venue.address
         
         self.toggleImagesGallery(venue.images.count > 0)
-        if venue.images.count > 0 {
-            self.images = venue.images
-        }
+        self.images = venue.images
         
         self.toggleMapNavigation(venue.maps.count > 0)
         self.toggleMapsGallery(venue.maps.count > 0)
@@ -177,24 +145,32 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @inline(__always)
-    func toggleMap(_ visible: Bool) {
+    private func toggleMap(_ visible: Bool) {
         mapView.isHidden = !visible
     }
     
     @inline(__always)
-    func toggleMapsGallery(_ visible: Bool) {
+    private func toggleMapsGallery(_ visible: Bool) {
         mapsSlideshow.isHidden = !visible
     }
     
     @inline(__always)
-    func toggleImagesGallery(_ visible: Bool) {
+    private func toggleImagesGallery(_ visible: Bool) {
         imagesSlideshow.isHidden = !visible
         imagesSlideshowHeightConstraint.constant = visible ? 220 : 0
         imagesSlideshow.updateConstraints()
     }
     
     @inline(__always)
-    func toggleMapNavigation(_ visible: Bool) {
+    private func toggleMapNavigation(_ visible: Bool) {
         arrowImageView.isHidden = !visible
+    }
+    
+    @inline(__always)
+    private func configure(slideshow: ImageSlideshow, with imageURLs: [URL]) {
+        
+        let imageInputs = imageURLs.map { HanekeInputSource(url: $0) }
+        
+        slideshow.setImageInputs(imageInputs)
     }
 }

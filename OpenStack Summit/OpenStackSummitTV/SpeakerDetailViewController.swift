@@ -16,9 +16,9 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private(set) weak var tableView: UITableView!
     
-    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var pictureImageView: UIImageView!
     
     // MARK: - Properties
     

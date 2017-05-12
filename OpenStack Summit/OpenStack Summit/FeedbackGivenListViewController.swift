@@ -14,7 +14,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - IB Outlet
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private(set) weak var tableView: UITableView!
     
     // MARK: - Properties
     

@@ -14,7 +14,7 @@ final class TrackScheduleViewController: ScheduleViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
     
     // MARK: - Properties
     

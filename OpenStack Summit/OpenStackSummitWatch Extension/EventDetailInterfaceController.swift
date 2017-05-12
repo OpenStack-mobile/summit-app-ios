@@ -16,37 +16,37 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var moviePlayer: WKInterfaceMovie!
+    @IBOutlet private(set) weak var moviePlayer: WKInterfaceMovie!
     
-    @IBOutlet weak var dateLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var dateLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var locationLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var locationSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var locationSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var locationButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var locationButton: WKInterfaceButton!
     
-    @IBOutlet weak var tagsLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var tagsLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var tagsGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var tagsGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var tagsSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var tagsSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var speakersLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var speakersLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var speakersButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var speakersButton: WKInterfaceButton!
     
-    @IBOutlet weak var speakersSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var speakersSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var levelLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var levelLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var levelGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var levelGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var levelSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var levelSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var descriptionLabel: WKInterfaceLabel!
     
     // MARK: - Properties
     

@@ -16,7 +16,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var mapView: WKInterfaceMap!
+    @IBOutlet private(set) weak var mapView: WKInterfaceMap!
     
     // MARK: - Properties
     

@@ -119,7 +119,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         application.registerForRemoteNotifications()
     }
     
-    public func process(pushNotification: [String: AnyObject], unread: Bool = true) {
+    public func process(pushNotification: [String: Any], unread: Bool = true) {
         
         let notification: PushNotification?
         
@@ -138,14 +138,12 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             // cache
             context.perform {
                 
-                try! teamMessage.save(context)
+                let _ = try! teamMessage.save(context)
                 
                 try! context.save()
             }
             
-            let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.identifier
-            
-            if incomingMessage {
+            if let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.id {
                 
                 // set as unread
                 unreadTeamMessages.value.insert(teamMessage.identifier)
@@ -167,7 +165,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     
                 } else if teamMessageAlertFilter != teamMessageNotification.team {
                     
-                    SweetAlert().showAlert(alertTitle, subTitle: alertBody, style: .None)
+                    SweetAlert().showAlert(alertTitle, subTitle: alertBody, style: .none)
                 }
             }
             
@@ -198,7 +196,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             // cache
             context.perform {
                 
-                try! encodable.save(context)
+                let _ = try! encodable.save(context)
                 
                 try! context.save()
             }
@@ -576,7 +574,7 @@ public protocol PushNotification {
     
     var created: Date { get }
     
-    init?(pushNotification: [String: AnyObject])
+    init?(pushNotification: [String: Any])
 }
 
 public struct TeamMessageNotification: PushNotification {
@@ -598,7 +596,7 @@ public struct TeamMessageNotification: PushNotification {
     
     public let from: (idenfitier: Identifier, firstName: String, lastName: String)
     
-    public init?(pushNotification: [String: AnyObject]) {
+    public init?(pushNotification: [String: Any]) {
         
         guard let topicString = pushNotification[Key.from.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
@@ -661,7 +659,7 @@ public struct GeneralNotification: PushNotification {
     
     public let event: (identifier: Identifier, title: String)?
     
-    public init?(pushNotification: [String: AnyObject]) {
+    public init?(pushNotification: [String: Any]) {
         
         guard let topicString = pushNotification[Key.from.rawValue] as? String ?? pushNotification[Key.to.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
@@ -691,7 +689,7 @@ public struct GeneralNotification: PushNotification {
         case .event:
             
             guard let eventIDString = pushNotification[Key.event_id.rawValue] as? String,
-                let eventID = Int(eventIDString),
+                let eventID = Identifier(eventIDString),
                 let eventTitle = pushNotification[Key.title.rawValue] as? String
                 else { return nil }
             

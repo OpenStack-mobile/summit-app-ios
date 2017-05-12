@@ -94,24 +94,18 @@ extension Event.DataUpdate: JSONDecodable {
             self.videos = []
         }
         
-        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.from(json: slidesJSONArray)
-                else { return nil }
-            
-            self.slides = Set(slides)
+            self.slides = Set(Slide.forceDecode(json: jsonArray))
             
         } else {
             
             self.slides = []
         }
         
-        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.from(json: linksJSONArray)
-                else { return nil }
-            
-            self.links = Set(links)
+            self.links = Set(Link.forceDecode(json: jsonArray))
             
         } else {
             

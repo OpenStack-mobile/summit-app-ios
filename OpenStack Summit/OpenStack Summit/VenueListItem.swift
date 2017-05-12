@@ -6,11 +6,11 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import CoreSummit
 import Foundation
-import CoreLocation
+import CoreSummit
+import struct CoreLocation.CLLocationCoordinate2D
 
-public struct VenueListItem: Named, CoreDataDecodable {
+public struct VenueListItem: Named {
         
     public let identifier: Identifier
     
@@ -24,11 +24,16 @@ public struct VenueListItem: Named, CoreDataDecodable {
     
     public let backgroundImageURL: String?
     
-    public let maps: [String]
+    public let maps: [URL]
     
-    public let images: [String]
+    public let images: [URL]
     
     public let isInternal: Bool
+}
+
+// MARK: - CoreDataDecodable
+
+extension VenueListItem: CoreDataDecodable {
     
     public init(managedObject venue: VenueManagedObject) {
         
@@ -37,16 +42,13 @@ public struct VenueListItem: Named, CoreDataDecodable {
         self.identifier = venue.id
         self.name = venue.name
         self.descriptionText = venue.descriptionText ?? ""
-        self.address = VenueListItem.getAddress(venue)
+        self.address = VenueListItem.address(for: venue)
         self.backgroundImageURL = venue.images.first?.url
         self.isInternal = venue.locationType == Venue.LocationType.Internal.rawValue
         
         let floors = venue.floors.sorted { $0.number < $1.number }
-        var maps = venue.maps.map { $0.url }
-        maps.append(contentsOf: floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
-        self.maps = maps
-        
-        self.images = venue.images.map { $0.url }
+        self.maps = venue.maps.map { URL(string: $0.url) } + floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false }
+        self.images = venue.images.map { URL(string: $0.url)! }
         
         // location
         if let latitude = Double(venue.latitude ?? ""),
@@ -59,27 +61,8 @@ public struct VenueListItem: Named, CoreDataDecodable {
             self.location = nil
         }
     }
-}
-
-// MARK: - Comparable
-
-public func == (lhs: VenueListItem, rhs: VenueListItem) -> Bool {
     
-    return lhs.identifier == rhs.identifier
-        && lhs.name == rhs.name
-        && lhs.descriptionText == rhs.descriptionText
-        && lhs.address == rhs.address
-        && lhs.location?.latitude == rhs.location?.latitude
-        && lhs.location?.longitude == rhs.location?.longitude
-        && lhs.backgroundImageURL == rhs.backgroundImageURL
-        && lhs.maps == rhs.maps
-}
-
-// MARK: - Private
-
-private extension VenueListItem {
-    
-    static func getAddress(_ venue: VenueManagedObject) -> String {
+    static func address(for venue: VenueManagedObject) -> String {
         
         var fullAddress = venue.address ?? ""
         
@@ -105,4 +88,18 @@ private extension VenueListItem {
         
         return fullAddress
     }
+}
+
+// MARK: - Equatable
+
+public func == (lhs: VenueListItem, rhs: VenueListItem) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.address == rhs.address
+        && lhs.location?.latitude == rhs.location?.latitude
+        && lhs.location?.longitude == rhs.location?.longitude
+        && lhs.backgroundImageURL == rhs.backgroundImageURL
+        && lhs.maps == rhs.maps
 }

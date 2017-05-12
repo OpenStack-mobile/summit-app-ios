@@ -14,7 +14,7 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
     
     // MARK: - IB Outlets
 
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet private(set) weak var mapView: GMSMapView!
     
     // MARK: - Properties
     

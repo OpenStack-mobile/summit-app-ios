@@ -163,7 +163,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             else {
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
+                dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
                 dateFormatter.dateFormat = "MMMM d-"
                 let stringDateFrom = dateFormatter.string(from: summit.start)
                 
@@ -227,11 +227,11 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     switch AppEnvironment {
                         
-                    case .Staging:
+                    case .staging:
                         
                         break
                         
-                    case .Production:
+                    case .production:
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }

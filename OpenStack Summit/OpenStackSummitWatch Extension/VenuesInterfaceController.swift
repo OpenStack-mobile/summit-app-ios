@@ -16,7 +16,7 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
@@ -135,15 +135,15 @@ final class VenueCellController: NSObject {
     
     static let identifier = "VenueCell"
     
-    @IBOutlet weak var headerGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var headerGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var contentGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var contentGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var addressLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var addressLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var activityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var activityIndicator: WKInterfaceImage!
 }

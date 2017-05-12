@@ -13,9 +13,9 @@ import UIKit
 @objc(OSSTVVideoCell)
 final class VideoCell: UICollectionViewCell {
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet private(set) weak var label: UILabel!
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private(set) weak var imageView: UIImageView!
     
     // MARK: Initialization
     

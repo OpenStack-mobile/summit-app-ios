@@ -19,7 +19,7 @@ extension Image: CoreDataDecodable {
     public init(managedObject: ImageManagedObject) {
         
         self.identifier = managedObject.id
-        self.url = managedObject.url
+        self.url = URL(string: managedObject.url)!
     }
 }
 
@@ -29,7 +29,7 @@ extension Image: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
-        managedObject.url = url
+        managedObject.url = url.absoluteString
         
         managedObject.didCache()
         

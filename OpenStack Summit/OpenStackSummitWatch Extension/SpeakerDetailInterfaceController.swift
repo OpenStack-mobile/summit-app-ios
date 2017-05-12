@@ -16,33 +16,33 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var titleLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var titleLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var twitterLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var twitterLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var twitterGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var twitterGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var twitterSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var twitterSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var ircLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var ircLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var ircGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var ircGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var ircSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var ircSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var eventsSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var eventsSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var eventsButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var eventsButton: WKInterfaceButton!
     
-    @IBOutlet weak var eventsLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var eventsLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var biographyLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var biographyLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var biographySeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var biographySeparator: WKInterfaceSeparator!
     
     // MARK: - Properties
     

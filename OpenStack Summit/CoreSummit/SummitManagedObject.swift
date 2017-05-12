@@ -62,7 +62,7 @@ extension Summit: CoreDataDecodable {
         self.datesLabel = managedObject.datesLabel
         self.start = managedObject.start
         self.end = managedObject.end
-        self.webpageURL = managedObject.webpageURL
+        self.webpage = URL(string: managedObject.webpageURL)!
         self.active = managedObject.active
         
         if let startShowingVenues = managedObject.startShowingVenues {
@@ -107,7 +107,7 @@ extension Summit: CoreDataEncodable {
         managedObject.start = start
         managedObject.end = end
         managedObject.defaultStart = defaultStart
-        managedObject.webpageURL = webpageURL
+        managedObject.webpageURL = webpage.absoluteString
         managedObject.active = active
         managedObject.startShowingVenues = startShowingVenues
         managedObject.sponsors = try context.relationshipFault(sponsors)

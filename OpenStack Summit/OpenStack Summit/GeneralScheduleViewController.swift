@@ -16,9 +16,9 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var noConnectivityView: UIView!
+    @IBOutlet private(set) weak var noConnectivityView: UIView!
     
-    @IBOutlet weak var retryButton: UIButton!
+    @IBOutlet private(set) weak var retryButton: UIButton!
     
     // MARK: - Properties
     

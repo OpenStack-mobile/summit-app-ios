@@ -7,6 +7,7 @@
 //
 
 import JSON
+import struct Foundation.URL
 
 public extension Summit {
     
@@ -44,7 +45,7 @@ extension Summit: JSONDecodable {
             let events = Event.from(json: eventsJSONArray, summit: identifier),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
             let eventTypes = EventType.from(json: eventTypesJSONArray),
-            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String,
+            let webpage = JSONObject[JSONKey.page_url.rawValue]?.urlValue,
             let wirelessNetworksJSONArray = JSONObject[JSONKey.wifi_connections.rawValue]?.arrayValue,
             let wirelessNetworks = WirelessNetwork.from(json: wirelessNetworksJSONArray)
             else { return nil }
@@ -54,7 +55,7 @@ extension Summit: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name
-        self.webpageURL = webpageURL
+        self.webpage = webpage
         self.active = active
         self.ticketTypes = Set(ticketTypes)
         self.tracks = Set(tracks)

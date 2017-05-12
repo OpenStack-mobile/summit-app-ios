@@ -35,7 +35,7 @@ extension Link: CoreDataDecodable {
         self.descriptionText = managedObject.descriptionText
         self.displayOnSite = managedObject.displayOnSite
         self.featured = managedObject.featured
-        self.link = managedObject.link
+        self.link = URL(string: managedObject.link)!
         self.event = managedObject.event.id
         self.order = managedObject.order
     }
@@ -51,7 +51,7 @@ extension Link: CoreDataEncodable {
         managedObject.descriptionText = descriptionText
         managedObject.displayOnSite = displayOnSite
         managedObject.featured = featured
-        managedObject.link = link
+        managedObject.link = link.absoluteString
         managedObject.order = order
         managedObject.event = try context.relationshipFault(event)
         

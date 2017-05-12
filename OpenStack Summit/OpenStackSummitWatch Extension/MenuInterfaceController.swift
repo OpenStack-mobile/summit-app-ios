@@ -16,9 +16,9 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
-    @IBOutlet weak var loadingImageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var loadingImageView: WKInterfaceImage!
     
     // MARK: - Properties
     
@@ -143,9 +143,9 @@ final class MenuCellController: NSObject {
     
     static let identifier = "MenuCell"
     
-    @IBOutlet weak var menuLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var menuLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
 }
 
 struct MenuItem {

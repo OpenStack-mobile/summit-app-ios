@@ -16,11 +16,11 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var searchButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var searchButton: WKInterfaceButton!
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
-    @IBOutlet weak var emptyLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var emptyLabel: WKInterfaceLabel!
     
     // MARK: - Properties
     
@@ -135,7 +135,7 @@ final class SpeakerCellController: NSObject {
     
     static let identifier = "SpeakerCell"
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var titleLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var titleLabel: WKInterfaceLabel!
 }

@@ -208,9 +208,9 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
 
 final class TeamInvitationTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet private(set) weak var teamLabel: UILabel!
     
-    @IBOutlet weak var inviterLabel: UILabel!
+    @IBOutlet private(set) weak var inviterLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
 }

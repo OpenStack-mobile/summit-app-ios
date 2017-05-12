@@ -12,10 +12,10 @@ import AFHorizontalDayPicker
 final class ScheduleView: UIView {
     
     @IBOutlet var view: UIView!
-    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noEventsLabel: UILabel!
-    @IBOutlet weak var nowButton: UIButton!
+    @IBOutlet private(set) weak var dayPicker: AFHorizontalDayPicker!
+    @IBOutlet private(set) weak var tableView: UITableView!
+    @IBOutlet private(set) weak var noEventsLabel: UILabel!
+    @IBOutlet private(set) weak var nowButton: UIButton!
     @IBOutlet private weak var nowWidthConstraint: NSLayoutConstraint!
     
     var nowButtonEnabled: Bool = true {

@@ -223,7 +223,7 @@ private extension EventDetailViewController {
 
 final class VideoPlayerTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var playImageView: UIImageView!
-    @IBOutlet weak var videoImageView: UIImageView!
+    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var playImageView: UIImageView!
+    @IBOutlet private(set) weak var videoImageView: UIImageView!
 }

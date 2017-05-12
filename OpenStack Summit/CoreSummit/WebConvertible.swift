@@ -18,7 +18,7 @@ public extension WebConvertible {
     
     func toWebpage(_ summit: Summit) -> URL {
         
-        return URL(string: summit.webpageURL + "/summit-schedule/" + Self.webPathComponent.rawValue + "/\(identifier)")!
+        return URL(string: summit.webpage.absoluteString + "/summit-schedule/" + Self.webPathComponent.rawValue + "/\(identifier)")!
     }
 }
 
