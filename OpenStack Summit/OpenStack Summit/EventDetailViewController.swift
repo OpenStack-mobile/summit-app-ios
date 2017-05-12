@@ -175,10 +175,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBAction func showAttachment(_ sender: AnyObject? = nil) {
         
-        guard let url = Foundation.URL(string: eventDetail.attachment)
-            else { return }
-        
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.openURL(eventDetail.attachment)
     }
     
     // MARK: - Private Methods

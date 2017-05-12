@@ -75,7 +75,7 @@ extension Event: CoreDataDecodable {
         self.rsvp = managedObject.rsvp
         self.externalRSVP = managedObject.externalRSVP
         self.willRecord = managedObject.willRecord
-        self.attachment = managedObject.attachment
+        self.attachment = URL(string: managedObject.attachment ?? "")
         self.track = managedObject.track?.id
         self.type = managedObject.eventType.id
         self.sponsors = managedObject.sponsors.identifiers
@@ -105,7 +105,7 @@ extension Event: CoreDataEncodable {
         managedObject.rsvp = rsvp
         managedObject.externalRSVP = externalRSVP
         managedObject.willRecord = willRecord
-        managedObject.attachment = attachment
+        managedObject.attachment = attachment?.absoluteString
         
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
@@ -141,7 +141,7 @@ extension MemberResponse.Event: CoreDataEncodable {
         managedObject.rsvp = rsvp
         managedObject.externalRSVP = externalRSVP
         managedObject.willRecord = willRecord
-        managedObject.attachment = attachment
+        managedObject.attachment = attachment?.absoluteString
         
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)

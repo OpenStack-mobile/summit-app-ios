@@ -42,8 +42,8 @@ public struct EventDetail: CoreDataDecodable {
     public let willRecord: Bool
     public let rsvp: String
     public let externalRSVP: Bool
-    public let attachment: String
-    public let webpageURL: Foundation.URL
+    public let attachment: URL
+    public let webpage: URL
     
     // MARK: - Initialization
     
@@ -112,23 +112,11 @@ public struct EventDetail: CoreDataDecodable {
         
         self.speakers = speakers.sorted()
         
-        if let videoManagedObject = event.videos.first {
-            
-            self.video = Video(managedObject: videoManagedObject)
-            
-        } else {
-            
-            self.video = nil
-        }
+        self.video = Video.from(managedObjects: event.videos).sorted().first
         
         let summit = Summit(managedObject: event.summit)
         
-        let webpageURLString = Event(managedObject: event).toWebpage(summit)
-        
-        guard let webpageURL = NSURL(string: webpageURLString)
-            else { fatalError("Invalid URL \(webpageURLString)") }
-        
-        self.webpageURL = webpageURL
+        self.webpage = Event(managedObject: event).toWebpage(summit)
     }
 }
 

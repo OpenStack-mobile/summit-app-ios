@@ -116,7 +116,7 @@ public struct MemberResponse {
         
         public let willRecord: Bool
         
-        public let attachment: String?
+        public let attachment: URL?
         
         public let sponsors: [Company]
         

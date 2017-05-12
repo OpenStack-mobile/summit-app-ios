@@ -65,7 +65,7 @@ public extension Event {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
-        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.urlValue
         
         if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
             track > 0 {
@@ -178,7 +178,7 @@ extension MemberResponse.Event: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
-        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.urlValue
         
         if let trackJSON = JSONObject[JSONKey.track.rawValue] {
             
