@@ -120,7 +120,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let now = Date()
         
-        guard let today = self.availableDates.first(where: { $0.mt_isWithinSameDay(now) })
+        guard let today = self.availableDates.first(where: { ($0 as NSDate).mt_isWithinSameDay(now) })
             else { return }
         
         (self.scheduleView.dayPicker.value(forKey: "daysCollectionView") as! UICollectionView).reloadData()
@@ -243,7 +243,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let oldSelectedDate = self.selectedDate
         
-        if  let defaultStart = summit.defaultStart?,
+        if  let defaultStart = summit.defaultStart,
             let defaultDay = self.availableDates.first(where: { $0.mt_isWithinSameDay(defaultStart) }),
             summitActive == false && self.didSelectDate == false {
             
@@ -273,7 +273,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         // fetch new events
         
-        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT()
+        let offsetLocalTimeZone = TimeZone.localTimeZone().secondsFromGMT()
         
         let startDate = self.selectedDate.mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
         let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
@@ -299,7 +299,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         if oldSchedule.isEmpty {
             
-            tableView.reloadData()
+            tableView?.reloadData()
             
             OperationQueue.main.addOperation {
                 
@@ -312,9 +312,9 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             
         } else {
             
-            tableView.beginUpdates()
+            tableView?.beginUpdates()
             
-            defer { tableView.endUpdates() }
+            defer { tableView?.endUpdates() }
             
             // update new schedule with animation
             
@@ -325,11 +325,11 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 // add new item
                 guard index < oldSchedule.count else {
                     
-                    tableView.insertRows(at: [indexPath], with: .automatic)
+                    tableView?.insertRows(at: [indexPath], with: .automatic)
                     
-                    if let cell = tableView.cellForRow(at: indexPath) as? ScheduleTableViewCell {
+                    if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                         
-                        configure(cell: cell, at: indexPath)
+                        configure(cell, at: indexPath)
                     }
                     
                     continue
@@ -340,13 +340,13 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 // delete and insert cell (cell represents different event)
                 guard event.identifier == oldEvent.identifier else {
                     
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    tableView?.deleteRows(at: [indexPath], with: .automatic)
                     
-                    tableView.insertRows(at: [indexPath], with: .automatic)
+                    tableView?.insertRows(at: [indexPath], with: .automatic)
                     
-                    if let cell = tableView.cellForRow(at: indexPath) as? ScheduleTableViewCell {
+                    if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                         
-                        configure(cell: cell, at: indexPath)
+                        configure(cell, at: indexPath)
                     }
                     
                     continue
@@ -354,9 +354,9 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
                 // update existing cell
                 
-                if let cell = tableView.cellForRow(at: indexPath) as? ScheduleTableViewCell {
+                if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                     
-                    configure(cell: cell, at: indexPath)
+                    configure(cell, at: indexPath)
                 }
             }
             
@@ -365,12 +365,12 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
                 let deletedIndexPaths = (dayEvents.count ..< oldSchedule.count).map { IndexPath(row: $0, section: 0) }
                 
-                tableView.deleteRows(at: deletedIndexPaths, with: .automatic)
+                tableView?.deleteRows(at: deletedIndexPaths, with: .automatic)
             }
         }
     }
     
-    private func configure(cell: ScheduleTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: ScheduleTableViewCell, at indexPath: IndexPath) {
         
         let index = indexPath.row
         let event = dayEvents[index]
@@ -480,9 +480,9 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell)!
         
-        configure(cell: cell, at: indexPath)
+        configure(cell, at: indexPath)
         
         return cell
     }
@@ -514,42 +514,42 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     private func registerNotifications() {
         
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(loggedIn),
-            name: Store.Notification.LoggedIn.rawValue,
+            name: Store.Notification.loggedIn,
             object: nil)
         
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(loggedOut),
-            name: Store.Notification.LoggedOut.rawValue,
+            name: Store.Notification.loggedOut,
             object: nil)
         
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
-            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+            name: Notification.Name.NSManagedObjectContextObjectsDidChange,
             object: Store.shared.managedObjectContext)
     }
     
     private func stopNotifications() {
         
-        NotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedIn.rawValue, object: nil)
-        NotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedOut.rawValue, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Store.Notification.loggedIn, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Store.Notification.loggedOut, object: nil)
     }
     
-    @objc private func loggedIn(_ notification: Notification) {
+    @objc private func loggedIn(_ notification: Foundation.Notification) {
         
         self.scheduleView.tableView.reloadData()
     }
     
-    @objc private func loggedOut(_ notification: Notification) {
+    @objc private func loggedOut(_ notification: Foundation.Notification) {
         
         self.scheduleView.tableView.reloadData()
     }
     
-    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Foundation.Notification) {
         
         self.reloadSchedule()
     }

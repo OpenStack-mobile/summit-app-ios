@@ -76,23 +76,23 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         self.navigationItem.rightBarButtonItem = didFinish != nil ? doneButton : nil
     }
     
-    private func configure(cell: UITableViewCell, with summit: Summit) {
+    private func configure(_ cell: UITableViewCell, with summit: Summit) {
         
         cell.textLabel!.text = summit.name
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start)
+        let stringDateFrom = dateFormatter.string(from: summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end)
+        let stringDateTo = dateFormatter.string(from: summit.end)
         
         cell.detailTextLabel!.text = stringDateFrom + stringDateTo
         
         let isCurrentSummit = SummitManager.shared.summit.value == summit.identifier
         
-        cell.accessoryType = isCurrentSummit ? .Checkmark : .None
+        cell.accessoryType = isCurrentSummit ? .checkmark : .none
     }
     
     // MARK: - UITableViewDataSource
@@ -115,9 +115,9 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.summitCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.summitCell, for: indexPath)!
             
-            configure(cell: cell, with: item)
+            configure(cell, with: item)
             
             return cell
             
@@ -125,7 +125,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
             cell.activityIndicator.isHidden = false
             

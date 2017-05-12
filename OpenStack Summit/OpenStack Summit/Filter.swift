@@ -182,7 +182,7 @@ struct ScheduleFilter: Equatable {
         return true
     }
     
-    mutating func disable(filter: Filter) -> Bool {
+    mutating func disable(_ filter: Filter) -> Bool {
         
         let validFilter = allFilters.values.contains { $0.contains(filter) }
         
@@ -234,7 +234,7 @@ final class FilterManager {
         
         timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
         
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
             name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,

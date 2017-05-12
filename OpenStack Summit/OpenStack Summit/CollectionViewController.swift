@@ -14,7 +14,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     
     // MARK: - Properties
     
-    final var fetchedResultsController: NSFetchedResultsController!
+    final var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     final private var changes = [Change]()
     

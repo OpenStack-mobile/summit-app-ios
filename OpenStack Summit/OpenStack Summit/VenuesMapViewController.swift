@@ -79,7 +79,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         guard let venue = dictionary[marker]
             else { return false }
         
-        showLocationDetail(venue)
+        showLocationDetail(Identifier(venue))
         
         return true
     }

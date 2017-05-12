@@ -94,7 +94,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         if rate == 0 {
             validationErrorText = "You must provide a rate using stars at the top"
         }
-        else if review.characters.count > 500 {
+        else if (review?.characters.count)! > 500 {
             validationErrorText = "Review exceeded 500 characters limit"
         }
         else {
@@ -121,9 +121,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
         case .new:
             
-            Store.shared.addFeedback(summit, event: event, rate: rate, review: review) { [weak self] (response) in
+            Store.shared.addFeedback(summit, event: event, rate: rate, review: review!) { [weak self] (response) in
                 
-                OperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     guard let controller = self else { return }
                     
@@ -144,9 +144,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
         case .edit:
             
-            Store.shared.editFeedback(summit, event: event, rate: rate, review: review)  { [weak self] (error) in
+            Store.shared.editFeedback(summit, event: event, rate: rate, review: review!)  { [weak self] (error) in
                 
-                OperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     guard let controller = self else { return }
                     
@@ -154,11 +154,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                     
                     switch error {
                         
-                    case let .Some(error):
+                    case let .some(error):
                         
                         controller.showErrorMessage(error)
                         
-                    case .None:
+                    case .none:
                         
                         controller.close()
                     }
@@ -254,10 +254,10 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func keyboardDidShow(_ notification: Notification) {
+    @objc private func keyboardDidShow(_ notification: Foundation.Notification) {
         
-        let userInfo: NSDictionary = notification.userInfo!
-        var keyboardRect = userInfo.object(forKey: UIKeyboardFrameBeginUserInfoKey)!.cgRectValue
+        let userInfo: [String: AnyObject] = notification.userInfo as! [String : AnyObject]
+        var keyboardRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardRect = view.convert(keyboardRect, from: nil)
         
         let visibleHeight = self.view.frame.size.height - keyboardRect.size.height
@@ -265,7 +265,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         view.updateConstraints()
     }
     
-    @objc private func keyboardWillHide(_ notification: Notification) {
+    @objc private func keyboardWillHide(_ notification: Foundation.Notification) {
         
         bottomViewHeightConstraint.constant = minimumBottomSpace
         view.updateConstraints()

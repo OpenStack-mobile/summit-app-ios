@@ -31,11 +31,11 @@ extension UIViewController {
         
         // listen to when the video stops playing
         var observer: AnyObject!
-        observer = NotificationCenter.defaultCenter().addObserverForName(NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: videoPlayer.moviePlayer, queue: nil) { (notification) in
+        observer = NotificationCenter.default.addObserver(forName: Notification.Name.MPMoviePlayerPlaybackDidFinish, object: videoPlayer.moviePlayer, queue: nil) { (notification) in
             
             userActivity.invalidate()
             
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
         }
     }
 }

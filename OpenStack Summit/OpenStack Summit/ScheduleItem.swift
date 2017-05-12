@@ -85,10 +85,10 @@ internal extension ScheduleItem {
         dateFormatter.dateFormat = "hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) - \(stringDateTo)"
     }
@@ -99,7 +99,7 @@ internal extension ScheduleItem {
         dateFormatter.timeZone = TimeZone(name: event.summit.timeZone);
         dateFormatter.dateStyle = .medium
         
-        return dateFormatter.stringFromDate(event.start)
+        return dateFormatter.string(from: event.start)
     }
     
     static func getDateTime(_ event: EventManagedObject) -> String {
@@ -109,10 +109,10 @@ internal extension ScheduleItem {
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
@@ -130,8 +130,7 @@ internal extension ScheduleItem {
             
             location = room.venue.name
             
-            if let floorName = room.floor?.name
-                where floorName.isEmpty == false {
+            if let floorName = room.floor?.name, floorName.isEmpty == false {
                 
                 location += " - " + floorName
             }
@@ -162,7 +161,7 @@ internal extension ScheduleItem {
             track.groups.isEmpty == false
             else { return "" }
         
-        let trackGroups = track.groups.sort { $0.0.id < $0.1.id }
+        let trackGroups = track.groups.sorted { $0.0.id < $0.1.id }
         
         return trackGroups[0].color
     }

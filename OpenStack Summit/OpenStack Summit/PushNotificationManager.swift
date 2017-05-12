@@ -26,28 +26,28 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     private var summitObserver: Int!
     
-    private var teamsFetchedResultsController: NSFetchedResultsController?
+    private var teamsFetchedResultsController: NSFetchedResultsController<TeamManagedObject>?
     
     private var teams: Set<Identifier> {
         
-        return (teamsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+        return (teamsFetchedResultsController?.fetchedObjects ?? []).identifiers
     }
     
-    private var eventsFetchedResultsController: NSFetchedResultsController?
+    private var eventsFetchedResultsController: NSFetchedResultsController<EventManagedObject>?
     
     private var events: Set<Identifier> {
         
-        return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+        return (eventsFetchedResultsController?.fetchedObjects ?? []).identifiers
     }
     
-    private var notificationsFetchedResultsController: NSFetchedResultsController!
+    private var notificationsFetchedResultsController: NSFetchedResultsController<NotificationManagedObject>!
     
     private var notifications: Set<Identifier> {
         
-        return (notificationsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+        return (notificationsFetchedResultsController?.fetchedObjects ?? []).identifiers
     }
     
-    private(set) var subscribedTopics = Set<Notification.Topic>()
+    private(set) var subscribedTopics = Set<CoreSummit.Notification.Topic>()
     
     private let userDefaults = UserDefaults.standard
     
@@ -74,11 +74,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         self.summitObserver = SummitManager.shared.summit.observe(summitChanged)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedIn), name: Store.Notification.LoggedIn.rawValue, object: self.store)
+        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(loggedIn), name: Store.Notification.LoggedIn.rawValue, object: self.store)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
+        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
+        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
         
         self.notificationsFetchedResultsController = NSFetchedResultsController.init(Notification.self,
                                                                                 delegate: self,
@@ -136,7 +136,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             let teamMessage = TeamMessage(notification: teamMessageNotification)
             
             // cache
-            context.performBlock {
+            context.perform {
                 
                 try! teamMessage.save(context)
                 
@@ -196,7 +196,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             let encodable = Notification(notification: generalNotification)
             
             // cache
-            context.performBlock {
+            context.perform {
                 
                 try! encodable.save(context)
                 
@@ -306,7 +306,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    private func subscribe(to topic: Notification.Topic) {
+    private func subscribe(to topic: CoreSummit.Notification.Topic) {
         
         FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
         
@@ -316,7 +316,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    private func unsubscribe(from topic: Notification.Topic) {
+    private func unsubscribe(from topic: CoreSummit.Notification.Topic) {
         
         FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
         
@@ -397,7 +397,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     @inline(__always)
     private func initUnreadNotifications(_ preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
         
-        let storedValue = userDefaults.objectForKey(preferenceKey.rawValue) as? [Int] ?? []
+        let storedValue = userDefaults.object(forKey: preferenceKey.rawValue) as? [Int] ?? []
         
         let observable = Observable<Set<Identifier>>(Set(storedValue))
         
@@ -408,7 +408,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     private func unreadNotificationsChanged(new newValue: Set<Identifier>, old oldValue: Set<Identifier>, key preferenceKey: PreferenceKey) {
         
-        userDefaults.setObject(Array(newValue), forKey: preferenceKey.rawValue)
+        userDefaults.set(Array(newValue), forKey: preferenceKey.rawValue)
         userDefaults.synchronize()
         
         updateAppBadge()
@@ -472,18 +472,18 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             switch type {
                 
-            case .Insert: subscribe(to: topic)
+            case .insert: subscribe(to: topic)
                 
-            case .Delete: unsubscribe(from: topic)
+            case .delete: unsubscribe(from: topic)
                 
-            case .Move, .Update: break
+            case .move, .update: break
             }
             
         } else if controller == notificationsFetchedResultsController {
             
             switch type {
                 
-            case .Delete:
+            case .delete:
                 
                 // remove unread notification from set since it was deleted
                 if unreadNotifications.value.contains(identifier) {
@@ -491,7 +491,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     unreadNotifications.value.remove(identifier)
                 }
                 
-            case .Insert, .Move, .Update: break
+            case .insert, .move, .update: break
             }
             
         } else {
@@ -511,19 +511,19 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Notifications
     
-    @objc private func loggedIn(_ notification: Notification) {
+    @objc private func loggedIn(_ notification: Foundation.Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc private func loggedOut(_ notification: Notification) {
+    @objc private func loggedOut(_ notification: Foundation.Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc private func forcedLoggedOut(_ notification: Notification) {
+    @objc private func forcedLoggedOut(_ notification: Foundation.Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
@@ -618,11 +618,11 @@ public struct TeamMessageNotification: PushNotification {
             type == type(of: self).type
             else { return nil }
         
-        self.identifier = identifier
+        self.identifier = Identifier(identifier)
         self.team = team
         self.body = body
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
-        self.from = (fromID, fromFirstName, fromLastName)
+        self.from = (Identifier(fromID), fromFirstName, fromLastName)
     }
 }
 
@@ -679,11 +679,11 @@ public struct GeneralNotification: PushNotification {
             type == type(of: self).type
             else { return nil }
         
-        self.identifier = identifier
+        self.identifier = Identifier(identifier)
         self.from = topic
         self.body = body
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
-        self.summit = summitID
+        self.summit = Identifier(summitID)
         self.channel = channel
         
         switch channel {
@@ -704,7 +704,7 @@ public struct GeneralNotification: PushNotification {
     }
 }
 
-extension Notification {
+extension CoreSummit.Notification {
     
     init(notification: GeneralNotification) {
         

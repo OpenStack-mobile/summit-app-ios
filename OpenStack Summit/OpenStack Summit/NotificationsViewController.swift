@@ -81,7 +81,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let context = Store.shared.privateQueueManagedObjectContext
         
-        context.performBlock {
+        context.perform {
             
             let managedObjects = selectedItems.map { context.objectWithID($0.objectID) }
             
@@ -123,7 +123,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return Notification(managedObject: managedObject)
     }
     
-    private func configure(cell: NotificationTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: NotificationTableViewCell, at indexPath: IndexPath) {
         
         let notification = self[indexPath]
         
@@ -155,9 +155,9 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationCell)!
         
-        configure(cell: cell, at: indexPath)
+        configure(cell, at: indexPath)
         
         return cell
     }

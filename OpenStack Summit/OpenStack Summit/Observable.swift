@@ -36,7 +36,7 @@ public final class Observable<Value: Equatable> {
     
     // MARK: - Methods
     
-    public func observe(_ observer: (new: Value, old: Value) -> ()) -> Int {
+    public func observe(_ observer: @escaping (_ new: Value, _ old: Value) -> ()) -> Int {
         
         let identifier = nextID
         
@@ -74,7 +74,7 @@ private struct Observer<Value> {
     
     let callback: (Value, Value) -> ()
     
-    init(identifier: Int, callback: (Value, Value) -> ()) {
+    init(identifier: Int, callback: @escaping (Value, Value) -> ()) {
         
         self.identifier = identifier
         self.callback = callback

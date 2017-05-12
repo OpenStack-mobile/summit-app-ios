@@ -106,7 +106,7 @@ final class ScheduleView: UIView {
         // configure day name  (example: Thu, Чт)
         let dayName = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: cell.contentView.frame.size.width, height: cell.contentView.frame.size.height / 3 * 2))
         dayName.textAlignment = .center
-        dayName.text = cell.date.mt_stringFromDateWithFormat("EEE", localized: true).uppercased()
+        dayName.text = cell.date.mt_stringFromDate(withFormat: "EEE", localized: true).uppercased()
         cell.dayName = dayName
         cell.contentView.addSubview(dayName)
         

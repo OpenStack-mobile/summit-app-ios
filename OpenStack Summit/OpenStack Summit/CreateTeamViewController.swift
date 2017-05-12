@@ -44,7 +44,7 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
         
         Store.shared.create(team: name, description: description) { (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 

@@ -259,7 +259,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         let unreadCount = PushNotificationManager.shared.unreadCount
         
-        inboxCounterView.hidden = unreadCount == 0
+        inboxCounterView.isHidden = unreadCount == 0
         inboxCounterView.layer.cornerRadius = inboxCounterView.frame.size.width / 2
         inboxCounterLabel.text = "\(unreadCount)"
     }
@@ -351,7 +351,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let revealViewController = self.revealViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        revealViewController?.pushFrontViewController(navigationController, animated: true)
     }
     
     // MARK: Login / Logout
@@ -379,7 +379,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             guard let controller = self else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 controller.hideMenu()
                 
@@ -387,11 +387,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .None:
+                case .none:
                     
                     controller.showUserProfile()
                     controller.reloadMenu()
@@ -410,14 +410,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                         let revealViewController = controller.revealViewController()
                         
                         // show a popup asking user if they are going to the summit
-                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
+                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .alert)
                         
-                        alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
+                        alert.addAction(UIAlertAction(title: "No", style: .default) { (action) in
                             
                             Preference.goingToSummit = false
                         })
                         
-                        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
+                        alert.addAction(UIAlertAction(title: "Yes", style: .default) { (action) in
                             
                             Preference.goingToSummit = true
                             
@@ -426,12 +426,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                             revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
                         })
                         
-                        revealViewController.presentViewController(alert, animated: true) { }
+                        revealViewController?.present(alert, animated: true) { }
                     }
                     
                     // log user email
-                    if let userID = Store.shared.authenticatedMember?.identifier
-                        where AppEnvironment == .Staging {
+                    if let userID = Store.shared.authenticatedMember?.identifier, AppEnvironment == .Staging {
                         
                         Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
@@ -516,7 +515,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    func search(searchTerm: String) {
+    override func search(_ searchTerm: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
         searchViewController.searchTerm = searchTerm
@@ -526,7 +525,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - Notifications
     
-    @objc private func revokedAccess(_ notification: Notification) {
+    @objc private func revokedAccess(_ notification: Foundation.Notification) {
         
         // logout in case its not cleared
         Store.shared.session.clear()

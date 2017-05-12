@@ -111,7 +111,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }
     
     @inline(__always)
-    private func configure(cell: TeamCell, with team: Team) {
+    private func configure(_ cell: TeamCell, with team: Team) {
         
         cell.nameLabel.text = team.name
         
@@ -119,7 +119,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         
         let unreadCount = try! PushNotificationManager.shared.unreadMessages(in: team.identifier, context: Store.shared.managedObjectContext)
         
-        cell.unreadView.hidden = unreadCount == 0
+        cell.unreadView.isHidden = unreadCount == 0
         cell.unreadLabel.text = "\(unreadCount)"
     }
     
@@ -150,7 +150,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamCell)!
             
             configure(cell: cell, with: item)
             
@@ -160,7 +160,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
             cell.activityIndicator.isHidden = false
             

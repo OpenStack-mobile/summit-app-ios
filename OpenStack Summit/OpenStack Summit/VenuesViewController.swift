@@ -64,7 +64,7 @@ final class VenuesViewController: RevealTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDelegate
     
-    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         return [venuesMapViewController, venueListViewController]
     }

@@ -199,7 +199,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         
         Store.shared.confirmAttendee(for: orderNumber, externalAttendee: selectedAttendee.identifier, summit: summit) { [weak self] (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -207,7 +207,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     let code = (error as NSError).code
                     
@@ -226,11 +226,11 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                         controller.showErrorMessage(error)
                     }
                     
-                case .None:
+                case .none:
                     
                     Store.shared.currentMember(for: summit) { (response) in
                         
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                        OperationQueue.main.addOperation {
                             
                             switch response {
                                 
@@ -269,13 +269,13 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
         case .order:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.attendeeConfirmOrderTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmOrderTableViewCell)!
             
             return cell
             
         case .selection:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.attendeeConfirmSelectionTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmSelectionTableViewCell)!
             
             cell.pickerView.reloadAllComponents()
             
@@ -283,7 +283,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
         case .action:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.attendeeConfirmActionTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmActionTableViewCell)!
             
             let confirmEnabled: Bool
             
@@ -322,7 +322,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let newString = (textField.text ?? "" as NSString).replacingCharacters(in: range, with: string)
+        let newString = (textField.text ?? ("" as NSString) as String).replacingCharacters(in: range, with: string)
         
         guard let orderNumer = Int(newString)
             else { return newString.isEmpty }

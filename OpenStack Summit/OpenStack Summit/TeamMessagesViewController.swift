@@ -26,7 +26,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private(set) var sending = false
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     private lazy var placeholderMemberImage = R.image.genericUserAvatar()!
     
@@ -85,7 +85,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
                                                                    predicate: predicate,
                                                                    sortDescriptors: sortDescriptors,
                                                                    sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController!.performFetch()
         
@@ -94,7 +94,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private subscript (indexPath: IndexPath) -> TeamMessage {
         
-        let managedObject = self.fetchedResultsController!.objectAtIndexPath(indexPath) as! TeamMessageManagedObject
+        let managedObject = self.fetchedResultsController!.object(at: indexPath) as! TeamMessageManagedObject
         
         return TeamMessage(managedObject: managedObject)
     }
@@ -125,7 +125,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return (name, message.body, imageURL)
     }
     
-    private func configure(cell: MessageTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: MessageTableViewCell, at indexPath: IndexPath) {
         
         let managedObject = self.fetchedResultsController.object(at: indexPath)
         
@@ -143,12 +143,12 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             
             Shared.imageCache.fetch(URL: url, failure: nil, success: { [weak self] (image) in
                 
-                OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.main.addOperation { [weak self] in
                     
                     guard let controller = self else { return }
                     
                     // cell hasnt changed
-                    guard indexPath == controller.fetchedResultsController.indexPathForObject(managedObject)
+                    guard indexPath == controller.fetchedResultsController.indexPath(forObject: managedObject)
                         && controller[data: indexPath].image == url
                         else { return }
                     
@@ -212,7 +212,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         Store.shared.send(self.textView.text, to: team) { [weak self] (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -248,7 +248,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MessengerCellIdentifier, for: indexPath) as! MessageTableViewCell
         
-        configure(cell: cell, at: indexPath)
+        configure(cell, at: indexPath)
         
         let message = self[indexPath]
         
@@ -276,9 +276,9 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         var width = tableView.frame.width-kMessageTableViewCellAvatarHeight
         width -= 25.0
         
-        let titleBounds = (messageData.name as NSString).boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: attributes, context: nil)
+        let titleBounds = (messageData.name as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
-        let bodyBounds = messageData.body.boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: attributes, context: nil)
+        let bodyBounds = messageData.body.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
         if messageData.body.characters.count == 0 {
             return 0
@@ -324,7 +324,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             if let updateIndexPath = indexPath,
                 let cell = self.tableView!.cellForRow(at: updateIndexPath) as! MessageTableViewCell? {
                 
-                self.configure(cell: cell, at: updateIndexPath)
+                self.configure(cell, at: updateIndexPath)
             }
         case .move:
             

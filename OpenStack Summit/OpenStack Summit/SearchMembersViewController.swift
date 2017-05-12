@@ -95,7 +95,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
-    private func configure(cell: PeopleTableViewCell, with member: Member) {
+    private func configure(_ cell: PeopleTableViewCell, with member: Member) {
         
         cell.name = member.name
         cell.pictureURL = member.pictureURL
@@ -141,9 +141,9 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
-            configure(cell: cell, with: item)
+            configure(cell, with: item)
             
             return cell
             
@@ -151,7 +151,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
             cell.activityIndicator.isHidden = false
             

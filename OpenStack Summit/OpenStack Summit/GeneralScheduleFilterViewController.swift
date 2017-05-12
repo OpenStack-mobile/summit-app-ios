@@ -113,7 +113,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = trackGroupsSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            let identifiers = trackGroupsSection.map { NSNumber(value: Int64(identifier(for: $0))) }
             
             let predicate = NSPredicate(format: "id IN %@", identifiers)
             
@@ -134,7 +134,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let venuesSection = scheduleFilter.allFilters[.venue] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = venuesSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            let identifiers = venuesSection.map { NSNumber(value: Int64(identifier(for: $0))) }
             
             let predicate = NSPredicate(format: "id IN %@", identifiers)
             
@@ -153,7 +153,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         return section.items[indexPath.row]
     }
     
-    private func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
         
         let item = self[indexPath]
         
@@ -205,7 +205,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell, forIndexPath: indexPath)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.generalScheduleFilterTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

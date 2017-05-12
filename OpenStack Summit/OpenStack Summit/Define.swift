@@ -21,7 +21,7 @@ public let AppBuild = Int(Bundle.main.infoDictionary!["CFBundleVersion"] as! Str
 /// The app's environment.
 let AppEnvironment: Environment = {
     
-    let environmentString = NSBundle.mainBundle().infoDictionary!["SummitEnvironment"] as! String
+    let environmentString = Bundle.main.infoDictionary!["SummitEnvironment"] as! String
     
     guard let environment = Environment(rawValue: environmentString)
         else { fatalError("Invalid Environment: \(environmentString)") }

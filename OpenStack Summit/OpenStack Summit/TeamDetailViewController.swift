@@ -83,7 +83,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         Store.shared.fetch(team: team) { (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -140,7 +140,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         // members
         let members = team.members
-            .sort()
+            .sorted()
             .filter { $0.member.identifier != team.owner.identifier }
             .map { Cell.member($0) }
         
@@ -234,7 +234,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .description(description):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailTextFieldTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailTextFieldTableViewCell, for: indexPath)!
             
             cell.textField.placeholder = "Description"
             
@@ -246,7 +246,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .created(created):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailLabelTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailLabelTableViewCell, for: indexPath)!
             
             cell.textLabel!.text = "Created"
             
@@ -256,7 +256,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .updated(updated):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailLabelTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailLabelTableViewCell, for: indexPath)!
             
             cell.textLabel!.text = "Last Modified"
             
@@ -266,7 +266,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .member(teamMember):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = teamMember.member.name
             cell.pictureURL = teamMember.member.pictureURL
@@ -276,7 +276,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .owner(member):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = member.name
             cell.pictureURL = member.pictureURL
@@ -286,7 +286,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .invitation(invitation):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = invitation.invitee.name
             cell.pictureURL = invitation.invitee.pictureURL
@@ -296,7 +296,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case .delete:
             
-            return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailDeleteTableViewCell, forIndexPath: indexPath)!
+            return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailDeleteTableViewCell, for: indexPath)!
         }
     }
     
@@ -358,7 +358,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             Store.shared.delete(team: team) { (response) in
                 
-                OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.main.addOperation { [weak self] in
                     
                     guard let controller = self else { return }
                     
@@ -405,7 +405,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                 
                 Store.shared.remove(member: teamMember.identifier, from: team) { (response) in
                     
-                    OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    OperationQueue.main.addOperation { [weak self] in
                         
                         guard let controller = self else { return }
                         
@@ -438,7 +438,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             Store.shared.update(team: team, name: newName, description: description) { (response) in
                 
-                OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.main.addOperation { [weak self] in
                     
                     guard let controller = self else { return }
                     
@@ -473,7 +473,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                 
                 Store.shared.update(team: team, name: name, description: newDescription) { (response) in
                     
-                    OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    OperationQueue.main.addOperation { [weak self] in
                         
                         guard let controller = self else { return }
                         

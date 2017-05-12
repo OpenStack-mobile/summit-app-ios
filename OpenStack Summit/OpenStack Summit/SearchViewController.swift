@@ -265,7 +265,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return section
     }
     
-    private func configure(cell: ScheduleTableViewCell, with event: ScheduleItem) {
+    private func configure(_ cell: ScheduleTableViewCell, with event: ScheduleItem) {
         
         // set text
         cell.nameLabel.text = event.name
@@ -299,14 +299,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), for: .touchUpInside)
     }
     
-    private func configure(cell: PeopleTableViewCell, with speaker: Speaker) {
+    private func configure(_ cell: PeopleTableViewCell, with speaker: Speaker) {
         
         cell.name = speaker.name
         cell.title = speaker.title
         cell.pictureURL = speaker.pictureURL
     }
     
-    private func configure(cell: SearchResultTableViewCell, with track: Track) {
+    private func configure(_ cell: SearchResultTableViewCell, with track: Track) {
         
         cell.itemLabel.text = track.name
     }
@@ -351,7 +351,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .event(event):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: event)
             
@@ -359,7 +359,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .speaker(speaker):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: speaker)
             
@@ -367,7 +367,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .track(track):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.searchResultTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchResultTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: track)
             
@@ -434,7 +434,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             let memberProfileViewController = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
             
-            showViewController(memberProfileViewController, sender: self)
+            show(memberProfileViewController, sender: self)
             
         case let .track(track):
             
@@ -504,7 +504,7 @@ extension ScheduleItem: SearchViewControllerItem {
     
     private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
-        return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm)
+        return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
     }
 }
 
@@ -514,7 +514,7 @@ extension Speaker: SearchViewControllerItem {
     
     private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm, searchTerm)
     }
 }
 
@@ -524,7 +524,7 @@ extension Track: SearchViewControllerItem {
     
     private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(longLong: Int64(summit)), searchTerm)
+        return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(value: Int64(summit)), searchTerm)
     }
 }
 

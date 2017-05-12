@@ -30,10 +30,10 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         if let url = self.userActivity?.webpageURL {
             
-            items.append(url)
+            items.append(url as AnyObject)
         }
         
-        items.append(self.headerView.nameLabel.text ?? "")
+        items.append(self.headerView.nameLabel.text as AnyObject ?? "" as AnyObject)
         
         for data in self.data {
             
@@ -118,9 +118,9 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         case let .speaker(identifier):
             
             let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
-                            AppActivityUserInfo.identifier.rawValue: identifier]
+                            AppActivityUserInfo.identifier.rawValue: identifier] as [String : Any]
             
-            userActivity.addUserInfoEntriesFromDictionary(userInfo as [AnyHashable: Any])
+            userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
             
         default: break
         }
@@ -132,7 +132,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     @IBAction func nonConfirmedWarningTapped(_ sender: AnyObject? = nil) {
         
-        self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
+        self.performSegue(withIdentifier: R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
     // MARK: - Actions
@@ -194,7 +194,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
-        headerView.titleLabel.hidden = (person.title ?? "").isEmpty
+        headerView.titleLabel.isHidden = (person.title ?? "").isEmpty
         headerView.imageView.image = R.image.genericUserAvatar()!
         
         if let imageURL = URL(string: person.pictureURL) {
@@ -231,12 +231,12 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
         
         if let biography = person.biography,
-            let data = biography.dataUsingEncoding(String.Encoding.unicode, allowLossyConversion: false),
+            let data = biography.data(using: String.Encoding.unicode, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
+            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: range)
             
             self.data.append(.biography(attributedString))
         }
@@ -332,16 +332,16 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             if confirmed {
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
                 
             } else {
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
             }
             
         case let .links(links):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailLinksCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell)!
             
             cell.twitterView.isHidden = links.twitter.isEmpty
             cell.twitterView.label.text = links.twitter
@@ -356,7 +356,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
         case let .biography(text):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailDescriptionCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell)!
             
             cell.textView.attributedText = text
             cell.textView.textContainerInset = UIEdgeInsets.zero

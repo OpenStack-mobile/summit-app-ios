@@ -45,7 +45,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         tableView.reloadData()
     }
     
-    private func configure(cell: FeedbackTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: FeedbackTableViewCell, at indexPath: IndexPath) {
         
         let feedback = feedbackList[indexPath.row]
         cell.eventName = feedback.eventName
@@ -72,9 +72,9 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.feedbackTableViewCell)!
         
-        configure(cell: cell, at: indexPath)
+        configure(cell, at: indexPath)
         
         return cell
     }

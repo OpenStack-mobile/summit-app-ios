@@ -14,7 +14,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private(set) weak var tableView: UITableView!
     
     // MARK: - Properties
     
@@ -39,7 +39,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         
         let summit = SummitManager.shared.summit.value
         
-        let venues = try! VenueListItem.filter("summit.id" == summit, context: Store.shared.managedObjectContext)
+        let venues = try! VenueListItem.filter(#keyPath(VenueManagedObject.summit.id) == summit, context: Store.shared.managedObjectContext)
         
         internalVenueList = venues.filter({ $0.isInternal == true })
         externalVenueList = venues.filter({ $0.isInternal == false })
@@ -82,14 +82,14 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == VenueListSectionType.internal.rawValue {
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.internalVenuesTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.internalVenuesTableViewCell)!
             configure(cell: cell, at: indexPath)
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
             return cell
         }
         else if indexPath.section == VenueListSectionType.external.rawValue {
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.externalVenuesTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.externalVenuesTableViewCell)!
             configure(cell: cell, at: indexPath)
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
@@ -154,7 +154,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Directory")
     }
 }

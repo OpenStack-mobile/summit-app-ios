@@ -113,9 +113,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
-                        AppActivityUserInfo.identifier.rawValue: self.event]
+                        AppActivityUserInfo.identifier.rawValue: self.event] as [String : Any]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [AnyHashable: Any])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
@@ -193,7 +193,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // handle event deletion
         guard let eventManagedObject = try! EventManagedObject.find(event, context: context) else {
             
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
             self.navigationItem.rightBarButtonItems = []
             showErrorAlert("The event has been deleted.",
                            okHandler: { self.navigationController?.popToRootViewController(animated: true) })
@@ -234,15 +234,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .white
         titleHeader.trackLabel.isHidden = eventDetail.track.isEmpty
         
-        titleHeader.scheduleButton.setTitle(eventDetail.rsvp.isEmpty ? "Schedule" : "RSVP", forState: .Normal)
+        titleHeader.scheduleButton.setTitle(eventDetail.rsvp.isEmpty ? "Schedule" : "RSVP", for: UIControlState())
         
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
         
-        titleHeader.scheduleButton.highlighted = didConfirm
-        titleHeader.favoriteButton.highlighted = isFavorite
+        titleHeader.scheduleButton.isHighlighted = didConfirm
+        titleHeader.favoriteButton.isHighlighted = isFavorite
         
-        titleHeader.favoriteButton.hidden = !eventDetail.willRecord
+        titleHeader.favoriteButton.isHidden = !eventDetail.willRecord
 
         // action buttons
         
@@ -328,7 +328,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         Store.shared.averageFeedback(summit, event: event) { [weak self] (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -348,7 +348,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.speakers.rawValue, "\(indexPath.section) is not speaker section")
         
@@ -362,7 +362,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.separatorInset = UIEdgeInsets.zero
     }
     
-    private func configure(cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
         
@@ -441,7 +441,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .video:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailVideoTableViewCell, for: indexPath)!
                 
                 guard let video = self.eventDetail?.video
                     else { fatalError("Event has no video") }
@@ -456,8 +456,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 cell.videoImageView.hnk_setImageFromURL(thumbnailURL, success: { (image) in
                     
-                    cell.playButton.hidden = false
-                    cell.activityIndicator.hidden = true
+                    cell.playButton.isHidden = false
+                    cell.activityIndicator.isHidden = true
                     cell.activityIndicator.stopAnimating()
                     cell.videoImageView.image = image
                 })
@@ -466,7 +466,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .description:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailDescriptionTableViewCell, for: indexPath)!
                 
                 // date and time
                 
@@ -503,7 +503,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .location:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailTableViewCell, for: indexPath)!
                 
                 cell.sectionLabel.text = "VENUE"
                 cell.valueLabel.text = eventDetail.location
@@ -512,7 +512,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .level:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailTableViewCell, for: indexPath)!
                 
                 cell.sectionLabel.text = "LEVEL"
                 cell.valueLabel.text = eventDetail.level
@@ -521,17 +521,17 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .attachment:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, for: indexPath)!
                 
                 let title = eventDetail.eventType == "Presentation" ? "Download slides" : "Download attachment"
-                cell.downloadButton.setTitle(title, forState: .Normal)
+                cell.downloadButton.setTitle(title, for: .Normal)
                 
                 return cell
             }
             
         case .speakers:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.speakerTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.speakerTableViewCell, for: indexPath)!
             
             configure(cell: cell, at: indexPath)
             
@@ -539,7 +539,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
         case .feedback:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailFeedbackTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailFeedbackTableViewCell, for: indexPath)!
             
             configure(cell: cell, at: indexPath)
             
@@ -595,7 +595,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let memberViewController = MemberProfileViewController(profile: PersonIdentifier.speaker(speaker.identifier))
             
-            self.showViewController(memberViewController, sender: self)
+            self.show(memberViewController, sender: self)
             
         case .feedback:
             

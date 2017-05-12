@@ -41,9 +41,9 @@ public struct VenueListItem: Named, CoreDataDecodable {
         self.backgroundImageURL = venue.images.first?.url
         self.isInternal = venue.locationType == Venue.LocationType.Internal.rawValue
         
-        let floors = venue.floors.sort { $0.number < $1.number }
+        let floors = venue.floors.sorted { $0.number < $1.number }
         var maps = venue.maps.map { $0.url }
-        maps.appendContentsOf(floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
+        maps.append(contentsOf: floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
         self.maps = maps
         
         self.images = venue.images.map { $0.url }

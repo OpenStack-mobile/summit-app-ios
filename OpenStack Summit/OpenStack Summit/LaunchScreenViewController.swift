@@ -76,7 +76,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if Store.shared.isLoggedIn {
@@ -85,7 +85,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
         return .lightContent
     }
@@ -154,7 +154,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         // show current summit info
         if let summit = self.summit {
             
-            self.summitNameLabel.text = summit.name.uppercaseString
+            self.summitNameLabel.text = summit.name.uppercased()
             
             if let datesLabel = summit.datesLabel {
                 
@@ -165,29 +165,29 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
                 dateFormatter.dateFormat = "MMMM d-"
-                let stringDateFrom = dateFormatter.stringFromDate(summit.start)
+                let stringDateFrom = dateFormatter.string(from: summit.start)
                 
                 dateFormatter.dateFormat = "d, yyyy"
-                let stringDateTo = dateFormatter.stringFromDate(summit.end)
+                let stringDateTo = dateFormatter.string(from: summit.end)
                 
                 self.summitDateLabel.text = stringDateFrom + stringDateTo
             }
         }
     }
     
-    private func showRevealController(sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
+    private func showRevealController(_ sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
         let revealViewController = MainRevealViewController()
         
-        self.showViewController(revealViewController, sender: sender)
+        self.show(revealViewController, sender: sender)
         
         self.willTransition = false;
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?(revealViewController) }
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { completion?(revealViewController) }
     }
     
     private func loadSummits() {
@@ -198,7 +198,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summits { [weak self] (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -255,7 +255,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summit(summitID) { (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -284,22 +284,22 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
-        showRevealController(self) { $0.view(data, identifier: identifier) }
+        showRevealController(self) { $0.view(data: data, identifier: identifier) }
     }
     
     func view(screen: AppActivityScreen) {
         
-        showRevealController(self) { $0.view(screen) }
+        showRevealController(self) { $0.view(screen: screen) }
     }
     
-    func search(searchTerm: String) {
+    override func search(_ searchTerm: String) {
         
         showRevealController(self) { $0.search(searchTerm) }
     }
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             

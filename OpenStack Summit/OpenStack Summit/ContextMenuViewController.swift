@@ -298,7 +298,7 @@ final class CopyLinkActivity: UIActivity {
         
         return activityItems.first(where: { (item) in
             
-            if let url = item as? NSURL, UIApplication.sharedApplication().canOpenURL(url) {
+            if let url = item as? NSURL, UIApplication.shared.canOpenURL(url as URL) {
                 
                 return true
                 

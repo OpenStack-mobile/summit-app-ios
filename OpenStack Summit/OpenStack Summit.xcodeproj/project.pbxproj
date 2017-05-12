@@ -5298,6 +5298,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Debug;
@@ -5320,6 +5321,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Release;
@@ -5917,6 +5919,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Beta;
@@ -6041,6 +6044,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Mocked;

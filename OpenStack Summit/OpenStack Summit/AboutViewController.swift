@@ -82,13 +82,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             let url = URL(string: "https://openstack.org")!
             
-            open(url: url)
+            open(url)
             
         case .codeOfConduct:
             
             let url = URL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
             
-            open(url: url)
+            open(url)
             
         case .appSupport:
             
@@ -163,7 +163,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
+    private func configure(_ cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -171,7 +171,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell: AboutNameCell) {
+    private func configure(_ cell: AboutNameCell) {
         
         guard let summit = self.summitCache
             else { fatalError("No summit cache") }
@@ -187,10 +187,10 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(name: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start)
+            let stringDateFrom = dateFormatter.string(from: summit.start)
             
             dateFormatter.dateFormat = "dd, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end)
+            let stringDateTo = dateFormatter.string(from: summit.end)
             
             cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
         }
@@ -200,7 +200,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func open(url: URL) {
+    private func open(_ url: URL) {
         
         if UIApplication.shared.canOpenURL(url) {
             
@@ -241,19 +241,19 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         case .name:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutNameCell, for: indexPath)!
             
-            configure(cell: cell)
+            configure(cell)
             
             return cell
             
         case let .wirelessNetworks(networks):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.wirelessNetworkCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.wirelessNetworkCell, for: indexPath)!
             
             let network = networks[indexPath.row]
             
-            configure(cell: cell, with: network)
+            configure(cell, with: network)
             
             return cell
             
@@ -265,11 +265,11 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             case .links:
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutLinksCell, forIndexPath: indexPath)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutLinksCell, for: indexPath)!
                 
             case .description:
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutDescriptionCell, forIndexPath: indexPath)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutDescriptionCell, for: indexPath)!
             }
         }
     }

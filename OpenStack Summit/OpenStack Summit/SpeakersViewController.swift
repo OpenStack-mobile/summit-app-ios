@@ -31,7 +31,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
                                                                    delegate: self,
                                                                    sortDescriptors: Speaker.ManagedObject.sortDescriptors,
                                                                    sectionNameKeyPath: Speaker.ManagedObject.Property.addressBookSectionName.rawValue,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 30
         try! self.fetchedResultsController.performFetch()
@@ -59,12 +59,12 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     private subscript (indexPath: IndexPath) -> Speaker {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speaker.ManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! Speaker.ManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
-    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(_ cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         let person = self[indexPath]
         
@@ -77,9 +77,9 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell)!
         
-        configure(cell: cell, at: indexPath)
+        configure(cell, at: indexPath)
         
         return cell
     }
@@ -92,7 +92,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         
         let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: person))
         
-        showViewController(memberProfileVC, sender: self)
+        show(memberProfileVC, sender: self)
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -102,14 +102,14 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     // MARK: - NSFetchedResultsControllerDataSource
     
-    func controller(_ controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
         
         return sectionName
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Speakers")
     }

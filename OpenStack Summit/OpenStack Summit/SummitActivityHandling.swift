@@ -11,9 +11,9 @@ import CoreSummit
 
 protocol SummitActivityHandling {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier)
+    func view(_ data: AppActivitySummitDataType, identifier: Identifier)
     
-    func view(screen: AppActivityScreen)
+    func view(_ screen: AppActivityScreen)
     
     func search(_ searchTerm: String)
 }
@@ -24,7 +24,7 @@ extension SummitActivityHandling {
     func openWebURL(_ url: Foundation.URL) -> Bool {
         
         // perform search
-        if url.pathComponents?.last == "global-search",
+        if url.pathComponents.last == "global-search",
             let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
             let searchQuery = urlComponents.queryItems?.first(where: { $0.name == "t" && ($0.value ?? "").isEmpty == false }),
             let searchTerm = searchQuery.value {
@@ -78,7 +78,7 @@ extension SummitActivityHandling {
         return true
     }
     
-    func canView(data: AppActivitySummitDataType, identifier: Identifier) -> Bool {
+    func canView(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool {
         
         // find in cache
         guard let _ = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
@@ -96,7 +96,7 @@ protocol SummitActivityHandlingViewController: class, SummitActivityHandling { }
 
 extension SummitActivityHandlingViewController {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+    func view(_ data: AppActivitySummitDataType, identifier: Identifier) {
         
         guard let viewController = self as? UIViewController
             else { fatalError() }
@@ -104,12 +104,12 @@ extension SummitActivityHandlingViewController {
         viewController.show(data, identifier: identifier)
     }
     
-    func view(screen: AppActivityScreen) {
+    func view(_ screen: AppActivityScreen) {
         
         AppDelegate.shared.view(screen)
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         AppDelegate.shared.search(searchTerm)
     }
@@ -117,7 +117,7 @@ extension SummitActivityHandlingViewController {
     
 extension UIViewController {
     
-    func show(data: AppActivitySummitDataType, identifier: Identifier) {
+    func show(_ data: AppActivitySummitDataType, identifier: Identifier) {
         
         let context = Store.shared.managedObjectContext
         
@@ -132,7 +132,7 @@ extension UIViewController {
         case .speaker:
             
             let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
-            self.showViewController(memberProfileVC, sender: nil)
+            self.show(memberProfileVC, sender: nil)
             
         case .video:
             

@@ -77,7 +77,7 @@ public struct EventDetail: CoreDataDecodable {
             self.venue = nil
         }
         
-        self.finished = event.end.compare(NSDate()) == .OrderedAscending
+        self.finished = event.end.compare(NSDate() as Date) == .orderedAscending
         self.eventDescription = event.descriptionText ?? ""
         self.socialDescription = event.socialDescription ?? ""
         self.allowFeedback = event.allowFeedback
@@ -110,7 +110,7 @@ public struct EventDetail: CoreDataDecodable {
         
         speakers += presentationSpeakers
         
-        self.speakers = speakers.sort()
+        self.speakers = speakers.sorted()
         
         if let videoManagedObject = event.videos.first {
             

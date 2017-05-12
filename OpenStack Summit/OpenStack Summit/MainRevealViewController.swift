@@ -32,7 +32,7 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
         super.init(coder: aDecoder)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -50,7 +50,7 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
         }
         
         // show detail view controller
-        frontViewController.show(data, identifier: identifier)
+        frontViewController.show(data: data, identifier: identifier)
     }
     
     func view(screen: AppActivityScreen) {
@@ -58,7 +58,7 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
         menuViewController.view(screen)
     }
     
-    func search(searchTerm: String) {
+    override func search(_ searchTerm: String) {
         
         menuViewController.search(searchTerm)
     }

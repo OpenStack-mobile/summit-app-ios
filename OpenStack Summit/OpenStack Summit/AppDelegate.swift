@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         Preference.appBuild = AppBuild
         
         // setup Fabric
-        Crashlytics.startWithAPIKey(AppConsumerKey(AppEnvironment).fabric)
+        Crashlytics.start(withAPIKey: AppConsumerKey(AppEnvironment).fabric)
         
         // setup Google Maps
         GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
@@ -130,14 +130,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
     }
     
     // HACK: implemented old delegate to make notifications work as is on iOS 10
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         // app was just brought from background to foreground
-        if application.applicationState == .Active {
+        if application.applicationState == .active {
             
             // called when push notification received in foreground
             print("Recieved remote notification: \(userInfo)")
@@ -216,11 +216,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
             guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
                 let searchURL = Foundation.URL(string: searchIdentifierString),
-                searchURL.pathComponents?.count == 2
+                searchURL.pathComponents.count == 2
                 else { return false }
             
-            let searchTypeString = searchURL.pathComponents![0]
-            let identifierString = searchURL.pathComponents![1]
+            let searchTypeString = searchURL.pathComponents[0]
+            let identifierString = searchURL.pathComponents[1]
             
             guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
                 let identifier = Int(identifierString)

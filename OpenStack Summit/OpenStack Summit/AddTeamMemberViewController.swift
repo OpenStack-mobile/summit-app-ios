@@ -73,7 +73,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         
         Store.shared.add(member: member.identifier, to: team, permission: permission) { (response) in
             
-            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -87,7 +87,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
                     
                 case .Value:
                     
-                    controller.dismissViewControllerAnimated(true, completion: nil)
+                    controller.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -116,9 +116,9 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             self.selectedMemberCell.pictureURL = ""
         }
         
-        self.selectedMemberCell.selectMemberLabel.hidden = self.member != nil
-        self.selectedMemberCell.nameLabel.hidden = self.member == nil
-        self.selectedMemberCell.titleLabel.hidden = self.member == nil
+        self.selectedMemberCell.selectMemberLabel.isHidden = self.member != nil
+        self.selectedMemberCell.nameLabel.isHidden = self.member == nil
+        self.selectedMemberCell.titleLabel.isHidden = self.member == nil
         
         // configure permission cells
         
@@ -128,11 +128,11 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             
             let cell = self.cell(for: selectedPermission)
             
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
         
         // enable `Done` button
-        self.doneBarButtonItem.enabled = self.member != nil && self.permission != nil
+        self.doneBarButtonItem.isEnabled = self.member != nil && self.permission != nil
     }
     
     private func cell(for permission: TeamPermission) -> UITableViewCell {

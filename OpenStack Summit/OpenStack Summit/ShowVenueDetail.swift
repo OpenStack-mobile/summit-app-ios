@@ -17,23 +17,23 @@ extension UIViewController {
         
         let venue: Identifier
         
-        if let realmVenue = try! VenueManagedObject.find(location, context: Store.shared.managedObjectContext) {
+        if let venueManagedObject = try! VenueManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
-            venue = realmVenue.identifier
+            venue = venueManagedObject.id
             
-        } else if let realmVenueRoom = try! VenueRoomManagedObject.find(location, context: Store.shared.managedObjectContext) {
+        } else if let venueRoomManagedObject = try! VenueRoomManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
-            venue = realmVenueRoom.venue.identifier
+            venue = venueRoomManagedObject.venue.id
             
         } else {
             
             fatalError("Invalid location \(location)")
         }
         
-        let venueDetailVC = R.storyboard.venue.venueDetailViewController()!
+        let venueDetailViewController = R.storyboard.venue.venueDetailViewController()!
         
-        venueDetailVC.venue = venue
+        venueDetailViewController.venue = venue
         
-        self.show(venueDetailVC, sender: self)
+        self.show(venueDetailViewController, sender: self)
     }
 }

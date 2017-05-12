@@ -14,7 +14,7 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
     
     // MARK: - Properties
     
-    final var fetchedResultsController: NSFetchedResultsController!
+    final var fetchedResultsController: NSFetchedResultsController<NSManagedObject>!
     
     // MARK: - UITableViewDataSource
     

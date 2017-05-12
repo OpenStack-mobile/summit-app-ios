@@ -106,14 +106,14 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
-        var shareItems = [url, message]
+        var shareItems = [url, message] as [Any]
         
         if event.socialDescription.isEmpty == false {
             
             shareItems.append(event.socialDescription)
         }
         
-        return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
+        return ContextMenu(actions: actions, shareItems: shareItems as [AnyObject], systemActions: false)
     }
     
     func feedbackController(for event: EventDetail, rating: Int? = nil, completion: ((FeedbackViewController) -> ())? = nil) -> UINavigationController {
@@ -152,7 +152,7 @@ extension EventViewController {
         switch (newValue, rsvpURL, externalRSVP) {
             
         // non-RSVP
-        case let (newValue, .None, externalRSVP):
+        case let (newValue, .none, externalRSVP):
             
             assert(externalRSVP == false, "External RSVP should always have RSVP urls")
             
@@ -164,7 +164,7 @@ extension EventViewController {
             setScheduledOnServer(request, for: event, cacheValue: newValue) { }
             
         // external RSVP
-        case let (newValue, .Some(url), true):
+        case let (newValue, .some(url), true):
             
             // rsvp_external (boolean) if true, then before redirect to WEBView, mobile app should add the event to my schedule calling API ( this is only for attendees)
             
@@ -177,13 +177,13 @@ extension EventViewController {
             setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.sharedApplication().openURL(url) }
             
         // internal RSVPing
-        case let (true, .Some(url), false):
+        case let (true, .some(url), false):
             
             // just open RSVP link
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
           
         // internal unRSVPing
-        case (false, .Some, false):
+        case (false, .some, false):
             
             // When event has internal RSVP, clicking unRSVP button needs to ping the unRSVP endpoint 
             // (replacing the unSCHEDULE call since its done automatically by the server).
@@ -211,7 +211,7 @@ extension EventViewController {
         }
     }
     
-    private typealias EventRequest = (_ summit: Identifier?, _ event: Identifier, _ completion: (Error?) -> ()) -> ()
+    private typealias EventRequest = (_ summit: Identifier?, _ event: Identifier, _ completion: @escaping (Error?) -> ()) -> ()
     
     private func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: @escaping () -> ()) {
         
@@ -253,7 +253,7 @@ extension EventViewController {
         eventRequestInProgress = true
         
         // make API request
-        request(summit: event.summit, event: event.identifier, completion: completion)
+        request(event.summit, event.identifier, completion)
     }
     
     func toggleFavorite(for event: EventDetail) {
@@ -284,7 +284,7 @@ extension EventViewController {
         
         Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
-            OperationQueue.mainQueue.addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -292,7 +292,7 @@ extension EventViewController {
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     // show error
                     controller.showErrorMessage(error)
@@ -300,7 +300,7 @@ extension EventViewController {
                     // restore old value
                     setFavorite(isFavorite)
                     
-                case .None: break
+                case .none: break
                 }
             }
         }

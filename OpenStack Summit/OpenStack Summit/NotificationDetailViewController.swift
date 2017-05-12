@@ -14,7 +14,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var notification: Notification!
+    var notification: CoreSummit.Notification!
     
     private var data = [[Data]]()
     
@@ -42,7 +42,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func deleteAction(sender: UIBarButtonItem) {
+    @IBAction func deleteAction(_ sender: UIBarButtonItem) {
         
         let context = Store.shared.privateQueueManagedObjectContext
         
@@ -50,15 +50,15 @@ final class NotificationDetailViewController: UITableViewController {
         
         func closeViewController() {
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
-                controller.navigationController?.popViewControllerAnimated(true)
+                controller.navigationController?.popViewController(animated: true)
             }
         }
                 
-        context.performBlock {
+        context.perform {
             
             guard let notificationManagedObject = try! NotificationManagedObject.find(identifier, context: context)
                 else { closeViewController(); return }
@@ -119,7 +119,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .event(event):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailEventCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailEventCell, for: indexPath)!
             
             cell.textLabel!.text = event.name
             
@@ -127,7 +127,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .date(date):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailDateCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailDateCell, for: indexPath)!
             
             cell.textLabel!.text = date
             
@@ -135,7 +135,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .text(text):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailTextCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailTextCell, for: indexPath)!
             
             cell.textLabel!.text = text
             
