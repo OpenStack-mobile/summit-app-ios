@@ -34,7 +34,7 @@ public struct VenueListItem: Named, CoreDataDecodable {
         
         assert(venue.name != "", "Empty venue: \(venue)")
         
-        self.identifier = venue.identifier
+        self.identifier = venue.id
         self.name = venue.name
         self.descriptionText = venue.descriptionText ?? ""
         self.address = VenueListItem.getAddress(venue)

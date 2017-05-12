@@ -13,7 +13,7 @@ import CoreSummit
 
 extension UIViewController {
     
-    func playVideo(_ video: Video) {
+    func play(video: Video) {
         
         let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.youtube)
         self.presentMoviePlayerViewControllerAnimated(videoPlayer)

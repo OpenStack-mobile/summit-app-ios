@@ -55,10 +55,10 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
     
     func view(screen: AppActivityScreen) {
         
-        menuViewController.view(screen)
+        menuViewController.view(screen: screen)
     }
     
-    override func search(_ searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         menuViewController.search(searchTerm)
     }

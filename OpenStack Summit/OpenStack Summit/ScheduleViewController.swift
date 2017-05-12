@@ -98,7 +98,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         scheduleView.dayPicker.delegate = self
         scheduleView.nowButton.addTarget(self, action: #selector(nowTapped), for: .touchUpInside)
         
-        scheduleView.tableView.registerNib(R.nib.scheduleTableViewCell)
+        scheduleView.tableView.register(R.nib.scheduleTableViewCell)
         scheduleView.tableView.delegate = self
         scheduleView.tableView.dataSource = self
         scheduleView.tableView.estimatedRowHeight = 188
@@ -120,7 +120,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let now = Date()
         
-        guard let today = self.availableDates.first(where: { ($0 as NSDate).mt_isWithinSameDay(now) })
+        guard let today = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: now) })
             else { return }
         
         (self.scheduleView.dayPicker.value(forKey: "daysCollectionView") as! UICollectionView).reloadData()

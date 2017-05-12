@@ -49,7 +49,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.summitsButton.enabled = AppEnvironment == .Staging
+        self.summitsButton.enabled = AppEnvironment == .staging
         
         configureView()
     }
@@ -292,7 +292,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         showRevealController(self) { $0.view(screen: screen) }
     }
     
-    override func search(_ searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         showRevealController(self) { $0.search(searchTerm) }
     }

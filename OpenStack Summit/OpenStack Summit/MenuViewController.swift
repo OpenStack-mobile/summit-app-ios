@@ -515,7 +515,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    override func search(_ searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
         searchViewController.searchTerm = searchTerm
