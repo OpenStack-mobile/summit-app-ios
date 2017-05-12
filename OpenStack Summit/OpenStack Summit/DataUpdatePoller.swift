@@ -21,7 +21,8 @@ extension DataUpdatePoller {
                 
                 poller.summit = SummitManager.shared.summit.value
                 
-                SummitManager.shared.summit.observe { poller.summit = $0.0 }
+                // we never deinit, so no need to remove observer
+                let _ = SummitManager.shared.summit.observe { poller.summit = $0.0 }
                 
                 return poller
             }()

@@ -148,7 +148,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     @IBAction func showEventContextMenu(_ sender: UIButton) {
         
         let tableView = scheduleView.tableView
-        let buttonOrigin = sender.convert(.zero, to: tableView)
+        let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
         let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         //let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
         let scheduleItem = dayEvents[indexPath.row]

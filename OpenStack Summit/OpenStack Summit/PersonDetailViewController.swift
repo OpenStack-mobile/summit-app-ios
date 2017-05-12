@@ -33,7 +33,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             items.append(url as AnyObject)
         }
         
-        items.append(self.headerView.nameLabel.text as AnyObject ?? "" as AnyObject)
+        items.append(self.headerView.nameLabel.text as NSString)
         
         for data in self.data {
             

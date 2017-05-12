@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
+import Predicate
 
 final class VenueListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MessageEnabledViewController, IndicatorInfoProvider {
     
@@ -119,7 +120,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         case .external: venue = externalVenueList[indexPath.row]
         }
         
-        showLocationDetail(venue.identifier)
+        show(location: venue.identifier)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

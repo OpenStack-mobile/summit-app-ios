@@ -42,10 +42,10 @@ public struct FeedbackDetail {
         let now = Date()
         let earliest = (now as NSDate).earlierDate(date)
         let latest = (earliest == now) ? date : now
-        let components:DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.minute , NSCalendar.Unit.hour , NSCalendar.Unit.day , NSCalendar.Unit.weekOfYear , NSCalendar.Unit.month , NSCalendar.Unit.year , NSCalendar.Unit.second], from: earliest, to: latest, options: NSCalendar.Options())
+        let components: DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.minute , NSCalendar.Unit.hour , NSCalendar.Unit.day , NSCalendar.Unit.weekOfYear , NSCalendar.Unit.month , NSCalendar.Unit.year , NSCalendar.Unit.second], from: earliest, to: latest, options: NSCalendar.Options())
         
         if (components.year! >= 2) {
-            return "\(components.year) years ago"
+            return "\(String(describing: components.year)) years ago"
         } else if (components.year! >= 1){
             if (numericDates){
                 return "1 year ago"
@@ -53,7 +53,7 @@ public struct FeedbackDetail {
                 return "Last year"
             }
         } else if (components.month! >= 2) {
-            return "\(components.month) months ago"
+            return "\(String(describing: components.month)) months ago"
         } else if (components.month! >= 1){
             if (numericDates){
                 return "1 month ago"
@@ -61,7 +61,7 @@ public struct FeedbackDetail {
                 return "Last month"
             }
         } else if (components.weekOfYear! >= 2) {
-            return "\(components.weekOfYear) weeks ago"
+            return "\(String(describing: components.weekOfYear)) weeks ago"
         } else if (components.weekOfYear! >= 1){
             if (numericDates){
                 return "1 week ago"
@@ -69,7 +69,7 @@ public struct FeedbackDetail {
                 return "Last week"
             }
         } else if (components.day! >= 2) {
-            return "\(components.day) days ago"
+            return "\(String(describing: components.day)) days ago"
         } else if (components.day! >= 1){
             if (numericDates){
                 return "1 day ago"
@@ -77,7 +77,7 @@ public struct FeedbackDetail {
                 return "Yesterday"
             }
         } else if (components.hour! >= 2) {
-            return "\(components.hour) hours ago"
+            return "\(String(describing: components.hour)) hours ago"
         } else if (components.hour! >= 1){
             if (numericDates){
                 return "1 hour ago"
@@ -85,7 +85,7 @@ public struct FeedbackDetail {
                 return "An hour ago"
             }
         } else if (components.minute! >= 2) {
-            return "\(components.minute) minutes ago"
+            return "\(String(describing: components.minute)) minutes ago"
         } else if (components.minute! >= 1){
             if (numericDates){
                 return "1 minute ago"

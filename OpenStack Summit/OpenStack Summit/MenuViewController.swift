@@ -60,7 +60,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             let picURLInternal: String
             
-            if AppEnvironment == .Staging {
+            if AppEnvironment == .staging {
                 
                 picURLInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
                 
@@ -116,12 +116,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         // session notifications
+        /*
         NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        */
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
@@ -423,14 +425,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                             
                             let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
                             
-                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                            revealViewController!.present(viewController, animated: true) { controller.showMyProfile() }
                         })
                         
                         revealViewController?.present(alert, animated: true) { }
                     }
                     
                     // log user email
-                    if let userID = Store.shared.authenticatedMember?.identifier, AppEnvironment == .Staging {
+                    if let userID = Store.shared.authenticatedMember?.id, AppEnvironment == .staging {
                         
                         Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
@@ -444,7 +446,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         Store.shared.logout()
         
         // log user email
-        if AppEnvironment == .Staging {
+        if AppEnvironment == .staging {
             
             Crashlytics.sharedInstance().setUserIdentifier(nil)
         }
@@ -479,7 +481,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             unselectMenuItems()
             
-            guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).count > 0 else {
+            guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).count > 0 else {
                 
                 showInfoMessage("Info", message: "No summit data available")
                 return true

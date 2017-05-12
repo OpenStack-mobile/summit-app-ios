@@ -141,7 +141,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         if let url = messageData.image {
             
-            Shared.imageCache.fetch(URL: url, failure: nil, success: { [weak self] (image) in
+            let _ = Shared.imageCache.fetch(URL: url, failure: nil, success: { [weak self] (image) in
                 
                 OperationQueue.main.addOperation { [weak self] in
                     

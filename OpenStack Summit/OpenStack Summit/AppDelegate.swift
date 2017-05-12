@@ -287,7 +287,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Notifications
     
-    func tokenRefreshNotification(_ notification: Notification) {
+    func tokenRefreshNotification(_ notification: Foundation.Notification) {
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             
@@ -308,7 +308,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return topViewController.view(data, identifier: identifier)
     }
     
-    func view(_ screen: AppActivityScreen) {
+    func view(screen: AppActivityScreen) {
         
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }

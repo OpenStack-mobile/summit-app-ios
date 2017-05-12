@@ -19,7 +19,7 @@ open class LocationManagedObject: Entity {
     
     @NSManaged open var events: Set<EventManagedObject>
     
-    @NSManaged open var summits: SummitManagedObject
+    @NSManaged open var summit: SummitManagedObject
 }
 
 extension Location: CoreDataDecodable {

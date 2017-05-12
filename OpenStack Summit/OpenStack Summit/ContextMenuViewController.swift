@@ -124,8 +124,8 @@ extension ContextMenu {
         
         enum Handler {
             
-            case modal(((Bool) -> ()) -> UIViewController)
-            case background(((Bool) -> ()) -> ())
+            case modal((@escaping (Bool) -> ()) -> UIViewController)
+            case background((@escaping (Bool) -> ()) -> ())
         }
     }
 }
@@ -148,9 +148,9 @@ extension ContextMenu {
         return .action
     }
     
-    override var activityType : String? {
+    override var activityType : UIActivityType {
         
-        return action.activityType
+        return UIActivityType(rawValue: action.activityType)
     }
     
     override var activityTitle : String? {
@@ -204,9 +204,9 @@ final class OpenInSafariActivity: UIActivity {
         return .action
     }
     
-    override var activityType : String? {
+    override var activityType : UIActivityType {
         
-        return "\(type(of: self))"
+        return UIActivityType(rawValue: "\(type(of: self))")
     }
     
     override var activityTitle : String? {
@@ -221,12 +221,12 @@ final class OpenInSafariActivity: UIActivity {
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         
-        return url(from: activityItems) != nil
+        return self.url(from: activityItems) != nil
     }
     
     override func prepare(withActivityItems activityItems: [Any]) {
         
-        self.url = url(from: activityItems)!
+        self.url = self.url(from: activityItems)!
     }
     
     override func perform() {
@@ -236,7 +236,7 @@ final class OpenInSafariActivity: UIActivity {
         self.activityDidFinish(completed)
     }
     
-    private func url(from activityItems: [AnyObject]) -> URL? {
+    private func url(from activityItems: [Any]) -> URL? {
         
         return activityItems.first(where: { (item) in
             
@@ -262,9 +262,9 @@ final class CopyLinkActivity: UIActivity {
         return .action
     }
     
-    override var activityType : String? {
+    override var activityType : UIActivityType {
         
-        return "\(type(of: self))"
+        return UIActivityType(rawValue: "\(type(of: self))")
     }
     
     override var activityTitle : String? {
@@ -279,22 +279,22 @@ final class CopyLinkActivity: UIActivity {
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         
-        return url(from: activityItems) != nil
+        return self.url(from: activityItems) != nil
     }
     
     override func prepare(withActivityItems activityItems: [Any]) {
         
-        self.url = url(from: activityItems)!
+        self.url = self.url(from: activityItems)!
     }
     
     override func perform() {
         
-        UIPasteboard.general.string = self.url.absoluteString ?? ""
+        UIPasteboard.general.string = self.url.absoluteString 
         
         self.activityDidFinish(true)
     }
     
-    private func url(from activityItems: [AnyObject]) -> URL? {
+    private func url(from activityItems: [Any]) -> URL? {
         
         return activityItems.first(where: { (item) in
             

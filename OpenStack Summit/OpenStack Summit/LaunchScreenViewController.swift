@@ -49,7 +49,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.summitsButton.enabled = AppEnvironment == .staging
+        self.summitsButton.isEnabled = AppEnvironment == .staging
         
         configureView()
     }
