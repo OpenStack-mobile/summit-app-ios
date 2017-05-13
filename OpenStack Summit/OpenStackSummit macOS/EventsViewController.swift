@@ -24,7 +24,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<EventManagedObject>!
     
     private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
     
@@ -45,9 +45,9 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         
         defer { tableView.deselectAll(sender) }
         
-        let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
+        let event = fetchedResultsController.fetchedObjects![tableView.selectedRow]
         
-        AppDelegate.shared.mainWindowController.view(.event, identifier: event.identifier)
+        AppDelegate.shared.mainWindowController.view(data: .event, identifier: event.id)
     }
     
     // MARK: - Private Methods
@@ -64,7 +64,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: EventManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 50
         
@@ -81,7 +81,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     private func configure(cell: EventTableViewCell, at row: Int) {
         
-        let eventManagedObject = self.fetchedResultsController.fetchedObjects![row] as! EventManagedObject
+        let eventManagedObject = self.fetchedResultsController.fetchedObjects![row]
         
         let eventDetail = ScheduleItem(managedObject: eventManagedObject)
         

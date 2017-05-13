@@ -204,9 +204,9 @@ final class VenueAnnotation: NSObject, MKAnnotation {
     
     let coordinate: CLLocationCoordinate2D
     
-    private(set) var title: String?
+    fileprivate(set) var title: String?
     
-    private(set) var subtitle: String?
+    fileprivate(set) var subtitle: String?
     
     init?(venue: Venue) {
         

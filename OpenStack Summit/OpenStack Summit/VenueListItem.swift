@@ -9,6 +9,7 @@
 import Foundation
 import CoreSummit
 import struct CoreLocation.CLLocationCoordinate2D
+import func CoreLocation.CLLocationCoordinate2DMake
 
 public struct VenueListItem: Named {
         

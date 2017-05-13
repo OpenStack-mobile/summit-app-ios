@@ -27,7 +27,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<VideoManagedObject>!
     
     private var summitObserver: Int?
     
@@ -76,7 +76,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sort,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
@@ -85,11 +85,11 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     private func configure(item: CollectionViewItem, at indexPath: IndexPath) {
         
-        let video = fetchedResultsController.object(at: indexPath) as! VideoManagedObject
+        let video = fetchedResultsController.object(at: indexPath)
                 
         item.textField!.stringValue = video.event.name
         
-        item.imageURL = URL(youtubeThumbnail: video.youtube) as! NSURL
+        item.imageURL = URL(youtubeThumbnail: video.youtube)
     }
     
     // MARK: - NSCollectionViewDataSource
@@ -121,9 +121,9 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         
         indexPaths.forEach {
                         
-            let video = fetchedResultsController.object(at: $0) as! VideoManagedObject
+            let video = fetchedResultsController.object(at: $0)
             
-            AppDelegate.shared.mainWindowController.view(.video, identifier: video.identifier)
+            AppDelegate.shared.mainWindowController.view(data: .video, identifier: video.id)
         }
     }
     

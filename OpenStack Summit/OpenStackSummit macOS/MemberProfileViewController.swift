@@ -83,11 +83,11 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     @IBAction func share(_ sender: NSButton) {
         
-        var items = [AnyObject]()
+        var items = [Any]()
         
-        items.append(self.nameLabel.stringValue as AnyObject ?? "" as AnyObject)
+        items.append(self.nameLabel.stringValue)
         
-        items.append(self.titleLabel.stringValue as AnyObject ?? "" as AnyObject)
+        items.append(self.titleLabel.stringValue)
         
         if descriptionLabel.attributedStringValue.string.isEmpty == false {
             
@@ -98,7 +98,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         if let url = self.userActivity?.webpageURL {
             
-            items.append(url as AnyObject)
+            items.append(url)
         }
         
         let sharingServicePicker = NSSharingServicePicker(items: items)
@@ -154,7 +154,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
                  userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 userActivity.title = self.title
-                userActivity.webpageURL = URL(string: speaker.toWebpage(summit))
+                userActivity.webpageURL = speaker.toWebpage(summit)
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
                 
                 userActivity.becomeCurrent()
@@ -180,12 +180,8 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         self.nameLabel.stringValue = person.name
         self.titleLabel.stringValue = person.title ?? ""
         
-        self.imageView.image = NSImage(named: "generic-user-avatar")
-        
-        if let imageURL = URL(string: person.pictureURL) {
-            
-            self.imageView.loadCached(imageURL)
-        }
+        self.imageView.image = #imageLiteral(resourceName: "generic-user-avatar")
+        self.imageView.loadCached(person.picture)
         
         // set description
         if let htmlString = person.biography,

@@ -74,7 +74,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
             items.append(descriptionLabel.attributedStringValue)
         }
         
-        if let _ = venueCache.backgroundImageURL,
+        if let _ = venueCache.backgroundImage,
             let venueImage = self.venueImageView.image {
             
             items.append(venueImage)
@@ -148,8 +148,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         venueImageView.image = nil
         
-        if let urlString = venue.backgroundImageURL,
-            let imageURL = URL(string: urlString) {
+        if let imageURL = venue.backgroundImage {
             
             venueImageViewContainer.isHidden = false
             
@@ -161,11 +160,11 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
                 if self?.venueImageView.image != nil {
                     
                     self?.venueImageActivityIndicator.stopAnimation(nil)
-                    self?.venueImageActivityIndicator.hidden = true
+                    self?.venueImageActivityIndicator.isHidden = true
                     
                 } else {
                     
-                    self?.venueImageViewContainer.hidden = true
+                    self?.venueImageViewContainer.isHidden = true
                 }
             }
             
@@ -178,12 +177,12 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     
     private func configure(item: VenueImageCollectionViewItem, at indexPath: IndexPath, collectionView: NSCollectionView) {
         
-        let urlString: String
+        let url: URL
         
         switch collectionView {
-        case imagesCollectionView: urlString = venueCache.images[indexPath.item]
-        case mapImagesCollectionView: urlString = venueCache.maps[indexPath.item]
-        default: fatalError()
+        case imagesCollectionView: url = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: url = venueCache.maps[indexPath.item]
+        default: fatalError("Invalid collection view \(collectionView)")
         }
         
         item.imageView!.image = nil
@@ -191,15 +190,12 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         item.activityIndicator.isHidden = false
         item.activityIndicator.startAnimation(nil)
         
-        if let imageURL = URL(string: urlString) {
+        item.imageView!.loadCached(url) { _ in
             
-            item.imageView!.loadCached(imageURL) { _ in
+            if let _ = item.imageView?.image {
                 
-                if let _ = item.imageView?.image {
-                    
-                    item.activityIndicator.isHidden = true
-                    item.activityIndicator.stopAnimation(nil)
-                }
+                item.activityIndicator.isHidden = true
+                item.activityIndicator.stopAnimation(nil)
             }
         }
     }
@@ -216,7 +212,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         switch collectionView {
         case imagesCollectionView: return venueCache.images.count
         case mapImagesCollectionView: return venueCache.maps.count
-        default: fatalError()
+        default: fatalError("Invalid collection view \(collectionView)")
         }
     }
     
@@ -237,18 +233,15 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         let indexPath = indexPaths.first!
         
-        let imageString: String
+        let imageURL: URL
         
         switch collectionView {
-        case imagesCollectionView: imageString = venueCache.images[indexPath.item]
-        case mapImagesCollectionView: imageString = venueCache.maps[indexPath.item]
+        case imagesCollectionView: imageURL = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: imageURL = venueCache.maps[indexPath.item]
         default: fatalError()
         }
         
-        if let url = URL(string: imageString) {
-            
-            NSWorkspace.shared().open(url)
-        }
+        NSWorkspace.shared().open(imageURL)
     }
     
     // MARK: - NSSharingServicePickerDelegate

@@ -23,7 +23,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     // MARK: - Properties
     
-    lazy var pageController = PageController<Summit>(fetch: Store.shared.summits)
+    lazy var pageController: PageController<Summit> = PageController(fetch: Store.shared.summits)
     
     // MARK: - Loading
 
@@ -121,7 +121,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         activityIndicator.startAnimation(nil)
     }
     
-    func dismissActivityIndicator(animated: Bool = true) {
+    func dismissActivityIndicator(_ animated: Bool = true) {
         
         refreshButton.isHidden = false
         tableView.isHidden = false

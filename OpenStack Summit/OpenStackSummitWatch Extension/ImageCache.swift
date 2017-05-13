@@ -16,7 +16,7 @@ public final class ImageCache {
     
     // MARK: - Properties
     
-    private let internalCache = NSCache<NSString, Data>()
+    private let internalCache = NSCache<NSString, NSData>()
     
     public var urlSession = URLSession.shared
     

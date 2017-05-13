@@ -20,7 +20,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - NSApplicationDelegate
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_ notification: Foundation.Notification) {
         // Insert code here to initialize your application
         
         // print app info
@@ -40,7 +40,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
 
-    func applicationWillTerminate(_ notification: Notification) {
+    func applicationWillTerminate(_ notification: Foundation.Notification) {
         // Insert code here to tear down your application
         
         
@@ -70,17 +70,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            guard mainWindowController.openWebURL(url)
+            guard mainWindowController.openWeb(url: url)
                 else { NSWorkspace.shared().open(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
             guard let typeString = userActivity.userInfo?[AppActivityUserInfo.type.rawValue] as? String,
                 let dataType = AppActivitySummitDataType(rawValue: typeString),
-                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
+                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Identifier
                 else { return false }
             
-            return mainWindowController.view(dataType, identifier: identifier)
+            guard self.canView(data: dataType, identifier: identifier)
+                else { return false }
+            
+            self.view(data: dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -88,9 +91,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let screen = AppActivityScreen(rawValue: screenString)
                 else { return false }
             
-            mainWindowController.view(screen)
+            self.view(screen: screen)
         }
         
         return false
+    }
+}
+
+// MARK: - SummitActivityHandling
+
+extension AppDelegate: SummitActivityHandling {
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        mainWindowController.view(data: data, identifier: identifier)
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        mainWindowController.view(screen: screen)
+    }
+    
+    func search(_ searchTerm: String) {
+        
+        mainWindowController.search(searchTerm)
     }
 }

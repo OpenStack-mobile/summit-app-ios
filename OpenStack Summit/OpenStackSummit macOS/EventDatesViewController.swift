@@ -20,7 +20,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     weak var delegate: EventDatesViewControllerDelegate?
     
-    private var summitCache: (start: Date, end: Date, timeZone: TimeZone, name: String)?
+    private var summitCache: (start: Date, end: Date, timeZone: Foundation.TimeZone, name: String)?
     
     private lazy var dateFormatter: DateFormatter = {
         
@@ -58,7 +58,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         guard tableView.selectedRow >= 0
             else { return }
         
-        let selectedDate = summitCache!.start.mt_dateDaysAfter(tableView.selectedRow)
+        let selectedDate = (summitCache!.start as NSDate).mt_dateDays(after: tableView.selectedRow)!
         
         delegate?.eventDatesViewController(self, didSelect: selectedDate)
     }
@@ -69,9 +69,9 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         
         if let summit = self.currentSummit {
             
-            let start = summit.start.mt_startOfCurrentDay()
+            let start = (summit.start as NSDate).mt_startOfCurrentDay()!
             
-            let end = summit.end.mt_dateDaysAfter(1)
+            let end = (summit.end as NSDate).mt_dateDays(after: 1)!
             
             let timeZone = TimeZone(identifier: summit.timeZone)!
             
@@ -103,7 +103,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         guard let summit = summitCache
             else { return 0 }
         
-        return summit.end.mt_daysSinceDate(summit.start)
+        return (summit.end as NSDate).mt_days(since: summit.start)
     }
     
     // MARK: - NSTableViewDelegate
@@ -112,9 +112,9 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         
         let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
         
-        let date = summitCache!.start.mt_dateDaysAfter(row)
+        let date = (summitCache!.start as NSDate).mt_dateDays(after: row)!
         
-        cell.textField?.stringValue = dateFormatter.stringFromDate(date)
+        cell.textField?.stringValue = dateFormatter.string(from: date)
         
         return cell
     }

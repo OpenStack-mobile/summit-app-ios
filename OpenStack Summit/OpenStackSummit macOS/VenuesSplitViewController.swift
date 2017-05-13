@@ -77,7 +77,7 @@ final class VenuesSplitViewController: NSSplitViewController, SearchableControll
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
             userActivity.title = "Venues"
-            userActivity.webpageURL = URL(string: summit.webpageURL + "/travel")
+            userActivity.webpageURL = summit.webpage.appendingPathComponent("travel")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
             userActivity.becomeCurrent()

@@ -24,10 +24,10 @@ struct ServiceURL {
         
         guard let components = URLComponents(url: url as URL, resolvingAgainstBaseURL: false),
             let identifierString = components.queryItems?.first(where: { $0.name == QueryItem.identifier.rawValue })?.value,
-            let identifier = Int(identifierString)
+            let identifier = Identifier(identifierString)
             else { return nil }
         
-        self.identifier = Identifier(identifier)
+        self.identifier = identifier
     }
     
     var url: URL {

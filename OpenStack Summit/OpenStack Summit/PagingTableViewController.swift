@@ -94,22 +94,22 @@ extension PagingTableViewController {
                                         
                     for change in changes {
                         
-                         let indexSet = NSIndexSet(index: change.index)
+                        let indexSet = NSIndexSet(index: change.index) as IndexSet
                         
                         switch change.change {
                             
                         case .delete:
                             
-                            tableView.removeRows(at: indexSet as IndexSet, withAnimation: .effectFade)
+                            tableView.removeRows(at: indexSet, withAnimation: .effectFade)
                             
                         case .insert:
                             
-                            tableView.insertRows(at: indexSet as IndexSet, withAnimation: .effectFade)
+                            tableView.insertRows(at: indexSet, withAnimation: .effectFade)
                             
                         case .update:
                             
-                            tableView.removeRows(at: indexSet as IndexSet, withAnimation: .EffectNone)
-                            tableView.insertRows(at: indexSet as IndexSet, withAnimation: .EffectNone)
+                            tableView.removeRows(at: indexSet, withAnimation: [])
+                            tableView.insertRows(at: indexSet, withAnimation: [])
                         }
                     }
                     

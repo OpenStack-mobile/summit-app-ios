@@ -57,9 +57,9 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
             
             // show events for date
             
-            let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()
+            let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()!
             
-            predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate as CVarArg, endDate as! CVarArg)
+            predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate as NSDate, endDate as NSDate)
             
         } else {
             

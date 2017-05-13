@@ -26,7 +26,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     weak var delegate: VenueDirectoryViewControllerDelegate?
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     private var summitObserver: Int?
     
@@ -59,9 +59,9 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         
         // get selected venue
         
-        let venue = self.fetchedResultsController.fetchedObjects![tableView.selectedRow] as! VenueManagedObject
+        let venue = self.fetchedResultsController.fetchedObjects![tableView.selectedRow]
         
-        delegate?.venueDirectoryViewController(self, didSelect: venue.identifier)
+        delegate?.venueDirectoryViewController(self, didSelect: venue.id)
     }
     
     // MARK: - Private Methods
@@ -80,7 +80,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sort,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
@@ -91,14 +91,14 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         
         assert(fetchedResultsController.fetchedObjects != nil)
         
-        let venueManagedObject = fetchedResultsController.fetchedObjects![row] as! VenueManagedObject
+        let venueManagedObject = fetchedResultsController.fetchedObjects![row]
         
         let venue = VenueListItem(managedObject: venueManagedObject)
         
         cell.venueNameLabel.stringValue = venue.name
         cell.venueAddressLabel.stringValue = venue.address
         
-        cell.imageURL = URL(string: venue.backgroundImageURL ?? "")
+        cell.imageURL = venue.backgroundImage
     }
     
     // MARK: - NSTableViewDataSource

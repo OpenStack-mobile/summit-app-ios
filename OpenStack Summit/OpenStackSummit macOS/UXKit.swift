@@ -22,7 +22,7 @@ public extension IndexPath {
     @inline(__always)
     init(forRow row: Int, inSection section: Int) {
         
-        (self as NSIndexPath).init(forItem: row, inSection: section)
+        self.init(item: row, section: section)
     }
 }
 

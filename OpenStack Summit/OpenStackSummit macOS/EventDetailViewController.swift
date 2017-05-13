@@ -115,13 +115,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
-        let items = [message, eventDetail.webpageURL]
+        let items = [message, eventDetail.webpage] as [Any]
         
         let sharingServicePicker = NSSharingServicePicker(items: items)
         
         sharingServicePicker.delegate = self
         
-        sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
+        sharingServicePicker.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
     }
     
     @IBAction func showLevel(_ sender: NSButton) {
@@ -202,7 +202,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         userActivity.title = eventDetail.name
-        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.webpageURL = eventDetail.webpage
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
         
         
@@ -211,7 +211,8 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     
     func addToCalendar() {
         
-        let event = eventDetail
+        guard let event = eventDetail
+            else { fatalError("No Event") }
         
         let status = EKEventStore.authorizationStatus(for: .event)
         
@@ -263,14 +264,14 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             let calendarEvent = EKEvent(eventStore: calendarEventStore)
             
             calendarEvent.calendar = calendar
-            calendarEvent.title = (event?.name)!
-            calendarEvent.startDate = (event?.start)!
-            calendarEvent.endDate = (event?.end)!
-            calendarEvent.timeZone = TimeZone(identifier: (event?.timeZone)!)
-            calendarEvent.URL = event.webpageURL
-            calendarEvent.location = event?.location
+            calendarEvent.title = event.name
+            calendarEvent.startDate = event.start
+            calendarEvent.endDate = event.end
+            calendarEvent.timeZone = TimeZone(identifier: event.timeZone)
+            calendarEvent.url = event.webpage
+            calendarEvent.location = event.location
             
-            if let data = event?.eventDescription.data(using: String.Encoding.utf8),
+            if let data = event.eventDescription.data(using: String.Encoding.utf8),
                 let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
@@ -289,7 +290,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         guard let url = link as? URL
             else { return false }
         
-        return AppDelegate.shared.mainWindowController.openWebURL(url)
+        return AppDelegate.shared.mainWindowController.openWeb(url: url)
     }
     
     // MARK: - NSSharingServicePickerDelegate
@@ -308,7 +309,9 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             customItems.append(safariReadList)
         }
         
-        if let url = eventDetail.webpageURL.absoluteString {
+        do {
+            
+            let url = eventDetail.webpage.absoluteString
             
             let copyLink = NSSharingService(copyLink: url)
             

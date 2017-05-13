@@ -26,11 +26,11 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<SpeakerManagedObject>!
     
     private var summitObserver: Int?
     
-    private lazy var placeholderImage: NSImage = NSImage(named: "generic-user-avatar")!
+    private lazy var placeholderImage: NSImage = #imageLiteral(resourceName: "generic-user-avatar")
     
     // MARK: - Loading
     
@@ -93,7 +93,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
@@ -102,7 +102,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     private func configure(item: CollectionViewItem, at indexPath: IndexPath) {
         
-        let managedObject = fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
+        let managedObject = fetchedResultsController.object(at: indexPath)
         
         let speaker = Speaker(managedObject: managedObject)
         
@@ -110,7 +110,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         item.placeholderImage = self.placeholderImage
         
-        item.imageURL = URL(string: speaker.pictureURL)
+        item.imageURL = speaker.picture
     }
     
     // MARK: - NSCollectionViewDataSource
@@ -142,9 +142,9 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         let indexPath = indexPaths.first!
         
-        let speaker = fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
+        let speaker = fetchedResultsController.object(at: indexPath) 
         
-        AppDelegate.shared.mainWindowController.view(.speaker, identifier: speaker.identifier)
+        AppDelegate.shared.mainWindowController.view(data: .speaker, identifier: speaker.id)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

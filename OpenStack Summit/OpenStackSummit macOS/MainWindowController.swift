@@ -165,7 +165,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         // try to get existing window
         if let existingController = childContentWindowControllers
             .first(where: { ($0 as? ContentController)?.contentIdentifier == identifier
-                && type(of: ($0 as? ContentController)?).contentType == contentType }) {
+                && (type(of: $0) as? ContentController.Type)?.contentType == contentType }) {
             
             windowController = existingController
             
@@ -223,11 +223,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     // MARK: - SummitActivityHandling
     
-    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier)  {
         
          // find in cache
          guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
-         else { return false }
+            else { return }
          
          switch data {
          
@@ -244,9 +244,9 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             let video = Video(managedObject: managedObject as! VideoManagedObject)
             
             guard let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube)
-                else { return false }
+                else { return }
          
-            return NSWorkspace.shared().open(url)
+            NSWorkspace.shared().open(url)
          
          case .venue:
             
@@ -256,11 +256,9 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             
             break
          }
- 
-        return true
     }
     
-    func view(_ screen: AppActivityScreen) {
+    func view(screen: AppActivityScreen) {
         
         switch screen {
             
@@ -281,7 +279,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             
         case .about:
             
-            showPreferences()
+            self.showPreferences()
+            
+        case .inbox:
+            
+            break
         }
     }
     
@@ -292,7 +294,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     // MARK: - Notifications
     
-    @objc private func windowWillClose(_ notification: Notification) {
+    @objc private func windowWillClose(_ notification: Foundation.Notification) {
         
         let window = notification.object as! NSWindow
         

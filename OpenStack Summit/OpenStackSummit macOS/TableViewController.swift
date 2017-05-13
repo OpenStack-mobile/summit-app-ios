@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import CoreData
+import CoreSummit
 
 class TableViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -18,7 +19,7 @@ class TableViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     // MARK: - Properties
     
-    final var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    final var fetchedResultsController: NSFetchedResultsController<CoreSummit.Entity>!
     
     // MARK: - UITableViewDataSource
     
