@@ -103,7 +103,6 @@
 		6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */; };
 		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
 		6E0D3D7B1DC09B7C00EEB8A7 /* SummitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */; };
-		6E0FD0B51E92E57F000C6DBA /* SwiftFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E0FD0B91E92E57F000C6DBA /* AeroGearHttp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E0FD0BB1E92E57F000C6DBA /* AeroGearOAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1280,7 +1279,6 @@
 				6E0FD0B91E92E57F000C6DBA /* AeroGearHttp.framework in Embed Frameworks */,
 				6E0FD0BD1E92E57F000C6DBA /* XCDYouTubeKit.framework in Embed Frameworks */,
 				6E75588E1E58D0F8003B6844 /* CoreSummit.framework in Embed Frameworks */,
-				6E0FD0B51E92E57F000C6DBA /* SwiftFoundation.framework in Embed Frameworks */,
 				6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */,
 				6E0FD0BB1E92E57F000C6DBA /* AeroGearOAuth2.framework in Embed Frameworks */,
 			);
@@ -3808,7 +3806,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/tvOS/SwiftFoundation.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearHttp.framework",
