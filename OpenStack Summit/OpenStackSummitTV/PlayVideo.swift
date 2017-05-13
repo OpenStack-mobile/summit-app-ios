@@ -28,9 +28,12 @@ extension UIViewController {
             guard error == nil
                 else { controller.showErrorAlert(error!.localizedDescription); return }
             
-            guard let streamURL = youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.HD720.rawValue as NSNumber]
-                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.medium360.rawValue as NSNumber]
-                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.small240.rawValue as NSNumber]
+            guard let streamURLs = youtubeVideo?.streamURLs as? [UInt: URL],
+                let highestResolution = streamURLs.keys.sorted().last,
+                let streamURL = streamURLs[XCDYouTubeVideoQuality.HD720.rawValue]
+                ?? streamURLs[XCDYouTubeVideoQuality.medium360.rawValue]
+                ?? streamURLs[XCDYouTubeVideoQuality.small240.rawValue]
+                ?? streamURLs[highestResolution]
                 else { controller.showErrorAlert("YouTube API Error"); return }
             
             let asset = AVAsset(url: streamURL)
