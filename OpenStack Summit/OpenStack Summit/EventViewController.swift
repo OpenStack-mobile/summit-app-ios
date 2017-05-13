@@ -67,7 +67,7 @@ extension EventViewController {
             
             var title = newValue ? "Schedule" : "Unschedule"
             
-            if !event.rsvp.isEmpty {
+            if event.rsvp != nil {
                 
                 title = newValue ? "RSVP" : "unRSVP"
             }
@@ -142,7 +142,7 @@ extension EventViewController {
         
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
-        let rsvpURL = event.rsvp.isEmpty ? nil : Foundation.URL(string: event.rsvp)
+        let rsvpURL = event.rsvp
         
         let externalRSVP = event.externalRSVP
         

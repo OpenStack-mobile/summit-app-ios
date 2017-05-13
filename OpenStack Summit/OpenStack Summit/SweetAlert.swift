@@ -412,11 +412,11 @@ class CancelAnimatedView: AnimatableView {
     override func animate() {
         var t = CATransform3DIdentity;
         t.m34 = 1.0 / -500.0;
-        t = CATransform3DRotate(t, CGFloat(90.0 * M_PI / 180.0), 1, 0, 0);
+        t = CATransform3DRotate(t, CGFloat(90.0 * .pi / 180.0), 1, 0, 0);
         
         var t2 = CATransform3DIdentity;
         t2.m34 = 1.0 / -500.0;
-        t2 = CATransform3DRotate(t2, CGFloat(-M_PI), 1, 0, 0);
+        t2 = CATransform3DRotate(t2, CGFloat(-.pi), 1, 0, 0);
         
         let animation = CABasicAnimation(keyPath: "transform")
         let time = 0.3

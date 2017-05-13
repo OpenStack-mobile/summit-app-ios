@@ -180,7 +180,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard let url = eventDetail?.attachment
             else { fatalError("No URL") }
         
-        UIApplication.shared.openURL(attachment)
+        UIApplication.shared.openURL(url)
     }
     
     // MARK: - Private Methods
@@ -236,7 +236,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .white
         titleHeader.trackLabel.isHidden = eventDetail.track.isEmpty
         
-        titleHeader.scheduleButton.setTitle(eventDetail.rsvp.isEmpty ? "Schedule" : "RSVP", for: UIControlState())
+        titleHeader.scheduleButton.setTitle(eventDetail.rsvp == nil ? "Schedule" : "RSVP", for: UIControlState())
         
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
@@ -273,7 +273,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         userActivity.title = eventDetail.name
-        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.webpageURL = eventDetail.webpage
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
         

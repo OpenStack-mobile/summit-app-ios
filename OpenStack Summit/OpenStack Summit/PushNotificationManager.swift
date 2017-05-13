@@ -74,13 +74,25 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         self.summitObserver = SummitManager.shared.summit.observe(summitChanged)
         
-        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(loggedIn), name: Store.Notification.LoggedIn.rawValue, object: self.store)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(loggedIn),
+            name: Store.Notification.loggedIn,
+            object: self.store)
         
-        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(loggedOut),
+            name: Store.Notification.loggedOut,
+            object: self.store)
         
-        NotificationCenter.defaultCenter.addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(forcedLoggedOut),
+            name: Store.Notification.forcedLoggedOut,
+            object: self.store)
         
-        self.notificationsFetchedResultsController = NSFetchedResultsController.init(Notification.self,
+        self.notificationsFetchedResultsController = NSFetchedResultsController(Notification.self,
                                                                                 delegate: self,
                                                                                 context: Store.shared.managedObjectContext)
         
@@ -143,7 +155,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
-            if let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.id {
+            let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.id
+            
+            if incomingMessage {
                 
                 // set as unread
                 unreadTeamMessages.value.insert(teamMessage.identifier)
@@ -212,7 +226,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     
                     let alertTitle = generalNotification.event?.title ?? "Notification"
                     
-                    SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                    SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .none)
                 }
             }
             
@@ -651,11 +665,11 @@ public struct GeneralNotification: PushNotification {
     
     public let created: Date
     
-    public let from: Notification.Topic
+    public let from: CoreSummit.Notification.Topic
     
     public let summit: Identifier
     
-    public let channel: Notification.Channel
+    public let channel: CoreSummit.Notification.Channel
     
     public let event: (identifier: Identifier, title: String)?
     

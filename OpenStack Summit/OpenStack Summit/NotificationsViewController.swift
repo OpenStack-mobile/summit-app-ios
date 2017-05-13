@@ -142,11 +142,11 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let changedNotifications = managedObjects.filter { newValue.contains($0.id) } 
         
-        let indexPaths = changedNotifications.map { fetchedResultsController.indexPathForObject($0)! }
+        let indexPaths = changedNotifications.map { fetchedResultsController.indexPath(forObject: $0)! }
         
         tableView.beginUpdates()
         
-        tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .None)
+        tableView.reloadRows(at: indexPaths, with: .none)
         
         tableView.endUpdates()
     }

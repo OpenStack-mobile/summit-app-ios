@@ -10,7 +10,7 @@ import Foundation
 import Foundation
 import CoreSummit
 
-struct EventDetail: Named {
+struct EventDetail {
     
     let identifier: Identifier
     let name: String
@@ -38,7 +38,7 @@ struct EventDetail: Named {
     let averageFeedback: Double
     let video: Video?
     let willRecord: Bool
-    let rsvp: String
+    let rsvp: URL?
     let externalRSVP: Bool
     let attachment: URL?
     let webpage: URL
@@ -64,7 +64,7 @@ extension EventDetail: CoreDataDecodable {
         self.track = ScheduleItem.getTrack(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
-        self.rsvp = event.rsvp ?? ""
+        self.rsvp = URL(string: event.rsvp ?? "")
         self.externalRSVP = event.externalRSVP
         self.willRecord = event.willRecord
         self.attachment = URL(string: event.attachment ?? "") ?? Slide.from(managedObjects: event.slides).ordered().first?.link
@@ -168,7 +168,7 @@ func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
         && lhs.title == rhs.title
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography

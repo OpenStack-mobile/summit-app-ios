@@ -61,11 +61,11 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         
         if sender.isOn {
             
-            FilterManager.shared.filter.value.enable(filter: filter)
+            FilterManager.shared.filter.value.enable(filter)
             
         } else {
             
-            FilterManager.shared.filter.value.disable(filter: filter)
+            FilterManager.shared.filter.value.disable(filter)
         }
     }
     

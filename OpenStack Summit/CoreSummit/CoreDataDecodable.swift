@@ -110,7 +110,7 @@ public func NSFetchedResultsController <T: CoreDataDecodable>
 
 public extension CoreDataDecodable {
     
-    static func from <C: Collection> (managedObjects: C) -> [Self]
+    static func from <C: RandomAccessCollection> (managedObjects: C) -> [Self]
         where C.Iterator.Element == ManagedObject {
         
         return managedObjects.map { self.init(managedObject: $0) }
