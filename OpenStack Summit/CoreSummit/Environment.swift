@@ -8,6 +8,6 @@
 
 public enum Environment: String {
     
-    case staging
-    case production
+    case staging = "Staging"
+    case production = "Production"
 }
