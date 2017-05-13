@@ -29,16 +29,16 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
         set { addressLabel.text = newValue }
     }
     
-    var backgroundImageURL: String = "" {
+    var backgroundImage: URL? {
+        
         didSet {
-            if backgroundImageURL.isEmpty {
-                backgroundImageView.image = nil
+            if let url = backgroundImage {
+                
+                backgroundImageView.hnk_setImageFromURL(url.environmentScheme)
             }
             else {
-
-                let picUrl = backgroundImageURL
                 
-                backgroundImageView.hnk_setImageFromURL(URL(string: picUrl)!)
+                backgroundImageView.image = nil
             }
         }
     }

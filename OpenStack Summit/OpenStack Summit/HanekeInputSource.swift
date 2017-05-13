@@ -26,7 +26,7 @@ final class HanekeInputSource: InputSource {
      */
     func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
         
-        imageView.hnk_setImageFromURL(url,
+        imageView.hnk_setImageFromURL(url.environmentScheme,
                                       format: Format<UIImage>(name: "original"),
                                       failure: { _ in callback(nil) },
                                       success: { callback($0) })

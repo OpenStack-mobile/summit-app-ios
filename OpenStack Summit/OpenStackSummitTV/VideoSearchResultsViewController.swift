@@ -109,9 +109,9 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         cell.imageView.image = nil
         
-        if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
+        if let thumbnailURL = URL(youtubeThumbnail: video.youtube) {
             
-            cell.imageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+            cell.imageView.hnk_setImageFromURL(thumbnailURL.environmentScheme, placeholder: nil, format: nil, failure: nil, success: { (image) in
                 
                 cell.imageView.image = image
             })

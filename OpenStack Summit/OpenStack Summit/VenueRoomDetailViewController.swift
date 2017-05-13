@@ -41,13 +41,12 @@ final class VenueRoomDetailViewController: UIViewController {
         }
     }
     
-    private(set) var pictureURL: String = "" {
+    private(set) var picture: URL? {
         
         didSet {
             
-            let picUrlInternal = pictureURL
-            if (!picUrlInternal.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(URL(string: picUrlInternal)!)
+            if let url = picture {
+                pictureImageView.hnk_setImageFromURL(url.environmentScheme)
             }
             else {
                 pictureImageView.image = nil

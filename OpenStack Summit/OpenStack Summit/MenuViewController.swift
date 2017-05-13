@@ -62,7 +62,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             if let url = picture {
                 
-                pictureImageView.hnk_setImageFromURL(url, placeholder: placeholder)
+                pictureImageView.hnk_setImageFromURL(url.environmentScheme, placeholder: placeholder)
                 
             } else {
                 

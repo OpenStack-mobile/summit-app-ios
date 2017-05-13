@@ -175,6 +175,9 @@
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1949331DCBB3E000A00603 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
+		6E1A5CFC1EC6D84E006E72BE /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A5CFB1EC6D84E006E72BE /* URLExtensions.swift */; };
+		6E1A5CFD1EC6DC11006E72BE /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A5CFB1EC6D84E006E72BE /* URLExtensions.swift */; };
+		6E1A5CFE1EC6DC12006E72BE /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A5CFB1EC6D84E006E72BE /* URLExtensions.swift */; };
 		6E1BCFE21E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
 		6E1BCFE31E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
 		6E1BCFE41E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
@@ -1390,6 +1393,7 @@
 		6E1651951D8462AE00574CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
+		6E1A5CFB1EC6D84E006E72BE /* URLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		6E1BCFE11E35CBF100059E94 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupJSON.swift; sourceTree = "<group>"; };
 		6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagedObject.swift; sourceTree = "<group>"; };
@@ -2235,6 +2239,7 @@
 				6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */,
 				6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */,
 				6E6179681DE7657500EED286 /* SummitManager.swift */,
+				6E1A5CFB1EC6D84E006E72BE /* URLExtensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3718,6 +3723,7 @@
 				"$(SRCROOT)/../Carthage/Build/WatchOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearOAuth2.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/Predicate.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -3866,6 +3872,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SlackTextViewController.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Predicate.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -4117,6 +4124,7 @@
 				6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */,
+				6E1A5CFC1EC6D84E006E72BE /* URLExtensions.swift in Sources */,
 				6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
 				6E57DDC91E4ADCB300783BA6 /* EventViewController.swift in Sources */,
 				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
@@ -4767,6 +4775,7 @@
 				6E31ECB31E5BCD6A000E5BAC /* EventDetailViewController.swift in Sources */,
 				6E7558D01E595753003B6844 /* NSDateComponents+MTDates.m in Sources */,
 				6E31ECA81E5B8E46000E5BAC /* ContentBackgroundView.swift in Sources */,
+				6E1A5CFE1EC6DC12006E72BE /* URLExtensions.swift in Sources */,
 				6E7558BE1E58D81E003B6844 /* Observable.swift in Sources */,
 				6EF58C931E5EABAA00009053 /* SummitActivityHandling.swift in Sources */,
 				6E7558721E58C62B003B6844 /* SummitsViewController.swift in Sources */,
@@ -4850,6 +4859,7 @@
 				6E74FB041D7CAFDB0018633D /* Define.swift in Sources */,
 				6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */,
 				6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */,
+				6E1A5CFD1EC6DC11006E72BE /* URLExtensions.swift in Sources */,
 				6EBC583E1E4CBFE000F5DD68 /* MessageEnabledViewController.swift in Sources */,
 				6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */,
 			);

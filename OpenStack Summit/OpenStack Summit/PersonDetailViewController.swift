@@ -195,7 +195,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
         headerView.titleLabel.isHidden = (person.title ?? "").isEmpty
-        headerView.imageView.hnk_setImageFromURL(person.picture, placeholder: R.image.genericUserAvatar()!)
+        headerView.imageView.hnk_setImageFromURL(person.picture.environmentScheme, placeholder: R.image.genericUserAvatar()!)
         
         // configure cells
         

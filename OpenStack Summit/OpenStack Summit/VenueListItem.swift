@@ -22,7 +22,7 @@ public struct VenueListItem: Named {
     
     public let location: CLLocationCoordinate2D?
     
-    public let backgroundImageURL: String?
+    public let backgroundImage: URL?
     
     public let maps: [URL]
     
@@ -43,7 +43,7 @@ extension VenueListItem: CoreDataDecodable {
         self.name = venue.name
         self.descriptionText = venue.descriptionText ?? ""
         self.address = VenueListItem.address(for: venue)
-        self.backgroundImageURL = venue.images.first?.url
+        self.backgroundImage = Image.from(managedObjects: venue.images).sorted().first?.url
         self.isInternal = venue.locationType == Venue.LocationType.Internal.rawValue
         
         var floorImages = [URL]()
@@ -106,6 +106,6 @@ public func == (lhs: VenueListItem, rhs: VenueListItem) -> Bool {
         && lhs.address == rhs.address
         && lhs.location?.latitude == rhs.location?.latitude
         && lhs.location?.longitude == rhs.location?.longitude
-        && lhs.backgroundImageURL == rhs.backgroundImageURL
+        && lhs.backgroundImage == rhs.backgroundImage
         && lhs.maps == rhs.maps
 }

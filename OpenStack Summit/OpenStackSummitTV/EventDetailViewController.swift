@@ -137,9 +137,9 @@ final class EventDetailViewController: UITableViewController {
             cell.playImageView.hidden = true
             cell.activityIndicator.hidden = false
             
-            if let thumbnailURL = NSURL(youtubeThumbnail: eventDetail.video!.youtube) {
+            if let thumbnailURL = URL(youtubeThumbnail: eventDetail.video!.youtube) {
                 
-                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL.environmentScheme, placeholder: nil, format: nil, failure: nil, success: { (image) in
                     
                     cell.videoImageView.image = image
                     cell.playImageView.hidden = false

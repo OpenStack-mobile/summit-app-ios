@@ -74,7 +74,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
         
         self.speakerCache = speaker
         
-        pictureImageView.hnk_setImageFromURL(NSURL(string: speaker.pictureURL)!, placeholder: UIImage(named: "generic-user-avatar"))
+        pictureImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: UIImage(named: "generic-user-avatar"))
         
         data = []
         

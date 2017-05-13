@@ -456,7 +456,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 guard let thumbnailURL = Foundation.URL(youtubeThumbnail: video.youtube)
                     else { return cell }
                 
-                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, success: { (image) in
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL.environmentScheme, success: { (image) in
                     
                     cell.playButton.isHidden = false
                     cell.activityIndicator.isHidden = true

@@ -70,9 +70,9 @@ final class PeopleTableViewCell: UITableViewCell {
             
             let placeholder = R.image.genericUserAvatar()!
             
-            if let picture = self.picture {
+            if let url = self.picture {
                 
-                pictureImageView.hnk_setImageFromURL(picture, placeholder: placeholder)
+                pictureImageView.hnk_setImageFromURL(url.environmentScheme, placeholder: placeholder)
                 
             } else {
                 

@@ -60,7 +60,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         let venue = internalVenueList[indexPath.row]
         cell.name = venue.name
         cell.address = venue.address
-        cell.backgroundImageURL = venue.backgroundImageURL ?? ""
+        cell.backgroundImage = venue.backgroundImage
     }
     
     // MARK: - UITableViewDataSource
