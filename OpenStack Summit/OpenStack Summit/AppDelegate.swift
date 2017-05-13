@@ -268,7 +268,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         FIRMessaging.messaging().connect { (error) in
             if error != nil {
-                print("Unable to connect with FCM. \(String(describing: error))")
+                print("Unable to connect with FCM. \(error!)")
             } else {
                 print("Connected to FCM.")
             }
