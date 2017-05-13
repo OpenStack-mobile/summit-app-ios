@@ -71,7 +71,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Core Spotlight
         if CSSearchableIndex.isIndexingAvailable() {
             
+            #if DEBUG
             SpotlightController.shared.log = { print("SpotlightController: " + $0) }
+            #endif
         }
         
         // Setup Notification Manager

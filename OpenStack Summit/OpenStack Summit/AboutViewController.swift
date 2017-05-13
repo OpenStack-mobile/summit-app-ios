@@ -126,7 +126,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             #if DEBUG
             let summitActive = true // always show for debug builds
             #else
-            let summitActive = Date().mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
+            let summitActive = NSDate().mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
             #endif
             
             if summitActive {

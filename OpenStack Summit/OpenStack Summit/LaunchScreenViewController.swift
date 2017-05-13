@@ -61,15 +61,6 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
             self.willTransition = true
             
-            let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            
-            DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
-                
-                guard let controller = self else { return }
-                
-                controller.showRevealController()
-            }
-            
         } else {
             
             self.loadSummits()

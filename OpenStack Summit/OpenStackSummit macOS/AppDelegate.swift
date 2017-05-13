@@ -33,11 +33,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         DataUpdatePoller.shared.start()
         
-        //#if DEBUG
-        //SummitManager.shared.summit.value = 0
-        //try! Store.shared.clear()
-        //#endif
-        
     }
 
     func applicationWillTerminate(_ notification: Foundation.Notification) {
