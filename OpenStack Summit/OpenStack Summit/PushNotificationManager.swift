@@ -25,6 +25,12 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     // Alerts for messages belonging to this team will be excluded.
     public var teamMessageAlertFilter: Identifier?
     
+    public var unreadCount: Int { return unreadNotifications.value.count + unreadTeamMessages.value.count }
+    
+    public lazy var unreadNotifications: Observable<Set<Identifier>> = self.initUnreadNotifications(.unreadNotifications)
+    
+    public lazy var unreadTeamMessages: Observable<Set<Identifier>> = self.initUnreadNotifications(.unreadTeamMessages)
+    
     private var summitObserver: Int!
     
     private var teamsFetchedResultsController: NSFetchedResultsController<TeamManagedObject>?
@@ -51,12 +57,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     private(set) var subscribedTopics = Set<CoreSummit.Notification.Topic>()
     
     private let userDefaults = UserDefaults.standard
-    
-    var unreadCount: Int { return unreadNotifications.value.count + unreadTeamMessages.value.count }
-    
-    lazy var unreadNotifications: Observable<Set<Identifier>> = self.initUnreadNotifications(.unreadNotifications)
-    
-    lazy var unreadTeamMessages: Observable<Set<Identifier>> = self.initUnreadNotifications(.unreadTeamMessages)
     
     // MARK: - Initialization
     
