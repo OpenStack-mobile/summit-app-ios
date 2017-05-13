@@ -85,7 +85,7 @@ extension VideoManagedObject {
         
         contentItem.imageURL = URL(youtubeThumbnail: youtube)
         
-        contentItem.imageShape = .square
+        contentItem.imageShape = .HDTV
         
         contentItem.displayURL = serviceURL
         

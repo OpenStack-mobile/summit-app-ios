@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 import Haneke
+import func TVServices.TVTopShelfImageSize
 
 @objc(OSSTVVideoSearchResultsViewController)
 final class VideoSearchResultsViewController: CollectionViewController, UISearchResultsUpdating {
@@ -34,6 +35,10 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         super.viewDidLoad()
         
         filterChanged()
+        
+        // setup collection view
+        let collectionViewLayout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        collectionViewLayout.itemSize = TVTopShelfImageSize(shape: .HDTV, style: .sectioned)
     }
     
     override func viewDidAppear(_ animated: Bool) {
