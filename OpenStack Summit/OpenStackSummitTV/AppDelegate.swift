@@ -25,6 +25,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // set appearance
         SetAppearance()
         
+        #if DEBUG
+        DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #endif
+        
+        // start data poller
+        DataUpdatePoller.shared.start()
+        
         return true
     }
 
