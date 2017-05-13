@@ -449,7 +449,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
         let predicate: Predicate = "team.id" == team && "id".`in`(unreadTeamMessages)
         
-        return try context.count(TeamMessageManagedObject.self, predicate: predicate.toFoundation())
+        return try context.count(TeamMessageManagedObject.self, predicate: predicate)
     }
     
     // MARK: - FIRMessagingDelegate

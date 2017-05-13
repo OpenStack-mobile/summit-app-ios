@@ -90,7 +90,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             data.append(.irc)
         }
         
-        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self, predicate: eventsPredicate.toFoundation())
+        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self, predicate: eventsPredicate)
         
         data.append(.sessions(eventCount))
         
