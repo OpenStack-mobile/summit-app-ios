@@ -150,7 +150,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
         
         let invitations = team.invitations
-            .sort()
+            .sorted()
             .filter { $0.invitee.identifier != memberID }
             .map { Cell.invitation($0) }
         
@@ -270,7 +270,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             cell.name = teamMember.member.name
             cell.picture = teamMember.member.picture
-            cell.title = teamMember.permission.rawValue.lowercase.capitalized
+            cell.title = teamMember.permission.rawValue.lowercased().capitalized
             
             return cell
             
@@ -289,8 +289,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = invitation.invitee.name
-            cell.pictureURL = invitation.invitee.pictureURL
-            cell.title = invitation.permission.rawValue.lowercaseString.capitalizedString
+            cell.picture = invitation.invitee.picture
+            cell.title = invitation.permission.rawValue.lowercased().capitalized
             
             return cell
             

@@ -80,7 +80,7 @@ final class PeopleTableViewCell: UITableViewCell {
             }
             
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
-            pictureImageView.clipsToBounds = true;
+            pictureImageView.clipsToBounds = true
         }
     }
 }

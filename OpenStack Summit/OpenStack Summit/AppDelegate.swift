@@ -6,10 +6,10 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import UserNotifications
 import CoreSpotlight
-import Foundation
 import CoreSummit
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
@@ -181,7 +181,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
             if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
                 
-                let notification = Notification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsKey.url:url])
+                let notification = Foundation.Notification (name: Notification.Name(rawValue: AGAppLaunchedWithURLNotification), object: nil, userInfo: [UIApplicationLaunchOptionsKey.url:url])
                 NotificationCenter.default.post(notification)
                 
                 return true
@@ -190,25 +190,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // HACK: async is needed in case app was not already opened
         DispatchQueue.main.async {
-            return self.openSchemeURL(url)
+            let _ = self.openScheme(url: url)
         }
         
         return false
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        
-        /// force view load
-        let _ = self.revealViewController.view
-        let _ = self.menuViewController.view
-        let _ = self.revealViewController.frontViewController.view
-        
-        if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController
-            && self.launchScreenViewController.willTransition == false {
-            
-            self.launchScreenViewController.showRevealController() { self.application(application, continue: userActivity, restorationHandler: restorationHandler) }
-            return true
-        }
         
         print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo?.description ?? "")")
         
@@ -223,13 +211,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             let identifierString = searchURL.pathComponents[1]
             
             guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
-                let identifier = Int(identifierString)
+                let identifier = Identifier(identifierString)
                 else { return false }
             
-            guard self.canView(dataType, identifier: identifier)
+            guard self.canView(data: dataType, identifier: identifier)
                 else { return false }
             
-            self.view(dataType, identifier: identifier)
+            self.view(data: dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
@@ -238,20 +226,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            guard openWebURL(url)
+            guard self.openWeb(url: url)
                 else { UIApplication.shared.openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
             guard let typeString = userActivity.userInfo?[AppActivityUserInfo.type.rawValue] as? String,
                 let dataType = AppActivitySummitDataType(rawValue: typeString),
-                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
+                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Identifier
                 else { return false }
             
-            guard self.canView(dataType, identifier: identifier)
+            guard self.canView(data: dataType, identifier: identifier)
                 else { return false }
             
-            self.view(dataType, identifier: identifier)
+            self.view(data: dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -259,7 +247,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let screen = AppActivityScreen(rawValue: screenString)
                 else { return false }
             
-            self.view(screen)
+            self.view(screen: screen)
         }
         
         return false
@@ -305,7 +293,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
-        return topViewController.view(data, identifier: identifier)
+        return topViewController.view(data: data, identifier: identifier)
     }
     
     func view(screen: AppActivityScreen) {
@@ -313,7 +301,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
-        topViewController.view(screen)
+        topViewController.view(screen: screen)
     }
     
     func search(_ searchTerm: String) {

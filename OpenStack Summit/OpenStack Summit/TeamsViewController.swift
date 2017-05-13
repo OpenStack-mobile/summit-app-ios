@@ -17,7 +17,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - Properties
     
-    lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    lazy var pageController: PageController<Team> = PageController(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
     
     lazy var contextMenu: ContextMenu = {
         
@@ -74,7 +74,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -187,7 +187,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
         case R.segue.teamsViewController.showTeamDetail.identifier:
             
-            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPathForCell(sender as! UITableViewCell)!.row]
+            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPath(for: sender as! UITableViewCell)!.row]
                 else { fatalError("Invalid row") }
             
             let viewController = segue.destination as! TeamDetailViewController

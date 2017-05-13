@@ -80,7 +80,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     @IBAction func send(_ sender: AnyObject? = nil) {
         
         guard Reachability.connected
-            else { showErrorMessage(Error.reachability); return }
+            else { showErrorMessage(AppError.reachability); return }
         
         // get new values
         

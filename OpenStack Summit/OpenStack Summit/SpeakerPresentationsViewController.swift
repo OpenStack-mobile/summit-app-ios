@@ -52,7 +52,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         
         let summit = SummitManager.shared.summit.value
         
-        let managedObjects = try! EventManagedObject.presentations(for: speaker, start: interval.start, end: interval.end), summit: summit, context: Store.shared.managedObjectContext)
+        let managedObjects = try! EventManagedObject.presentations(for: speaker, start: interval.start, end: interval.end, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: managedObjects)
     }

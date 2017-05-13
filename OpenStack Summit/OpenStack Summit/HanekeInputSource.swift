@@ -28,7 +28,7 @@ final class HanekeInputSource: InputSource {
         
         imageView.hnk_setImageFromURL(url,
                                       format: Format<UIImage>(name: "original"),
-                                      success: { callback($0) },
-                                      failure: { callback(nil) })
+                                      failure: { _ in callback(nil) },
+                                      success: { callback($0) })
     }
 }

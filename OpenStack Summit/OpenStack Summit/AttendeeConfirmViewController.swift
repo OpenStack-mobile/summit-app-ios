@@ -322,7 +322,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let newString = (textField.text ?? ("" as NSString) as String).replacingCharacters(in: range, with: string)
+        let newString = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: string)
         
         guard let orderNumer = Int(newString)
             else { return newString.isEmpty }
