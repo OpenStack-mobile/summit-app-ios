@@ -135,7 +135,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                         
                         controller.showErrorMessage(error)
                         
-                    case .Value:
+                    case .value:
                         
                         controller.close()
                     }

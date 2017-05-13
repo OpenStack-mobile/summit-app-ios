@@ -85,7 +85,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value:
+                case .value:
                     
                     controller.dismiss(animated: true, completion: nil)
                 }
@@ -109,11 +109,11 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             self.selectedMemberCell.selectMemberLabel.isHidden = true
             self.selectedMemberCell.nameLabel.text = selectedMember.name
             self.selectedMemberCell.titleLabel.text = selectedMember.title ?? selectedMember.twitter ?? selectedMember.irc
-            self.selectedMemberCell.pictureURL = selectedMember.pictureURL
+            self.selectedMemberCell.picture = selectedMember.picture
             
         } else {
             
-            self.selectedMemberCell.pictureURL = ""
+            self.selectedMemberCell.picture = nil
         }
         
         self.selectedMemberCell.selectMemberLabel.isHidden = self.member != nil
@@ -216,23 +216,23 @@ final class SelectTeamMemberTableViewCell: UITableViewCell {
     @IBOutlet private weak var pictureImageView: UIImageView!
     @IBOutlet private(set) weak var selectMemberLabel: UILabel!
     
-    var pictureURL: String = "" {
+    fileprivate var picture: URL? {
         
         didSet {
             
-            let picUrlInternal: String
+            let placeholder = R.image.genericUserAvatar()!
             
-            picUrlInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
-            
-            if (!picUrlInternal.isEmpty) {
-                let placeholder = R.image.genericUserAvatar()!
-                pictureImageView.hnk_setImageFromURL(Foundation.URL(string: picUrlInternal)!, placeholder: placeholder)
-            }
-            else {
+            if let url = picture {
+                
+                pictureImageView.hnk_setImageFromURL(url, placeholder: placeholder)
+                
+            } else {
+                
                 pictureImageView.image = R.image.genericUserAvatar()!
             }
+            
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
-            pictureImageView.clipsToBounds = true;
+            pictureImageView.clipsToBounds = true
         }
     }
 }

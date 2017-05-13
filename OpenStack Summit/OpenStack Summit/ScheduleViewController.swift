@@ -329,7 +329,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                     
                     if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                         
-                        configure(cell, at: indexPath)
+                        configure(cell: cell, at: indexPath)
                     }
                     
                     continue
@@ -346,7 +346,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                     
                     if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                         
-                        configure(cell, at: indexPath)
+                        configure(cell: cell, at: indexPath)
                     }
                     
                     continue
@@ -356,7 +356,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
                 if let cell = tableView?.cellForRow(at: indexPath) as? ScheduleTableViewCell {
                     
-                    configure(cell, at: indexPath)
+                    configure(cell: cell, at: indexPath)
                 }
             }
             
@@ -370,7 +370,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    private func configure(_ cell: ScheduleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: ScheduleTableViewCell, at indexPath: IndexPath) {
         
         let index = indexPath.row
         let event = dayEvents[index]
@@ -482,7 +482,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell)!
         
-        configure(cell, at: indexPath)
+        configure(cell: cell, at: indexPath)
         
         return cell
     }

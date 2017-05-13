@@ -95,7 +95,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
-    private func configure(_ cell: PeopleTableViewCell, with member: Member) {
+    private func configure(cell: PeopleTableViewCell, with member: Member) {
         
         cell.name = member.name
         cell.picture = member.picture
@@ -143,7 +143,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
-            configure(cell, with: item)
+            configure(cell: cell, with: item)
             
             return cell
             

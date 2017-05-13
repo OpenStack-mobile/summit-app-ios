@@ -238,7 +238,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                                 
                                 controller.showErrorMessage(error)
                                 
-                            case .Value:
+                            case .value:
                                 
                                 controller.cancel()
                             }

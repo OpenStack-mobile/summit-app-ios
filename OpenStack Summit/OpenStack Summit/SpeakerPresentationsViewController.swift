@@ -31,12 +31,12 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         
         let summit = SummitManager.shared.summit.value
         
-        let events = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.presentations(for: speaker, start: startDate, end: endDate, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [Date] = []
         for event in events {
-            let timeZone = NSTimeZone(name: event.summit.timeZone)!
-            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            let timeZone = TimeZone(identifier: event.summit.timeZone)!
+            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
             if !activeDates.contains(startDate) {
                 activeDates.append(startDate)
             }
@@ -52,7 +52,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         
         let summit = SummitManager.shared.summit.value
         
-        let managedObjects = try! EventManagedObject.speakerPresentations(speaker, startDate: interval.start.toFoundation(), endDate: interval.end.toFoundation(), summit: summit, context: Store.shared.managedObjectContext)
+        let managedObjects = try! EventManagedObject.presentations(for: speaker, start: interval.start, end: interval.end), summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: managedObjects)
     }

@@ -54,25 +54,18 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    private(set) var pictureURL: String = "" {
+    private(set) var picture: URL? {
         
         didSet {
             
-            let picURLInternal: String
+            let placeholder = R.image.genericUserAvatar()!
             
-            if AppEnvironment == .staging {
+            if let url = picture {
                 
-                picURLInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
+                pictureImageView.hnk_setImageFromURL(url, placeholder: placeholder)
                 
             } else {
                 
-                picURLInternal = pictureURL
-            }
-
-            if picURLInternal.isEmpty == false {
-                pictureImageView.hnk_setImageFromURL(URL(string: picURLInternal)!)
-            }
-            else {
                 pictureImageView.image = R.image.genericUserAvatar()!
             }
             
@@ -283,18 +276,18 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             if let speaker = currentMember.speakerRole {
                 
                 name = speaker.name
-                pictureURL = speaker.pictureURL
+                picture = speaker.picture
                 
             } else {
                 
                 name = currentMember.name
-                pictureURL = currentMember.pictureURL
+                picture = currentMember.picture
             }
             
         } else {
             
             name = ""
-            pictureURL = ""
+            picture = nil
         }
     }
     

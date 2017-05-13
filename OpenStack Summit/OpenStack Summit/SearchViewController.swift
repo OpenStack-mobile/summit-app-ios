@@ -265,7 +265,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return section
     }
     
-    private func configure(_ cell: ScheduleTableViewCell, with event: ScheduleItem) {
+    private func configure(cell: ScheduleTableViewCell, with event: ScheduleItem) {
         
         // set text
         cell.nameLabel.text = event.name
@@ -299,14 +299,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), for: .touchUpInside)
     }
     
-    private func configure(_ cell: PeopleTableViewCell, with speaker: Speaker) {
+    private func configure(cell: PeopleTableViewCell, with speaker: Speaker) {
         
         cell.name = speaker.name
-        cell.title = speaker.title
-        cell.pictureURL = speaker.pictureURL
+        cell.title = speaker.title ?? ""
+        cell.picture = speaker.picture
     }
     
-    private func configure(_ cell: SearchResultTableViewCell, with track: Track) {
+    private func configure(cell: SearchResultTableViewCell, with track: Track) {
         
         cell.itemLabel.text = track.name
     }

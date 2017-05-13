@@ -96,7 +96,7 @@ final class SummitsViewController: UITableViewController {
         cell.textLabel?.text = summit.name
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
         let stringDateFrom = dateFormatter.stringFromDate(summit.start)
         
@@ -165,7 +165,7 @@ final class SummitsViewController: UITableViewController {
                         
                         controller.showErrorAlert((error as NSError).localizedDescription)
                         
-                    case .Value:
+                    case .value:
                         
                         controller.select(summit: selectedSummit.identifier)
                     }

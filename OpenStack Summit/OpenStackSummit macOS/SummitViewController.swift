@@ -59,7 +59,7 @@ final class SummitViewController: NSViewController {
             nameLabel.stringValue = summit.name
             
             let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
+            dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
             let stringDateFrom = dateFormatter.stringFromDate(summit.start)
             

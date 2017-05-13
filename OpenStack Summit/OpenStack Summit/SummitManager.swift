@@ -38,11 +38,11 @@ final class SummitManager {
     @inline(__always)
     private func initSummit() -> Observable<Identifier> {
         
-        let summit = userDefaults.integer(forKey: PreferenceKey.summit.rawValue)
+        let summit = userDefaults.object(forKey: PreferenceKey.summit.rawValue) as? Int64 ?? 0
         
         let observable = Observable<Identifier>(summit)
         
-        observable.observe(summitChanged)
+        let _ = observable.observe(summitChanged)
         
         return observable
     }

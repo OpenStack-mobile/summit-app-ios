@@ -51,7 +51,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         super.viewDidLoad()
         
         // setup table view
-        tableView.registerNib(R.nib.peopleTableViewCell)
+        tableView.register(R.nib.peopleTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -95,7 +95,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value: break // entity controller will update
+                case .value: break // entity controller will update
                 }
             }
         }
@@ -105,7 +105,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     private func configureView(_ team: Team) {
         
-        guard let memberID = Store.shared.authenticatedMember?.identifier
+        guard let memberID = Store.shared.authenticatedMember?.id
             else { fatalError("Not logged in") }
         
         let userPermission = team.permission(for: memberID)
@@ -269,8 +269,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = teamMember.member.name
-            cell.pictureURL = teamMember.member.pictureURL
-            cell.title = teamMember.permission.rawValue.lowercaseString.capitalizedString
+            cell.picture = teamMember.member.picture
+            cell.title = teamMember.permission.rawValue.lowercase.capitalized
             
             return cell
             
@@ -279,8 +279,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = member.name
-            cell.pictureURL = member.pictureURL
-            cell.title = member.title ?? member.twitter ?? member.irc
+            cell.picture = member.picture
+            cell.title = member.title ?? member.twitter ?? member.irc ?? ""
             
             return cell
             

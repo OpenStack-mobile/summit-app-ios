@@ -76,7 +76,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         self.navigationItem.rightBarButtonItem = didFinish != nil ? doneButton : nil
     }
     
-    private func configure(_ cell: UITableViewCell, with summit: Summit) {
+    private func configure(cell: UITableViewCell, with summit: Summit) {
         
         cell.textLabel!.text = summit.name
         
@@ -117,7 +117,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.summitCell, for: indexPath)!
             
-            configure(cell, with: item)
+            configure(cell: cell, with: item)
             
             return cell
             

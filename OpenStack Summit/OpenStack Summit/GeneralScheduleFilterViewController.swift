@@ -153,7 +153,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         return section.items[indexPath.row]
     }
     
-    private func configure(_ cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
         
         let item = self[indexPath]
         

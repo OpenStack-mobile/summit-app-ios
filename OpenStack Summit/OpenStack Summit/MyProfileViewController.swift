@@ -62,14 +62,14 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers: [UIViewController] = [personDetailViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
-            speakerPresentationsViewController.speaker = speaker.identifier
+            speakerPresentationsViewController.speaker = speaker.id
             childViewControllers.append(speakerPresentationsViewController)
         }
         

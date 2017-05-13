@@ -342,7 +342,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     
                     controller.showErrorMessage(error)
                     
-                case .Value:
+                case .value:
                     
                     controller.configureAverageRatingView()
                 }
@@ -350,21 +350,21 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    private func configure(_ cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.speakers.rawValue, "\(indexPath.section) is not speaker section")
         
         let speaker = eventDetail.speakers[indexPath.row]
         cell.name = speaker.name
-        cell.title = speaker.title
-        cell.pictureURL = speaker.pictureURL
+        cell.title = speaker.title ?? ""
+        cell.picture = speaker.picture
         cell.isModerator = speaker.isModerator
         
         cell.layoutMargins = UIEdgeInsets.zero
         cell.separatorInset = UIEdgeInsets.zero
     }
     
-    private func configure(_ cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
         
@@ -526,7 +526,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, for: indexPath)!
                 
                 let title = eventDetail.eventType == "Presentation" ? "Download slides" : "Download attachment"
-                cell.downloadButton.setTitle(title, for: .Normal)
+                cell.downloadButton.setTitle(title, for: .normal)
                 
                 return cell
             }
@@ -578,7 +578,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 guard let venue = eventDetail.venue
                     else { return }
                 
-                showLocationDetail(venue.identifier)
+                show(location: venue.identifier)
                 
             case .level:
                 
@@ -603,7 +603,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            guard feedback.member.identifier == Store.shared.authenticatedMember?.identifier
+            guard feedback.member.identifier == Store.shared.authenticatedMember?.id
                 && canAddFeedback(for: eventDetail)
                 else { return }
             
@@ -697,7 +697,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     // Swift Protocol extensions are not visible to ObjC, need to place implementation here and not in extension
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
-        guard self.openWebURL(URL)
+        guard self.openWeb(url: URL)
             else { return true }
         
         return false

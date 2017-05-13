@@ -241,7 +241,7 @@ extension EventDatesViewController {
         
         case loading
         case error(ErrorType)
-        case summit(start: NSDate, end: NSDate, name: String, timeZone: NSTimeZone)
+        case summit(start: NSDate, end: NSDate, name: String, timeZone: TimeZone)
         
         init(summit: Summit) {
             
@@ -249,7 +249,7 @@ extension EventDatesViewController {
             
             let end = summit.end.mt_dateDaysAfter(1)
             
-            let timeZone = NSTimeZone(name: summit.timeZone)!
+            let timeZone = TimeZone(identifier: summit.timeZone)!
             
             self = .summit(start: start, end: end, name: summit.name, timeZone: timeZone)
         }

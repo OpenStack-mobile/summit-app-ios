@@ -20,7 +20,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     weak var delegate: EventDatesViewControllerDelegate?
     
-    private var summitCache: (start: NSDate, end: NSDate, timeZone: NSTimeZone, name: String)?
+    private var summitCache: (start: NSDate, end: NSDate, timeZone: TimeZone, name: String)?
     
     private lazy var dateFormatter: NSDateFormatter = {
         
@@ -73,7 +73,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
             
             let end = summit.end.mt_dateDaysAfter(1)
             
-            let timeZone = NSTimeZone(name: summit.timeZone)!
+            let timeZone = TimeZone(identifier: summit.timeZone)!
             
             self.summitCache = (start: start, end: end, timeZone: timeZone, name: summit.name)
             

@@ -70,7 +70,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
                     
                     controller.showErrorMessage(error)
                     
-                case .Value:
+                case .value:
                     
                     // set summit
                     SummitManager.shared.summit.value = item.identifier
@@ -101,7 +101,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         cell.nameLabel!.stringValue = summit.name
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
         let stringDateFrom = dateFormatter.stringFromDate(summit.start)
         

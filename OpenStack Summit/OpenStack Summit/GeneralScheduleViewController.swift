@@ -145,7 +145,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     internal override func loadData() {
         
-        if try! Store.shared.managedObjectContext.managedObjects(Summit).isEmpty
+        if self.isDataLoaded == false
             && Reachability.connected == false {
             
             self.toggleNoConnectivityMessage(true)
@@ -196,8 +196,8 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         var activeDates: [Date] = []
         for event in events {
-            let timeZone = NSTimeZone(name: event.summit.timeZone)!
-            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            let timeZone = TimeZone(identifier: event.summit.timeZone)!
+            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
             if !activeDates.contains(startDate) {
                 activeDates.append(startDate)
             }

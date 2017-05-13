@@ -12,6 +12,7 @@ import Foundation
 import CoreSummit
 import FirebaseCore
 import FirebaseMessaging
+import Predicate
 
 public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate {
     
@@ -262,7 +263,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 guard let topicString = notification.userInfo?[UserNotificationUserInfo.topic.rawValue] as? String,
                     let topic = Notification.Topic(rawValue: topicString),
                     case let .team(team) = topic,
-                    let messageIdentifier = notification.userInfo?[UserNotificationUserInfo.identifier.rawValue] as? Int
+                    let messageIdentifier = notification.userInfo?[UserNotificationUserInfo.identifier.rawValue] as? Identifier
                     else { completion(); return }
                 
                 // mark message as read
@@ -320,7 +321,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     @inline(__always)
     private func subscribe(to topic: CoreSummit.Notification.Topic) {
         
-        FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
+        FIRMessaging.messaging().subscribe(toTopic: topic.rawValue)
         
         subscribedTopics.insert(topic)
         
@@ -330,7 +331,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     @inline(__always)
     private func unsubscribe(from topic: CoreSummit.Notification.Topic) {
         
-        FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
+        FIRMessaging.messaging().unsubscribe(fromTopic: topic.rawValue)
         
         subscribedTopics.remove(topic)
         
@@ -370,7 +371,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let member = self.store.authenticatedMember
         
-        if let memberID = member?.identifier {
+        if let memberID = member?.id {
             
             subscribe(to: .member(memberID))
         }
@@ -409,11 +410,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     @inline(__always)
     private func initUnreadNotifications(_ preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
         
-        let storedValue = userDefaults.object(forKey: preferenceKey.rawValue) as? [Int] ?? []
+        let storedValue = userDefaults.object(forKey: preferenceKey.rawValue) as? [Identifier] ?? []
         
         let observable = Observable<Set<Identifier>>(Set(storedValue))
         
-        observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0.0, old: $0.1, key: preferenceKey) }
+        let _ = observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0.0, old: $0.1, key: preferenceKey) }
         
         return observable
     }
@@ -446,7 +447,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         let unreadTeamMessages = Array(self.unreadTeamMessages.value)
         
         //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
-        let predicate: Predicate = "team.id" == Int64(team) &&& "id".`in`(unreadTeamMessages)
+        let predicate: Predicate = "team.id" == team && "id".`in`(unreadTeamMessages)
         
         return try context.count(TeamMessageManagedObject.self, predicate: predicate)
     }
@@ -455,19 +456,19 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
         
-        process(remoteMessage.appData as! [String: AnyObject])
+        process(pushNotification: remoteMessage.appData as! [String: Any])
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        let identifier = (anObject as! Entity).identifier
+        let identifier = (anObject as! Entity).id
         
         if controller == teamsFetchedResultsController
             || controller == eventsFetchedResultsController {
             
-            let topic: Notification.Topic
+            let topic: CoreSummit.Notification.Topic
             
             if controller === teamsFetchedResultsController {
                 
@@ -509,15 +510,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         } else {
             
             fatalError("Unknown fetched results controller \(controller)")
-        }
-        
-        switch type {
-            
-        case .insert: subscribe(to: topic)
-            
-        case .delete: unsubscribe(from: topic)
-            
-        case .move, .update: break
         }
     }
     

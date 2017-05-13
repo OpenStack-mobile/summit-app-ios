@@ -49,7 +49,7 @@ extension MessageEnabledViewController {
         
         print("Error at \(fileName):\(lineNumber)\n\(error)")
         
-        if AppEnvironment == .Staging {
+        if AppEnvironment == .staging {
             
             showInfoMessage(NSLocalizedString("Error", comment: "Error"), message: message)
         }

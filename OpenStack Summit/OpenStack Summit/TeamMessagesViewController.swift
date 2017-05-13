@@ -125,7 +125,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return (name, message.body, imageURL)
     }
     
-    private func configure(_ cell: MessageTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: MessageTableViewCell, at indexPath: IndexPath) {
         
         let managedObject = self.fetchedResultsController.object(at: indexPath)
         
@@ -250,7 +250,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MessengerCellIdentifier, for: indexPath) as! MessageTableViewCell
         
-        configure(cell, at: indexPath)
+        configure(cell: cell, at: indexPath)
         
         let message = self[indexPath]
         
@@ -326,7 +326,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             if let updateIndexPath = indexPath,
                 let cell = self.tableView!.cellForRow(at: updateIndexPath) as! MessageTableViewCell? {
                 
-                self.configure(cell, at: updateIndexPath)
+                self.configure(cell: cell, at: updateIndexPath)
             }
         case .move:
             

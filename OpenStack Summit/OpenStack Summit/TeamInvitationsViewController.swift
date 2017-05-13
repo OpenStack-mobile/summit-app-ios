@@ -21,7 +21,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     var completion: ((TeamInvitationsViewController) -> ())?
     
-    lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    lazy var pageController: PageController<Invitation> = PageController(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
@@ -40,7 +40,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         
         tableView.estimatedRowHeight = 98
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -65,7 +65,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - Private Methods
     
-    private func configure(_ cell: TeamInvitationTableViewCell, with invitation: Invitation) {
+    private func configure(cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
         cell.teamLabel.text = invitation.team.name
         
@@ -106,7 +106,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                                 
                                 controller.showErrorMessage(error)
                                 
-                            case .Value:
+                            case .value:
                                 
                                 controller.refresh()
                             }
@@ -191,9 +191,9 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
             
         case let .item(item):
             
-            let accept = UITableViewRowAction(style: .Normal, title: "Accept") { [weak self] (_,_) in self?.accept(item) }
+            let accept = UITableViewRowAction(style: .normal, title: "Accept") { [weak self] (_,_) in self?.accept(item) }
             
-            let decline = UITableViewRowAction(style: .Destructive, title: "Decline") { [weak self] (_,_) in self?.decline(item)  }
+            let decline = UITableViewRowAction(style: .destructive, title: "Decline") { [weak self] (_,_) in self?.decline(item)  }
             
             return [decline, accept]
             

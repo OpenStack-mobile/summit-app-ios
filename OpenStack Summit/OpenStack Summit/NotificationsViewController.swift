@@ -123,7 +123,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return Notification(managedObject: managedObject)
     }
     
-    private func configure(_ cell: NotificationTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: NotificationTableViewCell, at indexPath: IndexPath) {
         
         let notification = self[indexPath]
         
@@ -157,7 +157,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationCell)!
         
-        configure(cell, at: indexPath)
+        configure(cell: cell, at: indexPath)
         
         return cell
     }

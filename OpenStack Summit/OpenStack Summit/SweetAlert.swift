@@ -205,23 +205,27 @@ open class SweetAlert: UIViewController {
         self.contentView = UIView()
     }
     
+    @discardableResult
     open func showAlert(_ title: String) -> SweetAlert {
         self.showAlert(title, subTitle: nil, style: .none)
         return self
     }
     
+    @discardableResult
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle = .none) -> SweetAlert {
         self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: "OK")
         return self
         
     }
     
+    @discardableResult
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
         self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: UIColor.colorFromRGB(0xAEDEF4))
         userAction = action
         return self
     }
     
+    @discardableResult
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
         self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
             nil)
@@ -229,6 +233,7 @@ open class SweetAlert: UIViewController {
         return self
     }
     
+    @discardableResult
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
         String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
             self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
@@ -355,7 +360,7 @@ class CancelAnimatedView: AnimatableView {
         setupLayers()
         var t = CATransform3DIdentity;
         t.m34 = 1.0 / -500.0;
-        t = CATransform3DRotate(t, CGFloat(90.0 * M_PI / 180.0), 1, 0, 0);
+        t = CATransform3DRotate(t, CGFloat(90.0 * .pi / 180.0), 1, 0, 0);
         circleLayer.transform = t
         crossPathLayer.opacity = 0.0
     }
@@ -370,8 +375,8 @@ class CancelAnimatedView: AnimatableView {
     
     private var outlineCircle: CGPath  {
         let path = UIBezierPath()
-        let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
-        let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
+        let startAngle: CGFloat = CGFloat((0) / 180.0 * .pi)  //0
+        let endAngle: CGFloat = CGFloat((360) / 180.0 * .pi)   //360
         path.addArc(withCenter: CGPoint(x: self.frame.size.width/2.0, y: self.frame.size.width/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
         return path.cgPath
@@ -416,7 +421,7 @@ class CancelAnimatedView: AnimatableView {
         
         var t2 = CATransform3DIdentity;
         t2.m34 = 1.0 / -500.0;
-        t2 = CATransform3DRotate(t2, CGFloat(-.pi), 1, 0, 0);
+        t2 = CATransform3DRotate(t2, CGFloat(-Double.pi), 1, 0, 0);
         
         let animation = CABasicAnimation(keyPath: "transform")
         let time = 0.3
@@ -472,8 +477,8 @@ class InfoAnimatedView: AnimatableView {
     
     var outlineCircle: CGPath  {
         let path = UIBezierPath()
-        let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
-        let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
+        let startAngle: CGFloat = CGFloat((0) / 180.0 * .pi)  //0
+        let endAngle: CGFloat = CGFloat((360) / 180.0 * .pi)   //360
         path.addArc(withCenter: CGPoint(x: self.frame.size.width/2.0, y: self.frame.size.width/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
         let factor:CGFloat = self.frame.size.width / 1.5
@@ -533,16 +538,16 @@ class SuccessAnimatedView: AnimatableView {
     
     var outlineCircle: CGPath {
         let path = UIBezierPath()
-        let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
-        let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
+        let startAngle: CGFloat = CGFloat((0) / 180.0 * .pi)  //0
+        let endAngle: CGFloat = CGFloat((360) / 180.0 * .pi)   //360
         path.addArc(withCenter: CGPoint(x: self.frame.size.width/2.0, y: self.frame.size.height/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         return path.cgPath
     }
     
     var path: CGPath {
         let path = UIBezierPath()
-        let startAngle:CGFloat = CGFloat((60) / 180.0 * M_PI) //60
-        let endAngle:CGFloat = CGFloat((200) / 180.0 * M_PI)  //190
+        let startAngle:CGFloat = CGFloat((60) / 180.0 * .pi) //60
+        let endAngle:CGFloat = CGFloat((200) / 180.0 * .pi)  //190
         path.addArc(withCenter: CGPoint(x: self.frame.size.width/2.0, y: self.frame.size.height/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         path.addLine(to: CGPoint(x: 36.0 - 10.0 ,y: 60.0 - 10.0))
         path.addLine(to: CGPoint(x: 85.0 - 20.0, y: 30.0 - 20.0))

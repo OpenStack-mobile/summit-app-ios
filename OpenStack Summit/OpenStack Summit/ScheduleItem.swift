@@ -32,9 +32,9 @@ public struct ScheduleItem: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.identifier = event.identifier
+        self.identifier = event.id
         self.name = event.name
-        self.summit = event.summit.identifier
+        self.summit = event.summit.id
         self.start = event.start
         self.end = event.end
         self.eventType = event.eventType.name
@@ -81,7 +81,7 @@ internal extension ScheduleItem {
     static func getTime(_ event: EventManagedObject) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: event.summit.timeZone);
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone)
         dateFormatter.dateFormat = "hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
@@ -96,7 +96,7 @@ internal extension ScheduleItem {
     static func getDay(_ event: EventManagedObject) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: event.summit.timeZone);
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone)
         dateFormatter.dateStyle = .medium
         
         return dateFormatter.string(from: event.start)
@@ -105,7 +105,7 @@ internal extension ScheduleItem {
     static func getDateTime(_ event: EventManagedObject) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: event.summit.timeZone);
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
@@ -121,7 +121,7 @@ internal extension ScheduleItem {
         
         // only show after date
         guard let startShowingVenues = event.summit.startShowingVenues,
-            Date().mt_isAfter(startShowingVenues)
+            NSDate().mt_is(after: startShowingVenues)
             else { return "" }
         
         var location = ""

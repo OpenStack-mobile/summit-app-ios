@@ -64,7 +64,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         return Speaker(managedObject: managedObject)
     }
     
-    private func configure(_ cell: PeopleTableViewCell, at indexPath: IndexPath) {
+    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         let person = self[indexPath]
         
@@ -79,7 +79,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell)!
         
-        configure(cell, at: indexPath)
+        configure(cell: cell, at: indexPath)
         
         return cell
     }

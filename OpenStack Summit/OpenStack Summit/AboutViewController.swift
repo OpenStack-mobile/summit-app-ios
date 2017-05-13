@@ -164,7 +164,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(_ cell: WirelessNetworkCell, with network: WirelessNetwork) {
+    private func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -172,7 +172,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(_ cell: AboutNameCell) {
+    private func configure(cell: AboutNameCell) {
         
         guard let summit = self.summitCache
             else { fatalError("No summit cache") }
@@ -244,7 +244,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutNameCell, for: indexPath)!
             
-            configure(cell)
+            configure(cell: cell)
             
             return cell
             
@@ -254,7 +254,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             let network = networks[indexPath.row]
             
-            configure(cell, with: network)
+            configure(cell: cell, with: network)
             
             return cell
             

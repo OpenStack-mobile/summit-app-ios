@@ -111,7 +111,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }
     
     @inline(__always)
-    private func configure(_ cell: TeamCell, with team: Team) {
+    private func configure(cell: TeamCell, with team: Team) {
         
         cell.nameLabel.text = team.name
         
