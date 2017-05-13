@@ -16,7 +16,7 @@ public final class ImageCache {
     
     // MARK: - Properties
     
-    private let internalCache = NSCache<NSString, NSData>()
+    private let internalCache = NSCache<NSString, Data>()
     
     public var urlSession = URLSession.shared
     
@@ -228,7 +228,7 @@ import AppKit
 
 extension NSImageView: ImageCacheView {
     
-    public func setImageData(imageData: NSData?) {
+    public func setImageData(_ imageData: Data?) {
         
         if let data = imageData {
             

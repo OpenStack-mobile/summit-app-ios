@@ -32,7 +32,7 @@ final class SpeakersTableViewController: TableViewController {
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(_ sender: AnyObject) {
         
         guard tableView.selectedRow >= 0
             else { return }
@@ -50,7 +50,7 @@ final class SpeakersTableViewController: TableViewController {
         
         let _ = self.view
         
-        assert(viewLoaded)
+        assert(isViewLoaded)
         
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, cachedPredicate])
         
@@ -73,7 +73,7 @@ final class SpeakersTableViewController: TableViewController {
         }
     }
     
-    private func configure(cell cell: SpeakerTableViewCell, at row: Int) {
+    private func configure(cell: SpeakerTableViewCell, at row: Int) {
         
         let managedObject = self.fetchedResultsController.fetchedObjects![row] as! SpeakerManagedObject
         
@@ -86,7 +86,7 @@ final class SpeakersTableViewController: TableViewController {
         
         cell.imageView!.image = NSImage(named: "generic-user-avatar")
         
-        if let url = NSURL(string: speaker.pictureURL) {
+        if let url = URL(string: speaker.pictureURL) {
             
             cell.imageView!.loadCached(url)
         }
@@ -94,9 +94,9 @@ final class SpeakersTableViewController: TableViewController {
     
     // MARK: - NSTableViewDataSource
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
         
         configure(cell: cell, at: row)
         

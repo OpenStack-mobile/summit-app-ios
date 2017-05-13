@@ -64,16 +64,16 @@ extension MessageEnabledViewController {
     
 extension MessageEnabledViewController {
 
-    func showInfoMessage(title: String, message: String) {
+    func showInfoMessage(_ title: String, message: String) {
         
         let alert = NSAlert()
         alert.messageText = title
         alert.informativeText = message
-        alert.alertStyle = .Informational
+        alert.alertStyle = .informational
         alert.runModal()
     }
     
-    func showErrorMessage(error: ErrorType,
+    func showErrorMessage(_ error: Error,
                           fileName: String = #file,
                           lineNumber: Int = #line) {
         

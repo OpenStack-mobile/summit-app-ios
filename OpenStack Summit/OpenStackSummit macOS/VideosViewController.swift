@@ -27,7 +27,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     private var summitObserver: Int?
     
@@ -53,7 +53,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "event.summit.id == %@", summitID)
         
@@ -76,37 +76,37 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sort,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController.performFetch()
         
         self.collectionView.reloadData()
     }
     
-    private func configure(item item: CollectionViewItem, at indexPath: NSIndexPath) {
+    private func configure(item: CollectionViewItem, at indexPath: IndexPath) {
         
-        let video = fetchedResultsController.objectAtIndexPath(indexPath) as! VideoManagedObject
+        let video = fetchedResultsController.object(at: indexPath) as! VideoManagedObject
                 
         item.textField!.stringValue = video.event.name
         
-        item.imageURL = NSURL(youtubeThumbnail: video.youtube)
+        item.imageURL = URL(youtubeThumbnail: video.youtube) as! NSURL
     }
     
     // MARK: - NSCollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
         
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("VideoCollectionViewItem", forIndexPath: indexPath) as! CollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: "VideoCollectionViewItem", for: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         
@@ -115,13 +115,13 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     // MARK: - NSCollectionViewDelegate
     
-    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         
-        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        defer { collectionView.deselectItems(at: indexPaths) }
         
         indexPaths.forEach {
                         
-            let video = fetchedResultsController.objectAtIndexPath($0) as! VideoManagedObject
+            let video = fetchedResultsController.object(at: $0) as! VideoManagedObject
             
             AppDelegate.shared.mainWindowController.view(.video, identifier: video.identifier)
         }
@@ -129,12 +129,12 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         

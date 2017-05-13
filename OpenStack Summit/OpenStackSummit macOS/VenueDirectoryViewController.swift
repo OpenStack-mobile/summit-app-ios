@@ -26,7 +26,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     weak var delegate: VenueDirectoryViewControllerDelegate?
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     private var summitObserver: Int?
     
@@ -50,7 +50,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject? = nil) {
+    @IBAction func tableViewClick(_ sender: AnyObject? = nil) {
         
         guard tableView.selectedRow >= 0
             else { return }
@@ -68,7 +68,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
         
@@ -80,14 +80,14 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sort,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController.performFetch()
         
         self.tableView.reloadData()
     }
     
-    private func configure(cell cell: VenueTableViewCell, at row: Int) {
+    private func configure(cell: VenueTableViewCell, at row: Int) {
         
         assert(fetchedResultsController.fetchedObjects != nil)
         
@@ -98,21 +98,21 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         cell.venueNameLabel.stringValue = venue.name
         cell.venueAddressLabel.stringValue = venue.address
         
-        cell.imageURL = NSURL(string: venue.backgroundImageURL ?? "")
+        cell.imageURL = URL(string: venue.backgroundImageURL ?? "")
     }
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     // MARK: - NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! VenueTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
         
         configure(cell: cell, at: row)
         
@@ -121,12 +121,12 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         
@@ -186,7 +186,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
 
 @objc protocol VenueDirectoryViewControllerDelegate: class {
     
-    func venueDirectoryViewController(controller: VenueDirectoryViewController, didSelect venue: Identifier)
+    func venueDirectoryViewController(_ controller: VenueDirectoryViewController, didSelect venue: Identifier)
 }
 
 final class VenueTableViewCell: ImageTableViewCell {

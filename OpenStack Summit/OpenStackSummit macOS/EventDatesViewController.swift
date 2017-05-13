@@ -20,11 +20,11 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     weak var delegate: EventDatesViewControllerDelegate?
     
-    private var summitCache: (start: NSDate, end: NSDate, timeZone: TimeZone, name: String)?
+    private var summitCache: (start: Date, end: Date, timeZone: TimeZone, name: String)?
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MMMM d"
         
@@ -53,7 +53,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject? = nil) {
+    @IBAction func tableViewClick(_ sender: AnyObject? = nil) {
                 
         guard tableView.selectedRow >= 0
             else { return }
@@ -85,11 +85,11 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         self.tableView.reloadData()
         
         // select first row
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             
             if self.tableView.numberOfRows > 0 {
                 
-                self.tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+                self.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 
                 self.tableViewClick()
             }
@@ -98,7 +98,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         guard let summit = summitCache
             else { return 0 }
@@ -108,9 +108,9 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! NSTableCellView
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
         
         let date = summitCache!.start.mt_dateDaysAfter(row)
         
@@ -124,5 +124,5 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
 
 @objc protocol EventDatesViewControllerDelegate: class {
     
-    func eventDatesViewController(controller: EventDatesViewController, didSelect date: NSDate)
+    func eventDatesViewController(_ controller: EventDatesViewController, didSelect date: Date)
 }

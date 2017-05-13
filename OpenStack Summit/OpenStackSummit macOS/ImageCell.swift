@@ -15,12 +15,12 @@ protocol ImageCell: class {
     
     var placeholderImage: NSImage? { get set }
     
-    var imageURL: NSURL? { get set }
+    var imageURL: URL? { get set }
 }
 
 private extension ImageCell {
     
-    private func configureView(newValue: NSURL?, _ oldValue: NSURL?) {
+    func configureView(_ newValue: URL?, _ oldValue: URL?) {
         
         if imageURL != oldValue {
             
@@ -38,7 +38,7 @@ class ImageTableViewCell: NSTableCellView, ImageCell {
     
     var placeholderImage: NSImage?
     
-    var imageURL: NSURL? {
+    var imageURL: URL? {
         
         didSet { configureView(imageURL, oldValue) }
     }
@@ -48,7 +48,7 @@ class ImageCollectionViewItem: NSCollectionViewItem, ImageCell {
     
     var placeholderImage: NSImage?
     
-    var imageURL: NSURL? {
+    var imageURL: URL? {
         
         didSet { configureView(imageURL, oldValue) }
     }

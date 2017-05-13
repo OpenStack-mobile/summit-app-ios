@@ -39,7 +39,7 @@ final class SpeakerViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventsViewController.tableView.selectionHighlightStyle = .Regular
+        eventsViewController.tableView.selectionHighlightStyle = .regular
         
         configureView()
     }
@@ -54,9 +54,9 @@ final class SpeakerViewController: NSViewController {
             
             memberProfileViewController.profile = .speaker(speaker)
             
-            let speakerID = NSNumber(longLong: Int64(speaker))
+            let speakerID = NSNumber(value: Int64(speaker))
             
-            let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+            let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
             
             eventsViewController.predicate = NSPredicate(format: "ANY presentation.speakers.id == %@ && summit.id == %@", speakerID, summitID)
             

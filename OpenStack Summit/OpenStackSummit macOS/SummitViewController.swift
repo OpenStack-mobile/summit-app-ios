@@ -51,24 +51,24 @@ final class SummitViewController: NSViewController {
     
     private func configureView() {
         
-        self.contentView.hidden = self.currentSummit == nil
-        self.emptyView.hidden = self.currentSummit != nil
+        self.contentView.isHidden = self.currentSummit == nil
+        self.emptyView.isHidden = self.currentSummit != nil
         
         if let summit = self.currentSummit {
             
             nameLabel.stringValue = summit.name
             
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start)
+            let stringDateFrom = dateFormatter.string(from: summit.start)
             
             dateFormatter.dateFormat = "dd, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end)
+            let stringDateTo = dateFormatter.string(from: summit.end)
             
             dateLabel.stringValue = stringDateFrom + stringDateTo
             
-            let today = NSDate()
+            let today = Date()
             
             let summitActive = today.mt_isBetweenDate(summit.start, andDate: summit.end)
             

@@ -24,7 +24,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
     
@@ -38,7 +38,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(_ sender: AnyObject) {
         
         guard tableView.selectedRow >= 0
             else { return }
@@ -54,7 +54,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
         
@@ -64,7 +64,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: EventManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 50
         
@@ -79,7 +79,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         }
     }
     
-    private func configure(cell cell: EventTableViewCell, at row: Int) {
+    private func configure(cell: EventTableViewCell, at row: Int) {
         
         let eventManagedObject = self.fetchedResultsController.fetchedObjects![row] as! EventManagedObject
         
@@ -90,19 +90,19 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         cell.locationLabel.stringValue = eventDetail.location
         cell.trackLabel.stringValue = eventDetail.track
         cell.typeLabel.stringValue = eventDetail.eventType
-        cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clearColor()
+        cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clear
     }
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! EventTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! EventTableViewCell
         
         configure(cell: cell, at: row)
         
@@ -111,12 +111,12 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         

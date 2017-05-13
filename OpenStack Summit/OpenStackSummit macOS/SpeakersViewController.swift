@@ -26,7 +26,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     private var summitObserver: Int?
     
@@ -59,11 +59,11 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         self.userActivity = userActivity
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
@@ -72,7 +72,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
         
@@ -93,16 +93,16 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController.performFetch()
         
         self.collectionView.reloadData()
     }
     
-    private func configure(item item: CollectionViewItem, at indexPath: NSIndexPath) {
+    private func configure(item: CollectionViewItem, at indexPath: IndexPath) {
         
-        let managedObject = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        let managedObject = fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
         
         let speaker = Speaker(managedObject: managedObject)
         
@@ -110,24 +110,24 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         item.placeholderImage = self.placeholderImage
         
-        item.imageURL = NSURL(string: speaker.pictureURL)
+        item.imageURL = URL(string: speaker.pictureURL)
     }
     
     // MARK: - NSCollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
         
         return fetchedResultsController.sections?.count ?? 0
     }
     
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath) as! CollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: "PersonCollectionViewItem", for: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         
@@ -136,25 +136,25 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     // MARK: - NSCollectionViewDelegate
     
-    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         
-        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        defer { collectionView.deselectItems(at: indexPaths) }
         
         let indexPath = indexPaths.first!
         
-        let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        let speaker = fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
         
         AppDelegate.shared.mainWindowController.view(.speaker, identifier: speaker.identifier)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         

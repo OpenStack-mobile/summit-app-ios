@@ -20,7 +20,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - NSApplicationDelegate
 
-    func applicationDidFinishLaunching(notification: NSNotification) {
+    func applicationDidFinishLaunching(_ notification: Notification) {
         // Insert code here to initialize your application
         
         // print app info
@@ -40,13 +40,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
 
-    func applicationWillTerminate(notification: NSNotification) {
+    func applicationWillTerminate(_ notification: Notification) {
         // Insert code here to tear down your application
         
         
     }
     
-    func applicationShouldHandleReopen(application: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    func applicationShouldHandleReopen(_ application: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         
         application.windows
             .filter { $0.className != NSPopover.windowClassName }
@@ -55,12 +55,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         
         return false
     }
     
-    func application(application: NSApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]) -> Void) -> Bool {
+    func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
         
         print("Continue activity \(userActivity.activityType)\n\(userActivity.webpageURL?.description ?? "")\n\(userActivity.userInfo?.description ?? "")")
         
@@ -71,7 +71,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 else { return false }
             
             guard mainWindowController.openWebURL(url)
-                else { NSWorkspace.sharedWorkspace().openURL(url); return false }
+                else { NSWorkspace.shared().open(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
