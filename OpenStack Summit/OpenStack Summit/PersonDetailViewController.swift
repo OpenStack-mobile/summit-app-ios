@@ -21,7 +21,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     var profile: PersonIdentifier = .currentUser {
         
-        didSet { configureView() }
+        didSet { if isViewLoaded { configureView() } }
     }
     
     var contextMenu: ContextMenu {
