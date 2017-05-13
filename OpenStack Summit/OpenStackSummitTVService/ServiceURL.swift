@@ -20,25 +20,25 @@ struct ServiceURL {
         self.identifier = identifier
     }
     
-    init?(url: NSURL) {
+    init?(url: URL) {
         
-        guard let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false),
+        guard let components = URLComponents(url: url as URL, resolvingAgainstBaseURL: false),
             let identifierString = components.queryItems?.first(where: { $0.name == QueryItem.identifier.rawValue })?.value,
             let identifier = Int(identifierString)
             else { return nil }
         
-        self.identifier = identifier
+        self.identifier = Identifier(identifier)
     }
     
-    var url: NSURL {
+    var url: URL {
         
-        let components = NSURLComponents()
+        var components = URLComponents()
         
         components.scheme = type(of: self).scheme
         
-        components.queryItems = [NSURLQueryItem(name: QueryItem.identifier.rawValue, value: "\(identifier)")]
+        components.queryItems = [URLQueryItem(name: QueryItem.identifier.rawValue, value: "\(identifier)") as URLQueryItem]
         
-        return components.URL!
+        return components.url!
     }
 }
 

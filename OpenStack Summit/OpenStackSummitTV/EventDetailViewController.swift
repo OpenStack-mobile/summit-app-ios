@@ -11,6 +11,7 @@ import UIKit
 import CoreSummit
 import Haneke
 import XCDYouTubeKit
+import Predicate
 
 @objc(OSSTVEventDetailViewController)
 final class EventDetailViewController: UITableViewController {
@@ -74,17 +75,17 @@ final class EventDetailViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let detail = self.data[indexPath.row]
         
@@ -92,7 +93,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .name:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventNameCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventNameCell", for: indexPath)
             
             cell.textLabel!.text = eventDetail.name
             
@@ -100,9 +101,9 @@ final class EventDetailViewController: UITableViewController {
             
         case .description:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventDescriptionCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventDescriptionCell", for: indexPath)
             
-            if let data = eventDetail.eventDescription.dataUsingEncoding(String.Encoding.utf8),
+            if let data = eventDetail.eventDescription.data(using: String.Encoding.utf8),
                 let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 cell.textLabel!.text = attributedString.string
@@ -116,7 +117,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .track:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventTrackCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventTrackCell", for: indexPath)
             
             cell.textLabel!.text = eventDetail.track
             
@@ -124,7 +125,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .time:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventTimeCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventTimeCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel!.text = eventDetail.dateTime
             
@@ -132,17 +133,17 @@ final class EventDetailViewController: UITableViewController {
             
         case .video:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventVideoCell", forIndexPath: indexPath) as! VideoPlayerTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventVideoCell", for: indexPath) as! VideoPlayerTableViewCell
             
-            cell.playImageView.hidden = true
-            cell.activityIndicator.hidden = false
+            cell.playImageView.isHidden = true
+            cell.activityIndicator.isHidden = false
             
             if let thumbnailURL = URL(youtubeThumbnail: eventDetail.video!.youtube) {
                 
-                cell.videoImageView.hnk_setImageFromURL(thumbnailURL.environmentScheme, placeholder: nil, format: nil, failure: nil, success: { (image) in
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
                     
                     cell.videoImageView.image = image
-                    cell.playImageView.hidden = false
+                    cell.playImageView.isHidden = false
                     cell.activityIndicator.stopAnimating()
                     cell.setNeedsDisplay()
                 })
@@ -152,7 +153,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .location:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("EventLocationCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventLocationCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel!.text = eventDetail.location
             
@@ -160,7 +161,7 @@ final class EventDetailViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let data = self.data[indexPath.row]
         
@@ -176,15 +177,16 @@ final class EventDetailViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case "showTrackEvents":
             
-            let predicate = NSPredicate(format: "track.id == %@", eventCache.track! as NSNumber)
+            //let predicate = NSPredicate(format: "track.id == %@", eventCache.track! as NSNumber)
+            let predicate: Predicate = #keyPath(EventManagedObject.track.id) == eventCache.track!
             
-            let eventsViewController = segue.destinationViewController as! EventsViewController
+            let eventsViewController = segue.destination as! EventsViewController
             
             eventsViewController.predicate = predicate
             
@@ -197,7 +199,7 @@ final class EventDetailViewController: UITableViewController {
             
             let location = try! Location.find(locationID, context: Store.shared.managedObjectContext)
             
-            let venueDetailViewController = segue.destinationViewController as! VenueDetailViewController
+            let venueDetailViewController = segue.destination as! VenueDetailViewController
             
             venueDetailViewController.location = location
             

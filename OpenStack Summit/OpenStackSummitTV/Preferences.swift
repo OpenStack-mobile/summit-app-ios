@@ -13,25 +13,25 @@ final class Preferences {
     
     static let shared = Preferences()
     
-    private let userDefaults: NSUserDefaults
+    private let userDefaults: UserDefaults
     
     private init() {
         
-        self.userDefaults = NSUserDefaults(suiteName: AppGroup)!
+        self.userDefaults = UserDefaults(suiteName: AppGroup)!
     }
     
     // MARK: - Accessors
     
     private(set) var recentlyPlayed: [Identifier] {
         
-        get { return self[.recentlyPlayed] as? [Int] ?? [] }
+        get { return self[.recentlyPlayed] as! [Identifier]? ?? [] }
         
-        set { self[.recentlyPlayed] = newValue as [NSNumber] }
+        set { self[.recentlyPlayed] = newValue }
     }
     
     // MARK: - Methods
     
-    func addRecentlyPlayed(video: Identifier) {
+    func addRecentlyPlayed(_ video: Identifier) {
         
         let limit = 10
         
@@ -41,9 +41,9 @@ final class Preferences {
         var didRemovePrevious = false
         repeat {
             
-            if let previousIndex = recentlyPlayed.indexOf(video) {
+            if let previousIndex = recentlyPlayed.index(of: video) {
                 
-                recentlyPlayed.removeAtIndex(previousIndex)
+                recentlyPlayed.remove(at: previousIndex)
                 didRemovePrevious = true
                 
             } else {
@@ -60,7 +60,7 @@ final class Preferences {
             
         } else {
             
-            recentlyPlayed.insert(video, atIndex: 0)
+            recentlyPlayed.insert(video, at: 0)
         }
         
         // trim
@@ -72,13 +72,13 @@ final class Preferences {
     
     // MARK: - Private Methods
     
-    private subscript (key: Key) -> AnyObject? {
+    private subscript (key: Key) -> Any? {
         
-        get { return userDefaults.objectForKey(key.rawValue) }
+        get { return userDefaults.object(forKey: key.rawValue) as Any? }
         
         set {
             
-            userDefaults.setObject(newValue, forKey: key.rawValue)
+            userDefaults.set(newValue, forKey: key.rawValue)
             userDefaults.synchronize()
         }
     }

@@ -21,7 +21,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         didSet {
             
             // Return if the filter string hasn't changed.
-            guard filterString != oldValue && isViewLoaded() else { return }
+            guard filterString != oldValue && isViewLoaded else { return }
             
             filterChanged()
         }
@@ -46,7 +46,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         
         var predicates = [NSPredicate]()
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
         
@@ -75,7 +75,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
                                                                    predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
                                                                    sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
@@ -85,7 +85,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     }
     
     @inline(__always)
-    private func configure(cell cell: SpeakerTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: SpeakerTableViewCell, at indexPath: IndexPath) {
         
         let speaker = self[indexPath]
         
@@ -96,16 +96,16 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         cell.speakerImageView.clipsToBounds = true
     }
     
-    private subscript (indexPath: NSIndexPath) -> Speaker {
+    private subscript (indexPath: IndexPath) -> Speaker {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
     // MARK: - UISearchResultsUpdating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
         // update filter string
         filterString = searchController.searchBar.text ?? ""
@@ -113,9 +113,9 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(SpeakerTableViewCell.identifier, forIndexPath: indexPath) as! SpeakerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SpeakerTableViewCell.identifier, for: indexPath) as! SpeakerTableViewCell
         
         configure(cell: cell, at: indexPath)
         
@@ -124,7 +124,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -132,7 +132,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
             
             let speaker = self[tableView.indexPathForSelectedRow!]
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let speakerDetailViewController = navigationController.topViewController as! SpeakerDetailViewController
             

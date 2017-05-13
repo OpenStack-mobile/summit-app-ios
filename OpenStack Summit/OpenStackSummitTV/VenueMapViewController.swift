@@ -26,28 +26,28 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     var selectedVenue: Identifier? {
         
-        didSet { if isViewLoaded() { showSelectedVenue() } }
+        didSet { if isViewLoaded { showSelectedVenue() } }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
         
         let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
         
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController.performFetch()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
          updateUI()
@@ -94,7 +94,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - MKMapViewDelegate
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         let annotation = view.annotation as! VenueAnnotation
         
@@ -103,12 +103,12 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         updateUI()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         let managedObject = anObject as! VenueManagedObject
         
@@ -119,20 +119,20 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         
         switch type {
             
-        case .Insert:
+        case .insert:
             
             let annotation = VenueAnnotation(venue: venue)!
             
             mapView.addAnnotation(annotation)
             
-        case .Delete:
+        case .delete:
             
             guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier })
                 else { return }
             
             mapView.removeAnnotation(annotation)
             
-        case .Update:
+        case .update:
             
             guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
                 else { return }
@@ -152,7 +152,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
                 mapView.addAnnotation(newAnnotation)
             }
             
-        case .Move: break
+        case .move: break
         }
     }
 }
@@ -162,7 +162,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
 protocol VenueMapViewControllerDelegate: class {
     
     /// Informs the delegate that the venue selection has changed via the Map interface.
-    func venueMapViewController(controller: VenueMapViewController, didSelectVenue venue: Identifier)
+    func venueMapViewController(_ controller: VenueMapViewController, didSelectVenue venue: Identifier)
 }
 
 final class VenueAnnotation: NSObject, MKAnnotation {

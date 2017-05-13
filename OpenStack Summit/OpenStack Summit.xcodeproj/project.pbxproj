@@ -866,6 +866,7 @@
 		6EB1FE001E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
+		6EB2B3871EC746E900648958 /* Predicate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB2B3861EC746E900648958 /* Predicate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */; };
 		6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */; };
@@ -1049,7 +1050,6 @@
 		6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BE1D218280009FD0DA /* MenuViewController.swift */; };
 		6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C01D2198DF009FD0DA /* Menu.storyboard */; };
 		6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C61D21DBE5009FD0DA /* Event.storyboard */; };
-		6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; };
 		6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; };
 		6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; };
 		6EFE54F61E612C7A005EAB86 /* AeroGearOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */; };
@@ -1281,6 +1281,7 @@
 				6E75588E1E58D0F8003B6844 /* CoreSummit.framework in Embed Frameworks */,
 				6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */,
 				6E0FD0BB1E92E57F000C6DBA /* AeroGearOAuth2.framework in Embed Frameworks */,
+				6EB2B3871EC746E900648958 /* Predicate.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1666,6 +1667,7 @@
 		6EB1FDF21E1C073E0048045D /* TeamInvitationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitationRequest.swift; sourceTree = "<group>"; };
 		6EB1FDFF1E1D6BB90048045D /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		6EB295161DA97B0B0021C846 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		6EB2B3861EC746E900648958 /* Predicate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Predicate.framework; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderViewDark.xib; sourceTree = "<group>"; };
 		6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -1788,7 +1790,6 @@
 		6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearHttp.framework; sourceTree = "<group>"; };
 		6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearOAuth2.framework; sourceTree = "<group>"; };
 		6EFE54EB1E612BDD005EAB86 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftFoundation.framework; sourceTree = "<group>"; };
 		6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCDYouTubeKit.framework; sourceTree = "<group>"; };
 		9D13D0A51EB39C3D00991DD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloor.swift; sourceTree = "<group>"; };
@@ -1928,7 +1929,6 @@
 			files = (
 				6E11E4F81E5A122300EBA211 /* MapKit.framework in Frameworks */,
 				6E75588D1E58D0F8003B6844 /* CoreSummit.framework in Frameworks */,
-				6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */,
 				6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */,
 				6E0FD0BC1E92E57F000C6DBA /* XCDYouTubeKit.framework in Frameworks */,
 				6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */,
@@ -2965,7 +2965,7 @@
 		6EFE54E41E612BDD005EAB86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */,
+				6EB2B3861EC746E900648958 /* Predicate.framework */,
 				6EFE54EB1E612BDD005EAB86 /* JSON.framework */,
 				6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */,
 				6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */,
@@ -3356,6 +3356,7 @@
 					6E65D2031E4F78D100F8F582 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 775U6X6R5M;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -3383,6 +3384,7 @@
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -3812,6 +3814,7 @@
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearOAuth2.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/Rswift.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/Haneke.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Predicate.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (

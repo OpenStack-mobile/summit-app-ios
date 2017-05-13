@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 import Haneke
+import Predicate
 
 @objc(OSSTVSpeakerDetailViewController)
 final class SpeakerDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -30,7 +31,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     private var data = [Detail]()
     
-    private var eventsPredicate: NSPredicate!
+    private var eventsPredicate: Predicate!
     
     // MARK: - Loading
     
@@ -60,7 +61,8 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
         
         self.entityController.event.updated = updateUI
         
-        eventsPredicate = NSPredicate(format: "ANY presentation.speakers.id == %@", NSNumber(longLong: Int64(self.speaker)))
+        //eventsPredicate = NSPredicate(format: "ANY presentation.speakers.id == %@", NSNumber(value: Int64(self.speaker)))
+        eventsPredicate = (#keyPath(EventManagedObject.presentation.speakers.id)).any(in: [self.speaker])
         
         guard let speaker = try! Speaker.find(self.speaker, context: context)
             else { fatalError("Invalid Speaker \(self.speaker)") }
@@ -68,7 +70,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
         self.updateUI(speaker)
     }
     
-    private func updateUI(speaker: Speaker) {
+    private func updateUI(_ speaker: Speaker) {
         
         self.title = speaker.name
         
@@ -88,7 +90,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             data.append(.irc)
         }
         
-        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self, predicate: eventsPredicate)
+        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self, predicate: eventsPredicate.toFoundation())
         
         data.append(.sessions(eventCount))
         
@@ -102,17 +104,17 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.data[indexPath.row]
         
@@ -120,7 +122,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
         case .twitter:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerTwitterCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerTwitterCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel.text = speakerCache.twitter
             
@@ -128,7 +130,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
         case .irc:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerIRCCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerIRCCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel.text = speakerCache.irc
             
@@ -136,9 +138,9 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
         case .biography:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerBiographyCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerBiographyCell", for: indexPath)
             
-            if let data = speakerCache.biography?.dataUsingEncoding(String.Encoding.utf8),
+            if let data = speakerCache.biography?.data(using: String.Encoding.utf8),
                 let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 cell.textLabel!.text = attributedString.string
@@ -152,7 +154,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
         case let .sessions(eventCount):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerEventsCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerEventsCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel.text = "\(eventCount) " + "\(eventCount == 1 ? "session" : "sessions")"
             
@@ -162,13 +164,13 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case "showSpeakerEvents":
             
-            let eventsViewController = segue.destinationViewController as! EventsViewController
+            let eventsViewController = segue.destination as! EventsViewController
             
             eventsViewController.predicate = eventsPredicate
             

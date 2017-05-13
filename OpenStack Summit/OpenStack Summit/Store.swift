@@ -44,11 +44,11 @@ extension Store {
                                              create: false)
         #elseif os(tvOS)
             
-        let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroup)!
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup)!
             
         let folderURL = containerURL
-            .URLByAppendingPathComponent("Library", isDirectory: true)!
-            .URLByAppendingPathComponent("Caches", isDirectory: true)!
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Caches", isDirectory: true)
             
         #endif
         
