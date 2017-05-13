@@ -45,6 +45,8 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     private func updateButtonBarViewLayout() {
         
+        guard buttonBarView != nil else { return }
+        
         if collectionViewFlowLayout == nil {
             
             collectionViewFlowLayout = buttonBarView.collectionViewLayout

@@ -81,7 +81,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         setupToolbar()
         
         // configure UI
-        configureView()
+        OperationQueue.main.addOperation { [weak self] in self?.configureView() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
