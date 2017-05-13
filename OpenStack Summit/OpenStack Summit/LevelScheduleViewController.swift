@@ -14,7 +14,7 @@ final class LevelScheduleViewController: ScheduleViewController {
     
     // MARK: - Properties
     
-    var level: String!
+    var level: Level!
     
     // MARK: - Loading
     
@@ -23,7 +23,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         
         assert(level != nil, "Level not set")
         
-        self.title = level.uppercased()
+        self.title = level.rawValue.uppercased()
     }
     
     // MARK: - Methods
@@ -49,7 +49,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         
         let date = DateFilter.interval(start: startDate, end: endDate)
         
-        let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [Date] = []
         for event in events {
@@ -82,7 +82,7 @@ final class LevelScheduleViewController: ScheduleViewController {
             }
         }
         
-        let events = try! EventManagedObject.filter(filter, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(filter, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }

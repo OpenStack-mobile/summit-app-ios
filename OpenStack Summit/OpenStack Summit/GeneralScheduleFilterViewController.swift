@@ -98,7 +98,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             
             switch filter {
             case .activeTalks: return "Hide Past Talks"
-            case let .level(level): return level
+            case let .level(level): return level.rawValue
             case .trackGroup, .venue: fatalError("Invalid filter: \(filter)")
             }
         }

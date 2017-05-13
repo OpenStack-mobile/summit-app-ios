@@ -180,10 +180,10 @@ public extension EventManagedObject {
     }
     
     static func filter(_ date: DateFilter,
-                       tracks: [Identifier]?,
-                       trackGroups: [Identifier]?,
-                       levels: [String]?,
-                       venues: [Identifier]?,
+                       tracks: [Identifier] = [],
+                       trackGroups: [Identifier] = [],
+                       levels: [Level] = [],
+                       venues: [Identifier] = [],
                        summit: Identifier,
                        context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
@@ -210,7 +210,7 @@ public extension EventManagedObject {
         
         var predicates = [summitPredicate, datePredicate]
         
-        if let trackGroups = trackGroups, trackGroups.isEmpty == false {
+        if trackGroups.isEmpty == false {
             
             //let trackGroupPredicate = NSPredicate(format: "ANY track.groups.id IN %@", trackGroups)
             let trackGroupPredicate: Predicate = (#keyPath(EventManagedObject.track.groups.id)).any(in: trackGroups)
@@ -218,7 +218,7 @@ public extension EventManagedObject {
             predicates.append(trackGroupPredicate)
         }
         
-        if let tracks = tracks, tracks.isEmpty == false {
+        if tracks.isEmpty == false {
             
             //let tracksPredicate = NSPredicate(format: "track.id IN %@", tracks)
             let tracksPredicate: Predicate = (#keyPath(EventManagedObject.track.id)).in(tracks)
@@ -226,15 +226,15 @@ public extension EventManagedObject {
             predicates.append(tracksPredicate)
         }
         
-        if let levels = levels, levels.isEmpty == false {
+        if levels.isEmpty == false {
             
             //let levelsPredicate = NSPredicate(format: "presentation.level IN %@", levels)
-            let levelsPredicate: Predicate = (#keyPath(EventManagedObject.presentation.level)).in(levels)
+            let levelsPredicate: Predicate = (#keyPath(EventManagedObject.presentation.level)).in(levels.rawValues)
             
             predicates.append(levelsPredicate)
         }
         
-        if let venues = venues, venues.isEmpty == false {
+        if venues.isEmpty == false {
             
             // NSPredicate(format: "venue.id IN %@", venues)
             let venueRoomsPredicate: Predicate = (#keyPath(VenueRoomManagedObject.venue.id)).in(venues)

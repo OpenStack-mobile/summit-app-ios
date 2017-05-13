@@ -716,6 +716,10 @@
 		6E7558C61E58EB4A003B6844 /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */; };
 		6E7558CF1E595753003B6844 /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7558CC1E595753003B6844 /* NSDate+MTDates.m */; };
 		6E7558D01E595753003B6844 /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7558CE1E595753003B6844 /* NSDateComponents+MTDates.m */; };
+		6E7614D61EC7C00D008FBC8A /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */; };
+		6E7614D71EC7C00D008FBC8A /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */; };
+		6E7614D81EC7C00D008FBC8A /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */; };
+		6E7614D91EC7C00D008FBC8A /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */; };
 		6E77C70D1DBE5C6B008BF684 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77C70C1DBE5C6B008BF684 /* ComplicationController.swift */; };
 		6E7847F11DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
 		6E7847F21DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
@@ -1584,6 +1588,7 @@
 		6E7558CC1E595753003B6844 /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
 		6E7558CD1E595753003B6844 /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
 		6E7558CE1E595753003B6844 /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
+		6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
 		6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdate.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
@@ -2571,6 +2576,7 @@
 			children = (
 				6EEEEBF81D7945D200965631 /* CollectionType.swift */,
 				6E3A53551E325EE100EA7CAF /* String.swift */,
+				6E7614D51EC7C00D008FBC8A /* RawRepresentable.swift */,
 			);
 			name = "Swift Extensions";
 			sourceTree = "<group>";
@@ -4010,6 +4016,7 @@
 				6E99B8AC1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */,
 				6E3A53581E325EE100EA7CAF /* String.swift in Sources */,
 				6E0B5EF21D77C8950005F6CE /* Store.swift in Sources */,
+				6E7614D91EC7C00D008FBC8A /* RawRepresentable.swift in Sources */,
 				6E1C8AD01E4EBE6400BE8BC9 /* FavoriteEventRequest.swift in Sources */,
 				6E0B5EF31D77C8950005F6CE /* Named.swift in Sources */,
 				6E3D4D091E12DB3400D542CD /* TeamMemberManagedObject.swift in Sources */,
@@ -4270,6 +4277,7 @@
 				6E10A58B1D10675D008CBD0C /* Summit.swift in Sources */,
 				6E2D9FEE1DC9B0F50015C588 /* VideoManagedObject.swift in Sources */,
 				9D4B1C391E85635200F98ECB /* AffiliationOrganizationManagedObject.swift in Sources */,
+				6E7614D61EC7C00D008FBC8A /* RawRepresentable.swift in Sources */,
 				6E10A5931D10675D008CBD0C /* TicketType.swift in Sources */,
 				6E10A5901D10675D008CBD0C /* SummitTypeJSON.swift in Sources */,
 				6E793E6E1EC4BB2A00C636AE /* LinkManagedObject.swift in Sources */,
@@ -4553,6 +4561,7 @@
 				6EA38A7D1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift in Sources */,
 				6EA38A791DCB1CA000B703CE /* EventDataUpdateManagedObject.swift in Sources */,
 				6EA38A811DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
+				6E7614D81EC7C00D008FBC8A /* RawRepresentable.swift in Sources */,
 				6EA38A851DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
 				6EA38A751DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift in Sources */,
 				6E919B521E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
@@ -4638,6 +4647,7 @@
 				6E55B50F1EBCBD46003AAFE6 /* LinkManagedObject.swift in Sources */,
 				6E7557D11E58C48C003B6844 /* VenueFloorJSON.swift in Sources */,
 				6E7557D21E58C48C003B6844 /* Speaker.swift in Sources */,
+				6E7614D71EC7C00D008FBC8A /* RawRepresentable.swift in Sources */,
 				6E7557D31E58C48C003B6844 /* Summit.swift in Sources */,
 				6E7557D41E58C48C003B6844 /* VideoManagedObject.swift in Sources */,
 				9D4B1C3A1E85635200F98ECB /* AffiliationOrganizationManagedObject.swift in Sources */,

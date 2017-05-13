@@ -582,9 +582,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .level:
                 
+                guard let level = eventCache.presentation.level
+                    else { fatalError("No level for event:\n\(eventCache)") }
+                
                 let levelScheduleViewController = R.storyboard.schedule.levelScheduleViewController()!
                 
-                levelScheduleViewController.level = eventDetail.level
+                levelScheduleViewController.level = level
                 
                 self.show(levelScheduleViewController, sender: self)
                 

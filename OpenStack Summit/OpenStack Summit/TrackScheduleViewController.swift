@@ -47,14 +47,14 @@ final class TrackScheduleViewController: ScheduleViewController {
         let tracks = [self.track.identifier]
         var trackGroups = [Identifier]()
         var venues = [Identifier]()
-        var levels = [String]()
+        var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
             case let .trackGroup(identifier): trackGroups.append(identifier)
             case let .venue(identifier): venues.append(identifier)
-            case let .level(name): levels.append(name)
+            case let .level(level): levels.append(level)
             case .activeTalks: break
             }
         }
@@ -83,14 +83,14 @@ final class TrackScheduleViewController: ScheduleViewController {
         let tracks = [self.track.identifier]
         var trackGroups = [Identifier]()
         var venues = [Identifier]()
-        var levels = [String]()
+        var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
             case let .trackGroup(identifier): trackGroups.append(identifier)
             case let .venue(identifier): venues.append(identifier)
-            case let .level(name): levels.append(name)
+            case let .level(level): levels.append(level)
             case .activeTalks: break
             }
         }

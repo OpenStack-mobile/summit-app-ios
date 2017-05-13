@@ -32,7 +32,7 @@ enum Filter {
     case activeTalks
     
     case trackGroup(Identifier)
-    case level(String)
+    case level(Level)
     case venue(Identifier)
 }
 
@@ -98,7 +98,6 @@ struct ScheduleFilter: Equatable {
             .flatMap { $0.level })
             .flatMap { Level(rawValue: $0) }
             .sorted()
-            .map { $0.rawValue }
         
         let venues = try! context.managedObjects(Venue.self, predicate: NSPredicate(format: "summit == %@", summit), sortDescriptors: VenueManagedObject.sortDescriptors)
         
