@@ -30,6 +30,10 @@ private extension ImageCell {
                 
                 imageView?.loadCached(url)
             }
+            
+        } else if newValue == nil && oldValue == nil {
+            
+            imageView?.image = placeholderImage
         }
     }
 }
