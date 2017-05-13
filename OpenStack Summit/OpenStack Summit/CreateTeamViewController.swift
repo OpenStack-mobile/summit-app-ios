@@ -56,7 +56,7 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value:
+                case .value:
                     
                     controller.completion?.done(controller)
                 }

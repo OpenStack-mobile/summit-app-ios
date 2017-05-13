@@ -17,7 +17,7 @@ extension TextViewController {
     
     func textView(_ textView: UITextView, shouldInteractWithURL URL: Foundation.URL, inRange characterRange: NSRange) -> Bool {
         
-        guard self.openWebURL(URL)
+        guard self.openWeb(url: URL)
             else { return true }
         
         return false

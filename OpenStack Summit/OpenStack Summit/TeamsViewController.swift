@@ -125,7 +125,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Teams")
     }

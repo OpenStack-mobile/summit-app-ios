@@ -77,15 +77,15 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let selectedIndexPaths = self.tableView.indexPathsForSelectedRows ?? []
         
-        let selectedItems = selectedIndexPaths.map { self.fetchedResultsController.objectAtIndexPath($0) as! NotificationManagedObject }
+        let selectedItems = selectedIndexPaths.map { self.fetchedResultsController.object(at: $0) as! NotificationManagedObject }
         
         let context = Store.shared.privateQueueManagedObjectContext
         
         context.perform {
             
-            let managedObjects = selectedItems.map { context.objectWithID($0.objectID) }
+            let managedObjects = selectedItems.map { context.object(with: $0.objectID) }
             
-            managedObjects.forEach { context.deleteObject($0) }
+            managedObjects.forEach { context.delete($0) }
             
             try! context.save()
         }
@@ -104,21 +104,21 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let sort = [NSSortDescriptor(key: "channel", ascending: true), NSSortDescriptor(key: "id", ascending: false)]
         
-        self.fetchedResultsController = NSFetchedResultsController(Notification.self,
+        self.fetchedResultsController = NSFetchedResultsController(CoreSummit.Notification.self,
                                                                    delegate: self,
                                                                    predicate: nil,
                                                                    sortDescriptors: sort,
                                                                    sectionNameKeyPath: "channel",
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         try! self.fetchedResultsController.performFetch()
         
         self.tableView.reloadData()
     }
     
-    private subscript (indexPath: IndexPath) -> Notification {
+    private subscript (indexPath: IndexPath) -> CoreSummit.Notification {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Notification.ManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! CoreSummit.Notification.ManagedObject
         
         return Notification(managedObject: managedObject)
     }
@@ -131,16 +131,16 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         let unread = PushNotificationManager.shared.unreadNotifications.value.contains(notification.identifier)
         
-        cell.notificationLabel.font = unread ? UIFont.boldSystemFontOfSize(17) : UIFont.systemFontOfSize(17)
+        cell.notificationLabel.font = unread ? UIFont.boldSystemFont(ofSize: 17) : UIFont.systemFont(ofSize: 17)
         
-        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created)
+        cell.dateLabel.text = self.dateFormatter.string(from: notification.created)
     }
     
     private func unreadNotificationsChanged(_ newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
         
         let managedObjects = (self.fetchedResultsController.fetchedObjects ?? []) as! [NotificationManagedObject]
         
-        let changedNotifications = managedObjects.filter({ newValue.contains($0.identifier) })
+        let changedNotifications = managedObjects.filter { newValue.contains($0.id) } 
         
         let indexPaths = changedNotifications.map { fetchedResultsController.indexPathForObject($0)! }
         
@@ -188,7 +188,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Notifications")
     }

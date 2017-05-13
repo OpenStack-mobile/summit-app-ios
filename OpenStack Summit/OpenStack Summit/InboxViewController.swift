@@ -36,18 +36,18 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
     
     // MARK: - RevealTabStripViewController
     
-    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers = [UIViewController]()
         
-        let notificationsVC = R.storyboard.notifications.initialViewController()!
+        let notificationsVC = R.storyboard.notifications.instantiateInitialViewController()!
         
         childViewControllers.append(notificationsVC)
         
         #if DEBUG
         if Store.shared.authenticatedMember != nil {
             
-            let teamsVC = R.storyboard.teams.initialViewController()!
+            let teamsVC = R.storyboard.teams.instantiateInitialViewController()!
             
             childViewControllers.append(teamsVC)
         }

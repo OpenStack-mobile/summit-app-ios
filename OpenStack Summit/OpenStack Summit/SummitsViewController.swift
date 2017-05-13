@@ -38,7 +38,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -81,7 +81,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         cell.textLabel!.text = summit.name
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
         let stringDateFrom = dateFormatter.string(from: summit.start)
         

@@ -44,7 +44,7 @@ extension PagingTableViewController {
     
     func didLoadNextPage(_ response: ErrorValue<[PageControllerChange]>) {
         
-        dismissActivityIndicator(animated: true)
+        dismissActivityIndicator(true)
         
         #if os(iOS)
         refreshControl?.endRefreshing()
@@ -72,21 +72,21 @@ extension PagingTableViewController {
                 
                 for change in changes {
                     
-                    let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
+                    let indexPath = IndexPath(row: change.index, section: 0)
                     
                     switch change.change {
                         
                     case .delete:
                         
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
                         
                     case .insert:
                         
-                        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        tableView.insertRows(at: [indexPath], with: .fade)
                         
                     case .update:
                         
-                        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                        tableView.reloadRows(at: [indexPath], with: .none)
                     }
                 }
                 

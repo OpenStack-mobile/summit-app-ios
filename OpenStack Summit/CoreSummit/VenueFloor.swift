@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct VenueFloor: Named, Equatable {
+public struct VenueFloor: Named {
     
     public let identifier: Identifier
     

@@ -36,11 +36,7 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
             }
             else {
 
-                #if DEBUG
-                    let picUrl = backgroundImageURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                #else
-                    let picUrl = backgroundImageURL
-                #endif
+                let picUrl = backgroundImageURL
                 
                 backgroundImageView.hnk_setImageFromURL(URL(string: picUrl)!)
             }

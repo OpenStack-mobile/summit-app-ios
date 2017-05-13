@@ -53,8 +53,8 @@ extension Event: CoreSpotlightSearchable {
         attributeSet.keywords = tags
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -104,8 +104,8 @@ extension Video: CoreSpotlightSearchable {
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -130,8 +130,8 @@ extension Venue: CoreSpotlightSearchable {
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -160,8 +160,8 @@ extension VenueRoom: CoreSpotlightSearchable {
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -180,32 +180,32 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = SpotlightController()
     
-    let spotlightIndex = CSSearchableIndex.defaultSearchableIndex()
+    let spotlightIndex = CSSearchableIndex.default()
     
     var log: ((String) -> ())?
     
-    private let queue = dispatch_queue_create("CoreSpotlight Update Queue", nil)
+    private let queue = DispatchQueue(label: "CoreSpotlight Update Queue")
     
     deinit {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     private override init() {
         
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
-            name: NSManagedObjectContextObjectsDidChangeNotification,
+            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
             object: Store.shared.managedObjectContext)
         
     }
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         
-        func completionHandler(error: NSError?) {
+        func completionHandler(error: Swift.Error?) {
             
             if let error = error {
                 
@@ -223,12 +223,12 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
         
         if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as! Set<NSManagedObject>? {
             
-            indexableManagedObjects.appendContentsOf(updatedObjects)
+            indexableManagedObjects.append(contentsOf: updatedObjects)
         }
         
         if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as! Set<NSManagedObject>? {
             
-            indexableManagedObjects.appendContentsOf(insertedObjects)
+            indexableManagedObjects.append(contentsOf: insertedObjects)
         }
         
         if indexableManagedObjects.isEmpty == false {
@@ -253,7 +253,7 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
             
             if searchableItems.isEmpty == false {
                 
-                spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+                spotlightIndex.deleteSearchableItems(withIdentifiers: searchableItems, completionHandler: completionHandler)
             }
         }
     }

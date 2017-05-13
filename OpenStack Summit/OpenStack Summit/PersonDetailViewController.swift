@@ -195,12 +195,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
         headerView.titleLabel.isHidden = (person.title ?? "").isEmpty
-        headerView.imageView.image = R.image.genericUserAvatar()!
-        
-        if let imageURL = URL(string: person.pictureURL) {
-            
-            headerView.imageView.hnk_setImageFromURL(imageURL)
-        }
+        headerView.imageView.hnk_setImageFromURL(person.picture, placeholder: R.image.genericUserAvatar()!)
         
         // configure cells
         
@@ -247,8 +242,6 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // set user activity for handoff
         
-        let personURL: URL?
-        
         if let speaker = person as? Speaker,
             let summitManagedObject = self.currentSummit {
             
@@ -256,8 +249,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            personURL = URL(string: speaker.toWebpage(summit))
-            userActivity.webpageURL = personURL
+            userActivity.webpageURL = speaker.toWebpage(summit)
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
@@ -298,7 +290,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Profile")
     }

@@ -172,7 +172,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     private func registerNotifications() {
         
         NotificationCenter.default.addObserver(self.tableView!, selector: #selector(UITableView.reloadData), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textInputbarDidMove), name: SLKTextInputbarDidMoveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textInputbarDidMove), name: NSNotification.Name.SLKTextInputbarDidMove, object: nil)
     }
     
     private func stopNotifications() {

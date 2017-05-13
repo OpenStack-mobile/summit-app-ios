@@ -63,7 +63,7 @@ final class NotificationDetailViewController: UITableViewController {
             guard let notificationManagedObject = try! NotificationManagedObject.find(identifier, context: context)
                 else { closeViewController(); return }
             
-            context.deleteObject(notificationManagedObject)
+            context.delete(notificationManagedObject)
             
             try! context.save()
             
@@ -87,7 +87,7 @@ final class NotificationDetailViewController: UITableViewController {
             data.append([.event(event)])
         }
         
-        let date = dateFormatter.stringFromDate(notification.created)
+        let date = dateFormatter.string(from: notification.created)
         
         let text = notification.body
         

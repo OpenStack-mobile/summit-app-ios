@@ -26,7 +26,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         super.viewDidLoad()
         
         // setup table view
-        tableView.registerNib(R.nib.feedbackTableViewCell)
+        tableView.register(R.nib.feedbackTableViewCell)
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
@@ -40,7 +40,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     private func reloadData() {
         
         // Get Logged Member Given Feedback
-        feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(managedObject: $0) }
+        feedbackList = (Store.shared.authenticatedMember?.feedback ?? []).map { FeedbackDetail(managedObject: $0) }
         
         tableView.reloadData()
     }
@@ -81,7 +81,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Reviews")
     }

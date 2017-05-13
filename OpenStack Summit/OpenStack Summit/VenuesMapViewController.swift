@@ -10,13 +10,14 @@ import UIKit
 import XLPagerTabStrip
 //import GoogleMaps
 import CoreSummit
+import Predicate
 
 final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IndicatorInfoProvider {
     
     // MARK: - Properties
     
     var mapView: GMSMapView!
-    private(set) var dictionary = [GMSMarker: Int]()
+    private(set) var dictionary = [GMSMarker: Identifier]()
     
     // MARK: - Loading
     
@@ -42,10 +43,10 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         
         let summit = SummitManager.shared.summit.value
         
-        let predicate: Predicate = "summit.id" == summit
-            &&& "locationType" == Venue.LocationType.Internal.rawValue
-            &&& .keyPath("latitude") != .value(.null)
-            &&& .keyPath("longitude") != .value(.null)
+        let predicate: Predicate = #keyPath(VenueManagedObject.summit.id) == summit
+            && "locationType" == Venue.LocationType.Internal.rawValue
+            && .keyPath("latitude") != .value(.null)
+            && .keyPath("longitude") != .value(.null)
         
         let venues = try! VenueListItem.filter(predicate, context: Store.shared.managedObjectContext)
         
@@ -79,14 +80,15 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         guard let venue = dictionary[marker]
             else { return false }
         
-        showLocationDetail(Identifier(venue))
+        self.show(location: venue)
         
         return true
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: "Map")
     }
 }

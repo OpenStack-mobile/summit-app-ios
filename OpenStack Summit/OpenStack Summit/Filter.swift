@@ -9,6 +9,7 @@
 import Foundation
 import CoreSummit
 import CoreData
+import Predicate
 
 enum FilterCategory {
     
@@ -96,16 +97,16 @@ struct ScheduleFilter: Equatable {
         let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: "event.summit.id" == summitID)
             .flatMap { $0.level })
             .flatMap { Level(rawValue: $0) }
-            .sort { (lhs: Level, rhs: Level) -> Bool in lhs < rhs }
+            .sorted()
             .map { $0.rawValue }
         
         let venues = try! context.managedObjects(Venue.self, predicate: NSPredicate(format: "summit == %@", summit), sortDescriptors: VenueManagedObject.sortDescriptors)
         
         // populate filter categories
         
-        let summitTimeZoneOffset = TimeZone(name: summit.timeZone)!.secondsFromGMT
-        let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-        let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+        let summitTimeZoneOffset = TimeZone(identifier: summit.timeZone)!.secondsFromGMT()
+        let startDate = ((summit.start as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_startOfCurrentDay()
+        let endDate = ((summit.end as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_dateDaysAfter(1)
         let now = Date()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {

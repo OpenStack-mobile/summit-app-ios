@@ -14,6 +14,7 @@ import CoreSummit
 import XCDYouTubeKit
 import EventKit
 import JGProgressHUD
+import Predicate
     
 final class EventDetailViewController: UITableViewController, EventViewController, ActivityViewController, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
@@ -124,9 +125,10 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBAction func playVideo(_ sender: UIButton) {
         
-        assert(eventDetail.video != nil, "No video")
+        guard let video = eventDetail.video
+            else { fatalError("No video") }
         
-        self.playVideo(eventDetail.video!)
+        self.play(video: video)
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
@@ -167,15 +169,18 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBAction func rsvp(_ sender: AnyObject? = nil) {
         
-        guard let url = Foundation.URL(string: eventDetail.rsvp)
-            else { return }
+        guard let url = eventDetail?.rsvp
+            else { fatalError("No URL") }
         
         UIApplication.shared.openURL(url)
     }
     
     @IBAction func showAttachment(_ sender: AnyObject? = nil) {
         
-        UIApplication.shared.openURL(eventDetail.attachment)
+        guard let url = eventDetail?.attachment
+            else { fatalError("No URL") }
+        
+        UIApplication.shared.openURL(attachment)
     }
     
     // MARK: - Private Methods
@@ -209,7 +214,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         self.data.append(.description)
         
-        if eventDetail.attachment.isEmpty == false {
+        if eventDetail.attachment != nil {
             
             data.append(.attachment)
         }

@@ -10,48 +10,49 @@ import Foundation
 import Foundation
 import CoreSummit
 
-public struct EventDetail: CoreDataDecodable {
+struct EventDetail: Named {
     
-    // MARK: - Properties
+    let identifier: Identifier
+    let name: String
+    let summit: Identifier
+    let start: Date
+    let end: Date
+    let timeZone: String
+    let dateTime: String
+    let day: String
+    let time: String
+    let location: String
+    let track: String
+    let sponsors: String
+    let eventType: String
+    let trackGroupColor: String
     
-    public let identifier: Identifier
-    public let name: String
-    public let summit: Identifier
-    public let start: Date
-    public let end: Date
-    public let timeZone: String
-    public let dateTime: String
-    public let day: String
-    public let time: String
-    public let location: String
-    public let track: String
-    public let sponsors: String
-    public let eventType: String
-    public let trackGroupColor: String
+    let venue: Location?
+    let eventDescription: String
+    let socialDescription: String
+    let tags: String
+    let speakers: [SpeakerDetail]
+    let finished: Bool
+    let allowFeedback: Bool
+    let level: String
+    let averageFeedback: Double
+    let video: Video?
+    let willRecord: Bool
+    let rsvp: String
+    let externalRSVP: Bool
+    let attachment: URL?
+    let webpage: URL
+}
+
+// MARK: - CoreData
+
+extension EventDetail: CoreDataDecodable {
     
-    public let venue: Location?
-    public let eventDescription: String
-    public let socialDescription: String
-    public let tags: String
-    public let speakers: [SpeakerDetail]
-    public let finished: Bool
-    public let allowFeedback: Bool
-    public let level: String
-    public let averageFeedback: Double
-    public let video: Video?
-    public let willRecord: Bool
-    public let rsvp: String
-    public let externalRSVP: Bool
-    public let attachment: URL
-    public let webpage: URL
-    
-    // MARK: - Initialization
-    
-    public init(managedObject event: EventManagedObject) {
+    init(managedObject event: EventManagedObject) {
         
-        self.identifier = event.identifier
+        self.identifier = event.id
         self.name = event.name
-        self.summit = event.summit.identifier
+        self.summit = event.summit.id
         self.start = event.start
         self.end = event.end
         self.timeZone = event.summit.timeZone
@@ -66,7 +67,7 @@ public struct EventDetail: CoreDataDecodable {
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
         self.willRecord = event.willRecord
-        self.attachment = event.attachment ?? Slide.from(managedObjects: event.slides).ordered().first?.link ?? ""
+        self.attachment = URL(string: event.attachment ?? "") ?? Slide.from(managedObjects: event.slides).ordered().first?.link
         
         if let locationManagedObject = event.location {
             
@@ -122,37 +123,37 @@ public struct EventDetail: CoreDataDecodable {
 
 // MARK: - Supporting Types
 
-public extension EventDetail {
+extension EventDetail {
     
-    public struct SpeakerDetail: Person {
+    struct SpeakerDetail: Person {
         
-        public let identifier: Identifier
+        let identifier: Identifier
         
-        public let firstName: String
+        let firstName: String
         
-        public let lastName: String
+        let lastName: String
         
-        public let title: String?
+        let title: String?
         
-        public let pictureURL: String
+        let picture: URL
         
-        public let twitter: String?
+        let twitter: String?
         
-        public let irc: String?
+        let irc: String?
         
-        public var linkedIn: String? { return nil }
+        var linkedIn: String? { return nil }
         
-        public let biography: String?
+        let biography: String?
         
-        public let isModerator: Bool
+        let isModerator: Bool
                 
-        private init(speaker: Speaker, isModerator: Bool = false) {
+        fileprivate init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier
             self.firstName = speaker.firstName
             self.lastName = speaker.lastName
             self.title = speaker.title
-            self.pictureURL = speaker.pictureURL
+            self.picture = speaker.picture
             self.twitter = speaker.twitter
             self.irc = speaker.irc
             self.biography = speaker.biography
@@ -161,7 +162,7 @@ public extension EventDetail {
     }
 }
 
-public func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool {
+func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.firstName == rhs.firstName

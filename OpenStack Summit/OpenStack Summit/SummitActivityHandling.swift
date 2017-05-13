@@ -109,10 +109,10 @@ extension SummitActivityHandlingViewController {
     
     func view(screen: AppActivityScreen) {
         
-        AppDelegate.shared.view(screen)
+        AppDelegate.shared.view(screen: screen)
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         AppDelegate.shared.search(searchTerm)
     }

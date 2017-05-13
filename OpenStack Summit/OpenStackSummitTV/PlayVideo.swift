@@ -45,8 +45,8 @@ extension UIViewController {
                 titleItem.extendedLanguageTag = "und"
                 metadata.append(titleItem)
                 
-                if let data = video.descriptionText?.dataUsingEncoding(NSUTF8StringEncoding),
-                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                if let data = video.descriptionText?.dataUsingEncoding(String.Encoding.utf8),
+                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
                     
                     let descriptionItem = AVMutableMetadataItem()
                     descriptionItem.identifier = AVMetadataCommonIdentifierDescription

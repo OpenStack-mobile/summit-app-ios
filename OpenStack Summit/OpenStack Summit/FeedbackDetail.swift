@@ -9,9 +9,7 @@
 import Foundation
 import CoreSummit
 
-public struct FeedbackDetail {
-
-    // MARK: - Properties
+public struct FeedbackDetail: Unique {
     
     public let identifier: Identifier
     public let rate: Int
@@ -20,8 +18,24 @@ public struct FeedbackDetail {
     public let eventName: String
     public let event: Identifier
     public let member: Member
+}
+
+// MARK: - Equatable
+
+public func == (lhs: FeedbackDetail, rhs: FeedbackDetail) -> Bool {
     
-    // MARK: - Initialization
+    return lhs.identifier == rhs.identifier
+        && lhs.rate == rhs.rate
+        && lhs.review == rhs.review
+        && lhs.date == rhs.date
+        && lhs.eventName == rhs.eventName
+        && lhs.event == rhs.event
+        && lhs.member == rhs.member
+}
+
+// MARK: - CoreData
+
+extension FeedbackDetail: CoreDataDecodable {
     
     public init(managedObject feedback: FeedbackManagedObject) {
         

@@ -156,18 +156,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : Any], completionHandler: @escaping () -> Void) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
         
         PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-        var options = [String : AnyObject]()
+        var options = [UIApplicationOpenURLOptionsKey : Any]()
         
         if let sourceApplication = sourceApplication {
             
-            options[UIApplicationOpenURLOptionsKey.sourceApplication] = sourceApplication
+            options[.sourceApplication] = sourceApplication
         }
         
         return self.application(application, open: url, options: options)
@@ -278,7 +278,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         FIRMessaging.messaging().connect { (error) in
             if error != nil {
-                print("Unable to connect with FCM. \(error)")
+                print("Unable to connect with FCM. \(String(describing: error))")
             } else {
                 print("Connected to FCM.")
             }
