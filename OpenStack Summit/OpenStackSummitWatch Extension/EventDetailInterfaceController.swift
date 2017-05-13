@@ -147,7 +147,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         
         if let descriptionText = eventDetail.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
             

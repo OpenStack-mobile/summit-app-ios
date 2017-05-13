@@ -46,7 +46,7 @@ extension UIViewController {
                 metadata.append(titleItem)
                 
                 if let data = video.descriptionText?.dataUsingEncoding(String.Encoding.utf8),
-                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
+                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                     
                     let descriptionItem = AVMutableMetadataItem()
                     descriptionItem.identifier = AVMetadataCommonIdentifierDescription

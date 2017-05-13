@@ -166,7 +166,7 @@ final class VenueDetailViewController: UITableViewController {
             
             if let descriptionText = venue.descriptionText,
                 let data = descriptionText.dataUsingEncoding(String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 text = attributedString.string
                 
