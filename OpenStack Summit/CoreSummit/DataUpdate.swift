@@ -71,6 +71,7 @@ public extension DataUpdate {
         case SponsorFromEvent
         case SummitGroupEvent
         case SummitWIFIConnection
+        case SummitExternalLocation
         
         internal var type: Updatable.Type? {
             
@@ -85,7 +86,7 @@ public extension DataUpdate {
             case .SummitEventType: return CoreSummit.EventType.self
             case .PresentationSpeaker: return CoreSummit.Speaker.self
             case .SummitTicketType: return CoreSummit.TicketType.self
-            case .SummitVenue: return CoreSummit.Venue.self
+            case .SummitVenue, .SummitExternalLocation: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
             case .SummitVenueRoom: return CoreSummit.VenueRoom.DataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
