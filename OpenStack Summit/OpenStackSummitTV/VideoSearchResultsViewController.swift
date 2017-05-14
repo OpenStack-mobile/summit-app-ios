@@ -150,6 +150,8 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         let video = Video(managedObject: managedObject)
         
-        self.play(video: video)
+        let cell = collectionView.cellForItem(at: indexPath) as! VideoCell
+        
+        self.play(video: video, cachedImage: cell.imageView?.image)
     }
 }

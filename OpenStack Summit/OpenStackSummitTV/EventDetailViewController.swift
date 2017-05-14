@@ -26,6 +26,8 @@ final class EventDetailViewController: UITableViewController {
     
     private var data = [Detail]()
     
+    private var videoImage: UIImage?
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -50,6 +52,7 @@ final class EventDetailViewController: UITableViewController {
         
         self.eventCache = Event(managedObject: managedObject)
         self.eventDetail = EventDetail(managedObject: managedObject)
+        self.videoImage = nil
         
         self.data = [Detail]()
         
@@ -140,12 +143,13 @@ final class EventDetailViewController: UITableViewController {
             
             if let thumbnailURL = URL(youtubeThumbnail: eventDetail.video!.youtube) {
                 
-                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { [weak self, cell] (image) in
                     
                     cell.videoImageView.image = image
                     cell.playImageView.isHidden = false
                     cell.activityIndicator.stopAnimating()
                     cell.setNeedsDisplay()
+                    self?.videoImage = image
                 })
             }
             
@@ -169,7 +173,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .video:
             
-            self.play(video: eventDetail.video!)
+            self.play(video: eventDetail.video!, cachedImage: videoImage)
             
         default: break
         }

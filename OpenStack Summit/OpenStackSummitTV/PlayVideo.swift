@@ -13,7 +13,7 @@ import XCDYouTubeKit
 
 extension UIViewController {
     
-    func play(video: Video) {
+    func play(video: Video, cachedImage: UIImage? = nil) {
         
         // add to recently played
         
@@ -60,8 +60,7 @@ extension UIViewController {
                     metadata.append(descriptionItem)
                 }
                 
-                if let thumbnailURL = URL(youtubeThumbnail: video.youtube),
-                    let data = NSData(contentsOf: thumbnailURL) {
+                func setImage(data: NSData) {
                     
                     let item = AVMutableMetadataItem()
                     item.identifier = AVMetadataCommonIdentifierArtwork
@@ -69,6 +68,17 @@ extension UIViewController {
                     item.value = data
                     item.extendedLanguageTag = "und"
                     metadata.append(item)
+                }
+                
+                if let image = cachedImage,
+                    let data = UIImagePNGRepresentation(image) as NSData? {
+                    
+                    setImage(data: data)
+                    
+                } else if let thumbnailURL = URL(youtubeThumbnail: video.youtube),
+                    let data = NSData(contentsOf: thumbnailURL) {
+                    
+                    setImage(data: data)
                 }
                 
                 return metadata
