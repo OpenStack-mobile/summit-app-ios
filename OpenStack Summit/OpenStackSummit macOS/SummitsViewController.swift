@@ -87,7 +87,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     @inline(__always)
     private func configure(cell: SummitTableViewCell, with summit: Summit) {
         
-        let currentSummit = SummitManager.shared.summit.value == summit.identifier
+        let currentSummit = SummitManager.shared.summit.value == summit.identifier && self.currentSummit != nil
         
         if currentSummit {
             
