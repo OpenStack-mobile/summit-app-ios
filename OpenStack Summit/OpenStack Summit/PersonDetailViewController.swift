@@ -249,7 +249,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            userActivity.webpageURL = speaker.toWebpage(summit)
+            userActivity.webpageURL = speaker.webpage(for: summit)
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]

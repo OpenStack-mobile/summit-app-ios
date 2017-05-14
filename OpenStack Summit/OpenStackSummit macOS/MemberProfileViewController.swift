@@ -154,7 +154,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
                  userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 userActivity.title = self.title
-                userActivity.webpageURL = speaker.toWebpage(summit)
+                userActivity.webpageURL = speaker.webpage(for: summit)
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
                 
                 userActivity.becomeCurrent()

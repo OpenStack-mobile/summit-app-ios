@@ -117,7 +117,7 @@ extension EventDetail: CoreDataDecodable {
         
         let summit = Summit(managedObject: event.summit)
         
-        self.webpage = Event(managedObject: event).toWebpage(summit)
+        self.webpage = Event(managedObject: event).webpage(for: summit)
     }
 }
 

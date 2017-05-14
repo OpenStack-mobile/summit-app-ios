@@ -92,7 +92,7 @@ public struct EventDetail {
         
         self.video = event.videos.first
         
-        self.webpageURL = event.toWebpage(summit)
+        self.webpageURL = event.webpage(for: summit)
     }
 }
 
