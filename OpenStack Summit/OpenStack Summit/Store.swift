@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import Foundation
 import CoreSummit
 
 extension Store {
@@ -37,20 +36,35 @@ extension Store {
         
         let fileManager = FileManager.default
         
+        // get cache folder
+        
         #if os(iOS) || os(watchOS) || os(OSX)
-        let folderURL = try! fileManager.url(for: .cachesDirectory,
+        let cacheURL = try! fileManager.url(for: .cachesDirectory,
                                              in: .userDomainMask,
                                              appropriateFor: nil,
                                              create: false)
+        
         #elseif os(tvOS)
             
         let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup)!
             
-        let folderURL = containerURL
+        let cacheURL = containerURL
             .appendingPathComponent("Library", isDirectory: true)
             .appendingPathComponent("Caches", isDirectory: true)
             
         #endif
+        
+        // get app folder
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
+        let folderURL = cacheURL.appendingPathComponent(bundleIdentifier, isDirectory: true)
+        
+        // create folder if doesnt exist
+        var folderExists: ObjCBool = false
+        if fileManager.fileExists(atPath: folderURL.path, isDirectory: &folderExists) == false
+            || folderExists.boolValue == false {
+            
+            try! fileManager.createDirectory(at: folderURL, withIntermediateDirectories: true)
+        }
         
         let fileURL = folderURL.appendingPathComponent("data.sqlite", isDirectory: false)
         
