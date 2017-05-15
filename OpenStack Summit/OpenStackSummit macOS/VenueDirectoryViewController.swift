@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class VenueDirectoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -19,7 +20,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: true) {
+    var predicate = Predicate.value(true) {
         
         didSet { configureView() }
     }
@@ -68,11 +69,10 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     private func configureView() {
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
+        //let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        let summitPredicate: Predicate = #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, summitPredicate]))
         
         let sort = [NSSortDescriptor(key: "name", ascending: true)]
         

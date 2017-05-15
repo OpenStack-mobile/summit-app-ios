@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class EventsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -19,14 +20,14 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = Predicate.value(false) {
         
         didSet { configureView() }
     }
     
     private var fetchedResultsController: NSFetchedResultsController<EventManagedObject>!
     
-    private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
+    private lazy var cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
     // MARK: - Loading
     
@@ -54,11 +55,10 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     private func configureView() {
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
+        //let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        let summitPredicate: Predicate = #keyPath(EventManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, cachedPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, summitPredicate, cachedPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Event.self,
                                                                    delegate: self,

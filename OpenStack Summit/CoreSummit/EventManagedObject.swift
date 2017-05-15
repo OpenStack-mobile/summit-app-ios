@@ -174,7 +174,14 @@ public extension EventManagedObject {
     
     static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        let value = Expression.value(.string(searchTerm))
+        
+        //let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        let predicate: Predicate = (#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.speakers.lastName)).compare(.any, .contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.level)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.tags.name)).compare(.any, .contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.eventType.name)).compare(.contains, [.caseInsensitive], value)
         
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: self.sortDescriptors)
     }

@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class SpeakerViewController: NSViewController {
     
@@ -54,17 +55,15 @@ final class SpeakerViewController: NSViewController {
             
             memberProfileViewController.profile = .speaker(speaker)
             
-            let speakerID = NSNumber(value: Int64(speaker))
-            
-            let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
-            
-            eventsViewController.predicate = NSPredicate(format: "ANY presentation.speakers.id == %@ && summit.id == %@", speakerID, summitID)
+            //eventsViewController.predicate = NSPredicate(format: "ANY presentation.speakers.id == %@ && summit.id == %@", speakerID, summitID)
+            eventsViewController.predicate = (#keyPath(EventManagedObject.presentation.speakers.id)).any(in: [speaker])
+            && #keyPath(EventManagedObject.summit.id) == SummitManager.shared.summit.value
             
         } else {
             
             memberProfileViewController.profile = .currentUser
             
-            eventsViewController.predicate = NSPredicate(value: false)
+            eventsViewController.predicate = .value(false)
         }
     }
 }

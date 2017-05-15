@@ -101,9 +101,9 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+    func managedObjects<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [ManagedObject] {
         
-        return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
+        return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors, limit: limit)
     }
     
     @inline(__always)

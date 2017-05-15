@@ -8,6 +8,8 @@
 
 import Foundation
 import AppKit
+import CoreSummit
+import Predicate
 
 final class EventsSplitViewController: NSSplitViewController, SearchableController, EventDatesViewControllerDelegate {
     
@@ -45,13 +47,14 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
     
     private func configureView() {
         
-        let predicate: NSPredicate
+        let predicate: Predicate
         
         if searchTerm.isEmpty == false {
             
             // show events for search term
             
-            predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+            //predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+            predicate = (#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], .value(.string(searchTerm)))
             
         } else if let selectedDate = self.selectedDate  {
             
@@ -59,12 +62,14 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
             
             let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()!
             
-            predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate as NSDate, endDate as NSDate)
+            //predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate as NSDate, endDate as NSDate)
+            predicate = #keyPath(EventManagedObject.start) >= selectedDate
+                && #keyPath(EventManagedObject.end) <= endDate
             
         } else {
             
             // show no events
-            predicate = NSPredicate(value: false)
+            predicate = .value(false)
         }
         
         let collapseSidebar = searchTerm.isEmpty == false

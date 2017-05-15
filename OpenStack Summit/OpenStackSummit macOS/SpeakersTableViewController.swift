@@ -57,7 +57,7 @@ final class SpeakersTableViewController: TableViewController {
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
-                                                                   predicate: predicate.toFoundation(),
+                                                                   predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
                                                                    context: Store.shared.managedObjectContext) as! NSFetchedResultsController<Entity>
         
