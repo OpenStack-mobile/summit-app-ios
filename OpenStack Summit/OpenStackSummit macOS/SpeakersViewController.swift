@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class SpeakersViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate, SearchableController {
     
@@ -74,7 +75,8 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
-        let summitPredicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
+        //let summitPredicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
+        let summitPredicate: Predicate = #keyPath(SpeakerManagedObject.summits.id).compare
         
         let searchPredicate: NSPredicate
         

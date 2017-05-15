@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import CoreSummit
+import Predicate
 
 final class VenuesSplitViewController: NSSplitViewController, SearchableController, VenueDirectoryViewControllerDelegate {
     
@@ -52,20 +53,31 @@ final class VenuesSplitViewController: NSSplitViewController, SearchableControll
     
     private func configureView() {
         
-        let searchPredicate: NSPredicate
+        let searchPredicate: Predicate
         
         if searchTerm.isEmpty {
             
-            searchPredicate = NSPredicate(value: true)
+            searchPredicate = .value(true)
             
         } else {
             
-            searchPredicate = NSPredicate(format: "name CONTAINS[c] %@ OR address CONTAINS[c] %@ OR city CONTAINS[c] %@ OR state CONTAINS[c] %@ OR country CONTAINS[c] %@ OR zipCode CONTAINS[c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+            let value = Expression.value(.string(searchTerm))
+            
+            //searchPredicate = NSPredicate(format: "name CONTAINS[c] %@ OR address CONTAINS[c] %@ OR city CONTAINS[c] %@ OR state CONTAINS[c] %@ OR country CONTAINS[c] %@ OR zipCode CONTAINS[c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+            
+            searchPredicate = (#keyPath(VenueManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(VenueManagedObject.address)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(VenueManagedObject.city)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(VenueManagedObject.state)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(VenueManagedObject.country)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(VenueManagedObject.zipCode)).compare(.contains, [.caseInsensitive], value)
         }
         
-        let mapVenuesPredicate = NSPredicate(format: "latitude != nil AND longitude != nil")
+        //let mapVenuesPredicate = NSPredicate(format: "latitude != nil AND longitude != nil")
+        let mapVenuesPredicate: Predicate = #keyPath(VenueManagedObject.latitude) != .value(.null)
+            && #keyPath(VenueManagedObject.longitude) != .value(.null)
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mapVenuesPredicate, searchPredicate])
+        let predicate: Predicate = .compound(.and([mapVenuesPredicate, searchPredicate]))
         
         venueDirectoryViewController.predicate = predicate
         
