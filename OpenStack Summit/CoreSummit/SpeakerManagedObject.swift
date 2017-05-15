@@ -32,6 +32,10 @@ public final class SpeakerManagedObject: Entity {
     // Inverse Relationships
     
     @NSManaged public var summits: Set<SummitManagedObject>
+    
+    @NSManaged public var presentationModerator: Set<PresentationManagedObject>
+    
+    @NSManaged public var presentationSpeaker: Set<PresentationManagedObject>
 }
 
 // MARK: - Encoding

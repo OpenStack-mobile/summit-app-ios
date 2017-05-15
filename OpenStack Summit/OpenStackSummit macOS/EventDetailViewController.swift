@@ -11,6 +11,7 @@ import AppKit
 import CoreData
 import CoreSummit
 import EventKit
+import Predicate
 
 @objc(OSSEventDetailViewController)
 final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate, NSTextViewDelegate  {
@@ -358,9 +359,11 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
-            let eventID = NSNumber(value: Int64(eventDetail.identifier))
+            let eventID = Expression.value(.int64(eventDetail.identifier))
             
-            speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
+            //speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
+            speakersViewController.predicate = (#keyPath(SpeakerManagedObject.presentationModerator.event.id)).compare(.contains, eventID)
+                || (#keyPath(SpeakerManagedObject.presentationSpeaker.event.id)).compare(.contains, eventID)
             
             let speakerCount = speakersViewController.fetchedResultsController.fetchedObjects?.count ?? 0
             

@@ -10,17 +10,18 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class SpeakersTableViewController: TableViewController {
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = Predicate.value(false) {
         
         didSet { configureView() }
     }
     
-    private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
+    private lazy var cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
     // MARK: - Loading
     
@@ -52,11 +53,11 @@ final class SpeakersTableViewController: TableViewController {
         
         assert(isViewLoaded)
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, cachedPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, cachedPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
-                                                                   predicate: predicate,
+                                                                   predicate: predicate.toFoundation(),
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
                                                                    context: Store.shared.managedObjectContext) as! NSFetchedResultsController<Entity>
         

@@ -18,6 +18,10 @@ public final class PresentationManagedObject: Entity {
     @NSManaged public var moderator: SpeakerManagedObject?
     
     @NSManaged public var speakers: Set<SpeakerManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var event: EventManagedObject
 }
 
 extension Presentation: CoreDataDecodable {
