@@ -21,7 +21,7 @@ extension ContextMenuViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let barButtonItem = UIBarButtonItem(image: R.image.contextMenu(), style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "context-menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
         
         viewController.navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -116,7 +116,7 @@ extension ContextMenu {
         
         let activityType: String
         
-        let image: (() -> UIImage)?
+        let image: UIImage?
         
         let title: String
         
@@ -160,7 +160,7 @@ extension ContextMenu {
     
     override var activityImage : UIImage? {
         
-        return action.image?()
+        return action.image
     }
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
@@ -216,7 +216,7 @@ final class OpenInSafariActivity: UIActivity {
     
     override var activityImage : UIImage? {
         
-        return R.image.openInSafariActivity()!
+        return #imageLiteral(resourceName: "OpenInSafariActivity")
     }
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
@@ -274,7 +274,7 @@ final class CopyLinkActivity: UIActivity {
     
     override var activityImage : UIImage? {
         
-        return R.image.openInSafariActivity()!
+        return #imageLiteral(resourceName: "OpenInSafariActivity")
     }
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {

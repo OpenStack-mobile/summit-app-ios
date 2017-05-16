@@ -389,12 +389,12 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         if isScheduled {
             
             cell.statusImageView.isHidden = false
-            cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
+            cell.statusImageView.image = #imageLiteral(resourceName: "ContextMenuScheduleAdd")
             
         } else if isFavorite {
             
             cell.statusImageView.isHidden = false
-            cell.statusImageView.image = R.image.contextMenuWatchListAdd()!
+            cell.statusImageView.image = #imageLiteral(resourceName: "ContextMenuWatchListAdd")
             
         } else {
             

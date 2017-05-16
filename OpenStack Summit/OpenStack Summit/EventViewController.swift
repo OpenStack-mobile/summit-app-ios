@@ -51,7 +51,7 @@ extension EventViewController {
         
         if Store.shared.isLoggedIn && canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: #imageLiteral(resourceName: "ContextMenuRate"), title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
                 
                 return self!.feedbackController(for: event) { _ in didComplete(true) }
                 }))
@@ -72,9 +72,9 @@ extension EventViewController {
                 title = newValue ? "RSVP" : "unRSVP"
             }
             
-            let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
+            let image = newValue ? #imageLiteral(resourceName: "ContextMenuScheduleAdd") : #imageLiteral(resourceName: "ContextMenuScheduleRemove")
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { image }, title: title, handler: .background({ [weak self] (didComplete) in
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: image, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -94,7 +94,7 @@ extension EventViewController {
             
             let title = newValue ? "Watch Later" : "Don’t Watch Later"
             
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { R.image.contextMenuWatchListAdd()! }, title: title, handler: .background({ [weak self] (didComplete) in
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: #imageLiteral(resourceName: "ContextMenuWatchListAdd"), title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
