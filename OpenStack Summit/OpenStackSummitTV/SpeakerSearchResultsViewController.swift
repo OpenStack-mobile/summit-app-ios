@@ -11,6 +11,7 @@ import UIKit
 import CoreSummit
 import Haneke
 import CoreData
+import Predicate
 
 final class SpeakerSearchResultsViewController: TableViewController, UISearchResultsUpdating {
     
@@ -44,31 +45,23 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     private func filterChanged() {
         
-        var predicates = [NSPredicate]()
+        let summitID = SummitManager.shared.summit.value
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
-        
-        let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
-        
-        predicates.append(summitPredicate)
+        //let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
+        var predicate: Predicate = #keyPath(SpeakerManagedObject.summits.id).in([summitID])
         
         if filterString.isEmpty == false {
             
-            let filterPredicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            let value: Expression = .value(.string(filterString))
             
-            predicates.append(filterPredicate)
+            //let filterPredicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            let filterPredicate: Predicate = (#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
+            
+            predicate = predicate &&
         }
         
-        let predicate: NSPredicate?
-        
-        if predicates.count > 0 {
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates.first
-        }
+        let predicate: Predicate = predicates.count > 0 ? .compound(.and(predicates)) : predicates.first
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
@@ -91,7 +84,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         
         cell.nameLabel.text = speaker.name
         cell.titleLabel.text = speaker.title ?? ""
-        cell.speakerImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: UIImage(named: "generic-user-avatar"))
+        cell.speakerImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: #imageLiteral(resourceName: "generic-user-avatar"))
         cell.speakerImageView.layer.cornerRadius = cell.speakerImageView.frame.size.width / 2
         cell.speakerImageView.clipsToBounds = true
     }
