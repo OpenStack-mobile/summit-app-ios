@@ -10,13 +10,14 @@ import UIKit
 import Foundation
 import CoreSummit
 import CoreData
+import Predicate
 
 @objc(OSSTVVenueDirectoryViewController)
 final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     private var mapViewController: VenueMapViewController!
     
@@ -47,14 +48,21 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         performSegue(withIdentifier: "showVenueMap", sender: self)
         
         // setup fetched results controller
+                
+        //let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        let predicate: Predicate = .keyPath(#keyPath(VenueManagedObject.latitude)) != .value(.null)
+            && .keyPath(#keyPath(VenueManagedObject.longitude)) != .value(.null)
+            && #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
+        let sort = [NSSortDescriptor(key: #keyPath(VenueManagedObject.venueType), ascending: true),
+                    NSSortDescriptor(key: #keyPath(VenueManagedObject.name), ascending: true)]
         
-        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
-        
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   sectionNameKeyPath: #keyPath(VenueManagedObject.venueType),
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         

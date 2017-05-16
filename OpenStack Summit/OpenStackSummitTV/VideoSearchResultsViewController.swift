@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 import Haneke
+import Predicate
 import func TVServices.TVTopShelfImageSize
 
 @objc(OSSTVVideoSearchResultsViewController)
@@ -53,36 +54,21 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         let sort: [NSSortDescriptor]
         
-        var predicates = [NSPredicate]()
-        
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
-        
-        let summitPredicate = NSPredicate(format: "event.summit.id == %@", summitID)
-        
-        predicates.append(summitPredicate)
+        //let summitPredicate = NSPredicate(format: "event.summit.id == %@", summitID)
+        var predicate: Predicate = #keyPath(VideoManagedObject.event.summit.id) == SummitManager.shared.summit.value
         
         if filterString.isEmpty {
             
-           sort = [NSSortDescriptor(key: "event.start", ascending: true)]
+           sort = [NSSortDescriptor(key: #keyPath(VideoManagedObject.event.start), ascending: true)]
             
         } else {
             
-            sort = [NSSortDescriptor(key: "event.name", ascending: true)]
+            sort = [NSSortDescriptor(key: #keyPath(VideoManagedObject.event.name), ascending: true)]
             
-            let filterPredicate = NSPredicate(format: "event.name CONTAINS[c] %@", filterString)
+            //let filterPredicate = NSPredicate(format: "event.name CONTAINS[c] %@", filterString)
+            let filter: Predicate = (#keyPath(VideoManagedObject.event.name)).compare(.contains, [.caseInsensitive], .value(.string(filterString)))
             
-            predicates.append(filterPredicate)
-        }
-        
-        let predicate: NSPredicate?
-        
-        if predicates.count > 0 {
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates.first
+            predicate = predicate && filter
         }
         
         self.fetchedResultsController = NSFetchedResultsController(Video.self,

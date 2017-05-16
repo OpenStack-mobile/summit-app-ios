@@ -48,7 +48,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         let summitID = SummitManager.shared.summit.value
         
         //let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
-        var predicate: Predicate = #keyPath(SpeakerManagedObject.summits.id).in([summitID])
+        var predicate: Predicate = (#keyPath(SpeakerManagedObject.summits.id)).in([summitID])
         
         if filterString.isEmpty == false {
             
@@ -58,11 +58,9 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
             let filterPredicate: Predicate = (#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
                 || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
             
-            predicate = predicate &&
+            predicate = predicate && filterPredicate
         }
-        
-        let predicate: Predicate = predicates.count > 0 ? .compound(.and(predicates)) : predicates.first
-        
+                
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
