@@ -75,7 +75,7 @@ final class VenuesSplitViewController: NSSplitViewController, SearchableControll
         
         //let mapVenuesPredicate = NSPredicate(format: "latitude != nil AND longitude != nil")
         let mapVenuesPredicate: Predicate = #keyPath(VenueManagedObject.latitude) != .value(.null)
-            && #keyPath(VenueManagedObject.longitude) != .value(.null)
+            && (#keyPath(VenueManagedObject.longitude)) != .value(.null)
         
         let predicate: Predicate = .compound(.and([mapVenuesPredicate, searchPredicate]))
         
