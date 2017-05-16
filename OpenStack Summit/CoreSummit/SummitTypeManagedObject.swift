@@ -20,7 +20,7 @@ extension SummitType: CoreDataDecodable {
     
     public init(managedObject: SummitTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.color = managedObject.color
     }
@@ -28,7 +28,7 @@ extension SummitType: CoreDataDecodable {
 
 extension SummitType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SummitTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SummitTypeManagedObject {
         
         let managedObject = try cached(context)
         

@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-public class LocationManagedObject: Entity {
+open class LocationManagedObject: Entity {
     
-    @NSManaged public var name: String
+    @NSManaged open var name: String
     
-    @NSManaged public var descriptionText: String?
+    @NSManaged open var descriptionText: String?
     
     // Inverse Relationships
     
-    @NSManaged public var events: Set<EventManagedObject>
+    @NSManaged open var events: Set<EventManagedObject>
     
-    @NSManaged public var summits: SummitManagedObject
+    @NSManaged open var summit: SummitManagedObject
 }
 
 extension Location: CoreDataDecodable {
@@ -48,7 +48,7 @@ extension Location: CoreDataDecodable {
 
 extension Location: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> LocationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> LocationManagedObject {
         
         switch self {
         case let .venue(venue): return try venue.save(context)

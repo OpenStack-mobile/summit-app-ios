@@ -6,32 +6,30 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import struct Foundation.Date
+import JSON
 
-private extension EventDataUpdate {
+private extension Event.DataUpdate {
     
     typealias JSONKey = Event.JSONKey
 }
 
-extension EventDataUpdate: JSONDecodable {
+extension Event.DataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            let eventType = JSONObject[JSONKey.type_id.rawValue]?.rawValue as? Int,
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
+            let eventType = JSONObject[JSONKey.type_id.rawValue]?.integerValue,
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.from(json: tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
-            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
-            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
-            let presentation = PresentationDataUpdate(JSONValue: JSONValue),
+            let sponsors = Company.from(json: sponsorsJSONArray),
+            let presentation = Presentation.DataUpdate(json: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
@@ -49,7 +47,7 @@ extension EventDataUpdate: JSONDecodable {
             
             self.averageFeedback = doubleValue
             
-        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+        } else if let integerValue = averageFeedbackJSON.integerValue {
             
             self.averageFeedback = Double(integerValue)
             
@@ -64,8 +62,8 @@ extension EventDataUpdate: JSONDecodable {
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
-            where track > 0 {
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
+            track > 0 {
             
             self.track = track
             
@@ -74,8 +72,8 @@ extension EventDataUpdate: JSONDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.integerValue,
+            location > 0 {
             
             self.location = location
             
@@ -86,7 +84,7 @@ extension EventDataUpdate: JSONDecodable {
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
-            guard let videos = Video.fromJSON(videosJSONArray)
+            guard let videos = Video.from(json: videosJSONArray)
                 else { return nil }
             
             self.videos = Set(videos)
@@ -96,24 +94,18 @@ extension EventDataUpdate: JSONDecodable {
             self.videos = []
         }
         
-        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
-                else { return nil }
-            
-            self.slides = Set(slides)
+            self.slides = Set(Slide.forceDecode(json: jsonArray))
             
         } else {
             
             self.slides = []
         }
         
-        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
-                else { return nil }
-            
-            self.links = Set(links)
+            self.links = Set(Link.forceDecode(json: jsonArray))
             
         } else {
             

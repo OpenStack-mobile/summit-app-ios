@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class MemberManagedObject: Entity {
     
@@ -49,10 +49,10 @@ extension Member: CoreDataDecodable {
     
     public init(managedObject: MemberManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
-        self.pictureURL = managedObject.pictureURL
+        self.picture = URL(string: managedObject.pictureURL)!
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.linkedIn = managedObject.linkedIn
@@ -86,13 +86,13 @@ extension Member: CoreDataDecodable {
 
 extension Member: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> MemberManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
@@ -121,13 +121,13 @@ extension Member: CoreDataEncodable {
 
 extension MemberResponse.Member: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> MemberManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
@@ -153,26 +153,21 @@ extension MemberResponse.Member: CoreDataEncodable {
 public extension MemberManagedObject {
     
     @inline(__always)
-    func isScheduled(event event: Identifier) -> Bool {
+    func isScheduled(event: Identifier) -> Bool {
         
-        return attendeeRole?.schedule.contains({ $0.identifier == event }) ?? false
+        return attendeeRole?.schedule.contains(where: { $0.id == event }) ?? false
     }
     
     @inline(__always)
-    func isFavorite(event event: Identifier) -> Bool {
+    func isFavorite(event: Identifier) -> Bool {
         
-        return favoriteEvents.contains { $0.identifier == event }
+        return favoriteEvents.contains(where: { $0.id == event })
     }
     
     @inline(__always)
     func feedback(for event: Identifier) -> FeedbackManagedObject? {
         
-        return feedback.firstMatching({ $0.event.identifier == event})
-    }
-    
-    var givenFeedback: [FeedbackManagedObject] {
-        
-        return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
+        return feedback.first(where: { $0.event.id == event })
     }
 }
 
@@ -187,7 +182,7 @@ public extension Store {
     }
     
     /// The member that is logged in.
-    internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
+    internal func authenticatedMember(_ context: NSManagedObjectContext) throws -> MemberManagedObject? {
         
         guard let memberID = session.member,
             let member = try MemberManagedObject.find(memberID, context: context)
@@ -209,6 +204,6 @@ public extension Store {
     @inline(__always)
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
         
-        return self.authenticatedMember?.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
+        return self.authenticatedMember?.attendeeRole?.schedule.contains(where: { $0.id == eventID }) ?? false
     }
 }

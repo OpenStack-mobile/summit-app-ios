@@ -16,7 +16,7 @@ public struct Speaker: Person {
     
     public var title: String?
     
-    public var pictureURL: String
+    public var picture: URL
             
     public var twitter: String?
     
@@ -42,7 +42,7 @@ public func == (lhs: Speaker, rhs: Speaker) -> Bool {
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
         && lhs.title == rhs.title
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography

@@ -51,7 +51,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendActionOn(.LeftMouseDown)
+        shareButton.sendAction(on: .leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -66,14 +66,14 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         if case let .speaker(speaker) = profile {
             
             let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
-                            AppActivityUserInfo.identifier.rawValue: speaker]
+                            AppActivityUserInfo.identifier.rawValue: speaker] as [String : Any]
             
-            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject: AnyObject])
+            userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         }
         
         super.updateUserActivityState(userActivity)
@@ -81,13 +81,13 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     // MARK: - Actions
     
-    @IBAction func share(sender: NSButton) {
+    @IBAction func share(_ sender: NSButton) {
         
-        var items = [AnyObject]()
+        var items = [Any]()
         
-        items.append(self.nameLabel.stringValue ?? "")
+        items.append(self.nameLabel.stringValue)
         
-        items.append(self.titleLabel.stringValue ?? "")
+        items.append(self.titleLabel.stringValue)
         
         if descriptionLabel.attributedStringValue.string.isEmpty == false {
             
@@ -105,7 +105,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         sharingServicePicker.delegate = self
         
-        sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
+        sharingServicePicker.show(relativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.minY)
     }
     
     // MARK: - Private Methods
@@ -154,7 +154,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
                  userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 userActivity.title = self.title
-                userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
+                userActivity.webpageURL = speaker.webpage(for: summit)
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
                 
                 userActivity.becomeCurrent()
@@ -171,54 +171,50 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         }
     }
     
-    private func configureView<T: Person>(person: T) {
+    private func configureView<T: Person>(_ person: T) {
         
         let _ = self.view
         
-        assert(viewLoaded)
+        assert(isViewLoaded)
         
         self.nameLabel.stringValue = person.name
         self.titleLabel.stringValue = person.title ?? ""
         
-        self.imageView.image = NSImage(named: "generic-user-avatar")
-        
-        if let imageURL = NSURL(string: person.pictureURL) {
-            
-            self.imageView.loadCached(imageURL)
-        }
+        self.imageView.image = #imageLiteral(resourceName: "generic-user-avatar")
+        self.imageView.loadCached(person.picture)
         
         // set description
         if let htmlString = person.biography,
-            let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            where attributedString.string.isEmpty == false {
+            let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            attributedString.string.isEmpty == false {
             
-            self.descriptionView.hidden = false
+            self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
+            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
         } else {
             
-            self.descriptionView.hidden = true
+            self.descriptionView.isHidden = true
             self.descriptionLabel.stringValue = ""
         }
         
-        locationView.hidden = true
+        locationView.isHidden = true
         
-        twitterView.hidden = person.twitter == nil
+        twitterView.isHidden = person.twitter == nil
         twitterLabel.stringValue = person.twitter ?? ""
         
-        ircView.hidden = person.irc == nil
+        ircView.isHidden = person.irc == nil
         ircLabel.stringValue = person.irc ?? ""
     }
     
     // MARK: - NSSharingServicePickerDelegate
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
         
         var customItems = [NSSharingService]()
         
@@ -242,14 +238,14 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         return customItems + proposedServices
     }
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, delegateFor sharingService: NSSharingService) -> NSSharingServiceDelegate? {
         
         return self
     }
     
     // MARK: - NSSharingServiceDelegate
     
-    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+    func sharingService(_ sharingService: NSSharingService, willShareItems items: [Any]) {
         
         sharingService.subject = nameLabel.stringValue
     }

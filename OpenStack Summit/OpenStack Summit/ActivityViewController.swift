@@ -23,7 +23,7 @@ protocol ActivityViewController {
     
     func showActivityIndicator()
     
-    func dismissActivityIndicator(animated animated: Bool)
+    func dismissActivityIndicator(_ animated: Bool)
 }
 
 #if os(iOS)
@@ -32,18 +32,18 @@ extension ActivityViewController {
     
     func showActivityIndicator() {
         
-        view.userInteractionEnabled = false
+        view.isUserInteractionEnabled = false
         
-        progressHUD.showInView(view)
+        progressHUD.show(in: view)
         
-        view.bringSubviewToFront(progressHUD)
+        view.bringSubview(toFront: progressHUD)
     }
     
-    func dismissActivityIndicator(animated animated: Bool = true) {
+    func dismissActivityIndicator(_ animated: Bool = true) {
         
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
         
-        progressHUD.dismissAnimated(animated)
+        progressHUD.dismiss(animated: animated)
     }
 }
 

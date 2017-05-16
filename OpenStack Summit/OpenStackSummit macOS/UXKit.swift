@@ -17,12 +17,12 @@ public typealias UITableViewDelegate = NSTableViewDelegate
 public typealias UITableView = NSTableView
 public typealias UITableViewCell = NSTableCellView
 
-public extension NSIndexPath {
+public extension IndexPath {
     
     @inline(__always)
-    convenience init(forRow row: Int, inSection section: Int) {
+    init(forRow row: Int, inSection section: Int) {
         
-        self.init(forItem: row, inSection: section)
+        self.init(item: row, section: section)
     }
 }
 

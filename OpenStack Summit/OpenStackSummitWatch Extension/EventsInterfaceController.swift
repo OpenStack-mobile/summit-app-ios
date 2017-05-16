@@ -16,28 +16,28 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
     private(set) var events = [Event]()
     
-    private static let dateFormatter: NSDateFormatter = {
+    private static let dateFormatter: DateFormatter = {
        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: Store.shared.cache!.timeZone)
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: Store.shared.cache!.timeZone)
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         
         return dateFormatter
     }()
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
-        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sort()
+        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sorted()
         
         updateUI()
     }
@@ -49,7 +49,7 @@ final class EventsInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/summit-schedule"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: summit.webpage.appendingPathComponent("summit-schedule"))
         }
     }
     
@@ -68,11 +68,11 @@ final class EventsInterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(events.count, withRowType: EventCellController.identifier)
         
-        for (index, event) in events.enumerate() {
+        for (index, event) in events.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! EventCellController
+            let cell = tableView.rowController(at: index) as! EventCellController
             
-            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
+            let dateText = EventsInterfaceController.dateFormatter.string(from: event.start)
             let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
             
             cell.nameLabel.setText(event.name)
@@ -84,7 +84,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let event = events[rowIndex]
         
@@ -98,8 +98,8 @@ final class EventCellController: NSObject {
     
     static let identifier = "EventCell"
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
-    @IBOutlet weak var dateLabel: WKInterfaceLabel!
-    @IBOutlet weak var locationLabel: WKInterfaceLabel!
-    @IBOutlet weak var locationGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var dateLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationGroup: WKInterfaceGroup!
 }

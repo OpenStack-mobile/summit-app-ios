@@ -6,31 +6,32 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func feedback(summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
+    func feedback(_ summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: @escaping (ErrorValue<Page<Feedback>>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
+        let uri = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Feedback>(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let page = Page<Feedback>(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -39,36 +40,36 @@ public extension Store {
                 guard let _ = try EventManagedObject.find(event, context: context)
                     else { return }
                 
-                try page.items.save(context)
+                let _ = try page.items.save(context)
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(page))
+            completion(.value(page))
         }
     }
     
-    func averageFeedback(summit: Identifier, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
+    func averageFeedback(_ summit: Identifier, event: Identifier, completion: @escaping (ErrorValue<Double>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
+        let uri = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let averageFeedbackJSON = jsonObject[Event.JSONKey.avg_feedback_rate.rawValue]
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             let averageFeedback: Double
             
@@ -76,13 +77,13 @@ public extension Store {
                 
                 averageFeedback = doubleValue
                 
-            } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+            } else if let integerValue = averageFeedbackJSON.integerValue {
                 
                 averageFeedback = Double(integerValue)
                 
             } else {
                 
-                completion(.Error(Error.InvalidResponse)); return
+                completion(.error(Error.invalidResponse)); return
             }
                         
             // update cache
@@ -97,31 +98,31 @@ public extension Store {
             }
             
             // success
-            completion(.Value(averageFeedback))
+            completion(.value(averageFeedback))
         }
     }
     
-    func addFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
+    func addFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: @escaping (ErrorValue<Identifier>) -> ()) {
         
-        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
+        let uri = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
         
         let context = privateQueueManagedObjectContext
         
-        http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            let identifier = Int(responseObject as! String)!
+            let identifier = Identifier(responseObject as! String)!
             
             // create new feedback in cache
             try! context.performErrorBlockAndWait {
@@ -140,25 +141,25 @@ public extension Store {
                 }
             }
             
-            completion(.Value(identifier))
+            completion(.value(identifier))
         }
     }
     
-    func editFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorType?) -> ()) {
+    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: @escaping (Swift.Error?) -> ()) {
         
-        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
+        let uri = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
         
         let context = privateQueueManagedObjectContext
         
-        http.PUT(URL, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .put, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil

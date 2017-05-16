@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension TimeZone {
     
@@ -18,7 +18,7 @@ public extension TimeZone {
 
 extension TimeZone: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
             let countryCode = JSONObject[JSONKey.country_code.rawValue]?.rawValue as? String,
@@ -26,7 +26,7 @@ extension TimeZone: JSONDecodable {
             let longitude = JSONObject[JSONKey.longitude.rawValue]?.rawValue as? Double,
             let comments = JSONObject[JSONKey.comments.rawValue]?.rawValue as? String,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let offset = JSONObject[JSONKey.offset.rawValue]?.rawValue as? Int
+            let offset = JSONObject[JSONKey.offset.rawValue]?.integerValue
             else { return nil }
         
         self.countryCode = countryCode
@@ -34,6 +34,6 @@ extension TimeZone: JSONDecodable {
         self.longitude = longitude
         self.comments = comments
         self.name = name
-        self.offset = offset
+        self.offset = Int(offset)
     }
 }

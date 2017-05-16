@@ -16,35 +16,35 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var addressLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var addressLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var descriptionSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var descriptionSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var descriptionLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var capacityLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var capacityLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var capacitySeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var capacitySeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var roomLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var roomLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var roomSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var roomSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var mapView: WKInterfaceMap!
+    @IBOutlet private(set) weak var mapView: WKInterfaceMap!
     
-    @IBOutlet weak var imagesButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var imagesButton: WKInterfaceButton!
     
-    @IBOutlet weak var imagesView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imagesView: WKInterfaceImage!
     
-    @IBOutlet weak var imagesActivityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var imagesActivityIndicator: WKInterfaceImage!
     
-    @IBOutlet weak var mapImagesButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var mapImagesButton: WKInterfaceButton!
     
-    @IBOutlet weak var mapImagesView: WKInterfaceImage!
+    @IBOutlet private(set) weak var mapImagesView: WKInterfaceImage!
     
-    @IBOutlet weak var mapImagesActivityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var mapImagesActivityIndicator: WKInterfaceImage!
     
     // MARK: - Properties
     
@@ -67,8 +67,8 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let location = (context as? Context<Location>)?.value
             else { fatalError("Invalid context") }
@@ -91,9 +91,9 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: type.rawValue,
-                                AppActivityUserInfo.identifier.rawValue: location.identifier]
+                                AppActivityUserInfo.identifier.rawValue: location.identifier] as [String : Any]
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: nil)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: nil)
     }
     
     override func didDeactivate() {
@@ -105,25 +105,25 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showVenueImages(sender: AnyObject? = nil) {
+    @IBAction func showVenueImages(_ sender: AnyObject? = nil) {
         
-        showImages(venue.images.sort())
+        showImages(venue.images.sorted())
     }
     
-    @IBAction func showMapImages(sender: AnyObject? = nil) {
+    @IBAction func showMapImages(_ sender: AnyObject? = nil) {
         
-        showImages(venue.maps.sort())
+        showImages(venue.maps.sorted())
     }
         
     // MARK: - Private Methods
     
-    private func showImages(images: [Image]) {
+    private func showImages(_ images: [Image]) {
         
-        let names = [String](count: images.count, repeatedValue: ImageInterfaceController.identifier)
+        let names = [String](repeating: ImageInterfaceController.identifier, count: images.count)
         
         let contexts = images.map { Context($0) }
         
-        presentControllerWithNames(names, contexts: contexts)
+        presentController(withNames: names, contexts: contexts)
     }
     
     private func updateUI() {
@@ -153,8 +153,8 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         descriptionSeparator.setHidden(venue.descriptionText == nil)
         
         if let descriptionText = venue.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
             descriptionLabel.setHidden(false)
@@ -184,12 +184,11 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         roomSeparator.setHidden(room?.name == nil)
         
         // set images
-        if let image = venue.images.first,
-            let imageURL = NSURL(string: image.url) {
+        if let imageURL = venue.images.sorted().first?.url {
             
             // show activity indicator
             imagesActivityIndicator.setImageNamed("Activity")
-            imagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            imagesActivityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
             imagesActivityIndicator.setHidden(false)
             imagesView.setHidden(true)
             
@@ -202,7 +201,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
                 controller.imagesActivityIndicator.setHidden(true)
                 
                 // hide image view if no image
-                guard case .Data = response else {
+                guard case .data = response else {
                     
                     controller.imagesView.setHidden(true)
                     return
@@ -217,12 +216,11 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         }
         
         // set map images
-        if let image = venue.maps.first,
-            let imageURL = NSURL(string: image.url) {
+        if let imageURL = venue.maps.sorted().first?.url {
             
             // show activity indicator
             mapImagesActivityIndicator.setImageNamed("Activity")
-            mapImagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            mapImagesActivityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
             mapImagesActivityIndicator.setHidden(false)
             mapImagesView.setHidden(true)
             
@@ -235,7 +233,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
                 controller.mapImagesActivityIndicator.setHidden(true)
                 
                 // hide image view if no image
-                guard case .Data = response else {
+                guard case .data = response else {
                     
                     controller.mapImagesView.setHidden(true)
                     return
@@ -257,7 +255,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
             
             mapView.setHidden(false)
             mapView.removeAllAnnotations()
-            mapView.addAnnotation(center, withPinColor: .Red)
+            mapView.addAnnotation(center, with: .red)
             mapView.setRegion(region)
             
         } else {

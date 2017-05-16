@@ -6,9 +6,10 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     #if MOCKED
@@ -18,9 +19,9 @@ public extension Store {
     
         let JSONString = try! String(contentsOfFile: resourcePath)
     
-        let json = JSON.Value(string: JSONString)!
+        let json = try? JSON.Value(string: JSONString)!
     
-        let summit = Summit(JSONValue: json)!
+        let summit = Summit(json: json)!
         
         let context = self.privateQueueManagedObjectContext
         
@@ -37,7 +38,7 @@ public extension Store {
         completion(.Value(summit))
     }
     #else
-    func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
+    func summit(_ identifier: Identifier? = nil, completion: @escaping (ErrorValue<Summit>) -> ()) {
         
         let summitID: String
         
@@ -50,36 +51,36 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)?expand=schedule"
+        let uri = "/api/v1/summits/\(summitID)?expand=schedule"
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
-        let url = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let summit = Summit(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let summit = Summit(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
                 let managedObject = try summit.save(context)
                 
-                managedObject.initialDataLoad = NSDate()
+                managedObject.initialDataLoad = Date()
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(summit))
+            completion(.value(summit))
         }
     }
     #endif

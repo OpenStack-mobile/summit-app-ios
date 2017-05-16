@@ -13,13 +13,13 @@ final class FeedbackTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var eventNameLabel: UILabel!
-    @IBOutlet weak var ownerLabel: UILabel!
-    @IBOutlet weak var reviewLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var rateView: CosmosView!
+    @IBOutlet private(set) weak var eventNameLabel: UILabel!
+    @IBOutlet private(set) weak var ownerLabel: UILabel!
+    @IBOutlet private(set) weak var reviewLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var rateView: CosmosView!
     
-    @IBOutlet weak var rateViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var rateViewWidthConstraint: NSLayoutConstraint!
     
     // MARK: - Accessors
     
@@ -85,7 +85,7 @@ final class FeedbackTableViewCell: UITableViewCell {
     
     // MARK: - Selection
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

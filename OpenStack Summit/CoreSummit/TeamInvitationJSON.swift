@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 private enum TeamInvitationJSONKey: String {
     
@@ -15,21 +15,21 @@ private enum TeamInvitationJSONKey: String {
 
 extension TeamInvitation: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         typealias JSONKey = TeamInvitationJSONKey
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let team = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let team = JSONObject[JSONKey.team_id.rawValue]?.integerValue,
             let inviteeJSON = JSONObject[JSONKey.invitee.rawValue],
-            let invitee = Member(JSONValue: inviteeJSON),
+            let invitee = Member(json: inviteeJSON),
             let inviterJSON = JSONObject[JSONKey.inviter.rawValue],
-            let inviter = Member(JSONValue: inviterJSON),
+            let inviter = Member(json: inviterJSON),
             let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
             let permission = TeamPermission(rawValue: permissionString),
-            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
-            let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
+            let created = JSONObject[JSONKey.created_at.rawValue]?.integerValue,
+            let updated = JSONObject[JSONKey.updated_at.rawValue]?.integerValue,
             let accepted = JSONObject[JSONKey.is_accepted.rawValue]?.rawValue as? Bool
             else { return nil }
         
@@ -46,22 +46,22 @@ extension TeamInvitation: JSONDecodable {
 
 extension ListTeamInvitations.Response.Invitation: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         typealias JSONKey = TeamInvitationJSONKey
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let teamJSON = JSONObject[JSONKey.team.rawValue],
-            let team = Team(JSONValue: teamJSON),
+            let team = Team(json: teamJSON),
             let inviteeJSON = JSONObject[JSONKey.invitee.rawValue],
-            let invitee = Member(JSONValue: inviteeJSON),
+            let invitee = Member(json: inviteeJSON),
             let inviterJSON = JSONObject[JSONKey.inviter.rawValue],
-            let inviter = Member(JSONValue: inviterJSON),
+            let inviter = Member(json: inviterJSON),
             let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
             let permission = TeamPermission(rawValue: permissionString),
-            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
-            let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
+            let created = JSONObject[JSONKey.created_at.rawValue]?.integerValue,
+            let updated = JSONObject[JSONKey.updated_at.rawValue]?.integerValue,
             let accepted = JSONObject[JSONKey.is_accepted.rawValue]?.rawValue as? Bool
             else { return nil }
         
@@ -78,9 +78,9 @@ extension ListTeamInvitations.Response.Invitation: JSONDecodable {
 
 extension ListTeamInvitations.Response: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
-        guard let page = Page<ListTeamInvitations.Response.Invitation>(JSONValue: JSONValue)
+        guard let page = Page<ListTeamInvitations.Response.Invitation>(json: JSONValue)
             else { return nil }
         
         self.page = page

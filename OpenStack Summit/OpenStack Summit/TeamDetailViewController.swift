@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
-import SwiftFoundation
+import Foundation
 import JGProgressHUD
 
 final class TeamDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate, MessageEnabledViewController, ActivityViewController {
@@ -33,17 +33,17 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     private var data = [(Section, [Cell])]()
     
-    private static let dateFormatter: NSDateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
         
         return formatter
     }()
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -51,7 +51,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         super.viewDidLoad()
         
         // setup table view
-        tableView.registerNib(R.nib.peopleTableViewCell)
+        tableView.register(R.nib.peopleTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -67,7 +67,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         entityController.enabled = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // fetch from server
@@ -79,11 +79,11 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         Store.shared.fetch(team: team) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -91,11 +91,11 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value: break // entity controller will update
+                case .value: break // entity controller will update
                 }
             }
         }
@@ -103,9 +103,9 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - Private Methods
     
-    private func configureView(team: Team) {
+    private func configureView(_ team: Team) {
         
-        guard let memberID = Store.shared.authenticatedMember?.identifier
+        guard let memberID = Store.shared.authenticatedMember?.id
             else { fatalError("Not logged in") }
         
         let userPermission = team.permission(for: memberID)
@@ -116,7 +116,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         self.nameTextField.text = team.name
         
-        self.nameTextField.userInteractionEnabled = canEdit
+        self.nameTextField.isUserInteractionEnabled = canEdit
         
         self.navigationItem.rightBarButtonItem = canEdit ? addMemberBarButtonItem : nil
         
@@ -140,7 +140,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         // members
         let members = team.members
-            .sort()
+            .sorted()
             .filter { $0.member.identifier != team.owner.identifier }
             .map { Cell.member($0) }
         
@@ -150,7 +150,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
         
         let invitations = team.invitations
-            .sort()
+            .sorted()
             .filter { $0.invitee.identifier != memberID }
             .map { Cell.invitation($0) }
         
@@ -167,7 +167,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         self.tableView.reloadData()
     }
     
-    private subscript (indexPath: NSIndexPath) -> Cell {
+    private subscript (indexPath: IndexPath) -> Cell {
         
         let section = self.data[indexPath.section]
         
@@ -179,45 +179,45 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     private func wasDeleted() {
         
         /** Presents an alert controller with the specified completion handlers.  */
-        func showAlert(localizedText: String, okHandler: (() -> ())? = nil, retryHandler: (()-> ())? = nil) {
+        func showAlert(_ localizedText: String, okHandler: (() -> ())? = nil, retryHandler: (()-> ())? = nil) {
             
             let alert = UIAlertController(title: nil,
                                           message: localizedText,
-                                          preferredStyle: UIAlertControllerStyle.Alert)
+                                          preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
                 
                 okHandler?()
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
             }))
             
             // optionally add retry button
             
             if retryHandler != nil {
                 
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Retry"), style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Retry"), style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
                     
                     retryHandler!()
                     
-                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    alert.dismiss(animated: true, completion: nil)
                 }))
             }
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
         
-        showAlert("Team was deleted", okHandler: { self.navigationController?.popToRootViewControllerAnimated(true) })
+        showAlert("Team was deleted", okHandler: { self.navigationController?.popToRootViewController(animated: true) })
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return self.data.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = self.data[section]
         
@@ -226,7 +226,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         return rows.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellData = self[indexPath]
         
@@ -234,75 +234,75 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .description(description):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailTextFieldTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailTextFieldTableViewCell, for: indexPath)!
             
             cell.textField.placeholder = "Description"
             
             cell.textField.text = description
             
-            cell.userInteractionEnabled = canEdit
+            cell.isUserInteractionEnabled = canEdit
             
             return cell
             
         case let .created(created):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailLabelTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailLabelTableViewCell, for: indexPath)!
             
             cell.textLabel!.text = "Created"
             
-            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.stringFromDate(created.toFoundation())
+            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: created)
             
             return cell
             
         case let .updated(updated):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailLabelTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailLabelTableViewCell, for: indexPath)!
             
             cell.textLabel!.text = "Last Modified"
             
-            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.stringFromDate(updated.toFoundation())
+            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: updated)
             
             return cell
             
         case let .member(teamMember):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = teamMember.member.name
-            cell.pictureURL = teamMember.member.pictureURL
-            cell.title = teamMember.permission.rawValue.lowercaseString.capitalizedString
+            cell.picture = teamMember.member.picture
+            cell.title = teamMember.permission.rawValue.lowercased().capitalized
             
             return cell
             
         case let .owner(member):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = member.name
-            cell.pictureURL = member.pictureURL
-            cell.title = member.title ?? member.twitter ?? member.irc
+            cell.picture = member.picture
+            cell.title = member.title ?? member.twitter ?? member.irc ?? ""
             
             return cell
             
         case let .invitation(invitation):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             cell.name = invitation.invitee.name
-            cell.pictureURL = invitation.invitee.pictureURL
-            cell.title = invitation.permission.rawValue.lowercaseString.capitalizedString
+            cell.picture = invitation.invitee.picture
+            cell.title = invitation.permission.rawValue.lowercased().capitalized
             
             return cell
             
         case .delete:
             
-            return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailDeleteTableViewCell, forIndexPath: indexPath)!
+            return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamDetailDeleteTableViewCell, for: indexPath)!
         }
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         let section = self.data[section].0
         
@@ -320,9 +320,9 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let cellData = self[indexPath]
         
@@ -334,7 +334,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             memberProfileDetailVC.profile = .member(teamMember.member.identifier)
             
-            showViewController(memberProfileDetailVC, sender: self)
+            self.show(memberProfileDetailVC, sender: self)
             
         case let .owner(member):
             
@@ -342,7 +342,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             memberProfileDetailVC.profile = .member(member.identifier)
             
-            showViewController(memberProfileDetailVC, sender: self)
+            self.show(memberProfileDetailVC, sender: self)
             
         case let .invitation(invitation):
             
@@ -350,7 +350,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             memberProfileDetailVC.profile = .member(invitation.invitee.identifier)
             
-            showViewController(memberProfileDetailVC, sender: self)
+            self.show(memberProfileDetailVC, sender: self)
             
         case .delete:
             
@@ -358,7 +358,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             Store.shared.delete(team: team) { (response) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.main.addOperation { [weak self] in
                     
                     guard let controller = self else { return }
                     
@@ -375,7 +375,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         
         let cellData = self[indexPath]
         
@@ -383,19 +383,19 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case .member:
             
-            return canEdit ? .Delete : .None
+            return canEdit ? .delete : .none
             
         default:
             
-            return .None
+            return .none
         }
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         let cellData = self[indexPath]
         
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             
             switch cellData {
                 
@@ -405,7 +405,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                 
                 Store.shared.remove(member: teamMember.identifier, from: team) { (response) in
                     
-                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    OperationQueue.main.addOperation { [weak self] in
                         
                         guard let controller = self else { return }
                         
@@ -426,7 +426,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField === self.nameTextField {
             
@@ -438,7 +438,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             Store.shared.update(team: team, name: newName, description: description) { (response) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.main.addOperation { [weak self] in
                     
                     guard let controller = self else { return }
                     
@@ -456,8 +456,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
         
         // table view cell text field
-        let pointInTable = textField.convertPoint(textField.bounds.origin, toView: self.tableView)
-        if let indexPath = self.tableView.indexPathForRowAtPoint(pointInTable) {
+        let pointInTable = textField.convert(textField.bounds.origin, to: self.tableView)
+        if let indexPath = self.tableView.indexPathForRow(at: pointInTable) {
             
             let cellData = self[indexPath]
             
@@ -473,7 +473,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                 
                 Store.shared.update(team: team, name: name, description: newDescription) { (response) in
                     
-                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    OperationQueue.main.addOperation { [weak self] in
                         
                         guard let controller = self else { return }
                         
@@ -497,13 +497,13 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case R.segue.teamDetailViewController.addMember.identifier:
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let addTeamMemberViewController = navigationController.topViewController as! AddTeamMemberViewController
             
@@ -541,5 +541,5 @@ private extension TeamDetailViewController {
 
 final class TeamDetailTextFieldTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet private(set) weak var textField: UITextField!
 }

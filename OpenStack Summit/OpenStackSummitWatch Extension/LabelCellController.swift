@@ -13,5 +13,5 @@ final class LabelCellController: NSObject {
     
     static let identifier = "LabelCell"
     
-    @IBOutlet weak var textLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var textLabel: WKInterfaceLabel!
 }

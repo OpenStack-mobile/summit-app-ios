@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import JGProgressHUD
 
@@ -37,7 +37,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     lazy var pageController: PageController<Member> = PageController(fetch: self.fetch)
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -46,7 +46,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         
         tableView.estimatedRowHeight = 98
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -61,23 +61,24 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - Actions
     
-    @IBAction func search(sender: AnyObject? = nil) {
+    @IBAction func search(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
     
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
         self.didCancel?(self)
     }
     
     // MARK: - Private Methods
     
-    private func fetch(page: Int, perPage: Int, completion: (ErrorValue<Page<Member>>) -> ()) {
+    private func fetch(page: Int, perPage: Int, completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         // dont make request for empty search filter
-        guard let searchText = self.searchBar.text where searchText.isEmpty == false
-            else { completion(.Value(.empty)); return }
+        guard let searchText = self.searchBar.text,
+            searchText.isEmpty == false
+            else { completion(.value(.empty)); return }
         
         let filter = MemberListRequest.Filter(value: searchText, property: scope)
         
@@ -94,24 +95,24 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
-    private func configure(cell cell: PeopleTableViewCell, with member: Member) {
+    private func configure(cell: PeopleTableViewCell, with member: Member) {
         
         cell.name = member.name
-        cell.pictureURL = member.pictureURL
+        cell.picture = member.picture
         
         switch self.scope {
             
         case .twitter:
             
-            cell.title = member.twitter
+            cell.title = member.twitter ?? ""
             
         case .irc:
             
-            cell.title = member.irc
+            cell.title = member.irc ?? ""
             
         case .firstName, .lastName:
             
-            cell.title = member.title
+            cell.title = member.title ?? ""
         }
     }
     
@@ -122,17 +123,17 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.pageController.items[indexPath.row]
         
@@ -140,7 +141,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: item)
             
@@ -150,9 +151,9 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -162,7 +163,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let data = self.pageController.items[indexPath.row]
         
@@ -178,12 +179,12 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - UISearchBarDelegate
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         self.search()
     }
     
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
         self.scope = Scope(scopeIndex: selectedScope)!
         
@@ -192,19 +193,19 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case R.segue.searchMembersViewController.showMemberDetail.identifier:
             
-            let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)!
             
             let data = self.pageController.items[indexPath.row]
             
             guard case let .item(member) = data else { fatalError("Invalid cell") }
             
-            let memberProfileDetailViewController = segue.destinationViewController as! PersonDetailViewController
+            let memberProfileDetailViewController = segue.destination as! PersonDetailViewController
             
             memberProfileDetailViewController.profile = .member(member.identifier)
             

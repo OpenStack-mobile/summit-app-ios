@@ -8,19 +8,19 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
-public class FeedbackManagedObject: Entity {
+open class FeedbackManagedObject: Entity {
     
-    @NSManaged public var rate: Int16
+    @NSManaged open var rate: Int16
     
-    @NSManaged public var review: String
+    @NSManaged open var review: String
     
-    @NSManaged public var date: NSDate
+    @NSManaged open var date: Date
     
-    @NSManaged public var event: EventManagedObject
+    @NSManaged open var event: EventManagedObject
     
-    @NSManaged public var member: MemberManagedObject
+    @NSManaged open var member: MemberManagedObject
 }
 
 // MARK: - Encoding
@@ -29,24 +29,24 @@ extension Feedback: CoreDataDecodable {
     
     public init(managedObject: FeedbackManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.rate = Int(managedObject.rate)
         self.review = managedObject.review
-        self.date = Date(foundation: managedObject.date)
-        self.event = managedObject.event.identifier
+        self.date = managedObject.date
+        self.event = managedObject.event.id
         self.member = Member(managedObject: managedObject.member)
     }
 }
 
 extension Feedback: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> FeedbackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> FeedbackManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.rate = Int16(rate)
         managedObject.review = review
-        managedObject.date = date.toFoundation()
+        managedObject.date = date
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = try context.relationshipFault(member)
         
@@ -58,13 +58,13 @@ extension Feedback: CoreDataEncodable {
 
 extension MemberResponse.Feedback: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> FeedbackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> FeedbackManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.rate = Int16(rate)
         managedObject.review = review
-        managedObject.date = date.toFoundation()
+        managedObject.date = date
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = try context.relationshipFault(member)
         

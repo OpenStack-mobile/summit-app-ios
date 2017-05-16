@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 private extension Group {
     
@@ -18,10 +18,10 @@ private extension Group {
 
 extension Group: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
             let code = JSONObject[JSONKey.code.rawValue]?.rawValue as? String
             else { return nil }

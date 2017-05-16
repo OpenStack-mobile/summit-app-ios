@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 extension Feedback: JSONDecodable {
     
@@ -15,20 +15,20 @@ extension Feedback: JSONDecodable {
         case id, event_id, rate, note, created_date, owner
     }
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let rate = JSONObject[JSONKey.rate.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let rate = JSONObject[JSONKey.rate.rawValue]?.integerValue,
             let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
-            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int,
-            let event = JSONObject[JSONKey.event_id.rawValue]?.rawValue as? Int,
+            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.integerValue,
+            let event = JSONObject[JSONKey.event_id.rawValue]?.integerValue,
             let memberJSON = JSONObject[JSONKey.owner.rawValue],
-            let member = Member(JSONValue: memberJSON)
+            let member = Member(json: memberJSON)
             else { return nil }
         
         self.identifier = identifier
-        self.rate = rate
+        self.rate = Int(rate)
         self.review = review
         self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
@@ -43,19 +43,19 @@ extension MemberResponse.Feedback: JSONDecodable {
         case id, event_id, rate, note, created_date, owner_id
     }
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let rate = JSONObject[JSONKey.rate.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let rate = JSONObject[JSONKey.rate.rawValue]?.integerValue,
             let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
-            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int,
-            let event = JSONObject[JSONKey.event_id.rawValue]?.rawValue as? Int,
-            let member = JSONObject[JSONKey.owner_id.rawValue]?.rawValue as? Int
+            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.integerValue,
+            let event = JSONObject[JSONKey.event_id.rawValue]?.integerValue,
+            let member = JSONObject[JSONKey.owner_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
-        self.rate = rate
+        self.rate = Int(rate)
         self.review = review
         self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event

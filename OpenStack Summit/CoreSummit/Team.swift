@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public struct Team: Named {
     
@@ -52,6 +52,6 @@ public extension Team {
             return .admin
         }
         
-        return members.firstMatching({ $0.member.identifier == member })?.permission
+        return members.first(where: { $0.member.identifier == member })?.permission
     }
 }

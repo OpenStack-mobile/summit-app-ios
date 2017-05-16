@@ -32,7 +32,7 @@ final class VenuesViewController: RevealTabStripViewController {
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
             userActivity.title = "Venues"
-            userActivity.webpageURL = NSURL(string: summit.webpageURL + "/travel")
+            userActivity.webpageURL = summit.webpage.appendingPathComponent("travel")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
             userActivity.becomeCurrent()
@@ -41,30 +41,30 @@ final class VenuesViewController: RevealTabStripViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         userActivity?.becomeCurrent()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - PagerTabStripViewControllerDelegate
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         return [venuesMapViewController, venueListViewController]
     }

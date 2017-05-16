@@ -10,15 +10,15 @@ import Cocoa
 
 @IBDesignable final class ContentBackgroundView: NSView {
 
-    @IBInspectable var backgroundColor = NSColor.blackColor() {
+    @IBInspectable var backgroundColor = NSColor.black {
         
         didSet {
-            setNeedsDisplayInRect(bounds)
+            setNeedsDisplay(bounds)
         }
     }
     
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
         
         backgroundColor.set()
         NSRectFill(dirtyRect)

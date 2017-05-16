@@ -16,44 +16,44 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var titleLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var titleLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var twitterLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var twitterLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var twitterGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var twitterGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var twitterSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var twitterSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var ircLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var ircLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var ircGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var ircGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var ircSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var ircSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var eventsSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var eventsSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var eventsButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var eventsButton: WKInterfaceButton!
     
-    @IBOutlet weak var eventsLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var eventsLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var biographyLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var biographyLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var biographySeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var biographySeparator: WKInterfaceSeparator!
     
     // MARK: - Properties
     
     private(set) var speaker: Speaker!
     
-    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier) ?? false }) ?? []
+    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier)}) ?? []
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let speaker = (context as? Context<Speaker>)?.value
             else { fatalError("Invalid context") }
@@ -69,11 +69,11 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
-                                AppActivityUserInfo.identifier.rawValue: speaker.identifier]
+                                AppActivityUserInfo.identifier.rawValue: speaker.identifier] as [String : Any]
         
-        let webpageURL = NSURL(string: speaker.toWebpageURL(Store.shared.cache!))!
+        let webpageURL = speaker.webpage(for: Store.shared.cache!)
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: webpageURL)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: webpageURL)
     }
     
     override func didDeactivate() {
@@ -85,17 +85,17 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showEvents(sender: AnyObject? = nil) {
+    @IBAction func showEvents(_ sender: AnyObject? = nil) {
         
         if events.count == 1 {
             
             let event = events[0]
             
-            pushControllerWithName(EventDetailInterfaceController.identifier, context: Context(event))
+            pushController(withName: EventDetailInterfaceController.identifier, context: Context(event))
             
         } else {
             
-            pushControllerWithName(EventsInterfaceController.identifier, context: Context(events))
+            pushController(withName: EventsInterfaceController.identifier, context: Context(events))
         }
     }
     
@@ -108,10 +108,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         titleLabel.setText(speaker.title)
         titleLabel.setHidden(speaker.title == nil)
         
-        if let url = NSURL(string: speaker.pictureURL) {
-            
-            imageView.loadCached(url)
-        }
+        imageView.loadCached(speaker.picture)
         
         twitterLabel.setText(speaker.twitter)
         twitterGroup.setHidden(speaker.twitter == nil)
@@ -130,8 +127,8 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         biographySeparator.setHidden(speaker.biography == nil)
         
         if let descriptionText = speaker.biography,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             biographyLabel.setText(attributedString.string)
             

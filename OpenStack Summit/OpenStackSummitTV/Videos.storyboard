@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FKd-S3-AVa">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FKd-S3-AVa">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,20 +43,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="500" height="570"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="spatial" fixedFrame="YES" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3m-3R-cOa">
+                                        <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="spatial" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3m-3R-cOa">
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="0.17642489450000001" green="0.60687987239999996" blue="0.82575757579999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-6N-X51">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-6N-X51">
                                             <rect key="frame" x="0.0" y="535" width="500" height="35"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="i3m-3R-cOa" firstAttribute="leading" secondItem="O2e-p5-iw0" secondAttribute="leading" id="CAv-FF-V9n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ynh-6N-X51" secondAttribute="bottom" id="FBf-qt-w1o"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ynh-6N-X51" secondAttribute="trailing" id="U9b-YB-bHB"/>
+                                    <constraint firstAttribute="trailing" secondItem="i3m-3R-cOa" secondAttribute="trailing" id="VSz-aO-rYL"/>
+                                    <constraint firstItem="Ynh-6N-X51" firstAttribute="top" secondItem="i3m-3R-cOa" secondAttribute="bottom" constant="35" id="X4t-Ha-U1H"/>
+                                    <constraint firstItem="i3m-3R-cOa" firstAttribute="top" secondItem="O2e-p5-iw0" secondAttribute="top" id="ZAs-VF-Rb3"/>
+                                    <constraint firstItem="Ynh-6N-X51" firstAttribute="leading" secondItem="O2e-p5-iw0" secondAttribute="leading" id="xYi-Ll-uPP"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="i3m-3R-cOa" id="EjJ-Vw-Mt4"/>
                                     <outlet property="label" destination="Ynh-6N-X51" id="ATM-Wo-sRr"/>

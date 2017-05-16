@@ -8,6 +8,8 @@
 
 import Foundation
 import AppKit
+import CoreSummit
+import Predicate
 
 final class EventsSplitViewController: NSSplitViewController, SearchableController, EventDatesViewControllerDelegate {
     
@@ -18,7 +20,7 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
         didSet { configureView() }
     }
     
-    private(set) var selectedDate: NSDate? {
+    private(set) var selectedDate: Date? {
         
         didSet { configureView() }
     }
@@ -45,35 +47,38 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
     
     private func configureView() {
         
-        let predicate: NSPredicate
+        let predicate: Predicate
         
         if searchTerm.isEmpty == false {
             
             // show events for search term
             
-            predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+            //predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+            predicate = (#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], .value(.string(searchTerm)))
             
         } else if let selectedDate = self.selectedDate  {
             
             // show events for date
             
-            let endDate = selectedDate.mt_endOfCurrentDay()
+            let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()!
             
-            predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+            //predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate as NSDate, endDate as NSDate)
+            predicate = #keyPath(EventManagedObject.start) >= selectedDate
+                && #keyPath(EventManagedObject.end) <= endDate
             
         } else {
             
             // show no events
-            predicate = NSPredicate(value: false)
+            predicate = .value(false)
         }
         
         let collapseSidebar = searchTerm.isEmpty == false
         
         // collapse sidebar
-        if collapseSidebar != splitViewItems[0].collapsed {
+        if collapseSidebar != splitViewItems[0].isCollapsed {
             
             splitViewItems[0].canCollapse = true
-            splitViewItems[0].animator().collapsed = collapseSidebar
+            splitViewItems[0].animator().isCollapsed = collapseSidebar
             splitViewItems[0].canCollapse = false
         }
         
@@ -82,7 +87,7 @@ final class EventsSplitViewController: NSSplitViewController, SearchableControll
     
     // MARK: - EventDatesViewControllerDelegate
     
-    func eventDatesViewController(controller: EventDatesViewController, didSelect selectedDate: NSDate) {
+    func eventDatesViewController(_ controller: EventDatesViewController, didSelect selectedDate: Date) {
         
         self.selectedDate = selectedDate
     }

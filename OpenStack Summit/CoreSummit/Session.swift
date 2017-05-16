@@ -29,23 +29,23 @@ public extension SessionStorage {
 
 public final class UserDefaultsSessionStorage: SessionStorage {
     
-    public let userDefaults: NSUserDefaults
+    public let userDefaults: UserDefaults
     
-    public init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
+    public init(userDefaults: UserDefaults = UserDefaults.standard) {
         
         self.userDefaults = userDefaults
     }
     
     public var member: Identifier? {
         
-        get { return (userDefaults.objectForKey(Key.member.rawValue) as? NSNumber)?.integerValue }
+        get { return (userDefaults.object(forKey: Key.member.rawValue) as? NSNumber)?.int64Value }
         
         set {
             
             guard let member = newValue
-                else { userDefaults.removeObjectForKey(Key.member.rawValue); return }
+                else { userDefaults.removeObject(forKey: Key.member.rawValue); return }
             
-            userDefaults.setObject(NSNumber(long: member), forKey: Key.member.rawValue)
+            userDefaults.set(NSNumber(value: member), forKey: Key.member.rawValue)
             
             userDefaults.synchronize()
         }
@@ -53,9 +53,9 @@ public final class UserDefaultsSessionStorage: SessionStorage {
     
     public var hadPasscode: Bool {
         
-        get { return userDefaults.boolForKey(Key.hadPasscode.rawValue) }
+        get { return userDefaults.bool(forKey: Key.hadPasscode.rawValue) }
         
-        set { userDefaults.setBool(newValue, forKey: Key.hadPasscode.rawValue) }
+        set { userDefaults.set(newValue, forKey: Key.hadPasscode.rawValue) }
     }
     
     private enum Key: String {

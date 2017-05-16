@@ -14,7 +14,7 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
     
     // MARK: - IB Outlets
 
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet private(set) weak var mapView: GMSMapView!
     
     // MARK: - Properties
     
@@ -25,7 +25,7 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.myLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         mapView.delegate = self
         
         updateUI()
@@ -51,6 +51,6 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
         marker.icon = R.image.map_pin()!
         bounds = bounds.includingCoordinate(marker.position)
         mapView.selectedMarker = marker
-        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
     }
 }

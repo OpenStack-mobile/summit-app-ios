@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
+import Predicate
 
 @objc(OSSTVEventDatesViewController)
 final class EventDatesViewController: UITableViewController {
@@ -20,20 +21,20 @@ final class EventDatesViewController: UITableViewController {
         didSet { updateUI() }
     }
     
-    private static let dateFormatter: NSDateFormatter = {
+    private static let dateFormatter: DateFormatter = {
        
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MMMM d"
         
         return dateFormatter
     }()
     
-    private static let performSegueDelay: NSTimeInterval = 0.1
+    private static let performSegueDelay: TimeInterval = 0.1
     
-    private var lastSelectedIndexPath: NSIndexPath?
+    private var lastSelectedIndexPath: IndexPath?
     
-    private let delayedSeguesOperationQueue = NSOperationQueue()
+    private let delayedSeguesOperationQueue = OperationQueue()
     
     // MARK: - Loading
     
@@ -60,7 +61,7 @@ final class EventDatesViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func loadData(sender: AnyObject? = nil) {
+    @IBAction func loadData(_ sender: AnyObject? = nil) {
         
         state = .loading
         
@@ -78,15 +79,15 @@ final class EventDatesViewController: UITableViewController {
                 
                 guard let controller = self else { return }
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.state = .error(error)
                         
-                    case let .Value(summit):
+                    case let .value(summit):
                         
                         controller.state = State(summit: summit)
                     }
@@ -118,8 +119,8 @@ final class EventDatesViewController: UITableViewController {
             
             NSDate.mt_setTimeZone(timeZone)
             
-            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .None)
-            self.performSegueWithIdentifier("showDayEvents", sender: self)
+            self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+            self.performSegue(withIdentifier: "showDayEvents", sender: self)
         }
         
         tableView.reloadData()
@@ -127,62 +128,62 @@ final class EventDatesViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard case let .summit(start, end, _, _) = state
             else { return 0 }
         
-        return end.mt_daysSinceDate(start)
+        return (end as NSDate).mt_days(since: start)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("EventDayTableViewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventDayTableViewCell")!
         
         guard case let .summit(start, _, _, _) = state
             else { fatalError("Invalid state") }
         
-        let date = start.mt_dateDaysAfter(indexPath.row)
+        let date = (start as NSDate).mt_dateDays(after: indexPath.row)!
         
-        cell.textLabel?.text = EventDatesViewController.dateFormatter.stringFromDate(date)
+        cell.textLabel?.text = EventDatesViewController.dateFormatter.string(from: date)
         
         return cell
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         // Check that the next focus view is a child of the table view.
-        guard let nextFocusedView = context.nextFocusedView where nextFocusedView.isDescendantOfView(tableView) else { return }
+        guard let nextFocusedView = context.nextFocusedView, nextFocusedView.isDescendant(of: tableView) else { return }
         guard let indexPath = context.nextFocusedIndexPath else { return }
         
         // Cancel any previously queued segues.
         delayedSeguesOperationQueue.cancelAllOperations()
         
         // Create an `NSBlockOperation` to perform the detail segue after a delay.
-        let performSegueOperation = NSBlockOperation()
+        let performSegueOperation = BlockOperation()
         
         performSegueOperation.addExecutionBlock { [weak self, unowned performSegueOperation] in
             
             guard let controller = self else { return }
             
             // Pause the block so the segue isn't immediately performed.
-            NSThread.sleepForTimeInterval(0.1)
+            Thread.sleep(forTimeInterval: 0.1)
             
             /*
              Check that the operation wasn't cancelled and that the segue identifier
              is different to the last performed segue identifier.
              */
-            guard performSegueOperation.cancelled == false
+            guard performSegueOperation.isCancelled == false
                 && indexPath != controller.lastSelectedIndexPath
                 else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 // Record the last performed segue identifier.
                 controller.lastSelectedIndexPath = indexPath
@@ -191,8 +192,8 @@ final class EventDatesViewController: UITableViewController {
                  Select the focused cell so that the table view visibly reflects
                  which detail view is being shown.
                  */
-                controller.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-                controller.performSegueWithIdentifier("showDayEvents", sender: self)
+                controller.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                controller.performSegue(withIdentifier: "showDayEvents", sender: self)
             }
         }
         
@@ -201,7 +202,7 @@ final class EventDatesViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -212,13 +213,15 @@ final class EventDatesViewController: UITableViewController {
             
             let indexPath = tableView.indexPathForSelectedRow!
             
-            let selectedDate = start.mt_dateDaysAfter(indexPath.row)
+            let selectedDate = (start as NSDate).mt_dateDays(after: indexPath.row)!
             
-            let endDate = selectedDate.mt_endOfCurrentDay()
+            let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()!
             
-            let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+            //let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+            let predicate: Predicate = #keyPath(EventManagedObject.start) >= selectedDate
+                && #keyPath(EventManagedObject.end) <= endDate
             
-            let destinationViewController = segue.destinationViewController as! UINavigationController
+            let destinationViewController = segue.destination as! UINavigationController
             
             let eventsViewController = destinationViewController.topViewController as! EventsViewController
             
@@ -240,16 +243,16 @@ extension EventDatesViewController {
     enum State {
         
         case loading
-        case error(ErrorType)
-        case summit(start: NSDate, end: NSDate, name: String, timeZone: NSTimeZone)
+        case error(Error)
+        case summit(start: Date, end: Date, name: String, timeZone: Foundation.TimeZone)
         
         init(summit: Summit) {
             
-            let start = summit.start.toFoundation().mt_startOfCurrentDay()
+            let start = (summit.start as NSDate).mt_startOfCurrentDay()!
             
-            let end = summit.end.toFoundation().mt_dateDaysAfter(1)
+            let end = (summit.end as NSDate).mt_dateDays(after: 1)!
             
-            let timeZone = NSTimeZone(name: summit.timeZone)!
+            let timeZone = TimeZone(identifier: summit.timeZone)!
             
             self = .summit(start: start, end: end, name: summit.name, timeZone: timeZone)
         }

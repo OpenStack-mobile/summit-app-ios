@@ -12,6 +12,6 @@ extension UIViewController {
     
     func setBlankBackBarButtonItem() {
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
 }

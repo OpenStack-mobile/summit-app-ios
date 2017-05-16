@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class VenueDirectoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -19,14 +20,14 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: true) {
+    var predicate = Predicate.value(true) {
         
         didSet { configureView() }
     }
     
     weak var delegate: VenueDirectoryViewControllerDelegate?
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     private var summitObserver: Int?
     
@@ -50,7 +51,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject? = nil) {
+    @IBAction func tableViewClick(_ sender: AnyObject? = nil) {
         
         guard tableView.selectedRow >= 0
             else { return }
@@ -59,20 +60,19 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         
         // get selected venue
         
-        let venue = self.fetchedResultsController.fetchedObjects![tableView.selectedRow] as! VenueManagedObject
+        let venue = self.fetchedResultsController.fetchedObjects![tableView.selectedRow]
         
-        delegate?.venueDirectoryViewController(self, didSelect: venue.identifier)
+        delegate?.venueDirectoryViewController(self, didSelect: venue.id)
     }
     
     // MARK: - Private Methods
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        //let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        let summitPredicate: Predicate = #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, summitPredicate]))
         
         let sort = [NSSortDescriptor(key: "name", ascending: true)]
         
@@ -87,32 +87,32 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         self.tableView.reloadData()
     }
     
-    private func configure(cell cell: VenueTableViewCell, at row: Int) {
+    private func configure(cell: VenueTableViewCell, at row: Int) {
         
         assert(fetchedResultsController.fetchedObjects != nil)
         
-        let venueManagedObject = fetchedResultsController.fetchedObjects![row] as! VenueManagedObject
+        let venueManagedObject = fetchedResultsController.fetchedObjects![row]
         
         let venue = VenueListItem(managedObject: venueManagedObject)
         
         cell.venueNameLabel.stringValue = venue.name
         cell.venueAddressLabel.stringValue = venue.address
         
-        cell.imageURL = NSURL(string: venue.backgroundImageURL ?? "")
+        cell.imageURL = venue.backgroundImage
     }
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     // MARK: - NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! VenueTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
         
         configure(cell: cell, at: row)
         
@@ -121,12 +121,12 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         
@@ -186,7 +186,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
 
 @objc protocol VenueDirectoryViewControllerDelegate: class {
     
-    func venueDirectoryViewController(controller: VenueDirectoryViewController, didSelect venue: Identifier)
+    func venueDirectoryViewController(_ controller: VenueDirectoryViewController, didSelect venue: Identifier)
 }
 
 final class VenueTableViewCell: ImageTableViewCell {

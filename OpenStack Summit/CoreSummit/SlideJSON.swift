@@ -6,7 +6,8 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
+import struct Foundation.URL
 
 public extension Slide {
     
@@ -18,15 +19,15 @@ public extension Slide {
 
 extension Slide: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let featured = JSONObject[JSONKey.featured.rawValue]?.rawValue as? Bool,
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
-            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.rawValue as? Identifier,
-            let order = JSONObject[JSONKey.order.rawValue]?.rawValue as? Int,
-            let link = JSONObject[JSONKey.link.rawValue]?.rawValue as? String
+            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue,
+            let order = JSONObject[JSONKey.order.rawValue]?.integerValue,
+            let link = JSONObject[JSONKey.link.rawValue]?.urlValue
             else { return nil }
         
         self.identifier = identifier
@@ -39,8 +40,8 @@ extension Slide: JSONDecodable {
         // optional
         self.name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String ?? ""
         
-        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-            where descriptionText.isEmpty == false {
+        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
+            descriptionText.isEmpty == false {
             
             self.descriptionText = descriptionText
             

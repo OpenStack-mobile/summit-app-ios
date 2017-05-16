@@ -22,8 +22,8 @@ extension Attendee: CoreDataDecodable {
     
     public init(managedObject: AttendeeManagedObject) {
         
-        self.identifier = managedObject.identifier
-        self.member = managedObject.member.identifier
+        self.identifier = managedObject.id
+        self.member = managedObject.member.id
         self.tickets = managedObject.tickets.identifiers
         self.schedule = managedObject.schedule.identifiers
     }
@@ -31,7 +31,7 @@ extension Attendee: CoreDataDecodable {
 
 extension Attendee: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> AttendeeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> AttendeeManagedObject {
         
         let managedObject = try cached(context)
         

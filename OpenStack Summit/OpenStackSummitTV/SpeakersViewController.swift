@@ -19,7 +19,7 @@ final class SpeakersViewController: UINavigationController {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Speakers", bundle: nil)
-        let searchResultsController = storyboard.instantiateViewControllerWithIdentifier("SpeakerSearchResults") as! SpeakerSearchResultsViewController
+        let searchResultsController = storyboard.instantiateViewController(withIdentifier: "SpeakerSearchResults") as! SpeakerSearchResultsViewController
         
         /*
          Create a UISearchController, passing the `searchResultsController` to

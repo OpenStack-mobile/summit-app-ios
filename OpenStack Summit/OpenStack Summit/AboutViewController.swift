@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import Predicate
 import MessageUI
 
 final class AboutViewController: UITableViewController, RevealViewController, EmailComposerViewController {
@@ -40,7 +41,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "About the Summit"
-        userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)
+        userActivity.webpageURL = AppEnvironment.configuration.webpage
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
         self.userActivity = userActivity
@@ -49,30 +50,30 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         userActivity?.becomeCurrent()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
     
-    @IBAction func showLink(sender: UIButton) {
+    @IBAction func showLink(_ sender: UIButton) {
         
         let link = Link(rawValue: sender.tag)!
         
@@ -80,15 +81,15 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
         case .openStackWebsite:
             
-            let url = NSURL(string: "https://openstack.org")!
+            let url = URL(string: "https://openstack.org")!
             
-            open(url: url)
+            open(url)
             
         case .codeOfConduct:
             
-            let url = NSURL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+            let url = URL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
             
-            open(url: url)
+            open(url)
             
         case .appSupport:
             
@@ -132,7 +133,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
                 
                 let sort = [NSSortDescriptor(key: "name", ascending: true)]
                 
-                let wirelessNetworks = try! WirelessNetwork.filter(("summit.id" == summit.identifier).toFoundation(), sort: sort, context: Store.shared.managedObjectContext)
+                let wirelessNetworks = try! WirelessNetwork.filter((#keyPath(WirelessNetworkManagedObject.summit.id) == summit.identifier), sort: sort, context: Store.shared.managedObjectContext)
                 
                 if wirelessNetworks.isEmpty == false {
                     
@@ -142,13 +143,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             // setup handoff
             
-            userActivity?.webpageURL = NSURL(string: summit.webpageURL)!
+            userActivity?.webpageURL = summit.webpage
             
         } else {
             
             summitCache = nil
             
-            userActivity?.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
+            userActivity?.webpageURL = AppEnvironment.configuration.webpage
         }
         
         var aboutCells = [AboutCell]()
@@ -163,7 +164,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell cell: WirelessNetworkCell, with network: WirelessNetwork) {
+    private func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -171,7 +172,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell cell: AboutNameCell) {
+    private func configure(cell: AboutNameCell) {
         
         guard let summit = self.summitCache
             else { fatalError("No summit cache") }
@@ -184,13 +185,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
         else {
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+            let stringDateFrom = dateFormatter.string(from: summit.start)
             
             dateFormatter.dateFormat = "dd, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+            let stringDateTo = dateFormatter.string(from: summit.end)
             
             cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
         }
@@ -200,11 +201,11 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func open(url url: NSURL) {
+    private func open(_ url: URL) {
         
-        if UIApplication.sharedApplication().canOpenURL(url) {
+        if UIApplication.shared.canOpenURL(url) {
             
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
             
         } else {
             
@@ -214,12 +215,12 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return sections.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
         
         let section = sections[index]
         
@@ -233,7 +234,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let section = sections[indexPath.section]
         
@@ -241,7 +242,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         case .name:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutNameCell, for: indexPath)!
             
             configure(cell: cell)
             
@@ -249,7 +250,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
         case let .wirelessNetworks(networks):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.wirelessNetworkCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.wirelessNetworkCell, for: indexPath)!
             
             let network = networks[indexPath.row]
             
@@ -265,18 +266,18 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             case .links:
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutLinksCell, forIndexPath: indexPath)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutLinksCell, for: indexPath)!
                 
             case .description:
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutDescriptionCell, forIndexPath: indexPath)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutDescriptionCell, for: indexPath)!
             }
         }
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
         
         let section = sections[index]
         
@@ -286,7 +287,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
         
         let section = sections[index]
         
@@ -296,7 +297,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
         
         let section = sections[index]
         
@@ -306,7 +307,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
         
         let section = sections[index]
         
@@ -318,9 +319,9 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Swift.Error?) {
         
-        dismissViewControllerAnimated(true) {
+        dismiss(animated: true) {
             
             if let error = error {
                 
@@ -358,18 +359,18 @@ private extension AboutViewController {
 
 final class WirelessNetworkCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: CopyableLabel!
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet weak var passwordLabel: CopyableLabel!
+    @IBOutlet private(set) weak var passwordLabel: CopyableLabel!
 }
 
 final class AboutNameCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: CopyableLabel!
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet weak var dateLabel: CopyableLabel!
+    @IBOutlet private(set) weak var dateLabel: CopyableLabel!
     
-    @IBOutlet weak var buildVersionLabel: CopyableLabel!
+    @IBOutlet private(set) weak var buildVersionLabel: CopyableLabel!
     
-    @IBOutlet weak var buildNumberLabel: CopyableLabel!
+    @IBOutlet private(set) weak var buildNumberLabel: CopyableLabel!
 }

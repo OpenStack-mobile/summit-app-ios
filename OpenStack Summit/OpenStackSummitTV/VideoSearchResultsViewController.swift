@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 import Haneke
+import func TVServices.TVTopShelfImageSize
 
 @objc(OSSTVVideoSearchResultsViewController)
 final class VideoSearchResultsViewController: CollectionViewController, UISearchResultsUpdating {
@@ -22,7 +23,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         didSet {
             
             // Return if the filter string hasn't changed.
-            guard filterString != oldValue && isViewLoaded() else { return }
+            guard filterString != oldValue && isViewLoaded else { return }
             
             filterChanged()
         }
@@ -34,9 +35,13 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         super.viewDidLoad()
         
         filterChanged()
+        
+        // setup collection view
+        let collectionViewLayout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        collectionViewLayout.itemSize = TVTopShelfImageSize(shape: .HDTV, style: .sectioned)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         resetScrollPosition()
@@ -50,7 +55,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         var predicates = [NSPredicate]()
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
         
         let summitPredicate = NSPredicate(format: "event.summit.id == %@", summitID)
         
@@ -85,7 +90,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
                                                                    predicate: predicate,
                                                                    sortDescriptors: sort,
                                                                    sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
@@ -101,15 +106,15 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         self.collectionView!.setContentOffset(.zero, animated: true)
     }
     
-    private func configure(cell cell: VideoCell, at indexPath: NSIndexPath) {
+    private func configure(cell: VideoCell, at indexPath: IndexPath) {
         
-        let video = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
+        let video = self.fetchedResultsController.object(at: indexPath) as! Video.ManagedObject
         
         cell.label.text = video.event.name
         
         cell.imageView.image = nil
         
-        if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
+        if let thumbnailURL = URL(youtubeThumbnail: video.youtube) {
             
             cell.imageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
                 
@@ -120,7 +125,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
     
     // MARK: - UISearchResultsUpdating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
         // update filter string
         filterString = searchController.searchBar.text ?? ""
@@ -128,9 +133,9 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
     
     // MARK: - UICollectionViewDataSource
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VideoCell", forIndexPath: indexPath) as! VideoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
         
         configure(cell: cell, at: indexPath)
         
@@ -139,12 +144,14 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
     
     // MARK: - UICollectionViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! Video.ManagedObject
         
         let video = Video(managedObject: managedObject)
         
-        self.play(video: video)
+        let cell = collectionView.cellForItem(at: indexPath) as! VideoCell
+        
+        self.play(video: video, cachedImage: cell.imageView?.image)
     }
 }

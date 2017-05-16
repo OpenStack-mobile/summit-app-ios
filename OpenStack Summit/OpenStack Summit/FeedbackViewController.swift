@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import Cosmos
 import JGProgressHUD
@@ -30,11 +30,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - Properties
     
-    var completion: (FeedbackViewController -> ())?
+    var completion: ((FeedbackViewController) -> ())?
     
     var event: Identifier = 0 {
         
-         didSet { if isViewLoaded() { configureView() } }
+         didSet { if isViewLoaded { configureView() } }
     }
     
     private var mode: Mode = .new
@@ -43,13 +43,13 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     private let minimumBottomSpace: CGFloat = 100
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
     deinit {
         
-        if isViewLoaded() {
+        if isViewLoaded {
             
             unregisterKeyboardNotifications()
         }
@@ -65,22 +65,22 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         registerKeyboardNotifications()
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         
-        return [.Portrait]
+        return [.portrait]
     }
     
     // MARK: - Actions
     
-    @IBAction func close(sender: AnyObject? = nil) {
+    @IBAction func close(_ sender: AnyObject? = nil) {
         
         completion?(self)
     }
     
-    @IBAction func send(sender: AnyObject? = nil) {
+    @IBAction func send(_ sender: AnyObject? = nil) {
         
         guard Reachability.connected
-            else { showErrorMessage(Error.reachability); return }
+            else { showErrorMessage(AppError.reachability); return }
         
         // get new values
         
@@ -94,7 +94,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         if rate == 0 {
             validationErrorText = "You must provide a rate using stars at the top"
         }
-        else if review.characters.count > 500 {
+        else if (review?.characters.count)! > 500 {
             validationErrorText = "Review exceeded 500 characters limit"
         }
         else {
@@ -121,9 +121,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
         case .new:
             
-            Store.shared.addFeedback(summit, event: event, rate: rate, review: review) { [weak self] (response) in
+            Store.shared.addFeedback(summit, event: event, rate: rate, review: review!) { [weak self] (response) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     guard let controller = self else { return }
                     
@@ -131,11 +131,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.showErrorMessage(error)
                         
-                    case .Value:
+                    case .value:
                         
                         controller.close()
                     }
@@ -144,9 +144,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
         case .edit:
             
-            Store.shared.editFeedback(summit, event: event, rate: rate, review: review)  { [weak self] (error) in
+            Store.shared.editFeedback(summit, event: event, rate: rate, review: review!)  { [weak self] (error) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     guard let controller = self else { return }
                     
@@ -154,11 +154,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                     
                     switch error {
                         
-                    case let .Some(error):
+                    case let .some(error):
                         
                         controller.showErrorMessage(error)
                         
-                    case .None:
+                    case .none:
                         
                         controller.close()
                     }
@@ -205,9 +205,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - UITextViewDelegate
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
-        reviewTextView.textColor = UIColor.blackColor()
+        reviewTextView.textColor = UIColor.black
         
         if reviewTextView.text == placeHolderText  {
             reviewTextView.text = ""
@@ -216,17 +216,17 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         return true
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         if reviewTextView.text == "" {
             reviewTextView.text = placeHolderText
-            reviewTextView.textColor = UIColor.lightGrayColor()
+            reviewTextView.textColor = UIColor.lightGray
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text.characters.count == 1 {
-            if let _ = text.rangeOfCharacterFromSet(.newlineCharacterSet(), options: .BackwardsSearch) {
+            if let _ = text.rangeOfCharacter(from: .newlines, options: .backwards) {
                 textView.resignFirstResponder()
                 return false
             }
@@ -238,34 +238,34 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     @objc private func registerKeyboardNotifications() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardDidShow),
-                                                         name: UIKeyboardDidShowNotification,
+                                                         name: NSNotification.Name.UIKeyboardDidShow,
                                                          object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardWillHide),
-                                                         name: UIKeyboardWillHideNotification,
+                                                         name: NSNotification.Name.UIKeyboardWillHide,
                                                          object: nil)
     }
     
     @objc private func unregisterKeyboardNotifications() {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func keyboardDidShow(notification: NSNotification) {
+    @objc private func keyboardDidShow(_ notification: Foundation.Notification) {
         
-        let userInfo: NSDictionary = notification.userInfo!
-        var keyboardRect = userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue
-        keyboardRect = view.convertRect(keyboardRect, fromView: nil)
+        let userInfo: [String: AnyObject] = notification.userInfo as! [String : AnyObject]
+        var keyboardRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardRect = view.convert(keyboardRect, from: nil)
         
         let visibleHeight = self.view.frame.size.height - keyboardRect.size.height
         bottomViewHeightConstraint.constant = visibleHeight
         view.updateConstraints()
     }
     
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(_ notification: Foundation.Notification) {
         
         bottomViewHeightConstraint.constant = minimumBottomSpace
         view.updateConstraints()

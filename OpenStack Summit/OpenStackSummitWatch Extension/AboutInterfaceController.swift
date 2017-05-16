@@ -7,7 +7,7 @@
 //
 
 import WatchKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class AboutInterfaceController: WKInterfaceController {
@@ -16,14 +16,14 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var summitNameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var summitNameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var versionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var versionLabel: WKInterfaceLabel!
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -32,18 +32,9 @@ final class AboutInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        let webpageURL: NSURL
+        let webpage = Store.shared.cache?.webpage ?? AppEnvironment.configuration.webpage
         
-        if let summit = Store.shared.cache {
-            
-             webpageURL = NSURL(string: summit.webpageURL)!
-            
-        } else {
-            
-            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
-        }
-        
-        updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpageURL)
+        updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpage)
     }
     
     override func didDeactivate() {
@@ -55,7 +46,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func refreshData(sender: AnyObject? = nil) {
+    @IBAction func refreshData(_ sender: AnyObject? = nil) {
         
         try! Store.shared.clear()
         

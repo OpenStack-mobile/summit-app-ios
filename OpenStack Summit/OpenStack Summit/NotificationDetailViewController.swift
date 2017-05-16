@@ -14,17 +14,17 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var notification: Notification!
+    var notification: CoreSummit.Notification!
     
     private var data = [[Data]]()
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
-        dateFormatter.dateStyle = .LongStyle
+        dateFormatter.dateStyle = .long
         
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .medium
         
         return dateFormatter
     }()
@@ -42,7 +42,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func deleteAction(sender: UIBarButtonItem) {
+    @IBAction func deleteAction(_ sender: UIBarButtonItem) {
         
         let context = Store.shared.privateQueueManagedObjectContext
         
@@ -50,20 +50,20 @@ final class NotificationDetailViewController: UITableViewController {
         
         func closeViewController() {
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
-                controller.navigationController?.popViewControllerAnimated(true)
+                controller.navigationController?.popViewController(animated: true)
             }
         }
                 
-        context.performBlock {
+        context.perform {
             
             guard let notificationManagedObject = try! NotificationManagedObject.find(identifier, context: context)
                 else { closeViewController(); return }
             
-            context.deleteObject(notificationManagedObject)
+            context.delete(notificationManagedObject)
             
             try! context.save()
             
@@ -75,7 +75,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     private func configureView() {
         
-        assert(isViewLoaded(), "View must be loaded")
+        assert(isViewLoaded, "View must be loaded")
         
         assert(self.notification != nil, "\(self) not configured with notification")
         
@@ -87,7 +87,7 @@ final class NotificationDetailViewController: UITableViewController {
             data.append([.event(event)])
         }
         
-        let date = dateFormatter.stringFromDate(notification.created.toFoundation())
+        let date = dateFormatter.string(from: notification.created)
         
         let text = notification.body
         
@@ -99,19 +99,19 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = data[section]
         
         return section.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.data[indexPath.section][indexPath.row]
         
@@ -119,7 +119,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .event(event):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailEventCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailEventCell, for: indexPath)!
             
             cell.textLabel!.text = event.name
             
@@ -127,7 +127,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .date(date):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailDateCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailDateCell, for: indexPath)!
             
             cell.textLabel!.text = date
             
@@ -135,7 +135,7 @@ final class NotificationDetailViewController: UITableViewController {
             
         case let .text(text):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationDetailTextCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationDetailTextCell, for: indexPath)!
             
             cell.textLabel!.text = text
             
@@ -145,7 +145,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -154,7 +154,7 @@ final class NotificationDetailViewController: UITableViewController {
             guard let event = self.notification?.event
                 else { fatalError("No event for notification") }
             
-            let eventViewController = segue.destinationViewController as! EventDetailViewController
+            let eventViewController = segue.destination as! EventDetailViewController
             
             eventViewController.event = event
             

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public protocol FeedbackProtocol: Unique {
     

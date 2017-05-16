@@ -35,6 +35,6 @@ extension EmailComposerViewController {
         
         composerVC.mailComposeDelegate = self
         
-        viewController.presentViewController(composerVC, animated: true, completion: nil)
+        viewController.present(composerVC, animated: true, completion: nil)
     }
 }

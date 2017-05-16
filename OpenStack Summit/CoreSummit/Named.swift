@@ -12,7 +12,7 @@ public protocol Named: Unique {
     var name: String { get }
 }
 
-public extension CollectionType where Generator.Element: Named {
+public extension Collection where Iterator.Element: Named {
     
     var names: [String] {
         

@@ -29,7 +29,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     lazy var pageController: PageController<Summit> = PageController(fetch: Store.shared.summits)
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -38,7 +38,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -54,17 +54,17 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.view.bringSubviewToFront(progressHUD)
+        self.view.bringSubview(toFront: progressHUD)
     }
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
     
-    @IBAction func done(sender: AnyObject? = nil) {
+    @IBAction func done(_ sender: AnyObject? = nil) {
         
         self.didFinish?(self)
     }
@@ -76,38 +76,38 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         self.navigationItem.rightBarButtonItem = didFinish != nil ? doneButton : nil
     }
     
-    private func configure(cell cell: UITableViewCell, with summit: Summit) {
+    private func configure(cell: UITableViewCell, with summit: Summit) {
         
         cell.textLabel!.text = summit.name
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        let stringDateFrom = dateFormatter.string(from: summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        let stringDateTo = dateFormatter.string(from: summit.end)
         
         cell.detailTextLabel!.text = stringDateFrom + stringDateTo
         
         let isCurrentSummit = SummitManager.shared.summit.value == summit.identifier
         
-        cell.accessoryType = isCurrentSummit ? .Checkmark : .None
+        cell.accessoryType = isCurrentSummit ? .checkmark : .none
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.pageController.items[indexPath.row]
         
@@ -115,7 +115,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.summitCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.summitCell, for: indexPath)!
             
             configure(cell: cell, with: item)
             
@@ -125,9 +125,9 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -137,9 +137,9 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let data = self.pageController.items[indexPath.row]
         

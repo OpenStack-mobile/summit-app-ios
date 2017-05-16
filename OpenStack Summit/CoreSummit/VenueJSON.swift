@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Venue {
     
@@ -18,21 +18,21 @@ public extension Venue {
 
 extension Venue: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
                 
         guard let JSONObject = JSONValue.objectValue,
             let classNameString = JSONObject[LocationJSONKey.class_name.rawValue]?.rawValue as? String,
             let type = ClassName(rawValue: classNameString),
-            let identifier = JSONObject[LocationJSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[LocationJSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
+            name.isEmpty == false,
             let country = JSONObject[JSONKey.country.rawValue]?.rawValue as? String,
             let mapsJSONArray = JSONObject[JSONKey.maps.rawValue]?.arrayValue,
-            let maps = Image.fromJSON(mapsJSONArray),
+            let maps = Image.from(json: mapsJSONArray),
             let imagesJSONArray = JSONObject[JSONKey.images.rawValue]?.arrayValue,
-            let images = Image.fromJSON(imagesJSONArray),
+            let images = Image.from(json: imagesJSONArray),
             let locationTypeString = JSONObject[JSONKey.location_type.rawValue]?.rawValue as? String,
             let locationType = LocationType(rawValue: locationTypeString)
-            where name.isEmpty == false
             else { return nil }
         
         self.identifier = identifier
@@ -53,7 +53,7 @@ extension Venue: JSONDecodable {
         
         if let floorsJSONArray = JSONObject[JSONKey.floors.rawValue]?.arrayValue {
             
-            guard let floors = VenueFloor.fromJSON(floorsJSONArray)
+            guard let floors = VenueFloor.from(json: floorsJSONArray)
                 else { return nil }
             
             self.floors = Set(floors)

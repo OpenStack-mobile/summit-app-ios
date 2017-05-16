@@ -6,10 +6,10 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import UserNotifications
 import CoreSpotlight
-import SwiftFoundation
 import CoreSummit
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
@@ -23,11 +23,11 @@ import FirebaseMessaging
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
     
-    static var shared: AppDelegate { return unsafeBitCast(UIApplication.sharedApplication().delegate!, AppDelegate.self) }
+    static var shared: AppDelegate { return unsafeBitCast(UIApplication.shared.delegate!, to: AppDelegate.self) }
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // print app info
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
@@ -37,7 +37,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         Preference.appBuild = AppBuild
         
         // setup Fabric
-        Crashlytics.startWithAPIKey(AppConsumerKey(AppEnvironment).fabric)
+        Crashlytics.start(withAPIKey: AppConsumerKey(AppEnvironment).fabric)
         
         // setup Google Maps
         GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
@@ -61,7 +61,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         #endif
         
         // validate R.swift on debug builds
-        R.assertValid()
+        #if DEBUG
+        try! R.validate()
+        #endif
         
         // configure global appearance
         SetAppearance()
@@ -69,7 +71,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Core Spotlight
         if CSSearchableIndex.isIndexingAvailable() {
             
+            #if DEBUG
             SpotlightController.shared.log = { print("SpotlightController: " + $0) }
+            #endif
         }
         
         // Setup Notification Manager
@@ -85,9 +89,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
         // Add observer for InstanceID token refresh callback.
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(self.tokenRefreshNotification),
-                                                         name: kFIRInstanceIDTokenRefreshNotification,
+                                                         name: .firInstanceIDTokenRefresh,
                                                          object: nil)
         
         connectToFcm()
@@ -95,48 +99,49 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         FIRMessaging.messaging().disconnect()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         connectToFcm()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error) {
         
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> ()) {
+    // HACK: implemented old delegate to make notifications work as is on iOS 10
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         // app was just brought from background to foreground
-        if application.applicationState == .Active {
+        if application.applicationState == .active {
             
             // called when push notification received in foreground
             print("Recieved remote notification: \(userInfo)")
@@ -146,77 +151,75 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             // called when push notification tapped
             print("Tapped on remote notification: \(userInfo)")
             
-            PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            PushNotificationManager.shared.process(pushNotification: userInfo as! [String: Any], unread: false)
             
             // redirect to inbox
-            self.view(.inbox)
+            self.view(screen: .inbox)
         }
-        
-        fetchCompletionHandler(.NoData)
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
         
         PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-        var options = [String : AnyObject]()
+        var options = [UIApplicationOpenURLOptionsKey : Any]()
         
         if let sourceApplication = sourceApplication {
             
-            options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication
+            options[.sourceApplication] = sourceApplication
         }
         
-        return self.application(application, openURL: url, options: options)
+        return self.application(application, open: url, options: options)
     }
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
-        if let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String {
+        if let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String {
             
-            let bundleID = NSBundle.mainBundle().bundleIdentifier
+            let bundleID = Bundle.main.bundleIdentifier
             
             if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
                 
-                let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsURLKey:url])
-                NSNotificationCenter.defaultCenter().postNotification(notification)
+                let notification = Foundation.Notification (name: Notification.Name(rawValue: AGAppLaunchedWithURLNotification), object: nil, userInfo: [UIApplicationLaunchOptionsKey.url:url])
+                NotificationCenter.default.post(notification)
                 
                 return true
             }
         }
         
         // HACK: async is needed in case app was not already opened
-        dispatch_async(dispatch_get_main_queue()) {
-            return self.openSchemeURL(url)
+        DispatchQueue.main.async {
+            let _ = self.openScheme(url: url)
         }
         
         return false
     }
     
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
         print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo?.description ?? "")")
         
         if userActivity.activityType == CSSearchableItemActionType {
             
             guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                let searchURL = NSURL(string: searchIdentifierString)
-                where searchURL.pathComponents?.count == 2
+                let searchURL = Foundation.URL(string: searchIdentifierString),
+                searchURL.pathComponents.count == 2
                 else { return false }
             
-            let searchTypeString = searchURL.pathComponents![0]
-            let identifierString = searchURL.pathComponents![1]
+            let searchTypeString = searchURL.pathComponents[0]
+            let identifierString = searchURL.pathComponents[1]
             
             guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
-                let identifier = Int(identifierString)
+                let identifier = Identifier(identifierString)
                 else { return false }
             
-            guard self.canView(dataType, identifier: identifier)
+            guard self.canView(data: dataType, identifier: identifier)
                 else { return false }
             
-            self.view(dataType, identifier: identifier)
+            self.view(data: dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
@@ -225,20 +228,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            guard openWebURL(url)
-                else { UIApplication.sharedApplication().openURL(url); return false }
+            guard self.openWeb(url: url)
+                else { UIApplication.shared.openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
             guard let typeString = userActivity.userInfo?[AppActivityUserInfo.type.rawValue] as? String,
                 let dataType = AppActivitySummitDataType(rawValue: typeString),
-                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
+                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Identifier
                 else { return false }
             
-            guard self.canView(dataType, identifier: identifier)
+            guard self.canView(data: dataType, identifier: identifier)
                 else { return false }
             
-            self.view(dataType, identifier: identifier)
+            self.view(data: dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -246,7 +249,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let screen = AppActivityScreen(rawValue: screenString)
                 else { return false }
             
-            self.view(screen)
+            self.view(screen: screen)
         }
         
         return false
@@ -263,9 +266,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Disconnect previous FCM connection if it exists.
         FIRMessaging.messaging().disconnect()
         
-        FIRMessaging.messaging().connectWithCompletion { (error) in
+        FIRMessaging.messaging().connect { (error) in
             if error != nil {
-                print("Unable to connect with FCM. \(error)")
+                print("Unable to connect with FCM. \(error!)")
             } else {
                 print("Connected to FCM.")
             }
@@ -274,7 +277,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Notifications
     
-    func tokenRefreshNotification(notification: NSNotification) {
+    func tokenRefreshNotification(_ notification: Foundation.Notification) {
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             
@@ -292,7 +295,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
-        return topViewController.view(data, identifier: identifier)
+        return topViewController.view(data: data, identifier: identifier)
     }
     
     func view(screen: AppActivityScreen) {
@@ -300,10 +303,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
-        topViewController.view(screen)
+        topViewController.view(screen: screen)
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }

@@ -12,16 +12,16 @@ struct Preference {
     
     static var appBuild: Int {
         
-        get { return NSUserDefaults.standardUserDefaults().integerForKey(Key.appBuild.rawValue) }
+        get { return UserDefaults.standard.integer(forKey: Key.appBuild.rawValue) }
         
-        set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Key.appBuild.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Key.appBuild.rawValue) }
     }
     
     static var goingToSummit: Bool {
         
-        get { return NSUserDefaults.standardUserDefaults().boolForKey(Key.goingToSummit.rawValue)}
+        get { return UserDefaults.standard.bool(forKey: Key.goingToSummit.rawValue)}
         
-        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Key.goingToSummit.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: Key.goingToSummit.rawValue) }
     }
 }
 

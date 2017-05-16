@@ -28,7 +28,7 @@ extension EventType: CoreDataDecodable {
     
     public init(managedObject: EventTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.color = managedObject.color
         self.blackOutTimes = managedObject.blackOutTimes
@@ -37,7 +37,7 @@ extension EventType: CoreDataDecodable {
 
 extension EventType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventTypeManagedObject {
         
         let managedObject = try cached(context)
         

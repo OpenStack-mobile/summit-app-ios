@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Speaker {
     
@@ -18,19 +18,19 @@ public extension Speaker {
 
 extension Speaker: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
+            let picture = JSONObject[JSONKey.pic.rawValue]?.urlValue
             else { return nil }
         
         self.identifier = identifier
         self.firstName = firstName
         self.lastName = lastName
-        self.pictureURL = pictureURL
+        self.picture = picture
         
         // optional
         self.title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String
@@ -40,7 +40,7 @@ extension Speaker: JSONDecodable {
         
         if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
             
-            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+            guard let affiliations = Affiliation.from(json: affiliationsJSONArray)
                 else { return nil }
             
             self.affiliations = Set(affiliations)

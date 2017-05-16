@@ -6,7 +6,8 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
+import struct Foundation.URL
 
 public extension Image {
     
@@ -18,11 +19,12 @@ public extension Image {
 
 extension Image: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let url = JSONObject[JSONKey.image_url.rawValue]?.rawValue as? String
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let urlString = JSONObject[JSONKey.image_url.rawValue]?.rawValue as? String,
+            let url = URL(string: urlString)
             else { return nil }
         
         self.identifier = identifier

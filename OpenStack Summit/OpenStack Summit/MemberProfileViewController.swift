@@ -54,14 +54,14 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
             
             if let person = try! Speaker.find(identifier, context: Store.shared.managedObjectContext) {
                 
-                self.title = person.name.uppercaseString
+                self.title = person.name.uppercased()
             }
             
         case let .member(identifier):
             
             if let person = try! Member.find(identifier, context: Store.shared.managedObjectContext) {
                 
-                self.title = person.name.uppercaseString
+                self.title = person.name.uppercased()
             }
             
         case .currentUser:
@@ -74,7 +74,7 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
         addContextMenuBarButtonItem()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         reloadPagerTabStripView()
@@ -82,7 +82,7 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
     
     // MARK: - RevealTabStripViewController
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers = [UIViewController]()
         

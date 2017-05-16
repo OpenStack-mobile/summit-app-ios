@@ -6,28 +6,29 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import struct Foundation.Date
+import JSON
 
-public extension SummitDataUpdate {
+extension Summit.DataUpdate {
     
     typealias JSONKey = Summit.JSONKey
 }
 
-extension SummitDataUpdate: JSONDecodable {
+extension Summit.DataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
-            let timeZone = TimeZone(JSONValue: timeZoneJSON),
+            let timeZone = TimeZone(json: timeZoneJSON),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
-            let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
+            let ticketTypes = TicketType.from(json: ticketTypeJSONArray),
             let locationsJSONArray = JSONObject[JSONKey.locations.rawValue]?.arrayValue,
-            let locations = Location.fromJSON(locationsJSONArray),
+            let locations = Location.from(json: locationsJSONArray),
             let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String,
             let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool
             else { return nil }
@@ -56,7 +57,7 @@ extension SummitDataUpdate: JSONDecodable {
         
         self.datesLabel = JSONObject[JSONKey.dates_label.rawValue]?.rawValue as? String
         
-        if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
+        if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.integerValue {
             
             self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
             

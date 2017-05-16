@@ -16,9 +16,9 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var activityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var activityIndicator: WKInterfaceImage!
     
     // MARK: - Properties
     
@@ -26,8 +26,8 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let image = (context as? Context<Image>)?.value
             else { fatalError("Invalid context") }
@@ -41,10 +41,7 @@ final class ImageInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        if let imageURL = NSURL(string: image.url) {
-            
-            updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: imageURL)
-        }
+        updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: image.url)
     }
     
     override func didDeactivate() {
@@ -58,17 +55,14 @@ final class ImageInterfaceController: WKInterfaceController {
     
     private func updateUI() {
         
-        guard let imageURL = NSURL(string: image.url)
-            else { return }
-        
         // show activity indicator
         activityIndicator.setImageNamed("Activity")
-        activityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+        activityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
         activityIndicator.setHidden(false)
         imageView.setHidden(true)
         
         // load image
-        imageView.loadCached(imageURL) { [weak self] (response) in
+        imageView.loadCached(image.url) { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -78,7 +72,7 @@ final class ImageInterfaceController: WKInterfaceController {
             
             // show alert image
             
-            guard case .Data = response else {
+            guard case .data = response else {
                 
                 controller.imageView.setImageNamed("alert")
                 return

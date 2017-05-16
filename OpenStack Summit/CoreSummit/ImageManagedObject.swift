@@ -18,18 +18,18 @@ extension Image: CoreDataDecodable {
     
     public init(managedObject: ImageManagedObject) {
         
-        self.identifier = managedObject.identifier
-        self.url = managedObject.url
+        self.identifier = managedObject.id
+        self.url = URL(string: managedObject.url)!
     }
 }
 
 extension Image: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> ImageManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> ImageManagedObject {
         
         let managedObject = try cached(context)
         
-        managedObject.url = url
+        managedObject.url = url.absoluteString
         
         managedObject.didCache()
         

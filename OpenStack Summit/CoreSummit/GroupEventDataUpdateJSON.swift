@@ -6,7 +6,8 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import struct Foundation.Date
+import JSON
 
 private extension GroupEventDataUpdate {
     
@@ -15,24 +16,24 @@ private extension GroupEventDataUpdate {
 
 extension GroupEventDataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let summit = JSONObject[JSONKey.summit_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let summit = JSONObject[JSONKey.summit_id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            let eventType = JSONObject[JSONKey.type_id.rawValue]?.rawValue as? Int,
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
+            let eventType = JSONObject[JSONKey.type_id.rawValue]?.integerValue,
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.from(json: tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
-            let presentation = PresentationDataUpdate(JSONValue: JSONValue),
+            let sponsors = Company.from(json: sponsorsJSONArray),
+            let presentation = Presentation.DataUpdate(json: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Int.fromJSON(groupsJSONArray)
+            let groups = Identifier.from(json: groupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -51,7 +52,7 @@ extension GroupEventDataUpdate: JSONDecodable {
             
             self.averageFeedback = doubleValue
             
-        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+        } else if let integerValue = averageFeedbackJSON.integerValue {
             
             self.averageFeedback = Double(integerValue)
             
@@ -65,8 +66,7 @@ extension GroupEventDataUpdate: JSONDecodable {
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
-            where track > 0 {
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue, track > 0 {
             
             self.track = track
             
@@ -75,8 +75,7 @@ extension GroupEventDataUpdate: JSONDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.integerValue, location > 0 {
             
             self.location = location
             
@@ -87,7 +86,7 @@ extension GroupEventDataUpdate: JSONDecodable {
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
-            guard let videos = Video.fromJSON(videosJSONArray)
+            guard let videos = Video.from(json: videosJSONArray)
                 else { return nil }
             
             self.videos = Set(videos)

@@ -6,8 +6,9 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreData
+import JSON
 
 public struct DataUpdate {
     
@@ -28,16 +29,16 @@ public extension DataUpdate {
     
     public enum Operation: String {
         
-        case Insert     = "INSERT"
-        case Update     = "UPDATE"
-        case Delete     = "DELETE"
-        case Truncate   = "TRUNCATE"
+        case insert     = "INSERT"
+        case update     = "UPDATE"
+        case delete     = "DELETE"
+        case truncate   = "TRUNCATE"
     }
     
     public enum Entity {
         
-        case Identifier(CoreSummit.Identifier)
-        case JSON(SwiftFoundation.JSON.Object)
+        case identifier(CoreSummit.Identifier)
+        case json(JSON.Object)
     }
     
     public enum ClassName: String {
@@ -70,25 +71,26 @@ public extension DataUpdate {
         case SponsorFromEvent
         case SummitGroupEvent
         case SummitWIFIConnection
+        case SummitExternalLocation
         
         internal var type: Updatable.Type? {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule, .MyFavorite: return CoreSummit.EventDataUpdate.self
+            case .MySchedule, .MyFavorite: return CoreSummit.Event.DataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
-            case .Presentation: return CoreSummit.EventDataUpdate.self
-            case .SummitEvent, .SummitEventWithFile: return CoreSummit.EventDataUpdate.self
+            case .Presentation: return CoreSummit.Event.DataUpdate.self
+            case .SummitEvent, .SummitEventWithFile: return CoreSummit.Event.DataUpdate.self
             case .SummitGroupEvent: return CoreSummit.GroupEventDataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
             case .PresentationSpeaker: return CoreSummit.Speaker.self
             case .SummitTicketType: return CoreSummit.TicketType.self
-            case .SummitVenue: return CoreSummit.Venue.self
+            case .SummitVenue, .SummitExternalLocation: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
-            case .SummitVenueRoom: return CoreSummit.VenueRoomDataUpdate.self
+            case .SummitVenueRoom: return CoreSummit.VenueRoom.DataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
-            case .PresentationCategoryGroup, .PrivatePresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
+            case .PresentationCategoryGroup, .PrivatePresentationCategoryGroup: return CoreSummit.TrackGroup.DataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
             case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             case .PresentationVideo: return CoreSummit.Video.self
@@ -122,7 +124,7 @@ public extension Store {
             #endif
             
             // truncate
-            guard dataUpdate.operation != .Truncate else {
+            guard dataUpdate.operation != .truncate else {
                 
                 guard dataUpdate.className == .WipeData
                     else { return false }
@@ -148,11 +150,11 @@ public extension Store {
                 
                 switch dataUpdate.operation {
                     
-                case .Insert:
+                case .insert:
                     
                     guard let entityJSON = dataUpdate.entity,
-                        case let .JSON(jsonObject) = entityJSON,
-                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        case let .json(jsonObject) = entityJSON,
+                        let event = Event.DataUpdate.init(json: .object(jsonObject))
                         else { return false }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
@@ -161,10 +163,10 @@ public extension Store {
                     
                     return true
                     
-                case .Delete:
+                case .delete:
                     
                     guard let entityID = dataUpdate.entity,
-                        case let .Identifier(identifier) = entityID
+                        case let .identifier(identifier) = entityID
                         else { return false }
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
@@ -187,11 +189,11 @@ public extension Store {
                 
                 switch dataUpdate.operation {
                     
-                case .Insert:
+                case .insert:
                     
                     guard let entityJSON = dataUpdate.entity,
-                        case let .JSON(jsonObject) = entityJSON,
-                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        case let .json(jsonObject) = entityJSON,
+                        let event = Event.DataUpdate.init(json: .object(jsonObject))
                         else { return false }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
@@ -200,10 +202,10 @@ public extension Store {
                     
                     return true
                     
-                case .Delete:
+                case .delete:
                     
                     guard let entityID = dataUpdate.entity,
-                        case let .Identifier(identifier) = entityID
+                        case let .identifier(identifier) = entityID
                         else { return false }
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
@@ -222,16 +224,16 @@ public extension Store {
                 else { return true }
             
             // delete
-            guard dataUpdate.operation != .Delete else {
+            guard dataUpdate.operation != .delete else {
                 
                 guard let entityID = dataUpdate.entity,
-                    case let .Identifier(identifier) = entityID
+                    case let .identifier(identifier) = entityID
                     else { return false }
                 
                 // if it doesnt exist, dont delete it
                 if let foundEntity = try type.find(identifier, context: context) {
                     
-                    context.deleteObject(foundEntity)
+                    context.delete(foundEntity)
                 }
                 
                 return true
@@ -239,8 +241,8 @@ public extension Store {
             
             // parse JSON
             guard let entityJSON = dataUpdate.entity,
-                case let .JSON(jsonObject) = entityJSON,
-                let entity = type.init(JSONValue: .Object(jsonObject))
+                case let .json(jsonObject) = entityJSON,
+                let entity = type.init(json: .object(jsonObject))
                 else { return false }
             
             switch dataUpdate.className {
@@ -269,7 +271,7 @@ public extension Store {
             default:
                 
                 // insert or update
-                try entity.write(context, summit: summit)
+                let _ = try entity.write(context, summit: summit)
                 
                 return true
             }
@@ -284,22 +286,22 @@ public extension Store {
 /// The model type can be updated remotely
 internal protocol Updatable: JSONDecodable {
     
-    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity?
+    static func find(_ identifier: Identifier, context: NSManagedObjectContext) throws -> Entity?
     
     /// Encodes to CoreData.
-    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity
+    func write(_ context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity
 }
 
 extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
     
     @inline(__always)
-    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
+    static func find(_ identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
         return try ManagedObject.find(identifier, context: context)
     }
     
     @inline(__always)
-    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
+    func write(_ context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
         
         return try self.save(context)
     }
@@ -312,9 +314,9 @@ extension Speaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
 extension VenueFloor: Updatable { }
-extension VenueRoomDataUpdate: Updatable { }
+extension VenueRoom.DataUpdate: Updatable { }
 extension Track: Updatable { }
-extension TrackGroupDataUpdate: Updatable { }
+extension TrackGroup.DataUpdate: Updatable { }
 extension Image: Updatable { }
 extension GroupEventDataUpdate: Updatable { }
 extension WirelessNetwork: Updatable { }

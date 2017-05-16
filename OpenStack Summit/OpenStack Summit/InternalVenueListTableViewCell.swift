@@ -29,20 +29,16 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
         set { addressLabel.text = newValue }
     }
     
-    var backgroundImageURL: String = "" {
+    var backgroundImage: URL? {
+        
         didSet {
-            if backgroundImageURL.isEmpty {
-                backgroundImageView.image = nil
+            if let url = backgroundImage {
+                
+                backgroundImageView.hnk_setImageFromURL(url.environmentScheme)
             }
             else {
-
-                #if DEBUG
-                    let picUrl = backgroundImageURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                #else
-                    let picUrl = backgroundImageURL
-                #endif
                 
-                backgroundImageView.hnk_setImageFromURL(NSURL(string: picUrl)!)
+                backgroundImageView.image = nil
             }
         }
     }
@@ -52,6 +48,6 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .scaleAspectFill
     }
 }

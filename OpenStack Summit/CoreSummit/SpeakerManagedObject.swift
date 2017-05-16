@@ -32,6 +32,10 @@ public final class SpeakerManagedObject: Entity {
     // Inverse Relationships
     
     @NSManaged public var summits: Set<SummitManagedObject>
+    
+    @NSManaged public var presentationModerator: Set<PresentationManagedObject>
+    
+    @NSManaged public var presentationSpeaker: Set<PresentationManagedObject>
 }
 
 // MARK: - Encoding
@@ -40,11 +44,11 @@ extension Speaker: CoreDataDecodable {
     
     public init(managedObject: SpeakerManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
         self.title = managedObject.title
-        self.pictureURL = managedObject.pictureURL
+        self.picture = URL(string: managedObject.pictureURL)!
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.biography = managedObject.biography
@@ -54,15 +58,15 @@ extension Speaker: CoreDataDecodable {
 
 extension Speaker: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SpeakerManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SpeakerManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.addressBookSectionName = addressBookSectionName
+        managedObject.addressBookSectionName = AddressBook.section(for: self)
         managedObject.title = title
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography
@@ -94,7 +98,7 @@ public extension SpeakerManagedObject {
 
 public extension Speaker {
     
-    static func filter(searchTerm: String = "",
+    static func filter(_ searchTerm: String = "",
                        page: Int, objectsPerPage: Int,
                        summit: Identifier? = nil,
                        context: NSManagedObjectContext) throws -> [Speaker] {

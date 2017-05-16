@@ -8,27 +8,25 @@
 
 public extension VenueRoom {
     
-    typealias DataUpdate = VenueRoomDataUpdate
-}
-
-public struct VenueRoomDataUpdate: LocationProtocol {
-    
-    public let identifier: Identifier
-    
-    public let name: String
-    
-    public let descriptionText: String?
-    
-    public let capacity: Int?
-    
-    public let venue: Identifier
-    
-    public let floor: VenueFloor?
+    public struct DataUpdate: LocationProtocol {
+        
+        public let identifier: Identifier
+        
+        public let name: String
+        
+        public let descriptionText: String?
+        
+        public let capacity: Int?
+        
+        public let venue: Identifier
+        
+        public let floor: VenueFloor?
+    }
 }
 
 // MARK: - Equatable
 
-public func == (lhs: VenueRoomDataUpdate, rhs: VenueRoomDataUpdate) -> Bool {
+public func == (lhs: VenueRoom.DataUpdate, rhs: VenueRoom.DataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name

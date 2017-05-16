@@ -8,19 +8,19 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 extension GroupEventDataUpdate: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.socialDescription = socialDescription
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp

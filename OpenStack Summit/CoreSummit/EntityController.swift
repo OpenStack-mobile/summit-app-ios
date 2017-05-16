@@ -53,6 +53,8 @@ public final class EntityController<Decodable: CoreDataDecodable> {
 
 public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
     
+    public var inserted: (Decodable) -> () = { _ in }
+    
     public var updated: (Decodable) -> () = { _ in }
     
     public var deleted: () -> () = { _ in }
@@ -79,13 +81,13 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
             
             if newValue {
                 
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(objectsDidChange(_:)), name: NSManagedObjectContextObjectsDidChangeNotification, object: context)
+                NotificationCenter.default.addObserver(self, selector: #selector(objectsDidChange(_:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
                 
                 self.update()
             }
             else {
                 
-                NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
+                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.context)
             }
         }
     }
@@ -113,52 +115,62 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
             
         } else {
             
-            self.delegate?.managedObjectDeletedForObserver(self)
+            self.delegate?.managedObjectDeleted(for: self)
         }
     }
     
-    @objc func objectsDidChange(notification: NSNotification) {
+    @objc func objectsDidChange(_ notification: Foundation.Notification) {
         
-        if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as! Set<NSManagedObject>? {
+        func filter(managedObject: NSManagedObject) -> Bool {
             
-            for managedObject in updatedObjects {
-                
-                if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value
-                    && managedObject.entity.name! == self.entityName {
-                        
-                        self.delegate?.observer(self, managedObjectUpdated: managedObject)
-                        
-                        return
-                }
-            }
+            return managedObject.value(forKey: identifier.key) as? NSObject == identifier.value
+                && managedObject.entity.name! == self.entityName
         }
         
-        if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as! Set<NSManagedObject>? {
+        let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as! Set<NSManagedObject>? ?? []
+        
+        if let managedObject = insertedObjects.first(where: filter) {
             
-            for managedObject in deletedObjects {
-                
-                if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value &&
-                    managedObject.entity.name! == self.entityName {
-                        
-                        self.delegate?.managedObjectDeletedForObserver(self)
-                        
-                        return
-                }
-            }
+            self.delegate?.observer(self, managedObjectInserted: managedObject)
+        }
+        
+        let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as! Set<NSManagedObject>? ?? []
+        
+        if let managedObject = updatedObjects.first(where: filter) {
+            
+            self.delegate?.observer(self, managedObjectUpdated: managedObject)
+        }
+        
+        let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as! Set<NSManagedObject>? ?? []
+        
+        if deletedObjects.contains(where: filter) {
+            
+            self.delegate?.managedObjectDeleted(for: self)
         }
     }
 }
 
 private protocol PrivateEntityControllerDelegate: class {
     
-    func observer(observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject)
+    func observer(_ observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject)
     
-    func managedObjectDeletedForObserver(observer: PrivateEntityController)
+    func observer(_ observer: PrivateEntityController, managedObjectInserted managedObject: NSManagedObject)
+    
+    func managedObjectDeleted(for observer: PrivateEntityController)
 }
 
 extension EntityController: PrivateEntityControllerDelegate {
     
-    private func observer(observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject) {
+    fileprivate func observer(_ observer: PrivateEntityController, managedObjectInserted managedObject: NSManagedObject) {
+        
+        let managedObject = managedObject as! Decodable.ManagedObject
+        
+        let decodable = Decodable(managedObject: managedObject)
+        
+        self.event.inserted(decodable)
+    }
+    
+    fileprivate func observer(_ observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject) {
         
         let managedObject = managedObject as! Decodable.ManagedObject
         
@@ -167,7 +179,7 @@ extension EntityController: PrivateEntityControllerDelegate {
         self.event.updated(decodable)
     }
     
-    private func managedObjectDeletedForObserver(observer: PrivateEntityController) {
+    fileprivate func managedObjectDeleted(for observer: PrivateEntityController) {
         
         self.event.deleted()
     }

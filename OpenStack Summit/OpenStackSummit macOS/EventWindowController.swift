@@ -40,8 +40,8 @@ final class EventWindowController: NSWindowController, ContentController {
                 view.wantsLayer = true
             }
             
-            window.styleMask.insert(.FullSizeContentView)
-            window.titleVisibility = .Hidden
+            window.styleMask.insert(.fullSizeContentView)
+            window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
         }
     }

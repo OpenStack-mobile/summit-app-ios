@@ -6,7 +6,8 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
+import struct Foundation.URL
 
 public struct Event: Named {
     
@@ -38,7 +39,7 @@ public struct Event: Named {
     
     public var willRecord: Bool
     
-    public var attachment: String?
+    public var attachment: URL?
         
     public var sponsors: Set<Identifier>
     

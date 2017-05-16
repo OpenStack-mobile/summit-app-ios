@@ -8,29 +8,30 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import JSON
 @testable import CoreSummit
 
-internal func loadJSON(filename: String) -> JSON.Value {
+internal func loadJSON(_ filename: String) -> JSON.Value {
     
-    let testBundle = NSBundle(forClass: JSONTests.self)
+    let testBundle = Bundle(for: JSONTests.self)
     
-    let resourcePath = testBundle.pathForResource(filename, ofType: "json", inDirectory: nil, forLocalization: nil)!
+    let resourcePath = testBundle.path(forResource: filename, ofType: "json", inDirectory: nil, forLocalization: nil)!
     
     let JSONString = try! String(contentsOfFile: resourcePath)
     
-    return JSON.Value(string: JSONString)!
+    return try! JSON.Value(string: JSONString)
 }
 
-internal func dump(dumpable: Any, _ outputFileName: String) -> String {
+@discardableResult
+internal func dump(_ dumpable: Any, _ outputFileName: String) -> String {
     
     var dumpString = ""
     
-    dump(dumpable, &dumpString)
+    dump(dumpable, to: &dumpString)
     
-    let stringData = dumpString.toUTF8Data().toFoundation()
+    let stringData = dumpString.toUTF8Data()
     
-    stringData.writeToFile(outputDirectory + outputFileName, atomically: true)
+    try? stringData.write(to: Foundation.URL(fileURLWithPath: outputDirectory + outputFileName), options: [.atomic])
     
     return dumpString
 }
@@ -41,9 +42,9 @@ let outputDirectory: String = {
     
     var isDirectory: ObjCBool = false
     
-    if NSFileManager.defaultManager().fileExistsAtPath(outputDirectory, isDirectory: &isDirectory) == false {
+    if Foundation.FileManager.default.fileExists(atPath: outputDirectory, isDirectory: &isDirectory) == false {
         
-        try! NSFileManager.defaultManager().createDirectoryAtPath(outputDirectory, withIntermediateDirectories: false, attributes: nil)
+        try! Foundation.FileManager.default.createDirectory(atPath: outputDirectory, withIntermediateDirectories: false, attributes: nil)
     }
     
     print("Test output directory: \(outputDirectory)")
@@ -53,12 +54,12 @@ let outputDirectory: String = {
 
 func createStore() throws -> Store {
     
-    return try Store(environment: .Staging,
+    return try Store(environment: .staging,
                      session: UserDefaultsSessionStorage(),
                      createPersistentStore: {
-                        try $0.addPersistentStoreWithType(NSInMemoryStoreType,
-                            configuration: nil,
-                            URL: nil,
+                        try $0.addPersistentStore(ofType: NSInMemoryStoreType,
+                            configurationName: nil,
+                            at: nil,
                             options: nil) },
                      deletePersistentStore: { _ in fatalError("Not needed") })
 }

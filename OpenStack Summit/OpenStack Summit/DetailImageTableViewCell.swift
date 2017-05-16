@@ -16,7 +16,7 @@ final class DetailImageTableViewCell: UITableViewCell {
     typealias Label = UILabel
     #endif
     
-    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet private(set) weak var detailImageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: Label!
+    @IBOutlet private(set) weak var titleLabel: Label!
 }

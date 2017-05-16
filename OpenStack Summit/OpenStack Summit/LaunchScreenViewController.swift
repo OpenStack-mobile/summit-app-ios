@@ -49,7 +49,13 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.summitsButton.enabled = AppEnvironment == .Staging
+        self.summitsButton.isEnabled = AppEnvironment == .staging
+        
+        configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if Store.shared.isLoggedIn {
             
@@ -61,7 +67,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if Store.shared.isLoggedIn {
@@ -70,19 +76,19 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
-        return .LightContent
+        return .lightContent
     }
     
     // MARK: - Actions
     
-    @IBAction func login(sender: UIButton) {
+    @IBAction func login(_ sender: UIButton) {
         
         showRevealController(sender) { $0.menuViewController.login(sender) }
     }
     
-    @IBAction func continueAsGuest(sender: UIButton) {
+    @IBAction func continueAsGuest(_ sender: UIButton) {
         
         showRevealController(sender)
     }
@@ -97,49 +103,49 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
         case .loadingSummits:
             
-            self.summitView.hidden = true
-            self.summitActivityIndicatorView.hidden = false
+            self.summitView.isHidden = true
+            self.summitActivityIndicatorView.isHidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.hidden = self.isDataLoaded == false || self.willTransition
-            self.loginButton.hidden = self.isDataLoaded == false || self.willTransition
+            self.guestButton.isHidden = self.isDataLoaded == false || self.willTransition
+            self.loginButton.isHidden = self.isDataLoaded == false || self.willTransition
             
-            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
             
         case .loadingData:
             
             assert(self.summit != nil, "Invalid State")
             
-            self.summitView.hidden = false
-            self.summitActivityIndicatorView.hidden = true
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
             self.summitActivityIndicatorView.stopAnimating()
             
-            self.guestButton.hidden = true
-            self.loginButton.hidden = true
+            self.guestButton.isHidden = true
+            self.loginButton.isHidden = true
             
-            self.dataLoadedActivityIndicatorView.hidden = false
+            self.dataLoadedActivityIndicatorView.isHidden = false
             self.dataLoadedActivityIndicatorView.startAnimating()
             
         case .dataLoaded:
             
             assert(self.isDataLoaded, "Invalid State")
             
-            self.summitView.hidden = false
-            self.summitActivityIndicatorView.hidden = true
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
             self.summitActivityIndicatorView.stopAnimating()
             
-            self.guestButton.hidden = false
-            self.loginButton.hidden = false
+            self.guestButton.isHidden = false
+            self.loginButton.isHidden = false
             
-            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
         }
         
         // show current summit info
         if let summit = self.summit {
             
-            self.summitNameLabel.text = summit.name.uppercaseString
+            self.summitNameLabel.text = summit.name.uppercased()
             
             if let datesLabel = summit.datesLabel {
                 
@@ -147,32 +153,32 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             }
             else {
                 
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
                 dateFormatter.dateFormat = "MMMM d-"
-                let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+                let stringDateFrom = dateFormatter.string(from: summit.start)
                 
                 dateFormatter.dateFormat = "d, yyyy"
-                let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+                let stringDateTo = dateFormatter.string(from: summit.end)
                 
                 self.summitDateLabel.text = stringDateFrom + stringDateTo
             }
         }
     }
     
-    private func showRevealController(sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
+    private func showRevealController(_ sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
         let revealViewController = MainRevealViewController()
         
-        self.showViewController(revealViewController, sender: sender)
+        self.show(revealViewController, sender: sender)
         
         self.willTransition = false;
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?(revealViewController) }
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { completion?(revealViewController) }
     }
     
     private func loadSummits() {
@@ -183,20 +189,20 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summits { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     print("Error getting summits: \(error)")
                     
                     // try again
                     controller.loadSummits()
                     
-                case let .Value(page):
+                case let .value(page):
                     
                     guard let latestSummit = page.items.last
                         else { fatalError("No summits") }
@@ -212,11 +218,11 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     switch AppEnvironment {
                         
-                    case .Staging:
+                    case .staging:
                         
                         break
                         
-                    case .Production:
+                    case .production:
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }
@@ -240,20 +246,20 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summit(summitID) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     print("Error loading summit \(summitID): \(error)")
                     
                     // try again
                     controller.loadData()
                     
-                case let .Value(summit):
+                case let .value(summit):
                     
                     assert(controller.isDataLoaded)
                     
@@ -269,32 +275,32 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
-        showRevealController(self) { $0.view(data, identifier: identifier) }
+        showRevealController(self) { $0.view(data: data, identifier: identifier) }
     }
     
     func view(screen: AppActivityScreen) {
         
-        showRevealController(self) { $0.view(screen) }
+        showRevealController(self) { $0.view(screen: screen) }
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         showRevealController(self) { $0.search(searchTerm) }
     }
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case R.segue.launchScreenViewController.showSummits.identifier:
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let summitsViewController = navigationController.topViewController as! SummitsViewController
             
-            summitsViewController.didFinish = { [weak self] in $0.dismissViewControllerAnimated(true) { self?.loadSummits() } }
+            summitsViewController.didFinish = { [weak self] in $0.dismiss(animated: true) { self?.loadSummits() } }
             
         default: fatalError()
         }

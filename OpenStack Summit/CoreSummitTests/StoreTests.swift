@@ -9,7 +9,7 @@
 import XCTest
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 @testable import CoreSummit
 
 final class StoreTests: XCTestCase {
@@ -18,17 +18,17 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(description: "API Request")
         
         store.summits() { (response) in
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 XCTFail("\(error)");
                 
-            case let .Value(value):
+            case let .value(value):
                 
                 XCTAssert(value.items.isEmpty == false, "No summits")
                 
@@ -38,24 +38,24 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
     }
     
     func testCurrentSummitRequest() {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(description: "API Request")
         
         store.summit() { (response) in
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 XCTFail("\(error)");
                 
-            case let .Value(summit):
+            case let .value(summit):
                                 
                 dump(summit, "StoreTestsCurrentSummitDump.txt")
             }
@@ -63,7 +63,7 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
     }
     
     func testSummitRequest() {
@@ -72,17 +72,17 @@ final class StoreTests: XCTestCase {
         
         for summitID in SummitJSONIdentifiers {
             
-            let expectation = expectationWithDescription("API Request")
+            let expectation = self.expectation(description: "API Request")
             
             store.summit(summitID) { (response) in
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     XCTFail("\(error)");
                     
-                case let .Value(summit):
+                case let .value(summit):
                     
                     XCTAssert(summit.speakers.isEmpty == false, "No Events")
                     XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
@@ -93,7 +93,7 @@ final class StoreTests: XCTestCase {
                 expectation.fulfill()
             }
             
-            waitForExpectationsWithTimeout(60, handler: nil)
+            waitForExpectations(timeout: 60, handler: nil)
         }
     }
     
@@ -101,21 +101,21 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
         
-        let summitID = 22  // Boston 2017
+        let summitID: Identifier = 22  // Boston 2017
         
         let date = Date() - (60*60*24*30) // last month
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(description: "API Request")
         
         store.dataUpdates(summitID, from: date, limit: 100) { (response) in
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 XCTFail("\(error)");
                 
-            case .Value:
+            case .value:
                 
                 break
             }
@@ -123,28 +123,28 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
     }
     
     func testFeedbackRequest() {
         
         let store = try! createStore()
         
-        let summit = 7 // Barcelona
+        let summit: Identifier = 7 // Barcelona
         
-        let event = 16638 // Upstream University - Day 1
+        let event: Identifier = 16638 // Upstream University - Day 1
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(description: "API Request")
         
         store.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 XCTFail("\(error)");
                 
-            case let .Value(value):
+            case let .value(value):
                 
                 if value.total > 0 {
                     
@@ -155,24 +155,24 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
     }
     
     func testListMembersRequest() {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(description: "API Request")
         
         store.members(MemberListRequest.Filter(value: "Jimmy", property: .firstName)) { (response) in
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 XCTFail("\(error)");
                 
-            case let .Value(value):
+            case let .value(value):
                 
                 if value.total > 0 {
                     
@@ -183,6 +183,6 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
     }
 }

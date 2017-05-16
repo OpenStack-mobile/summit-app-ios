@@ -6,13 +6,14 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func dataUpdates(summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -25,12 +26,12 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&last_event_id=\(latestDataUpdate)"
+        let uri = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&last_event_id=\(latestDataUpdate)"
         
-        dataUpdates(URI, completion: completion)
+        dataUpdates(uri, completion: completion)
     }
     
-    func dataUpdates(summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -43,9 +44,9 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
+        let uri = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
         
-        dataUpdates(URI, completion: completion)
+        dataUpdates(uri, completion: completion)
     }
 }
 
@@ -53,25 +54,25 @@ public extension Store {
 
 private extension Store {
     
-    func dataUpdates(URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ uri: String, completion: @escaping (ErrorValue<[DataUpdate]>) -> ()) {
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.isLoggedIn ? self.createHTTP(.OpenIDJSON) : self.createHTTP(.ServiceAccount)
+        let http = self.isLoggedIn ? self.createHTTP(.openIDJSON) : self.createHTTP(.serviceAccount)
         
-        http.GET(URL) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             // parse
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonArray = json.arrayValue,
-                let dataUpdates = DataUpdate.fromJSON(jsonArray)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                let dataUpdates = DataUpdate.from(json: jsonArray)
+                else { completion(.error(Error.invalidResponse)); return }
             
-            completion(.Value(dataUpdates))
+            completion(.value(dataUpdates))
         }
     }
 }

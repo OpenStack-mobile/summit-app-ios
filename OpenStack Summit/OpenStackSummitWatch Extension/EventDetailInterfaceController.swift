@@ -16,37 +16,37 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var moviePlayer: WKInterfaceMovie!
+    @IBOutlet private(set) weak var moviePlayer: WKInterfaceMovie!
     
-    @IBOutlet weak var dateLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var dateLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var locationLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var locationLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var locationSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var locationSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var locationButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var locationButton: WKInterfaceButton!
     
-    @IBOutlet weak var tagsLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var tagsLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var tagsGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var tagsGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var tagsSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var tagsSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var speakersLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var speakersLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var speakersButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var speakersButton: WKInterfaceButton!
     
-    @IBOutlet weak var speakersSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var speakersSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var levelLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var levelLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var levelGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var levelGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var levelSeparator: WKInterfaceSeparator!
+    @IBOutlet private(set) weak var levelSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var descriptionLabel: WKInterfaceLabel!
     
     // MARK: - Properties
     
@@ -56,8 +56,8 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let event = (context as? Context<Event>)?.value
             else { fatalError("Invalid context") }
@@ -73,10 +73,10 @@ final class EventDetailInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
+        let activityUserInfo: [String: Any] = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: eventDetail.identifier]
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: eventDetail.webpageURL)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo, webpageURL: eventDetail.webpageURL)
     }
     
     override func didDeactivate() {
@@ -88,21 +88,21 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showSpeakers(sender: AnyObject? = nil) {
+    @IBAction func showSpeakers(_ sender: AnyObject? = nil) {
         
         if eventDetail.speakers.count == 1 {
             
             let speaker = eventDetail.speakers[0]
             
-            pushControllerWithName(SpeakerDetailInterfaceController.identifier, context: Context(speaker))
+            pushController(withName: SpeakerDetailInterfaceController.identifier, context: Context(speaker))
             
         } else {
             
-            pushControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
+            pushController(withName: SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
         }
     }
     
-    @IBAction func showLocation(sender: AnyObject? = nil) {
+    @IBAction func showLocation(_ sender: AnyObject? = nil) {
         
         guard let summit = Store.shared.cache,
             let locationID = event.location
@@ -111,7 +111,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         guard let location = summit.locations.with(locationID)
             else { fatalError("Invalid location \(locationID)") }
         
-        self.pushControllerWithName(VenueDetailInterfaceController.identifier, context: Context(location))
+        self.pushController(withName: VenueDetailInterfaceController.identifier, context: Context(location))
     }
     
     // MARK: - Private Methods
@@ -146,8 +146,8 @@ final class EventDetailInterfaceController: WKInterfaceController {
         levelSeparator.setHidden(eventDetail.level.isEmpty)
         
         if let descriptionText = eventDetail.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
             
@@ -159,7 +159,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         }
         
         if let video = eventDetail.video,
-            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg") {
+            let url = URL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg") {
             
             moviePlayer.setHidden(false)
             moviePlayer.loadCached(url)

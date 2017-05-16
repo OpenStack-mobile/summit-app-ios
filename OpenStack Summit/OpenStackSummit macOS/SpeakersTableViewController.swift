@@ -10,17 +10,18 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class SpeakersTableViewController: TableViewController {
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = Predicate.value(false) {
         
         didSet { configureView() }
     }
     
-    private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
+    private lazy var cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
     // MARK: - Loading
     
@@ -32,7 +33,7 @@ final class SpeakersTableViewController: TableViewController {
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(_ sender: AnyObject) {
         
         guard tableView.selectedRow >= 0
             else { return }
@@ -41,7 +42,7 @@ final class SpeakersTableViewController: TableViewController {
         
         let speaker = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! SpeakerManagedObject
         
-        AppDelegate.shared.mainWindowController.view(.speaker, identifier: speaker.identifier)
+        AppDelegate.shared.mainWindowController.view(data: .speaker, identifier: speaker.id)
     }
     
     // MARK: - Private Methods
@@ -50,15 +51,15 @@ final class SpeakersTableViewController: TableViewController {
         
         let _ = self.view
         
-        assert(viewLoaded)
+        assert(isViewLoaded)
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, cachedPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, cachedPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<Entity>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 10
         
@@ -73,7 +74,7 @@ final class SpeakersTableViewController: TableViewController {
         }
     }
     
-    private func configure(cell cell: SpeakerTableViewCell, at row: Int) {
+    private func configure(cell: SpeakerTableViewCell, at row: Int) {
         
         let managedObject = self.fetchedResultsController.fetchedObjects![row] as! SpeakerManagedObject
         
@@ -81,22 +82,19 @@ final class SpeakersTableViewController: TableViewController {
         
         cell.nameLabel.stringValue = speaker.name
         
-        cell.titleLabel.hidden = speaker.title == nil
+        cell.titleLabel.isHidden = speaker.title == nil
         cell.titleLabel.stringValue = speaker.title ?? ""
         
-        cell.imageView!.image = NSImage(named: "generic-user-avatar")
+        cell.imageView!.image = #imageLiteral(resourceName: "generic-user-avatar")
         
-        if let url = NSURL(string: speaker.pictureURL) {
-            
-            cell.imageView!.loadCached(url)
-        }
+        cell.imageView!.loadCached(speaker.picture)
     }
     
     // MARK: - NSTableViewDataSource
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
         
         configure(cell: cell, at: row)
         

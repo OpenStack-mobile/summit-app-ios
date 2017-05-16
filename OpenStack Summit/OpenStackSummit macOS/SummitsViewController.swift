@@ -23,7 +23,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     // MARK: - Properties
     
-    lazy var pageController = PageController<Summit>(fetch: Store.shared.summits)
+    lazy var pageController: PageController<Summit> = PageController(fetch: Store.shared.summits)
     
     // MARK: - Loading
 
@@ -41,12 +41,12 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(_ sender: AnyObject) {
         
         defer { tableView.deselectAll(sender) }
         
@@ -58,7 +58,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         
         Store.shared.summit(item.identifier) { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -66,11 +66,11 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error)
                     
-                case .Value:
+                case .value:
                     
                     // set summit
                     SummitManager.shared.summit.value = item.identifier
@@ -85,9 +85,9 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     // MARK: - Private Methods
     
     @inline(__always)
-    private func configure(cell cell: SummitTableViewCell, with summit: Summit) {
+    private func configure(cell: SummitTableViewCell, with summit: Summit) {
         
-        let currentSummit = SummitManager.shared.summit.value == summit.identifier
+        let currentSummit = SummitManager.shared.summit.value == summit.identifier && self.currentSummit != nil
         
         if currentSummit {
             
@@ -100,13 +100,13 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         
         cell.nameLabel!.stringValue = summit.name
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        let stringDateFrom = dateFormatter.string(from: summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        let stringDateTo = dateFormatter.string(from: summit.end)
         
         cell.dateLabel!.stringValue = stringDateFrom + stringDateTo
     }
@@ -115,30 +115,30 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     func showActivityIndicator() {
         
-        refreshButton.hidden = true
-        tableView.hidden = true
-        activityIndicator.hidden = false
+        refreshButton.isHidden = true
+        tableView.isHidden = true
+        activityIndicator.isHidden = false
         activityIndicator.startAnimation(nil)
     }
     
-    func dismissActivityIndicator(animated animated: Bool = true) {
+    func dismissActivityIndicator(_ animated: Bool = true) {
         
-        refreshButton.hidden = false
-        tableView.hidden = false
-        activityIndicator.hidden = true
+        refreshButton.isHidden = false
+        tableView.isHidden = false
+        activityIndicator.isHidden = true
         activityIndicator.stopAnimation(nil)
     }
 
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         return pageController.items.count
     }
     
     // MARK: - NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         let data = pageController.items[row]
         
@@ -146,7 +146,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
             
         case let .item(item):
             
-            let cell = tableView.makeViewWithIdentifier(SummitTableViewCell.identifier, owner: nil) as! SummitTableViewCell
+            let cell = tableView.make(withIdentifier: SummitTableViewCell.identifier, owner: nil) as! SummitTableViewCell
             
             configure(cell: cell, with: item)
             

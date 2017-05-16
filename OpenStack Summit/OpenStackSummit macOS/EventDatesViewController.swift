@@ -20,11 +20,11 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     weak var delegate: EventDatesViewControllerDelegate?
     
-    private var summitCache: (start: NSDate, end: NSDate, timeZone: NSTimeZone, name: String)?
+    private var summitCache: (start: Date, end: Date, timeZone: Foundation.TimeZone, name: String)?
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MMMM d"
         
@@ -53,12 +53,12 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject? = nil) {
+    @IBAction func tableViewClick(_ sender: AnyObject? = nil) {
                 
         guard tableView.selectedRow >= 0
             else { return }
         
-        let selectedDate = summitCache!.start.mt_dateDaysAfter(tableView.selectedRow)
+        let selectedDate = (summitCache!.start as NSDate).mt_dateDays(after: tableView.selectedRow)!
         
         delegate?.eventDatesViewController(self, didSelect: selectedDate)
     }
@@ -69,11 +69,11 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         
         if let summit = self.currentSummit {
             
-            let start = summit.start.mt_startOfCurrentDay()
+            let start = (summit.start as NSDate).mt_startOfCurrentDay()!
             
-            let end = summit.end.mt_dateDaysAfter(1)
+            let end = (summit.end as NSDate).mt_dateDays(after: 1)!
             
-            let timeZone = NSTimeZone(name: summit.timeZone)!
+            let timeZone = TimeZone(identifier: summit.timeZone)!
             
             self.summitCache = (start: start, end: end, timeZone: timeZone, name: summit.name)
             
@@ -85,11 +85,11 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         self.tableView.reloadData()
         
         // select first row
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             
             if self.tableView.numberOfRows > 0 {
                 
-                self.tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+                self.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 
                 self.tableViewClick()
             }
@@ -98,23 +98,23 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         guard let summit = summitCache
             else { return 0 }
         
-        return summit.end.mt_daysSinceDate(summit.start)
+        return (summit.end as NSDate).mt_days(since: summit.start)
     }
     
     // MARK: - NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! NSTableCellView
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
         
-        let date = summitCache!.start.mt_dateDaysAfter(row)
+        let date = (summitCache!.start as NSDate).mt_dateDays(after: row)!
         
-        cell.textField?.stringValue = dateFormatter.stringFromDate(date)
+        cell.textField?.stringValue = dateFormatter.string(from: date)
         
         return cell
     }
@@ -124,5 +124,5 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
 
 @objc protocol EventDatesViewControllerDelegate: class {
     
-    func eventDatesViewController(controller: EventDatesViewController, didSelect date: NSDate)
+    func eventDatesViewController(_ controller: EventDatesViewController, didSelect date: Date)
 }

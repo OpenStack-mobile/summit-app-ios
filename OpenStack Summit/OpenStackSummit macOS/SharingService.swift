@@ -15,7 +15,7 @@ extension NSSharingService {
         
         self.init(title: title, image: NSImage(named: "copyLink")!, alternateImage: nil) {
             
-            let pasteboard = NSPasteboard.generalPasteboard()
+            let pasteboard = NSPasteboard.general()
             
             pasteboard.declareTypes([NSPasteboardTypeString], owner: nil)
             

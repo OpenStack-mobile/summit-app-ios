@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension SummitType {
     
@@ -18,10 +18,10 @@ public extension SummitType {
 
 extension SummitType: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String
             /* let type = JSONObject[JSONKey.type.rawValue]?.rawValue as? String */

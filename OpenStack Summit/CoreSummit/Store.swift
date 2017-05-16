@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -42,12 +41,12 @@ public final class Store {
     private var persistentStore: NSPersistentStore
     
     /// The managed object context running on a background thread for asyncronous caching.
-    public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+    public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
     
     /// Request queue
-    private let requestQueue: NSOperationQueue = {
+    internal let requestQueue: OperationQueue = {
         
-        let queue = NSOperationQueue()
+        let queue = OperationQueue()
         
         queue.name = "\(Store.self) Request Queue"
         
@@ -63,16 +62,16 @@ public final class Store {
     deinit {
     
         // stop recieving 'didSave' notifications from private context
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextDidSave, object: self.privateQueueManagedObjectContext)
     
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     public init(environment: Environment,
                  session: SessionStorage,
-                 contextConcurrencyType: NSManagedObjectContextConcurrencyType = .MainQueueConcurrencyType,
-                 createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
-                 deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
+                 contextConcurrencyType: NSManagedObjectContextConcurrencyType = .mainQueueConcurrencyType,
+                 createPersistentStore: @escaping (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
+                 deletePersistentStore: @escaping (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
         
         // store values
         self.environment = environment
@@ -97,30 +96,32 @@ public final class Store {
         self.persistentStore = try createPersistentStore(persistentStoreCoordinator)
         
         // listen for notifications (for merging changes)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Store.mergeChangesFromContextDidSaveNotification(_:)), name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(Store.mergeChangesFromContextDidSaveNotification(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: self.privateQueueManagedObjectContext)
         
         
         // config OAuth and HTTP
         configOAuthAccounts()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(
+        /* Removed from lib
+        NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(revokedAccess),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        */
     }
     
     // MARK: - Accessors
     
     public var deviceHasPasscode: Bool {
         
-        let secret = "Device has passcode set?".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
+        let secret = "Device has passcode set?".data(using: String.Encoding.utf8, allowLossyConversion: false)
+        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly] as [String : Any]
         
-        let status = SecItemAdd(attributes, nil)
+        let status = SecItemAdd(attributes as CFDictionary, nil)
         if status == 0 {
-            SecItemDelete(attributes)
+            SecItemDelete(attributes as CFDictionary)
             return true
         }
         return false
@@ -137,7 +138,7 @@ public final class Store {
         self.privateQueueManagedObjectContext.reset()
         
         // manually send notification
-        NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
+        NotificationCenter.default.post(name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext, userInfo: [:])
         
         #if os(iOS)
         // logout
@@ -149,22 +150,22 @@ public final class Store {
     
     /// Convenience function for adding a block to the request queue.
     @inline(__always)
-    internal func newRequest(block: () -> ()) {
+    internal func newRequest(_ block: @escaping () -> ()) {
         
-        self.requestQueue.addOperationWithBlock(block)
+        self.requestQueue.addOperation(block)
     }
     
     // MARK: - OAuth2
     
-    internal func createHTTP(type: RequestType) -> Http {
+    internal func createHTTP(_ type: RequestType) -> Http {
         
         let http: Http
-        if (type == .OpenIDGetFormUrlEncoded) {
+        if (type == .openIDGetFormUrlEncoded) {
             http = Http(responseSerializer: StringResponseSerializer())
             http.authzModule = oauthModuleOpenID
         }
-        else if (type == .OpenIDJSON) {
-            http = Http(responseSerializer: StringResponseSerializer(), requestSerializer: JsonRequestSerializer())
+        else if (type == .openIDJSON) {
+            http = Http(requestSerializer: JsonRequestSerializer(), responseSerializer: StringResponseSerializer())
             http.authzModule = oauthModuleOpenID
         }
         else {
@@ -190,7 +191,7 @@ public final class Store {
         
         var serviceAccountScopes = ["\(environment.configuration.serverURL)/summits/read"]
         
-        if environment == .Staging {
+        if environment == .staging {
             
             // openID staging scopes
             
@@ -234,74 +235,74 @@ public final class Store {
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
     }
     
-    private func createOAuthModule(config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
+    private func createOAuthModule(_ config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
         var session: OAuth2Session
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
         
         if self.session.hadPasscode && !hasPasscode {
             
-            session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+            session = TrustedPersistentOAuth2Session(accountId: config.accountId!)
             session.clearTokens()
         }
         
-        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
+        session = hasPasscode ? TrustedPersistentOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session(accountId: config.accountId!)
         
-        return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
+        return AccountManager.addAccountWith(config: config, moduleClass: OpenStackOAuth2Module.self, session: session)
     }
     
     // MARK: Notifications
     
-    @objc private func mergeChangesFromContextDidSaveNotification(notification: NSNotification) {
+    @objc private func mergeChangesFromContextDidSaveNotification(_ notification: Foundation.Notification) {
         
-        self.managedObjectContext.performBlockAndWait {
+        self.managedObjectContext.performAndWait {
             
-            self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+            self.managedObjectContext.mergeChanges(fromContextDidSave: notification)
             
             // manually send notification
-            NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: notification.userInfo)
+            NotificationCenter.default.post(name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext, userInfo: notification.userInfo)
         }
     }
     
-    @objc private func revokedAccess(notification: NSNotification) {
+    @objc private func revokedAccess(_ notification: Foundation.Notification) {
         
         self.session.clear()
         
-        let notification = NSNotification(name: Notification.ForcedLoggedOut.rawValue, object:self, userInfo:nil)
-        NSNotificationCenter.defaultCenter().postNotification(notification)
+        let notification = Foundation.Notification(name: Store.Notification.forcedLoggedOut, object: self, userInfo: nil)
+        NotificationCenter.default.post(notification)
     }
 }
 
 // MARK: - Supporting Types
 
 /// Convenience function for adding a block to the main queue.
-internal func mainQueue(block: () -> ()) {
+internal func mainQueue(_ block: @escaping () -> ()) {
     
-    NSOperationQueue.mainQueue().addOperationWithBlock(block)
+    OperationQueue.main.addOperation(block)
 }
 
 public extension Store {
     
-    public enum Error: ErrorType {
+    public enum Error: Swift.Error {
         
         /// The server returned a status code indicating an error.
-        case ErrorStatusCode(Int)
+        case errorStatusCode(Int)
         
         /// The server returned an invalid response.
-        case InvalidResponse
+        case invalidResponse
         
         /// A custom error from the server.
-        case CustomServerError(String)
+        case customServerError(String)
     }
 }
 
 public extension Store {
     
-    public enum Notification: String {
+    public struct Notification {
         
-        case LoggedIn           = "CoreSummit.Store.Notification.LoggedIn"
-        case LoggedOut          = "CoreSummit.Store.Notification.LoggedOut"
-        case ForcedLoggedOut    = "CoreSummit.Store.Notification.ForcedLoggedOut"
+        public static let loggedIn = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedIn")
+        public static let loggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedOut")
+        public static let forcedLoggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.ForcedLoggedOut")
     }
 }
 
@@ -309,6 +310,6 @@ internal extension Store {
     
     enum RequestType {
         
-        case OpenIDGetFormUrlEncoded, OpenIDJSON, ServiceAccount
+        case openIDGetFormUrlEncoded, openIDJSON, serviceAccount
     }
 }
