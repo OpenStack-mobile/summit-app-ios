@@ -220,7 +220,7 @@ final class SelectTeamMemberTableViewCell: UITableViewCell {
         
         didSet {
             
-            let placeholder = R.image.genericUserAvatar()!
+            let placeholder = #imageLiteral(resourceName: "generic-user-avatar")
             
             if let url = picture {
                 
@@ -228,7 +228,7 @@ final class SelectTeamMemberTableViewCell: UITableViewCell {
                 
             } else {
                 
-                pictureImageView.image = R.image.genericUserAvatar()!
+                pictureImageView.image = #imageLiteral(resourceName: "generic-user-avatar")
             }
             
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2

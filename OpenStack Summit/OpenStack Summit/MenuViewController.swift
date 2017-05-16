@@ -58,7 +58,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         didSet {
             
-            let placeholder = R.image.genericUserAvatar()!
+            let placeholder = #imageLiteral(resourceName: "generic-user-avatar")
             
             if let url = picture {
                 
@@ -66,7 +66,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                 
             } else {
                 
-                pictureImageView.image = R.image.genericUserAvatar()!
+                pictureImageView.image = #imageLiteral(resourceName: "generic-user-avatar")
             }
             
             pictureImageView.layer.borderWidth = 0.88;

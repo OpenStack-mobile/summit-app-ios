@@ -91,7 +91,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         
         cell.nameLabel.text = speaker.name
         cell.titleLabel.text = speaker.title ?? ""
-        cell.speakerImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: UIImage(named: "generic-user-avatar"))
+        cell.speakerImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: #imageLiteral(resourceName: "generic-user-avatar"))
         cell.speakerImageView.layer.cornerRadius = cell.speakerImageView.frame.size.width / 2
         cell.speakerImageView.clipsToBounds = true
     }

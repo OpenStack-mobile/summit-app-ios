@@ -33,7 +33,7 @@ extension RevealViewController {
         let menuButton = UIBarButtonItem()
         menuButton.target = viewController.revealViewController()
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        menuButton.image = R.image.menu()!
+        menuButton.image = #imageLiteral(resourceName: "menu")
         
         viewController.navigationItem.leftBarButtonItem = menuButton
     }

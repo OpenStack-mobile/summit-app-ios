@@ -90,7 +90,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         ctr.transitioningDelegate = self.transitionDelegate!
         self.present(ctr, animated: true, completion: nil)
         
-        ctr.closeButton.setImage(UIImage(named: "close"), for: UIControlState())
+        ctr.closeButton.setImage(#imageLiteral(resourceName: "close"), for: UIControlState())
     }
     
     @IBAction func navigateToVenueLocationDetail(_ sender: UITapGestureRecognizer) {
@@ -134,7 +134,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
             marker.position = location
             marker.map = mapView
             marker.title = venue.name
-            marker.icon = R.image.map_pin()!
+            marker.icon = #imageLiteral(resourceName: "map_pin")
             bounds = bounds.includingCoordinate(marker.position)
             mapView.selectedMarker = marker
             

@@ -28,7 +28,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
-    private lazy var placeholderMemberImage = R.image.genericUserAvatar()!
+    private lazy var placeholderMemberImage = #imageLiteral(resourceName: "generic-user-avatar")
     
     // MARK: - Loading
     

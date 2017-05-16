@@ -195,7 +195,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
         headerView.titleLabel.isHidden = (person.title ?? "").isEmpty
-        headerView.imageView.hnk_setImageFromURL(person.picture.environmentScheme, placeholder: R.image.genericUserAvatar()!)
+        headerView.imageView.hnk_setImageFromURL(person.picture.environmentScheme, placeholder: #imageLiteral(resourceName: "generic-user-avatar"))
         
         // configure cells
         
@@ -274,7 +274,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         let imageBarButtonItem = UIBarButtonItem()
         imageBarButtonItem.target = self
         imageBarButtonItem.action = action
-        imageBarButtonItem.image = R.image.messageWarning()!
+        imageBarButtonItem.image = #imageLiteral(resourceName: "messageWarning")
         imageBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
         
         let textBarButtonItem = UIBarButtonItem()

@@ -58,7 +58,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
                 else { fatalError("Cannot show venue with no coordinates: \(venue)") }
             
             let marker = GMSMarker()
-            marker.icon = R.image.map_pin()!
+            marker.icon = #imageLiteral(resourceName: "map_pin")
             marker.position = location
             marker.title = venue.name
             marker.map = mapView

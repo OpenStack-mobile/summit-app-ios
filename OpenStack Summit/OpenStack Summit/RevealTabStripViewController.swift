@@ -39,7 +39,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
             let menuButton = UIBarButtonItem()
             menuButton.target = revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            menuButton.image = R.image.menu()!
+            menuButton.image = #imageLiteral(resourceName: "menu")
             
             navigationItem.leftBarButtonItem = menuButton
             self.menuButton = menuButton

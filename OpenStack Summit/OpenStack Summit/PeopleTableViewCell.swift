@@ -68,7 +68,7 @@ final class PeopleTableViewCell: UITableViewCell {
         
         didSet {
             
-            let placeholder = R.image.genericUserAvatar()!
+            let placeholder = #imageLiteral(resourceName: "generic-user-avatar")
             
             if let url = self.picture {
                 

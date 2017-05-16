@@ -54,7 +54,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         filterButton = UIBarButtonItem()
         filterButton.target = self
         filterButton.action = #selector(showFilters)
-        filterButton.image = R.image.filter()!
+        filterButton.image = #imageLiteral(resourceName: "filter")
         
         navigationItem.rightBarButtonItem = filterButton
         
@@ -71,7 +71,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let clear = UIBarButtonItem()
         clear.target = self
         clear.action = #selector(clearFilters)
-        clear.image = R.image.cancel()!
+        clear.image = #imageLiteral(resourceName: "cancel")
         clear.tintColor = UIColor.black
         
         toolbarItems = [message, spacer, clear]
