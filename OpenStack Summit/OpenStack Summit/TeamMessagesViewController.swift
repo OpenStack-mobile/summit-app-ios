@@ -27,7 +27,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private(set) var sending = false
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<TeamMessageManagedObject>!
     
     private lazy var placeholderMemberImage = #imageLiteral(resourceName: "generic-user-avatar")
     
@@ -75,7 +75,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         guard let teamID = self.team
             else { fatalError("View controller not configured") }
         
-        guard let teamManagedObject = try! TeamManagedObject.find(self.team, context: Store.shared.managedObjectContext)
+        guard let teamManagedObject = try! TeamManagedObject.find(teamID, context: Store.shared.managedObjectContext)
             else { fatalError("Team not in cache") }
         
         self.title = teamManagedObject.name
@@ -89,7 +89,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController!.performFetch()
         
@@ -98,7 +98,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private subscript (indexPath: IndexPath) -> TeamMessage {
         
-        let managedObject = self.fetchedResultsController!.object(at: indexPath) as! TeamMessageManagedObject
+        let managedObject = self.fetchedResultsController!.object(at: indexPath)
         
         return TeamMessage(managedObject: managedObject)
     }
