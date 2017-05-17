@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import Predicate
 import Haneke
 import SlackTextViewController
 
@@ -71,13 +72,16 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private func configureView() {
         
-        guard let teamManagedObject = try! TeamManagedObject.find(team, context: Store.shared.managedObjectContext)
+        guard let teamID = self.team
+            else { fatalError("View controller not configured") }
+        
+        guard let teamManagedObject = try! TeamManagedObject.find(self.team, context: Store.shared.managedObjectContext)
             else { fatalError("Team not in cache") }
         
         self.title = teamManagedObject.name
         
         //let predicate = NSPredicate(format: "team == %@", teamManagedObject)
-        let predicate = #keyPath(TeamMessageManagedObject.team.id) == self.team
+        let predicate: Predicate = #keyPath(TeamMessageManagedObject.team.id) == teamID
         
         let sortDescriptors = [NSSortDescriptor(key: #keyPath(TeamMessageManagedObject.id), ascending: false)]
         
