@@ -76,15 +76,15 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         self.title = teamManagedObject.name
         
-        let predicate = NSPredicate(format: "team == %@", teamManagedObject)
+        //let predicate = NSPredicate(format: "team == %@", teamManagedObject)
+        let predicate = #keyPath(TeamMessageManagedObject.team.id) == self.team
         
-        let sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        let sortDescriptors = [NSSortDescriptor(key: #keyPath(TeamMessageManagedObject.id), ascending: false)]
         
         self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sortDescriptors,
-                                                                   sectionNameKeyPath: nil,
                                                                    context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
         
         try! self.fetchedResultsController!.performFetch()

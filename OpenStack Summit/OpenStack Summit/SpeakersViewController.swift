@@ -29,8 +29,8 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         // configure fetched results controller
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
-                                                                   sortDescriptors: Speaker.ManagedObject.sortDescriptors,
-                                                                   sectionNameKeyPath: Speaker.ManagedObject.Property.addressBookSectionName.rawValue,
+                                                                   sortDescriptors: SpeakerManagedObject.sortDescriptors,
+                                                                   sectionNameKeyPath: #keyPath(SpeakerManagedObject.addressBookSectionName),
                                                                    context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 30
