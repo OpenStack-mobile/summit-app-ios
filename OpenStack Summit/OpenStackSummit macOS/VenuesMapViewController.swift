@@ -72,8 +72,8 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
             && .keyPath(#keyPath(VenueManagedObject.longitude)) != .value(.null)
             && #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true),
-                    NSSortDescriptor(key: "name", ascending: true)]
+        let sort = [NSSortDescriptor(key: #keyPath(VenueManagedObject.venueType), ascending: true),
+                    NSSortDescriptor(key: #keyPath(VenueManagedObject.name), ascending: true)]
         
         self.fetchedResultsController = NSFetchedResultsController(Venue.self,
                                                                    delegate: self,
