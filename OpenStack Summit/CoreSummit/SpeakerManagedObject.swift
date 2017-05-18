@@ -82,70 +82,11 @@ extension Speaker: CoreDataEncodable {
 
 public extension SpeakerManagedObject {
     
-    public enum Property: String {
-        
-        case id, firstName, lastName, addressBookSectionName, title, pictureURL, twitter, irc, biography, member
-    }
-    
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: Property.addressBookSectionName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.firstName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.lastName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.id.rawValue, ascending: true)]
-    }
-}
-
-public extension Speaker {
-    
-    static func filter(_ searchTerm: String = "",
-                       page: Int, objectsPerPage: Int,
-                       summit: Identifier? = nil,
-                       context: NSManagedObjectContext) throws -> [Speaker] {
-        
-        var predicates = [NSPredicate]()
-        
-        if searchTerm.isEmpty == false {
-            
-            let searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
-            
-            predicates.append(searchPredicate)
-        }
-        
-        if let summitID = summit,
-            let summit = try SummitManagedObject.find(summitID, context: context) {
-            
-            let summitPredicate = NSPredicate(format: "%@ IN summits", summit)
-            
-            predicates.append(summitPredicate)
-        }
-        
-        let predicate: NSPredicate?
-        
-        if predicates.count > 1 {
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates.first
-        }
-        
-        let results = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
-        
-        var speakers = [ManagedObject]()
-        
-        let startRecord = (page - 1) * objectsPerPage
-        
-        let endRecord = (startRecord + (objectsPerPage - 1)) <= results.count ? startRecord + (objectsPerPage - 1) : results.count - 1
-        
-        if (startRecord <= endRecord) {
-            
-            for index in (startRecord...endRecord) {
-                speakers.append(results[index])
-            }
-        }
-        
-        return Speaker.from(managedObjects: speakers)
+        return [NSSortDescriptor(key: #keyPath(addressBookSectionName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.firstName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.lastName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.id), ascending: true)]
     }
 }

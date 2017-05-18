@@ -356,11 +356,17 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             return
         }
         
-        let predicate = NSPredicate(format: "owner == %@ || members.member CONTAINS %@", member, member)
+        //let predicate = NSPredicate(format: "owner == %@ || members.member CONTAINS %@", member, member)
+        let predicate: Predicate = #keyPath(TeamManagedObject.owner.id) == member.id
+            || (#keyPath(TeamManagedObject.members.member.id)).compare(.contains, .value(.int64(member.id)))
         
-        let sort = [NSSortDescriptor(key: "id", ascending: true)]
+        let sort = [NSSortDescriptor(key: #keyPath(TeamManagedObject.id), ascending: true)]
         
-        teamsFetchedResultsController = NSFetchedResultsController(Team.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: nil, context: store.managedObjectContext)
+        teamsFetchedResultsController = NSFetchedResultsController(Team.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   context: store.managedObjectContext)
         
         try! teamsFetchedResultsController!.performFetch()
         
@@ -385,11 +391,13 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             subscribe(to: .attendees)
             
-            let predicate = NSPredicate(format: "attendees CONTAINS %@", attendeeRole)
+            //let predicate = NSPredicate(format: "attendees CONTAINS %@", attendeeRole)
+            let predicate: Predicate = (#keyPath(EventManagedObject.attendees.id)).compare(.contains, .value(.int64(attendeeRole.id)))
             
-            let sort = [NSSortDescriptor(key: "id", ascending: true)]
-            
-            eventsFetchedResultsController = NSFetchedResultsController(Event.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: nil, context: store.managedObjectContext)
+            eventsFetchedResultsController = NSFetchedResultsController(Event.self,
+                                                                        delegate: self,
+                                                                        predicate: predicate,
+                                                                        context: store.managedObjectContext)
             
             try! eventsFetchedResultsController!.performFetch()
             
@@ -447,7 +455,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         let unreadTeamMessages = Array(self.unreadTeamMessages.value)
         
         //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
-        let predicate: Predicate = "team.id" == team && "id".`in`(unreadTeamMessages)
+        let predicate: Predicate = #keyPath(TeamMessageManagedObject.team.id) == team
+            && (#keyPath(TeamMessageManagedObject.id)).in(unreadTeamMessages)
         
         return try context.count(TeamMessageManagedObject.self, predicate: predicate)
     }

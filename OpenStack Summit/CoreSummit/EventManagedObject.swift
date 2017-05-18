@@ -55,6 +55,10 @@ public final class EventManagedObject: Entity {
     @NSManaged public var groups: Set<GroupManagedObject>
     
     @NSManaged public var summit: SummitManagedObject
+    
+    // MARK: - Inverse Relationhips
+    
+    @NSManaged public var attendees: Set<AttendeeManagedObject>
 }
 
 // MARK: - Encoding
@@ -178,6 +182,7 @@ public extension EventManagedObject {
         
         //let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
         let predicate: Predicate = (#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.speakers.firstName)).compare(.any, .contains, [.caseInsensitive], value)
             || (#keyPath(EventManagedObject.presentation.speakers.lastName)).compare(.any, .contains, [.caseInsensitive], value)
             || (#keyPath(EventManagedObject.presentation.level)).compare(.contains, [.caseInsensitive], value)
             || (#keyPath(EventManagedObject.tags.name)).compare(.any, .contains, [.caseInsensitive], value)
@@ -259,7 +264,7 @@ public extension EventManagedObject {
         
         assert(predicates.count > 1)
         
-        return try context.managedObjects(EventManagedObject.self,
+        return try context.managedObjects(self,
                                           predicate: .compound(.and(predicates)),
                                           sortDescriptors: sortDescriptors)
     }
@@ -273,7 +278,7 @@ public extension EventManagedObject {
             && #keyPath(EventManagedObject.end) <= end
             && #keyPath(EventManagedObject.summit.id) == summit
         
-        return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
 }
 

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import Predicate
 import Haneke
 import SlackTextViewController
 
@@ -26,7 +27,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private(set) var sending = false
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<TeamMessageManagedObject>!
     
     private lazy var placeholderMemberImage = #imageLiteral(resourceName: "generic-user-avatar")
     
@@ -71,21 +72,24 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private func configureView() {
         
-        guard let teamManagedObject = try! TeamManagedObject.find(team, context: Store.shared.managedObjectContext)
+        guard let teamID = self.team
+            else { fatalError("View controller not configured") }
+        
+        guard let teamManagedObject = try! TeamManagedObject.find(teamID, context: Store.shared.managedObjectContext)
             else { fatalError("Team not in cache") }
         
         self.title = teamManagedObject.name
         
-        let predicate = NSPredicate(format: "team == %@", teamManagedObject)
+        //let predicate = NSPredicate(format: "team == %@", teamManagedObject)
+        let predicate: Predicate = #keyPath(TeamMessageManagedObject.team.id) == teamID
         
-        let sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        let sortDescriptors = [NSSortDescriptor(key: #keyPath(TeamMessageManagedObject.id), ascending: false)]
         
         self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: sortDescriptors,
-                                                                   sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController!.performFetch()
         
@@ -94,7 +98,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private subscript (indexPath: IndexPath) -> TeamMessage {
         
-        let managedObject = self.fetchedResultsController!.object(at: indexPath) as! TeamMessageManagedObject
+        let managedObject = self.fetchedResultsController!.object(at: indexPath)
         
         return TeamMessage(managedObject: managedObject)
     }

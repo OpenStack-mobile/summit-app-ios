@@ -22,7 +22,7 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
         didSet { if isViewLoaded { updateUI() } }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<EventManagedObject>!
     
     private static let cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
@@ -48,9 +48,9 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
         
         self.fetchedResultsController = NSFetchedResultsController(Event.self,
                                                                    delegate: self,
-                                                                   predicate: predicate.toFoundation(),
+                                                                   predicate: predicate,
                                                                    sortDescriptors: EventManagedObject.sortDescriptors,
-                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+                                                                   context: Store.shared.managedObjectContext)
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         

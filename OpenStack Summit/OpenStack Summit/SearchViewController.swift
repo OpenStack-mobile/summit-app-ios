@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import CoreData
 import EventKit
-import Foundation
 import CoreSummit
+import Predicate
 
 final class SearchViewController: UITableViewController, EventViewController, RevealViewController, UISearchBarDelegate {
     
@@ -495,16 +495,21 @@ private protocol SearchViewControllerItem: CoreDataDecodable {
     
     func toItem() -> SearchViewController.Item
     
-    static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate
+    static func predicate(for searchTerm: String, summit: Identifier) -> Predicate
 }
 
 extension ScheduleItem: SearchViewControllerItem {
     
     fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        // NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
+        return #keyPath(EventManagedObject.summit.id) == summit
+            && ((#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.sponsors.name)).compare(.contains, [.caseInsensitive], value))
     }
 }
 
@@ -512,9 +517,16 @@ extension Speaker: SearchViewControllerItem {
     
     fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        //return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        
+        return (#keyPath(SpeakerManagedObject.summits.id)).compare(.contains, .value(.int64(summit)))
+            && ((#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(SpeakerManagedObject.affiliations.organization.name)).compare(.contains, [.caseInsensitive], value))
     }
 }
 
@@ -522,9 +534,15 @@ extension Track: SearchViewControllerItem {
     
     fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
     
-    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(value: Int64(summit)), searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        //return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(value: Int64(summit)), searchTerm)
+        
+        return (#keyPath(TrackManagedObject.summits.id)).compare(.contains, .value(.int64(summit)))
+            && (#keyPath(TrackManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+        
     }
 }
 

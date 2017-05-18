@@ -53,9 +53,9 @@ public extension ScheduleItem {
     
     static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [ScheduleItem] {
         
-        let predicate = NSPredicate(format: "name CONTAINS [c] %@ OR ANY presentation.speakers.firstName CONTAINS [c] %@ OR ANY presentation.speakers.lastName CONTAINS [c] %@ OR presentation.level CONTAINS [c] %@ OR ANY tags.name CONTAINS [c] %@ OR eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        let managedObjects = try EventManagedObject.search(searchTerm, context: context)
         
-        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
+        return ScheduleItem.from(managedObjects: managedObjects)
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public final class TrackGroupManagedObject: Entity {
     
@@ -18,6 +19,10 @@ public final class TrackGroupManagedObject: Entity {
     @NSManaged public var color: String
     
     @NSManaged public var tracks: Set<TrackManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var summits: Set<SummitManagedObject>
 }
 
 // MARK: - Encoding
@@ -57,7 +62,7 @@ public extension TrackGroupManagedObject {
     
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: "name", ascending: true)]
+        return [NSSortDescriptor(key: #keyPath(TrackGroupManagedObject.name), ascending: true)]
     }
 }
 
@@ -66,15 +71,9 @@ public extension TrackGroup {
     /// Fetch all track groups that have some event associated with them.
     static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [TrackGroup] {
         
-        guard let summitManagedObject = try SummitManagedObject.find(summit, context: context)
-            else { return [] }
+        let predicate: Predicate = #keyPath(TrackGroupManagedObject.tracks.events) + ".@count" > 0
+            && (#keyPath(TrackGroupManagedObject.summits)).compare(.contains, .value(.int64(summit)))
         
-        let events = try context.managedObjects(EventManagedObject.self, predicate: NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
-        
-        var groups = events.reduce([TrackGroupManagedObject](), { $0.0 + Array($0.1.track!.groups) })
-                
-        groups = (Set(groups) as NSSet).sortedArray(using: ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
-        
-        return TrackGroup.from(managedObjects: groups)
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }
