@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="p6J-ZT-cbq">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="p6J-ZT-cbq">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Event-->
@@ -15,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventNameCell" textLabel="MGk-bD-dbm" rowHeight="100" style="IBUITableViewCellStyleDefault" id="wAT-Fx-ao6">
-                                <rect key="frame" x="0.0" y="199" width="1920" height="100"/>
+                                <rect key="frame" x="0.0" y="40" width="1920" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wAT-Fx-ao6" id="MNp-BB-WOH">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
@@ -25,14 +30,14 @@
                                             <rect key="frame" x="20" y="0.0" width="1864" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventTrackCell" textLabel="9WN-Rg-rVr" rowHeight="100" style="IBUITableViewCellStyleDefault" id="UWh-as-80j">
-                                <rect key="frame" x="0.0" y="313" width="1920" height="100"/>
+                                <rect key="frame" x="0.0" y="154" width="1920" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UWh-as-80j" id="M6c-FI-y09">
                                     <rect key="frame" x="0.0" y="0.0" width="1844" height="100"/>
@@ -42,7 +47,7 @@
                                             <rect key="frame" x="20" y="0.0" width="1824" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -51,14 +56,14 @@
                                     <segue destination="FD6-bu-Rpe" kind="show" identifier="showTrackEvents" id="FuB-Gw-jrh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventVideoCell" rowHeight="500" id="qok-Ya-SkY" customClass="VideoPlayerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="427" width="1920" height="500"/>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventVideoCell" rowHeight="500" id="qok-Ya-SkY" customClass="VideoPlayerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="268" width="1920" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qok-Ya-SkY" id="rtb-QA-y5V">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="500"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="crP-mC-Cr5">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="crP-mC-Cr5">
                                             <rect key="frame" x="928" y="218" width="64" height="64"/>
                                         </activityIndicatorView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zo7-M0-Kvu">
@@ -73,8 +78,10 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Zo7-M0-Kvu" secondAttribute="trailing" constant="20" id="5u7-Ha-LfM"/>
+                                        <constraint firstItem="crP-mC-Cr5" firstAttribute="centerY" secondItem="rtb-QA-y5V" secondAttribute="centerY" id="8PH-tA-XRe"/>
                                         <constraint firstItem="Zo7-M0-Kvu" firstAttribute="top" secondItem="rtb-QA-y5V" secondAttribute="top" constant="20" id="Jnr-6R-JXJ"/>
                                         <constraint firstAttribute="bottom" secondItem="Zo7-M0-Kvu" secondAttribute="bottom" constant="20" id="L9c-pe-aVI"/>
+                                        <constraint firstItem="crP-mC-Cr5" firstAttribute="centerX" secondItem="rtb-QA-y5V" secondAttribute="centerX" id="Owr-ih-0U4"/>
                                         <constraint firstItem="ZqP-Cm-skb" firstAttribute="centerY" secondItem="rtb-QA-y5V" secondAttribute="centerY" id="Yxv-zf-mNa"/>
                                         <constraint firstItem="ZqP-Cm-skb" firstAttribute="centerX" secondItem="rtb-QA-y5V" secondAttribute="centerX" id="tRW-F6-DRz"/>
                                         <constraint firstItem="Zo7-M0-Kvu" firstAttribute="leading" secondItem="rtb-QA-y5V" secondAttribute="leading" constant="20" id="thb-iY-Ia1"/>
@@ -87,7 +94,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventTimeCell" rowHeight="80" id="PSI-Ha-JwH" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="941" width="1920" height="80"/>
+                                <rect key="frame" x="0.0" y="782" width="1920" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSI-Ha-JwH" id="lTj-k5-zSV">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="80"/>
@@ -102,7 +109,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTD-8Q-B5N">
                                             <rect key="frame" x="92" y="20" width="1800" height="40"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -123,7 +130,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventLocationCell" rowHeight="80" id="Jqm-Sh-GcQ" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="1035" width="1920" height="80"/>
+                                <rect key="frame" x="0.0" y="876" width="1920" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqm-Sh-GcQ" id="Fvm-yK-nBA">
                                     <rect key="frame" x="0.0" y="0.0" width="1844" height="80"/>
@@ -138,7 +145,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-lf-vS2">
                                             <rect key="frame" x="92" y="20" width="121" height="40"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -160,7 +167,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDescriptionCell" textLabel="PO5-ig-3yy" rowHeight="100" style="IBUITableViewCellStyleDefault" id="p9x-au-rk5">
-                                <rect key="frame" x="0.0" y="1129" width="1920" height="100"/>
+                                <rect key="frame" x="0.0" y="970" width="1920" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9x-au-rk5" id="9lF-lR-HUX">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
@@ -170,7 +177,7 @@
                                             <rect key="frame" x="20" y="0.0" width="1864" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -231,4 +238,9 @@
         <image name="play" width="121" height="121"/>
         <image name="time" width="30" height="30"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <nil key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>
