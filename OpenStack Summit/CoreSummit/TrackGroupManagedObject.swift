@@ -19,6 +19,10 @@ public final class TrackGroupManagedObject: Entity {
     @NSManaged public var color: String
     
     @NSManaged public var tracks: Set<TrackManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var summits: Set<SummitManagedObject>
 }
 
 // MARK: - Encoding
@@ -68,6 +72,7 @@ public extension TrackGroup {
     static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [TrackGroup] {
         
         let predicate: Predicate = #keyPath(TrackGroupManagedObject.tracks.events) + ".@count" > 0
+            && (#keyPath(TrackGroupManagedObject.summits)).compare(.contains, .value(.int64(summit)))
         
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
