@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import CoreSummit
+import Predicate
 
 final class GeneralScheduleFilterViewController: UITableViewController {
     
@@ -113,9 +114,10 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = trackGroupsSection.map { NSNumber(value: Int64(identifier(for: $0))) }
+            let identifiers = trackGroupsSection.map { identifier(for: $0) }
             
-            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            //let predicate = NSPredicate(format: "id IN %@", identifiers)
+            let predicate: Predicate = (#keyPath(TrackGroupManagedObject.id)).in(identifiers)
             
             let trackGroups = try! context.managedObjects(TrackGroup.self, predicate: predicate, sortDescriptors: TrackGroup.ManagedObject.sortDescriptors)
             
@@ -134,9 +136,10 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let venuesSection = scheduleFilter.allFilters[.venue] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = venuesSection.map { NSNumber(value: Int64(identifier(for: $0))) }
+            let identifiers = venuesSection.map { identifier(for: $0) }
             
-            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            //let predicate = NSPredicate(format: "id IN %@", identifiers)
+            let predicate: Predicate = (#keyPath(VenueManagedObject.id)).in(identifiers)
             
             let venues = try! context.managedObjects(Venue.self, predicate: predicate, sortDescriptors: Venue.ManagedObject.sortDescriptors)
             

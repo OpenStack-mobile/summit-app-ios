@@ -34,17 +34,29 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [T] {
+    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type,
+                        predicate: NSPredicate? = nil,
+                        sortDescriptors: [NSSortDescriptor] = [],
+                        limit: Int = 0) throws -> [T] {
         
-        let results = try self.managedObjects(decodableType.ManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors, limit: limit)
+        let results = try self.managedObjects(decodableType.ManagedObject.self,
+                                              predicate: predicate,
+                                              sortDescriptors: sortDescriptors,
+                                              limit: limit)
         
         return T.from(managedObjects: results)
     }
     
     @inline(__always)
-    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [T] {
+    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type,
+                        predicate: Predicate,
+                        sortDescriptors: [NSSortDescriptor] = [],
+                        limit: Int = 0) throws -> [T] {
         
-        let results = try self.managedObjects(decodableType.ManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
+        let results = try self.managedObjects(decodableType.ManagedObject.self,
+                                              predicate: predicate.toFoundation(),
+                                              sortDescriptors: sortDescriptors,
+                                              limit: limit)
         
         return T.from(managedObjects: results)
     }
@@ -83,7 +95,7 @@ public extension NSFetchedResultsController {
 public func NSFetchedResultsController <T: CoreDataDecodable>
     (_ decodable: T.Type,
      delegate: NSFetchedResultsControllerDelegate? = nil,
-     predicate: NSPredicate? = nil,
+     predicate: Predicate? = nil,
      sortDescriptors: [NSSortDescriptor] = [],
      sectionNameKeyPath: String? = nil,
      context: NSManagedObjectContext) -> NSFetchedResultsController<T.ManagedObject> {
@@ -94,7 +106,7 @@ public func NSFetchedResultsController <T: CoreDataDecodable>
     
     let fetchRequest = NSFetchRequest<T.ManagedObject>(entityName: entity.name!)
     
-    fetchRequest.predicate = predicate
+    fetchRequest.predicate = predicate?.toFoundation()
     
     fetchRequest.sortDescriptors = sortDescriptors
     

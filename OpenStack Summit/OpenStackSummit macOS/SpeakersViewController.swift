@@ -73,23 +73,27 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     private func configureView() {
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
+        let summitID = Expression.value(.int64(SummitManager.shared.summit.value))
         
         //let summitPredicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
-        let summitPredicate: Predicate = #keyPath(SpeakerManagedObject.summits.id).compare
+        let summitPredicate: Predicate = (#keyPath(SpeakerManagedObject.summits.id)).compare(.contains, summitID)
         
-        let searchPredicate: NSPredicate
+        let searchPredicate: Predicate
         
         if searchTerm.isEmpty {
             
-            searchPredicate = NSPredicate(value: true)
+            searchPredicate = .value(true)
             
         } else {
             
-            searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+            let value = Expression.value(.string(searchTerm))
+            
+            //searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+            searchPredicate = (#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
         }
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [searchPredicate, summitPredicate])
+        let predicate: Predicate = .compound(.and([searchPredicate, summitPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,

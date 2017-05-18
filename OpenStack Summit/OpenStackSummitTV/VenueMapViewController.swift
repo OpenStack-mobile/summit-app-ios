@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import CoreData
 import CoreLocation
 import MapKit
 import CoreSummit
-import CoreData
+import Predicate
 
 @objc(OSSTVVenueMapViewController)
 final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
@@ -29,20 +30,27 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         didSet { if isViewLoaded { showSelectedVenue() } }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        //let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        let predicate: Predicate = .keyPath(#keyPath(VenueManagedObject.latitude)) != .value(.null)
+            && .keyPath(#keyPath(VenueManagedObject.longitude)) != .value(.null)
+            && #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitID = NSNumber(value: Int64(SummitManager.shared.summit.value))
+        let sort = [NSSortDescriptor(key: #keyPath(VenueManagedObject.venueType), ascending: true),
+                    NSSortDescriptor(key: #keyPath(VenueManagedObject.name), ascending: true)]
         
-        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
-        
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSFetchRequestResult>
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   sectionNameKeyPath: #keyPath(VenueManagedObject.venueType),
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
     }
@@ -64,7 +72,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
             // reload map view if empty but shouldnt be
             if self.fetchedResultsController.fetchedObjects?.isEmpty == false && self.mapView.annotations.isEmpty {
                 
-                for venue in Venue.from(managedObjects: (self.fetchedResultsController.fetchedObjects as! [VenueManagedObject])) {
+                for venue in Venue.from(managedObjects: (self.fetchedResultsController.fetchedObjects ?? [])) {
                     
                     let annotation = VenueAnnotation(venue: venue)!
                     
