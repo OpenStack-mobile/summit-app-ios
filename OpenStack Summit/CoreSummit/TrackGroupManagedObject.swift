@@ -71,9 +71,17 @@ public extension TrackGroup {
     /// Fetch all track groups that have some event associated with them.
     static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [TrackGroup] {
         
-        let predicate: Predicate = #keyPath(TrackGroupManagedObject.tracks.events) + ".@count" > 0
-            && (#keyPath(TrackGroupManagedObject.summits)).compare(.contains, .value(.int64(summit)))
+        // NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
+        let eventsPredicate: Predicate = .keyPath(#keyPath(EventManagedObject.track)) != .value(.null)
+            && #keyPath(EventManagedObject.summit.id) == summit
         
-        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
+        let events = try context.managedObjects(EventManagedObject.self, predicate: eventsPredicate)
+        
+        let groups = events
+            .flatMap({ $0.track?.groups })
+            .reduce([TrackGroupManagedObject](), { $0.0 + Array($0.1) })
+            .sorted(by: { $0.0.name < $0.1.name })
+        
+        return TrackGroup.from(managedObjects: groups)
     }
 }
