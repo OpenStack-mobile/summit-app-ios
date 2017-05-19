@@ -62,6 +62,12 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         userActivity?.resignCurrent()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        requestAppReview()
+    }
+    
     override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]

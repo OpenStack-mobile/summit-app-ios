@@ -23,6 +23,14 @@ struct Preference {
         
         set { UserDefaults.standard.set(newValue, forKey: Key.goingToSummit.rawValue) }
     }
+    
+    /// Last time user has offered to review the app.
+    static var lastAppReview: Date? {
+        
+        get { return (UserDefaults.standard.object(forKey: Key.lastAppReview.rawValue) as! NSDate?) as Date? }
+        
+        set { UserDefaults.standard.set(newValue, forKey: Key.lastAppReview.rawValue) }
+    }
 }
 
 // MARK: - Keys
@@ -33,5 +41,6 @@ private extension Preference {
         
         case appBuild
         case goingToSummit
+        case lastAppReview
     }
 }
