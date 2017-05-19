@@ -26,6 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     static var shared: AppDelegate { return unsafeBitCast(UIApplication.shared.delegate!, to: AppDelegate.self) }
 
     var window: UIWindow?
+    
+    let appLaunch = Date()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

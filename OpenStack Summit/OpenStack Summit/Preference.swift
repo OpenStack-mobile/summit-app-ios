@@ -10,28 +10,55 @@ import Foundation
 
 struct Preference {
     
+    // MARK: - Properties
+    
     static var appBuild: Int {
         
-        get { return UserDefaults.standard.integer(forKey: Key.appBuild.rawValue) }
+        get { return object(for: .appBuild) as? Int ?? 0 }
         
-        set { UserDefaults.standard.set(newValue, forKey: Key.appBuild.rawValue) }
+        set { set(object: newValue, for: .appBuild) }
     }
     
     static var goingToSummit: Bool {
         
-        get { return UserDefaults.standard.bool(forKey: Key.goingToSummit.rawValue)}
+        get { return object(for: .goingToSummit) as? Bool ?? false }
         
-        set { UserDefaults.standard.set(newValue, forKey: Key.goingToSummit.rawValue) }
+        set { set(object: newValue, for: .goingToSummit) }
+    }
+    
+    /// Last time user has offered to review the app.
+    static var lastAppReview: Date? {
+        
+        get { return object(for: .lastAppReview) as? Date }
+        
+        set { set(object: newValue, for: .lastAppReview) }
+    }
+    
+    // MARK: - Private Methods
+    
+    @inline(__always)
+    static func object(for key: Key) -> Any? {
+        
+        return UserDefaults.standard.object(forKey: key.rawValue)
+    }
+    
+    @inline(__always)
+    static func set(object: Any?, for key: Key) {
+        
+        UserDefaults.standard.set(object, forKey: key.rawValue)
+        
+        UserDefaults.standard.synchronize()
     }
 }
 
 // MARK: - Keys
 
-private extension Preference {
+extension Preference {
     
     enum Key: String {
         
         case appBuild
         case goingToSummit
+        case lastAppReview
     }
 }

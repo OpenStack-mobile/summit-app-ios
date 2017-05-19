@@ -137,6 +137,8 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                         
                     case .value:
                         
+                        controller.requestAppReview()
+                        
                         controller.close()
                     }
                 }
