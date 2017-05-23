@@ -102,17 +102,17 @@ final class VenueDetailViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.data[indexPath.row]
         
@@ -120,19 +120,19 @@ final class VenueDetailViewController: UITableViewController {
             
         case .room:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VenueTextCell", for: indexPath)
             
             let room = location.rawValue as! VenueRoom
             
             cell.textLabel!.text = room.name
             
-            cell.accessoryType = .None
+            cell.accessoryType = .none
             
             return cell
             
         case .address:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("VenueLocationCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VenueLocationCell", for: indexPath) as! DetailImageTableViewCell
             
             cell.titleLabel.text = venue.fullAddress
             
@@ -140,33 +140,33 @@ final class VenueDetailViewController: UITableViewController {
             
         case .images:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VenueTextCell", for: indexPath)
             
             cell.textLabel!.text = venue.images.count == 1 ? "View Image" : "\(venue.images.count) images"
             
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             
             return cell
             
         case .mapImages:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VenueTextCell", for: indexPath)
             
             cell.textLabel!.text = venue.maps.count == 1 ? "View Map Image" : "\(venue.images.count) map images"
             
-            cell.accessoryType = canShowMap ? .DisclosureIndicator : .None
+            cell.accessoryType = canShowMap ? .disclosureIndicator : .none
             
             return cell
             
         case .description:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VenueTextCell", for: indexPath)
             
             let text: String
             
             if let descriptionText = venue.descriptionText,
-                let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                let data = descriptionText.data(using: String.Encoding.utf8),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 text = attributedString.string
                 
@@ -177,7 +177,7 @@ final class VenueDetailViewController: UITableViewController {
             
             cell.textLabel!.text = text
             
-            cell.accessoryType = .None
+            cell.accessoryType = .none
             
             return cell
         }
@@ -185,7 +185,7 @@ final class VenueDetailViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
         switch identifier {
             
@@ -195,13 +195,13 @@ final class VenueDetailViewController: UITableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case "venueDetailShowMap":
             
-            let venueMapViewController = segue.destinationViewController as! VenueMapViewController
+            let venueMapViewController = segue.destination as! VenueMapViewController
             
             venueMapViewController.selectedVenue = venue.identifier
             

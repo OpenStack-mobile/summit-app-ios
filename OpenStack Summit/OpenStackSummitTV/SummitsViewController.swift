@@ -38,7 +38,7 @@ final class SummitsViewController: UITableViewController {
         tableView.layoutMargins.right = 90
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.refresh()
@@ -46,13 +46,13 @@ final class SummitsViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         self.loading = true
         
         Store.shared.summits { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -60,13 +60,13 @@ final class SummitsViewController: UITableViewController {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorAlert((error as NSError).localizedDescription, retryHandler: { controller.refresh() })
                     
-                case let .Value(value):
+                case let .value(value):
                     
-                    controller.summits = value.items.sort { $0.0.start > $0.1.start }
+                    controller.summits = value.items.sorted { $0.0.start > $0.1.start }
                 }
             }
         }
@@ -89,24 +89,24 @@ final class SummitsViewController: UITableViewController {
     }
     
     @inline(__always)
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: UITableViewCell, at indexPath: IndexPath) {
         
         let summit = self[indexPath]
         
         cell.textLabel?.text = summit.name
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        let stringDateFrom = dateFormatter.string(from: summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        let stringDateTo = dateFormatter.string(from: summit.end)
         
         cell.detailTextLabel?.text = stringDateFrom + stringDateTo
     }
     
-    private subscript (indexPath: NSIndexPath) -> Summit {
+    private subscript (indexPath: IndexPath) -> Summit {
         
         return self.summits[indexPath.row]
     }
@@ -117,24 +117,24 @@ final class SummitsViewController: UITableViewController {
         
         assert(self.currentSummit != nil, "Summit must already be loaded")
         
-        self.performSegueWithIdentifier(Segue.presentSummit.rawValue, sender: self)
+        self.performSegue(withIdentifier: Segue.presentSummit.rawValue, sender: self)
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.summits.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("SummitTableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SummitTableViewCell", for: indexPath)
         
         configure(cell: cell, at: indexPath)
         
@@ -143,7 +143,7 @@ final class SummitsViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let selectedSummit = self[indexPath]
         
@@ -155,17 +155,17 @@ final class SummitsViewController: UITableViewController {
             
             Store.shared.summit(selectedSummit.identifier) { [weak self] (response) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     
                     guard let controller = self else { return }
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .error(error):
                         
                         controller.showErrorAlert((error as NSError).localizedDescription)
                         
-                    case .Value:
+                    case .value:
                         
                         controller.select(summit: selectedSummit.identifier)
                     }
@@ -176,7 +176,7 @@ final class SummitsViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let segueIdentifier = Segue(rawValue: segue.identifier!)!
         

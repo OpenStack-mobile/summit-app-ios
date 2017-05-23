@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public final class TagManagedObject: Entity {
     
@@ -20,14 +21,14 @@ extension Tag: CoreDataDecodable {
     
     public init(managedObject: TagManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }
 
 extension Tag: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TagManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TagManagedObject {
         
         let managedObject = try cached(context)
         
@@ -51,12 +52,11 @@ public extension TagManagedObject {
 
 public extension Tag {
     
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Tag] {
+    static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [Tag] {
         
-        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        //let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        let predicate: Predicate = (#keyPath(TagManagedObject.name)).compare(.contains, [.caseInsensitive], .value(.string(searchTerm)))
         
-        let managedObjects = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
-        
-        return Tag.from(managedObjects: managedObjects)
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }

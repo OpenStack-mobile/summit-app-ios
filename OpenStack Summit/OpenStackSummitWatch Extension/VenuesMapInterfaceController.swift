@@ -16,14 +16,14 @@ final class VenuesMapInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var mapView: WKInterfaceMap!
+    @IBOutlet private(set) weak var mapView: WKInterfaceMap!
     
     // MARK: - Properties
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -35,7 +35,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/travel"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: summit.webpage.appendingPathComponent("travel"))
         }
     }
     
@@ -73,6 +73,6 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         }
         
         // add locations to Map
-        locations.forEach { mapView.addAnnotation($0, withPinColor: .Red) }
+        locations.forEach { mapView.addAnnotation($0, with: .red) }
     }
 }

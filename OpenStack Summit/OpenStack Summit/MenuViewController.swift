@@ -16,19 +16,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var searchTextView: UITextField!
-    @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet private(set) weak var searchTextView: UITextField!
+    @IBOutlet private(set) weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var loginButton: UIButton!
     
-    @IBOutlet weak var eventsButton: UIButton!
-    @IBOutlet weak var venuesButton: UIButton!
-    @IBOutlet weak var peopleButton: UIButton!
-    @IBOutlet weak var myProfileButton: UIButton!
-    @IBOutlet weak var aboutButton: UIButton!
-    @IBOutlet weak var inboxButton: UIButton!
-    @IBOutlet weak var inboxCounterView: UIView!
-    @IBOutlet weak var inboxCounterLabel: UILabel!
+    @IBOutlet private(set) weak var eventsButton: UIButton!
+    @IBOutlet private(set) weak var venuesButton: UIButton!
+    @IBOutlet private(set) weak var peopleButton: UIButton!
+    @IBOutlet private(set) weak var myProfileButton: UIButton!
+    @IBOutlet private(set) weak var aboutButton: UIButton!
+    @IBOutlet private(set) weak var inboxButton: UIButton!
+    @IBOutlet private(set) weak var inboxCounterView: UIView!
+    @IBOutlet private(set) weak var inboxCounterLabel: UILabel!
     
     // MARK: - Properties
     
@@ -40,7 +40,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     private var unreadNotificationsObserver: Int?
     private var unreadTeamMessagesObserver: Int?
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Accessors
     
@@ -54,30 +54,23 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         }
     }
     
-    private(set) var pictureURL: String = "" {
+    private(set) var picture: URL? {
         
         didSet {
             
-            let picURLInternal: String
+            let placeholder = #imageLiteral(resourceName: "generic-user-avatar")
             
-            if AppEnvironment == .Staging {
+            if let url = picture {
                 
-                picURLInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                pictureImageView.hnk_setImageFromURL(url.environmentScheme, placeholder: placeholder)
                 
             } else {
                 
-                picURLInternal = pictureURL
-            }
-
-            if picURLInternal.isEmpty == false {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picURLInternal)!)
-            }
-            else {
-                pictureImageView.image = R.image.genericUserAvatar()!
+                pictureImageView.image = #imageLiteral(resourceName: "generic-user-avatar")
             }
             
             pictureImageView.layer.borderWidth = 0.88;
-            pictureImageView.layer.borderColor = UIColor(red: 215/255, green: 226/255, blue: 235/255, alpha: 1.0).CGColor
+            pictureImageView.layer.borderColor = UIColor(red: 215/255, green: 226/255, blue: 235/255, alpha: 1.0).cgColor
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
             pictureImageView.clipsToBounds = true;
         }
@@ -85,8 +78,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - Loading
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     deinit {
@@ -101,7 +94,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             PushNotificationManager.shared.unreadNotifications.remove(observer)
         }
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -116,12 +109,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         // session notifications
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(
+        /*
+        NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        */
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
@@ -130,7 +125,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             .observe { [weak self] _ in self?.reloadInboxCounter() }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.showUserProfile()
@@ -140,7 +135,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - Actions
     
-    @IBAction func toggleMenuSelection(sender: UIButton) {
+    @IBAction func toggleMenuSelection(_ sender: UIButton) {
         
         let item: MenuItem
         
@@ -148,27 +143,27 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
         case eventsButton:
             showEvents()
-            item = .Events
+            item = .events
             
         case venuesButton:
             showVenues()
-            item = .Venues
+            item = .venues
             
         case peopleButton:
             showSpeakers()
-            item = .People
+            item = .people
             
         case myProfileButton:
             showMyProfile()
-            item = .MyProfile
+            item = .myProfile
             
         case aboutButton:
             showAbout()
-            item = .About
+            item = .about
             
         case inboxButton:
             showInbox()
-            item = .Inbox
+            item = .inbox
             
         default: fatalError("Invalid sender \(sender)")
         }
@@ -176,12 +171,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         highlight(item)
     }
     
-    @IBAction func login(sender: UIButton) {
+    @IBAction func login(_ sender: UIButton) {
         
-        if (hasAccess(to: .Login)) {
+        if (hasAccess(to: .login)) {
             login()
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
+            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.dismissActivityIndicator()
             }
         } else {
@@ -196,9 +191,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let currentMemberRole = Store.shared.memberRole
         
         switch (menuItem) {
-        case .MyProfile:
+        case .myProfile:
             return currentMemberRole != .anonymous
-        case .Login:
+        case .login:
             return currentMemberRole == .anonymous
         default:
             return true
@@ -215,28 +210,28 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         inboxButton.alpha = 0.5
     }
     
-    private func highlight(item: MenuItem) {
+    private func highlight(_ item: MenuItem) {
         
         let _ = self.view
         
         unselectMenuItems()
         
         switch item {
-        case .Events:
+        case .events:
             eventsButton.alpha = 1
-        case .Venues:
+        case .venues:
             venuesButton.alpha = 1
-        case .People:
+        case .people:
             peopleButton.alpha = 1
-        case .MyProfile:
+        case .myProfile:
             myProfileButton.alpha = 1
-        case .About:
+        case .about:
             aboutButton.alpha = 1
-        case .Inbox:
+        case .inbox:
             inboxButton.alpha = 1
             
         // not applicable
-        case .Login: break
+        case .login: break
         }
     }
     
@@ -247,19 +242,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     private func reloadMenu() {
         
-        let loginTitle = hasAccess(to: .Login) ? "LOG IN" : "LOG OUT"
-        loginButton.setTitle(loginTitle, forState: .Normal)
+        let loginTitle = hasAccess(to: .login) ? "LOG IN" : "LOG OUT"
+        loginButton.setTitle(loginTitle, for: UIControlState())
         
-        peopleButton.setTitle("SPEAKERS", forState: .Normal)
+        peopleButton.setTitle("SPEAKERS", for: UIControlState())
         
-        myProfileButton.hidden = hasAccess(to: .MyProfile) == false
+        myProfileButton.isHidden = hasAccess(to: .myProfile) == false
     }
     
     private func reloadInboxCounter() {
         
         let unreadCount = PushNotificationManager.shared.unreadCount
         
-        inboxCounterView.hidden = unreadCount == 0
+        inboxCounterView.isHidden = unreadCount == 0
         inboxCounterView.layer.cornerRadius = inboxCounterView.frame.size.width / 2
         inboxCounterLabel.text = "\(unreadCount)"
     }
@@ -281,45 +276,45 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             if let speaker = currentMember.speakerRole {
                 
                 name = speaker.name
-                pictureURL = speaker.pictureURL
+                picture = speaker.picture
                 
             } else {
                 
                 name = currentMember.name
-                pictureURL = currentMember.pictureURL
+                picture = currentMember.picture
             }
             
         } else {
             
             name = ""
-            pictureURL = ""
+            picture = nil
         }
     }
     
     func showSpeakers() {
         
-        highlight(.People)
+        highlight(.people)
         
         show(speakersViewController)
     }
     
     func showEvents() {
         
-        highlight(.Events)
+        highlight(.events)
         
         show(generalScheduleViewController)
     }
     
     func showVenues() {
         
-        highlight(.Venues)
+        highlight(.venues)
         
         show(venuesViewController)
     }
     
     func showAbout() {
         
-        highlight(.About)
+        highlight(.about)
         
         let aboutViewController = R.storyboard.menu.aboutViewController()!
         
@@ -328,38 +323,30 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     func showInbox() {
         
-        highlight(.Inbox)
+        highlight(.inbox)
         
         let teamsViewController = InboxViewController()
         
         show(teamsViewController)
-    }
-    
-    func showSearch(for term: String) {
-        
-        let searchViewController = R.storyboard.menu.searchViewController()!
-        searchViewController.searchTerm = term
-        
-        show(searchViewController)
     }
         
     private func showMyProfile() {
         
         guard Store.shared.isLoggedIn else { return }
         
-        highlight(.MyProfile)
+        highlight(.myProfile)
         
         let myProfileViewController = MyProfileViewController()
         
         show(myProfileViewController)
     }
     
-    private func show(viewController: UIViewController) {
+    private func show(_ viewController: UIViewController) {
         
-        let revealViewController = AppDelegate.shared.revealViewController
+        let revealViewController = self.revealViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        revealViewController?.pushFrontViewController(navigationController, animated: true)
     }
     
     // MARK: Login / Logout
@@ -378,7 +365,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         Store.shared.login(summit, loginCallback: {
             
             // return from SafariVC
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.showActivityIndicator()
             })
@@ -387,7 +374,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             guard let controller = self else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 controller.hideMenu()
                 
@@ -395,11 +382,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .None:
+                case .none:
                     
                     controller.showUserProfile()
                     controller.reloadMenu()
@@ -415,31 +402,30 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                         
                         controller.showMyProfile()
                         
-                        let revealViewController = AppDelegate.shared.revealViewController
+                        let revealViewController = controller.revealViewController()
                         
                         // show a popup asking user if they are going to the summit
-                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
+                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .alert)
                         
-                        alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
+                        alert.addAction(UIAlertAction(title: "No", style: .default) { (action) in
                             
                             Preference.goingToSummit = false
                         })
                         
-                        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
+                        alert.addAction(UIAlertAction(title: "Yes", style: .default) { (action) in
                             
                             Preference.goingToSummit = true
                             
                             let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
                             
-                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                            revealViewController!.present(viewController, animated: true) { controller.showMyProfile() }
                         })
                         
-                        revealViewController.presentViewController(alert, animated: true) { }
+                        revealViewController?.present(alert, animated: true) { }
                     }
                     
                     // log user email
-                    if let userID = Store.shared.authenticatedMember?.identifier
-                        where AppEnvironment == .Staging {
+                    if let userID = Store.shared.authenticatedMember?.id, AppEnvironment == .staging {
                         
                         Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
@@ -453,7 +439,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         Store.shared.logout()
         
         // log user email
-        if AppEnvironment == .Staging {
+        if AppEnvironment == .staging {
             
             Crashlytics.sharedInstance().setUserIdentifier(nil)
         }
@@ -467,18 +453,18 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     // MARK: - SWRevealViewControllerDelegate
     
-    func revealController(revealController: SWRevealViewController, willMoveToPosition position: FrontViewPosition) {
+    func revealController(_ revealController: SWRevealViewController, willMoveTo position: FrontViewPosition) {
         
         if let navigationController = revealController.frontViewController {
             if let viewController = navigationController.childViewControllers.first {
-                viewController.view.userInteractionEnabled = position != FrontViewPosition.Right
+                viewController.view.isUserInteractionEnabled = position != FrontViewPosition.right
             }
         }
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         searchTextView.resignFirstResponder()
         
@@ -488,7 +474,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             unselectMenuItems()
             
-            guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).count > 0 else {
+            guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).count > 0 else {
                 
                 showInfoMessage("Info", message: "No summit data available")
                 return true
@@ -496,24 +482,45 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             
             defer {
                 
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: delayTime) {
                     self.searchTextView.text = ""
                 }
             }
             
-            let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+            let sanitizedTerm = term.trimmingCharacters(in: .whitespacesAndNewlines)
             
             // show Search VC
-            showSearch(for: sanitizedTerm)
+            search(sanitizedTerm)
         }
         
         return true
     }
     
+    // MARK: - SummitActivityHandling
+    
+    func view(screen: AppActivityScreen) {
+        
+        switch screen {
+        case .venues: showVenues()
+        case .events: showEvents()
+        case .speakers: showSpeakers()
+        case .about: showAbout()
+        case .inbox: showInbox()
+        }
+    }
+    
+    func search(_ searchTerm: String) {
+        
+        let searchViewController = R.storyboard.menu.searchViewController()!
+        searchViewController.searchTerm = searchTerm
+        
+        show(searchViewController)
+    }
+    
     // MARK: - Notifications
     
-    @objc private func revokedAccess(notification: NSNotification) {
+    @objc private func revokedAccess(_ notification: Foundation.Notification) {
         
         // logout in case its not cleared
         Store.shared.session.clear()
@@ -532,11 +539,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
 
 enum MenuItem {
     
-    case Login
-    case Events
-    case Venues
-    case People
-    case About
-    case Inbox
-    case MyProfile
+    case login
+    case events
+    case venues
+    case people
+    case about
+    case inbox
+    case myProfile
 }

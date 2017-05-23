@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 public struct EventDetail {
@@ -33,7 +33,7 @@ public struct EventDetail {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
-    public let webpageURL: NSURL
+    public let webpageURL: URL
     
     // MARK: - Initialization
     
@@ -41,7 +41,7 @@ public struct EventDetail {
         
         self.identifier = event.identifier
         self.name = event.name
-        self.eventType = summit.eventTypes.firstMatching({ $0.identifier == event.type })!.name
+        self.eventType = summit.eventTypes.first(where: { $0.identifier == event.type })!.name
         self.location = EventDetail.getLocation(event, summit: summit)
         self.dateTime = EventDetail.getDateTime(event, summit: summit)
         self.time = EventDetail.getTime(event, summit: summit)
@@ -72,7 +72,7 @@ public struct EventDetail {
         
         for speakerID in event.presentation.speakers {
             
-            let speaker = summit.speakers.firstMatching({ $0.identifier == speakerID })!
+            let speaker = summit.speakers.first(where: { $0.identifier == speakerID })!
             
             // HACK: dismiss speakers with empty name
             if speaker.firstName.isEmpty && speaker.lastName.isEmpty {
@@ -82,9 +82,9 @@ public struct EventDetail {
             speakers.append(speaker)
         }
         
-        if let moderator = event.presentation.moderator where moderator != 0 {
+        if let moderator = event.presentation.moderator, moderator != 0 {
             
-            moderatorSpeaker = summit.speakers.firstMatching({ $0.identifier == moderator })!
+            moderatorSpeaker = summit.speakers.first(where: { $0.identifier == moderator })!
         }
         
         self.speakers = speakers
@@ -92,7 +92,7 @@ public struct EventDetail {
         
         self.video = event.videos.first
         
-        self.webpageURL = NSURL(string: event.toWebpageURL(summit))!
+        self.webpageURL = event.webpage(for: summit)
     }
 }
 
@@ -100,7 +100,7 @@ public struct EventDetail {
 
 internal extension EventDetail {
     
-    static func getSponsors(event: Event, summit: Summit) -> String {
+    static func getSponsors(_ event: Event, summit: Summit) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -108,7 +108,7 @@ internal extension EventDetail {
         var sponsors = "Sponsored by "
         var separator = ""
         for sponsorID in event.sponsors {
-            let sponsor = summit.sponsors.firstMatching({ sponsorID == $0.identifier })!
+            let sponsor = summit.sponsors.first(where: { sponsorID == $0.identifier })!
             sponsors += separator + sponsor.name
             separator = ", "
             assert(sponsor.name.isEmpty == false, "Empty sponsor name")
@@ -116,47 +116,46 @@ internal extension EventDetail {
         return sponsors
     }
     
-    static func getTime(event: Event, summit: Summit) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+    static func getTime(_ event: Event, summit: Summit) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end.toFoundation())
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getDateTime(event: Event, summit: Summit) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+    static func getDateTime(_ event: Event, summit: Summit) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end.toFoundation())
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: Event, summit: Summit) -> String {
+    static func getLocation(_ event: Event, summit: Summit) -> String {
         
-        guard let locationID = event.location
-            where locationID != 0
+        guard let locationID = event.location, locationID != 0
             else { return "" }
         
-        let location = summit.locations.firstMatching({ $0.identifier == locationID })!
+        let location = summit.locations.first(where: { $0.identifier == locationID })!
         
         switch location {
             
         case let .room(room):
             
-            guard let venueLocation = summit.locations.firstMatching({ $0.identifier == room.venue }),
+            guard let venueLocation = summit.locations.first(where: { $0.identifier == room.venue }),
                 case let .venue(venue) = venueLocation
                 else { fatalError("No venue") }
             
@@ -168,20 +167,20 @@ internal extension EventDetail {
         }
     }
     
-    static func getTrack(event: Event, summit: Summit) -> String {
+    static func getTrack(_ event: Event, summit: Summit) -> String {
         
         guard let trackID = event.track
             else { return "" }
         
-        return summit.tracks.firstMatching({ $0.identifier == trackID })!.name
+        return summit.tracks.first(where: { $0.identifier == trackID })!.name
     }
     
-    static func getTrackGroupColor(event: Event, summit: Summit) -> String {
+    static func getTrackGroupColor(_ event: Event, summit: Summit) -> String {
         
         guard let trackID = event.track,
-            let track = summit.tracks.firstMatching({ $0.identifier == trackID }),
+            let track = summit.tracks.first(where: { $0.identifier == trackID }),
             let trackGroupID = track.groups.first,
-            let trackGroup = summit.trackGroups.firstMatching({ $0.identifier == trackGroupID })
+            let trackGroup = summit.trackGroups.first(where: { $0.identifier == trackGroupID })
             else { return "" }
         
         return trackGroup.color

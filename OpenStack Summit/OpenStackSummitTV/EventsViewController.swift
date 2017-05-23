@@ -7,23 +7,24 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import CoreData
+import Predicate
 
 @objc(OSSTVEventsViewController)
 final class EventsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = Predicate.value(false) {
         
-        didSet { if isViewLoaded() { updateUI() } }
+        didSet { if isViewLoaded { updateUI() } }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<EventManagedObject>!
     
-    private static let cachedPredicate = NSPredicate(format: "cached != nil")
+    private static let cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
     // MARK: - Loading
     
@@ -40,11 +41,10 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
     
     private func updateUI() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        // NSPredicate(format: "summit.id == %@", summitID)
+        let summitPredicate: Predicate = #keyPath(EventManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, EventsViewController.cachedPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, summitPredicate, EventsViewController.cachedPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Event.self,
                                                                    delegate: self,
@@ -59,35 +59,35 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
         tableView.reloadData()
     }
     
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: UITableViewCell, at indexPath: IndexPath) {
         
         let event = self[indexPath]
         
         cell.textLabel!.text = event.name
     }
     
-    private subscript (indexPath: NSIndexPath) -> Event {
+    private subscript (indexPath: IndexPath) -> Event {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! EventManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! EventManagedObject
         
         return Event(managedObject: managedObject)
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath)
         
         configure(cell: cell, at: indexPath)
         
@@ -96,50 +96,50 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView.endUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-        case .Insert:
+        case .insert:
             
             if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView.insertRows(at: [insertIndexPath], with: .fade)
             }
-        case .Delete:
+        case .delete:
             
             if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView.deleteRows(at: [deleteIndexPath], with: .fade)
             }
-        case .Update:
+        case .update:
             if let updateIndexPath = indexPath,
-                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
+                let cell = self.tableView.cellForRow(at: updateIndexPath) {
                 
                 self.configure(cell: cell, at: updateIndexPath)
             }
-        case .Move:
+        case .move:
             
             if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView.deleteRows(at: [deleteIndexPath], with: .fade)
             }
             
             if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView.insertRows(at: [insertIndexPath], with: .fade)
             }
         }
     }
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -147,7 +147,7 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
             
             let event = self[tableView.indexPathForSelectedRow!]
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let eventDetailViewController = navigationController.topViewController as! EventDetailViewController
             

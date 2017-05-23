@@ -28,26 +28,26 @@ extension VenueFloor: CoreDataDecodable {
     
     public init(managedObject: VenueFloorManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
-        self.number = Int(managedObject.number)
-        self.imageURL = managedObject.imageURL
-        self.venue = managedObject.venue.identifier
+        self.number = managedObject.number
+        self.image = URL(string: managedObject.imageURL ?? "")
+        self.venue = managedObject.venue.id
         self.rooms = managedObject.rooms.identifiers
     }
 }
 
 extension VenueFloor: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> VenueFloorManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> VenueFloorManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.number = Int16(number)
-        managedObject.imageURL = imageURL
+        managedObject.number = number
+        managedObject.imageURL = image?.absoluteString
         managedObject.venue = try context.relationshipFault(venue)
         managedObject.rooms = try context.relationshipFault(rooms)
         

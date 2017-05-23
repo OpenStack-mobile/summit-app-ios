@@ -6,13 +6,14 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func addEventToSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -25,15 +26,15 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
+        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         
-        http.POST(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .post, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -52,10 +53,10 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
     
-    func removeEventFromSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -68,15 +69,15 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
+        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .delete, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -95,10 +96,10 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
     
-    func removeRSVP(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -111,15 +112,15 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)/rsvp"
+        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)/rsvp"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
+        http.request(method: .delete, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -138,6 +139,6 @@ public extension Store {
             }
             
             completion(nil)
-        })
+        }
     }
 }

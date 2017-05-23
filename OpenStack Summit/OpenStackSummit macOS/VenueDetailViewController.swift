@@ -56,25 +56,25 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendActionOn(.LeftMouseDown)
+        shareButton.sendAction(on: .leftMouseDown)
     }
     
     // MARK: - Actions
     
-    @IBAction func share(sender: NSButton) {
+    @IBAction func share(_ sender: NSButton) {
         
         var items = [AnyObject]()
         
-        items.append(venueCache.name)
+        items.append(venueCache.name as AnyObject)
         
-        items.append(venueCache.address)
+        items.append(venueCache.address as AnyObject)
         
         if descriptionLabel.attributedStringValue.string.isEmpty == false {
             
             items.append(descriptionLabel.attributedStringValue)
         }
         
-        if let _ = venueCache.backgroundImageURL,
+        if let _ = venueCache.backgroundImage,
             let venueImage = self.venueImageView.image {
             
             items.append(venueImage)
@@ -84,9 +84,9 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         sharingServicePicker.delegate = self
         
-        sharingServicePicker.showRelativeToRect(sender.bounds,
-                                                ofView: sender,
-                                                preferredEdge: .MinY)
+        sharingServicePicker.show(relativeTo: sender.bounds,
+                                                of: sender,
+                                                preferredEdge: .minY)
     }
     
     // MARK: - Private Methods
@@ -95,7 +95,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         let _ = self.view
         
-        assert(viewLoaded)
+        assert(isViewLoaded)
         
         entityController = EntityController(identifier: venue,
                                             entity: VenueManagedObject.self,
@@ -103,12 +103,12 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.dismissController(nil) }
+        entityController.event.deleted = { [weak self] _ in self?.dismiss(nil) }
         
         entityController.enabled = true
     }
     
-    private func configureView(venue: VenueListItem) {
+    private func configureView(_ venue: VenueListItem) {
         
         venueCache = venue
         
@@ -118,27 +118,27 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         // set description
         let htmlString = venue.descriptionText
         
-        if let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            where attributedString.string.isEmpty == false {
+        if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            attributedString.string.isEmpty == false {
             
-            self.descriptionView.hidden = false
+            self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
+            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
         } else {
             
-            self.descriptionView.hidden = true
+            self.descriptionView.isHidden = true
             self.descriptionLabel.stringValue = ""
         }
         
         // TEMP
-        imagesView.hidden = true
-        mapImagesView.hidden = true
+        imagesView.isHidden = true
+        mapImagesView.isHidden = true
         
         //imagesView.hidden = venue.images.isEmpty
         //imagesCollectionView.reloadData()
@@ -148,12 +148,11 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         venueImageView.image = nil
         
-        if let urlString = venue.backgroundImageURL,
-            let imageURL = NSURL(string: urlString) {
+        if let imageURL = venue.backgroundImage {
             
-            venueImageViewContainer.hidden = false
+            venueImageViewContainer.isHidden = false
             
-            venueImageActivityIndicator.hidden = false
+            venueImageActivityIndicator.isHidden = false
             venueImageActivityIndicator.startAnimation(self)
             
             venueImageView.loadCached(imageURL) { [weak self] _ in
@@ -161,68 +160,65 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
                 if self?.venueImageView.image != nil {
                     
                     self?.venueImageActivityIndicator.stopAnimation(nil)
-                    self?.venueImageActivityIndicator.hidden = true
+                    self?.venueImageActivityIndicator.isHidden = true
                     
                 } else {
                     
-                    self?.venueImageViewContainer.hidden = true
+                    self?.venueImageViewContainer.isHidden = true
                 }
             }
             
         } else {
             
-            venueImageViewContainer.hidden = true
-            venueImageActivityIndicator.hidden = true
+            venueImageViewContainer.isHidden = true
+            venueImageActivityIndicator.isHidden = true
         }
     }
     
-    private func configure(item item: VenueImageCollectionViewItem, at indexPath: NSIndexPath, collectionView: NSCollectionView) {
+    private func configure(item: VenueImageCollectionViewItem, at indexPath: IndexPath, collectionView: NSCollectionView) {
         
-        let urlString: String
+        let url: URL
         
         switch collectionView {
-        case imagesCollectionView: urlString = venueCache.images[indexPath.item]
-        case mapImagesCollectionView: urlString = venueCache.maps[indexPath.item]
-        default: fatalError()
+        case imagesCollectionView: url = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: url = venueCache.maps[indexPath.item]
+        default: fatalError("Invalid collection view \(collectionView)")
         }
         
         item.imageView!.image = nil
         
-        item.activityIndicator.hidden = false
+        item.activityIndicator.isHidden = false
         item.activityIndicator.startAnimation(nil)
         
-        if let imageURL = NSURL(string: urlString) {
+        item.imageView!.loadCached(url) { _ in
             
-            item.imageView!.loadCached(imageURL) { _ in
+            if let _ = item.imageView?.image {
                 
-                if let _ = item.imageView?.image {
-                    
-                    item.activityIndicator.hidden = true
-                    item.activityIndicator.stopAnimation(nil)
-                }
+                item.activityIndicator.isHidden = true
+                item.activityIndicator.stopAnimation(nil)
             }
         }
     }
     
     // MARK: - NSCollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
         
         return 1
     }
     
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch collectionView {
         case imagesCollectionView: return venueCache.images.count
         case mapImagesCollectionView: return venueCache.maps.count
-        default: fatalError()
+        default: fatalError("Invalid collection view \(collectionView)")
         }
     }
     
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("VenueImageCollectionViewItem", forIndexPath: indexPath) as! VenueImageCollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: "VenueImageCollectionViewItem", for: indexPath) as! VenueImageCollectionViewItem
         
         configure(item: item, at: indexPath, collectionView: collectionView)
         
@@ -231,29 +227,26 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     
     // MARK: - NSCollectionViewDelegate
     
-    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         
-        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        defer { collectionView.deselectItems(at: indexPaths) }
         
         let indexPath = indexPaths.first!
         
-        let imageString: String
+        let imageURL: URL
         
         switch collectionView {
-        case imagesCollectionView: imageString = venueCache.images[indexPath.item]
-        case mapImagesCollectionView: imageString = venueCache.maps[indexPath.item]
+        case imagesCollectionView: imageURL = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: imageURL = venueCache.maps[indexPath.item]
         default: fatalError()
         }
         
-        if let url = NSURL(string: imageString) {
-            
-            NSWorkspace.sharedWorkspace().openURL(url)
-        }
+        NSWorkspace.shared().open(imageURL)
     }
     
     // MARK: - NSSharingServicePickerDelegate
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
         
         var customItems = [NSSharingService]()
         
@@ -271,27 +264,27 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         return customItems + proposedServices
     }
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, delegateFor sharingService: NSSharingService) -> NSSharingServiceDelegate? {
         
         return self
     }
     
     // MARK: - NSSharingServiceDelegate
     
-    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+    func sharingService(_ sharingService: NSSharingService, willShareItems items: [Any]) {
         
         sharingService.subject = nameLabel.stringValue
     }
     
-    func sharingService(sharingService: NSSharingService, sourceFrameOnScreenForShareItem item: AnyObject) -> NSRect {
+    func sharingService(_ sharingService: NSSharingService, sourceFrameOnScreenForShareItem item: Any) -> NSRect {
         
-        if let image = item as? NSImage where image == self.venueImageView.image {
+        if let image = item as? NSImage, image == self.venueImageView.image {
             
             let imageView = self.venueImageView
             
-            var frame = imageView.convertRect(imageView.bounds, toView: nil)
-            frame = imageView.window!.convertRectToScreen(frame)
-            return frame
+            var frame = imageView?.convert((imageView?.bounds)!, to: nil)
+            frame = imageView?.window!.convertToScreen(frame!)
+            return frame!
             
         } else {
             
@@ -299,11 +292,11 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         }
     }
     
-    func sharingService(sharingService: NSSharingService, sourceWindowForShareItems items: [AnyObject], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow? {
+    func sharingService(_ sharingService: NSSharingService, sourceWindowForShareItems items: [Any], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow? {
         
         if self.view.window?.className == NSPopover.windowClassName {
             
-            return presentingViewController?.view.window
+            return presenting?.view.window
             
         } else {
             

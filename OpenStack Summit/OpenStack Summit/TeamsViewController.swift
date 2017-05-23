@@ -17,11 +17,11 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - Properties
     
-    lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    lazy var pageController: PageController<Team> = PageController(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
     
     lazy var contextMenu: ContextMenu = {
         
-        let createTeam = ContextMenu.Action(activityType: "\(self.dynamicType).CreateTeam", image: nil, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+        let createTeam = ContextMenu.Action(activityType: "\(type(of: self)).CreateTeam", image: nil, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController in
             
             let createTeamViewController = R.storyboard.teams.createTeamViewController()!
             
@@ -32,12 +32,12 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
             let navigationController = UINavigationController(rootViewController: createTeamViewController)
             
-            navigationController.modalPresentationStyle = .Popover
+            navigationController.modalPresentationStyle = .popover
             
             return navigationController
             }))
         
-        let viewInvitations = ContextMenu.Action(activityType: "\(self.dynamicType).TeamInvitations", image: nil, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+        let viewInvitations = ContextMenu.Action(activityType: "\(type(of: self)).TeamInvitations", image: nil, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController in
             
             let teamInvitationsViewController = R.storyboard.teams.teamInvitationsViewController()!
             
@@ -45,7 +45,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
             let navigationController = UINavigationController(rootViewController: teamInvitationsViewController)
             
-            navigationController.modalPresentationStyle = .PageSheet
+            navigationController.modalPresentationStyle = .pageSheet
             
             return navigationController
             }))
@@ -55,7 +55,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     private var unreadTeamMessagesObserver: Int?
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -74,7 +74,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -93,12 +93,12 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.view.bringSubviewToFront(progressHUD)
+        self.view.bringSubview(toFront: progressHUD)
     }
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
@@ -111,7 +111,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }
     
     @inline(__always)
-    private func configure(cell cell: TeamCell, with team: Team) {
+    private func configure(cell: TeamCell, with team: Team) {
         
         cell.nameLabel.text = team.name
         
@@ -119,30 +119,30 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         
         let unreadCount = try! PushNotificationManager.shared.unreadMessages(in: team.identifier, context: Store.shared.managedObjectContext)
         
-        cell.unreadView.hidden = unreadCount == 0
+        cell.unreadView.isHidden = unreadCount == 0
         cell.unreadLabel.text = "\(unreadCount)"
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Teams")
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = pageController.items[indexPath.row]
         
@@ -150,7 +150,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamCell)!
             
             configure(cell: cell, with: item)
             
@@ -160,9 +160,9 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -172,7 +172,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -181,16 +181,16 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             guard case let .item(selectedItem) = self.pageController.items[tableView.indexPathForSelectedRow!.row]
                 else { fatalError("Invalid row") }
             
-            let viewController = segue.destinationViewController as! TeamMessagesViewController
+            let viewController = segue.destination as! TeamMessagesViewController
             
             viewController.team = selectedItem.identifier
             
         case R.segue.teamsViewController.showTeamDetail.identifier:
             
-            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPathForCell(sender as! UITableViewCell)!.row]
+            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPath(for: sender as! UITableViewCell)!.row]
                 else { fatalError("Invalid row") }
             
-            let viewController = segue.destinationViewController as! TeamDetailViewController
+            let viewController = segue.destination as! TeamDetailViewController
             
             viewController.team = selectedItem.identifier
             
@@ -203,11 +203,11 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
 
 final class TeamCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet private(set) weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var unreadView: UIView!
+    @IBOutlet private(set) weak var unreadView: UIView!
     
-    @IBOutlet weak var unreadLabel: UILabel!
+    @IBOutlet private(set) weak var unreadLabel: UILabel!
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import JSON
 
 #if os(iOS)
 import Crashlytics
@@ -30,7 +30,7 @@ public final class DataUpdatePoller {
     
     // MARK: - Private Properties
     
-    private var timer: NSTimer?
+    private var timer: Timer?
     
     // MARK: - Initialization
     
@@ -51,7 +51,7 @@ public final class DataUpdatePoller {
         
         timer?.invalidate()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(DataUpdatePoller.pollServer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: pollingInterval, target: self, selector: #selector(DataUpdatePoller.pollServer), userInfo: nil, repeats: true)
         
         pollServer()
     }
@@ -76,19 +76,19 @@ public final class DataUpdatePoller {
         log?("Polling server for data updates for summit \(summitID)")
         
         /// Handles the polling of the data updates
-        func process(response response: ErrorValue<[DataUpdate]>) {
+        func process(response: ErrorValue<[DataUpdate]>) {
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 log?("Error polling server for data updates: \(error)")
                                 
-            case let .Value(dataUpdates):
+            case let .value(dataUpdates):
                 
                 for update in dataUpdates {
                     
-                    if store.process(update, summit: summit.identifier) == false {
+                    if store.process(dataUpdate: update, summit: summit.id) == false {
                         
                         // could not process update
                         
@@ -97,9 +97,9 @@ public final class DataUpdatePoller {
                             var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
                             
                             if let updateEntity = update.entity,
-                                case let .JSON(jsonObject) = updateEntity {
+                                case let .json(jsonObject) = updateEntity {
                                 
-                                let jsonString = JSON.Value.Object(jsonObject).toString()!
+                                let jsonString = try! JSON.Value.object(jsonObject).toString(options: .prettyPrint)
                                 
                                 errorUserInfo["JSON"] = jsonString
                             }
@@ -136,11 +136,11 @@ public final class DataUpdatePoller {
         
         if let latestDataUpdate = storage.latestDataUpdate {
             
-            store.dataUpdates(summit.identifier, latestDataUpdate: latestDataUpdate) { process(response: $0) }
+            store.dataUpdates(summit.id, latestDataUpdate: latestDataUpdate) { process(response: $0) }
             
         } else {
             
-            store.dataUpdates(summit.identifier, from: Date(foundation: summit.initialDataLoad ?? NSDate())) { process(response: $0) }
+            store.dataUpdates(summit.id, from: summit.initialDataLoad ?? Date()) { process(response: $0) }
         }
     }
 }
@@ -164,23 +164,23 @@ public extension DataUpdatePollerStorage {
 
 public final class UserDefaultsDataUpdatePollerStorage: DataUpdatePollerStorage {
     
-    public let userDefaults: NSUserDefaults
+    public let userDefaults: UserDefaults
     
-    public init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
+    public init(userDefaults: UserDefaults = UserDefaults.standard) {
         
         self.userDefaults = userDefaults
     }
     
     public var latestDataUpdate: Identifier? {
         
-        get { return userDefaults.objectForKey(Key.LatestDataUpdate.rawValue) as? Int }
+        get { return userDefaults.object(forKey: Key.LatestDataUpdate.rawValue) as? Identifier }
         
         set {
             
             guard let value = newValue
-                else { userDefaults.removeObjectForKey(Key.LatestDataUpdate.rawValue); return }
+                else { userDefaults.removeObject(forKey: Key.LatestDataUpdate.rawValue); return }
             
-            userDefaults.setObject(value, forKey: Key.LatestDataUpdate.rawValue)
+            userDefaults.set(value, forKey: Key.LatestDataUpdate.rawValue)
         }
     }
     

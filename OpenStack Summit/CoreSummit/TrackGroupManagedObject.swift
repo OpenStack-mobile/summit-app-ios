@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public final class TrackGroupManagedObject: Entity {
     
@@ -18,6 +19,10 @@ public final class TrackGroupManagedObject: Entity {
     @NSManaged public var color: String
     
     @NSManaged public var tracks: Set<TrackManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var summits: Set<SummitManagedObject>
 }
 
 // MARK: - Encoding
@@ -26,7 +31,7 @@ extension TrackGroup: CoreDataDecodable {
     
     public init(managedObject: TrackGroupManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.color = managedObject.color
@@ -36,7 +41,7 @@ extension TrackGroup: CoreDataDecodable {
 
 extension TrackGroup: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
         
         let managedObject = try cached(context)
         
@@ -57,7 +62,7 @@ public extension TrackGroupManagedObject {
     
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: "name", ascending: true)]
+        return [NSSortDescriptor(key: #keyPath(TrackGroupManagedObject.name), ascending: true)]
     }
 }
 
@@ -66,14 +71,16 @@ public extension TrackGroup {
     /// Fetch all track groups that have some event associated with them.
     static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [TrackGroup] {
         
-        guard let summitManagedObject = try SummitManagedObject.find(summit, context: context)
-            else { return [] }
+        // NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
+        let eventsPredicate: Predicate = .keyPath(#keyPath(EventManagedObject.track)) != .value(.null)
+            && #keyPath(EventManagedObject.summit.id) == summit
         
-        let events = try context.managedObjects(EventManagedObject.self, predicate: NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
+        let events = try context.managedObjects(EventManagedObject.self, predicate: eventsPredicate)
         
-        var groups = events.reduce([TrackGroupManagedObject](), combine: { $0.0 + Array($0.1.track!.groups) })
-                
-        groups = (Set(groups) as NSSet).sortedArrayUsingDescriptors(ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
+        let groups = events
+            .flatMap({ $0.track?.groups })
+            .reduce([TrackGroupManagedObject](), { $0.0 + Array($0.1) })
+            .sorted(by: { $0.0.name < $0.1.name })
         
         return TrackGroup.from(managedObjects: groups)
     }

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import JGProgressHUD
 
@@ -17,24 +17,24 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet private(set) weak var nameTextField: UITextField!
     
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet private(set) weak var descriptionTextField: UITextField!
     
     // MARK: - Properties
     
     var completion: (done: (CreateTeamViewController) -> (), cancel: (CreateTeamViewController) -> ())?
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Actions
     
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
         self.completion?.cancel(self)
     }
     
-    @IBAction func done(sender: AnyObject? = nil) {
+    @IBAction func done(_ sender: AnyObject? = nil) {
         
         let name = self.nameTextField.text ?? ""
         
@@ -44,7 +44,7 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
         
         Store.shared.create(team: name, description: description) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -52,11 +52,11 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value:
+                case .value:
                     
                     controller.completion?.done(controller)
                 }

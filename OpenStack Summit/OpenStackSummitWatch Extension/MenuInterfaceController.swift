@@ -16,9 +16,9 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
-    @IBOutlet weak var loadingImageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var loadingImageView: WKInterfaceImage!
     
     // MARK: - Properties
     
@@ -37,16 +37,16 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // load static menu table view
         
         tableView.setNumberOfRows(menuItems.count, withRowType: MenuCellController.identifier)
         
-        for (index, menuItem) in menuItems.enumerate() {
+        for (index, menuItem) in menuItems.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! MenuCellController
+            let cell = tableView.rowController(at: index) as! MenuCellController
             
             cell.menuLabel.setText(menuItem.name)
             cell.imageView.setImageNamed(menuItem.image)
@@ -54,7 +54,7 @@ final class MenuInterfaceController: WKInterfaceController {
         
         // configure activity indicator
         loadingImageView.setImageNamed("Activity")
-        loadingImageView.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+        loadingImageView.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
     }
     
     override func willActivate() {
@@ -72,11 +72,11 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - Table View Selection
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
         let menuItem = menuItems[rowIndex]
         
-        self.pushControllerWithName(menuItem.controller, context: nil)
+        self.pushController(withName: menuItem.controller, context: nil)
     }
     
     // MARK: - Private Methods
@@ -109,22 +109,22 @@ final class MenuInterfaceController: WKInterfaceController {
             
             switch response {
                 
-            case let .Error(error):
+            case let .error(error):
                 
                 print("Error loading summit: ", error)
                 
-                controller.presentAlertControllerWithTitle("Could not load summit data",
+                controller.presentAlert(withTitle: "Could not load summit data",
                     message: (error as NSError).localizedFailureReason ?? (error as NSError).localizedDescription,
                     preferredStyle:
-                    .Alert,
+                    .alert,
                     actions: [WKAlertAction(title: "Try again", style:
-                        .Cancel, handler: {
+                        .cancel, handler: {
                             
                             // attempt to reload data
                             controller.loadData()
                 })])
                 
-            case let .Value(summit):
+            case let .value(summit):
                 
                 print("Fetched \(summit.name) summit")
                 
@@ -143,9 +143,9 @@ final class MenuCellController: NSObject {
     
     static let identifier = "MenuCell"
     
-    @IBOutlet weak var menuLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var menuLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
 }
 
 struct MenuItem {

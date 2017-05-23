@@ -11,5 +11,5 @@ import UIKit
 
 final class LoadingTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
 }

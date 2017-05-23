@@ -6,41 +6,42 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func create(team name: String, description: String?, completion: (ErrorValue<Team>) -> ()) {
+    func create(team name: String, description: String?, completion: @escaping (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         
         jsonDictionary["name"] = name.toOpenStackEncoding()!
         
-        if let description = description where description.isEmpty == false {
+        if let description = description, description.isEmpty == false {
             jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
-        http.POST(url, parameters: jsonDictionary) { (responseObject, error) in
+        http.request(method: .post, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             // parse
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let identifier = jsonObject["id"]?.rawValue as? Int
-                else { completion(.Error(Error.InvalidResponse)); return }
+                let identifier = jsonObject["id"]?.integerValue
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -53,35 +54,35 @@ public extension Store {
                 
                 let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [], invitations: [])
                 
-                try team.save(context)
+                let _ = try team.save(context)
                 
                 try context.validateAndSave()
                 
                 // success
-                completion(.Value(team))
+                completion(.value(team))
             }
         }
     }
     
-    func update(team identifier: Identifier, name: String, description: String? = nil, completion: (ErrorType?) -> ()) {
+    func update(team identifier: Identifier, name: String, description: String? = nil, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        var jsonDictionary = [String: AnyObject]()
+        var jsonDictionary = [String: Any]()
         
         jsonDictionary["name"] = name.toOpenStackEncoding()!
         
-        if let description = description where description.isEmpty == false {
+        if let description = description, description.isEmpty == false {
             jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
-        http.PUT(url, parameters: jsonDictionary)  { (responseObject, error) in
+        http.request(method: .put, path: url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -96,7 +97,7 @@ public extension Store {
                     
                     managedObject.descriptionText = description
                     
-                    managedObject.updatedDate = NSDate()
+                    managedObject.updatedDate = Date()
                     
                     managedObject.didCache()
                     
@@ -109,50 +110,50 @@ public extension Store {
         }
     }
     
-    func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
+    func fetch(team identifier: Identifier, completion: @escaping (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member,groups"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let entity = Team(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let entity = Team(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try entity.save(context)
+                let _ = try entity.save(context)
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(entity))
+            completion(.value(entity))
         }
     }
     
-    func delete(team identifier: Identifier, completion: (ErrorType?) -> ()) {
+    func delete(team identifier: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.DELETE(url) { (responseObject, error) in
+        http.request(method: .delete, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -163,7 +164,7 @@ public extension Store {
                 
                 if let managedObject = try TeamManagedObject.find(identifier, context: context) {
                     
-                    context.deleteObject(managedObject)
+                    context.delete(managedObject)
                     
                     try context.validateAndSave()
                 }
@@ -174,44 +175,44 @@ public extension Store {
         }
     }
     
-    func teams(page page: Int = 1,
+    func teams(page: Int = 1,
                perPage: Int = 10,
-               completion: (ErrorValue<Page<Team>>) -> ()) {
+               completion: @escaping (ErrorValue<Page<Team>>) -> ()) {
         
-        let urlComponents = NSURLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
+        var urlComponents = URLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
         
-        var queryItems = [NSURLQueryItem]()
-        queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
-        queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
-        queryItems.append(NSURLQueryItem(name: "expand", value: "owner,members,member,groups"))
+        var queryItems = [URLQueryItem]()
+        queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
+        queryItems.append(URLQueryItem(name: "per_page", value: "\(perPage)"))
+        queryItems.append(URLQueryItem(name: "expand", value: "owner,members,member,groups"))
         urlComponents.queryItems = queryItems
         
-        let url = urlComponents.URL!.absoluteString!
+        let url = urlComponents.url!.absoluteString
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Team>(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let page = Page<Team>(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try page.items.save(context)
+                let _ = try page.items.save(context)
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(page))
+            completion(.value(page))
         }
     }
 }

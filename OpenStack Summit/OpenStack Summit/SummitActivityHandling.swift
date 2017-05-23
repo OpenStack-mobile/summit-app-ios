@@ -6,66 +6,88 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 protocol SummitActivityHandling {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool
+    func view(data: AppActivitySummitDataType, identifier: Identifier)
     
     func view(screen: AppActivityScreen)
     
-    func search(searchTerm: String)
+    func search(_ searchTerm: String)
 }
 
 extension SummitActivityHandling {
     
     /// Opens URL of universal domain.
-    func openWebURL(url: NSURL) -> Bool {
+    func openWeb(url: URL) -> Bool {
         
         // perform search
-        if url.pathComponents?.last == "global-search",
-            let urlComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false),
-            let searchQuery = urlComponents.queryItems?.firstMatching({ $0.name == "t" && ($0.value ?? "").isEmpty == false }),
+        if url.pathComponents.last == "global-search",
+            let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            let searchQuery = urlComponents.queryItems?.first(where: { $0.name == "t" && ($0.value ?? "").isEmpty == false }),
             let searchTerm = searchQuery.value {
             
             self.search(searchTerm)
             return true
         }
         
+        let components = url.pathComponents
+        
         // show data
-        guard let components = url.pathComponents
-            where components.count >= 6
+        guard components.count >= 6
             else { return false }
         
         let typeString = components[4]
         let identifierString = components[5]
         
-        guard let identifier = Int(identifierString),
+        guard let identifier = Identifier(identifierString),
             let type = WebPathComponent(rawValue: typeString)
             else { return false }
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(data: dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(data: dataType, identifier: identifier)
+        
+        return true
     }
     
     /// Opens URL of custom scheme.
-    func openSchemeURL(url: NSURL) -> Bool {
+    func openScheme(url: URL) -> Bool {
         
-        guard let typeString = url.host, let components = url.pathComponents
-            where components.count >= 2
+        let components = url.pathComponents
+        
+        guard let typeString = url.host,
+            components.count >= 2
             else { return false }
         
         let identifierString = components[1]
         
-        guard let identifier = Int(identifierString),
+        guard let identifier = Identifier(identifierString),
             let type = WebPathComponent(rawValue: typeString)
             else { return false }
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(data: dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(data: dataType, identifier: identifier)
+        
+        return true
+    }
+    
+    func canView(data: AppActivitySummitDataType, identifier: Identifier) -> Bool {
+        
+        // find in cache
+        guard let _ = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
+            else { return false }
+        
+        return true
     }
 }
 
@@ -73,60 +95,60 @@ extension SummitActivityHandling {
 
 // MARK: - View Controller
 
-protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
-    
-    func showViewController(vc: UIViewController, sender: AnyObject?)
-    
-    func playVideo(video: Video)
-    
-    func showLocationDetail(location: Identifier)
-}
+protocol SummitActivityHandlingViewController: class, SummitActivityHandling { }
 
 extension SummitActivityHandlingViewController {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        guard let viewController = self as? UIViewController
+            else { fatalError() }
+        
+        viewController.show(data: data, identifier: identifier)
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        AppDelegate.shared.view(screen: screen)
+    }
+    
+    func search(_ searchTerm: String) {
+        
+        AppDelegate.shared.search(searchTerm)
+    }
+}
+    
+extension UIViewController {
+    
+    func show(data: AppActivitySummitDataType, identifier: Identifier) {
         
         let context = Store.shared.managedObjectContext
-        
-        // find in cache
-        guard let managedObject = try! data.managedObject.find(identifier, context: context)
-            else { return false }
         
         switch data {
             
         case .event:
             
-            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
-            eventDetailVC.event = identifier
-            self.showViewController(eventDetailVC, sender: nil)
+            let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
+            eventDetailViewController.event = identifier
+            self.show(eventDetailViewController, sender: nil)
             
         case .speaker:
             
-            let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
-            self.showViewController(memberProfileVC, sender: nil)
+            let MmmberProfileViewController = MemberProfileViewController(profile: .speaker(identifier))
+            self.show(MmmberProfileViewController, sender: nil)
             
         case .video:
             
-            let video = Video(managedObject: managedObject as! VideoManagedObject)
+            // find in cache
+            guard let video = try! Video.find(identifier, context: context)
+                else { return }
             
-            self.playVideo(video)
+            self.play(video: video)
             
         case .venue, .venueRoom:
             
-            self.showLocationDetail(identifier)
+            self.show(location: identifier)
         }
-        
-        return true
-    }
-    
-    func view(screen: AppActivityScreen) {
-        
-        AppDelegate.shared.view(screen)
-    }
-    
-    func search(searchTerm: String) {
-        
-        AppDelegate.shared.search(searchTerm)
     }
 }
 

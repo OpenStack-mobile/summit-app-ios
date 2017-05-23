@@ -6,6 +6,8 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
+import struct Foundation.URL
+
 public struct Link: PresentationMaterial {
     
     public let identifier: Identifier
@@ -18,9 +20,9 @@ public struct Link: PresentationMaterial {
     
     public var featured: Bool
     
-    public var order: Int
+    public var order: Int64
     
-    public var link: String
+    public var link: URL
     
     public var event: Identifier
 }

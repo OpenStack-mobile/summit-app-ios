@@ -29,9 +29,9 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         // configure fetched results controller
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
-                                                                   sortDescriptors: Speaker.ManagedObject.sortDescriptors,
-                                                                   sectionNameKeyPath: Speaker.ManagedObject.Property.addressBookSectionName.rawValue,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   sortDescriptors: SpeakerManagedObject.sortDescriptors,
+                                                                   sectionNameKeyPath: #keyPath(SpeakerManagedObject.addressBookSectionName),
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 30
         try! self.fetchedResultsController.performFetch()
@@ -46,38 +46,38 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         self.userActivity = userActivity
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Private Methods
     
-    private subscript (indexPath: NSIndexPath) -> Speaker {
+    private subscript (indexPath: IndexPath) -> Speaker {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speaker.ManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! Speaker.ManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
-    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         let person = self[indexPath]
         
         cell.name = person.name
-        cell.title = person.title
-        cell.pictureURL = person.pictureURL
+        cell.title = person.title ?? ""
+        cell.picture = person.picture
     }
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell)!
         
         configure(cell: cell, at: indexPath)
         
@@ -86,30 +86,30 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let person = self[indexPath]
         
         let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: person))
         
-        showViewController(memberProfileVC, sender: self)
+        show(memberProfileVC, sender: self)
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
         return self.fetchedResultsController.sectionIndexTitles
     }
     
     // MARK: - NSFetchedResultsControllerDataSource
     
-    func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
         
         return sectionName
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Speakers")
     }

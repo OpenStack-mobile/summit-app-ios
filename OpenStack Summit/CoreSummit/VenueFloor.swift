@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct VenueFloor: Named, Equatable {
+public struct VenueFloor: Named {
     
     public let identifier: Identifier
     
@@ -14,9 +14,9 @@ public struct VenueFloor: Named, Equatable {
     
     public var descriptionText: String?
     
-    public var number: Int
+    public var number: Int16
     
-    public var imageURL: String?
+    public var image: URL?
     
     public var venue: Identifier
     
@@ -31,7 +31,7 @@ public func == (lhs: VenueFloor, rhs: VenueFloor) -> Bool {
         && lhs.name == rhs.name
         && lhs.descriptionText == rhs.descriptionText
         && lhs.number == rhs.number
-        && lhs.imageURL == rhs.imageURL
+        && lhs.image == rhs.image
         && lhs.venue == rhs.venue
         && lhs.rooms == rhs.rooms
 }

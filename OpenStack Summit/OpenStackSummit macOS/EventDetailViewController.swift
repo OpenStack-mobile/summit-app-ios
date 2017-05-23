@@ -11,6 +11,7 @@ import AppKit
 import CoreData
 import CoreSummit
 import EventKit
+import Predicate
 
 @objc(OSSEventDetailViewController)
 final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate, NSTextViewDelegate  {
@@ -73,7 +74,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendActionOn(.LeftMouseDown)
+        shareButton.sendAction(on: .leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -88,43 +89,43 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
-                        AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
+                        AppActivityUserInfo.identifier.rawValue: self.contentIdentifier] as [String : Any]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
     
-    @IBAction func playVideo(sender: NSButton) {
+    @IBAction func playVideo(_ sender: NSButton) {
         
         guard let video = eventDetail.video
             else { fatalError("Event has no video") }
         
-        if let url = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube) {
+        if let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube) {
             
-            NSWorkspace.sharedWorkspace().openURL(url)
+            NSWorkspace.shared().open(url)
         }
     }
     
-    @IBAction func share(sender: NSButton) {
+    @IBAction func share(_ sender: NSButton) {
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
-        let items = [message, eventDetail.webpageURL]
+        let items = [message, eventDetail.webpage] as [Any]
         
         let sharingServicePicker = NSSharingServicePicker(items: items)
         
         sharingServicePicker.delegate = self
         
-        sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
+        sharingServicePicker.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
     }
     
-    @IBAction func showLevel(sender: NSButton) {
+    @IBAction func showLevel(_ sender: NSButton) {
         
         
     }
@@ -141,68 +142,68 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.dismissController(nil) }
+        entityController.event.deleted = { [weak self] _ in self?.dismiss(nil) }
         
         entityController.enabled = true
         
         self.entityController = entityController
     }
     
-    private func configureView(event: EventDetail) {
+    private func configureView(_ event: EventDetail) {
         
         self.eventDetail = event
         
         self.nameLabel.stringValue = event.name
         
         self.trackLabel.stringValue = event.track
-        self.trackLabel.hidden = event.track.isEmpty
+        self.trackLabel.isHidden = event.track.isEmpty
         
         self.dateTimeLabel.stringValue = event.dateTime
         
-        self.playVideoButton.hidden = event.video == nil
+        self.playVideoButton.isHidden = event.video == nil
         
         self.descriptionTextView.string = ""
         
         let htmlString = event.eventDescription
         
-        if let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+        if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
             
-            self.descriptionView.hidden = false
+            self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
+            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
-            self.descriptionTextView.textStorage?.appendAttributedString(attributedString)
+            self.descriptionTextView.textStorage?.append(attributedString)
             
         } else {
             
-            self.descriptionView.hidden = true
+            self.descriptionView.isHidden = true
             self.descriptionLabel.stringValue = ""
         }
         
-        self.locationView.hidden = event.location.isEmpty
+        self.locationView.isHidden = event.location.isEmpty
         self.locationButton.title = event.location
         
-        self.levelView.hidden = event.level.isEmpty
+        self.levelView.isHidden = event.level.isEmpty
         self.levelButton.title = event.level
         
-        self.tagView.hidden = event.tags.isEmpty
+        self.tagView.isHidden = event.tags.isEmpty
         self.tagLabel.stringValue = event.tags
         
-        self.speakersView.hidden = event.speakers.isEmpty
+        self.speakersView.isHidden = event.speakers.isEmpty
         self.speakersButton.title = "\(event.speakers.count) speakers"
         
-        self.reviewsView.hidden = true
+        self.reviewsView.isHidden = true
         
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         userActivity.title = eventDetail.name
-        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.webpageURL = eventDetail.webpage
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
         
         
@@ -211,25 +212,26 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     
     func addToCalendar() {
         
-        let event = eventDetail
+        guard let event = eventDetail
+            else { fatalError("No Event") }
         
-        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        let status = EKEventStore.authorizationStatus(for: .event)
         
         switch status {
             
-        case .Restricted, .Denied:
+        case .restricted, .denied:
             
             break
             
-        case .NotDetermined:
+        case .notDetermined:
             
-            calendarEventStore.requestAccessToEntityType(.Event) { [weak self] (granted, error) in
+            calendarEventStore.requestAccess(to: .event) { [weak self] (granted, error) in
                 
                 // retry
                 self?.addToCalendar()
             }
             
-        case .Authorized:
+        case .authorized:
             
             let calendarListTitle = "OpenStack Summit"
             
@@ -237,13 +239,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             let calendar: EKCalendar
             
-            if let existingCalendar = calendarEventStore.calendarsForEntityType(.Event).firstMatching({ $0.title == calendarListTitle }) {
+            if let existingCalendar = calendarEventStore.calendars(for: .event).first(where: { $0.title == calendarListTitle }) {
                 
                 calendar = existingCalendar
                 
             } else {
                 
-                calendar = EKCalendar(forEntityType: .Event, eventStore: calendarEventStore)
+                calendar = EKCalendar(for: .event, eventStore: calendarEventStore)
                 
                 calendar.title = calendarListTitle
                 
@@ -264,19 +266,19 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             calendarEvent.calendar = calendar
             calendarEvent.title = event.name
-            calendarEvent.startDate = event.start.toFoundation()
-            calendarEvent.endDate = event.end.toFoundation()
-            calendarEvent.timeZone = NSTimeZone(name: event.timeZone)
-            calendarEvent.URL = event.webpageURL
+            calendarEvent.startDate = event.start
+            calendarEvent.endDate = event.end
+            calendarEvent.timeZone = TimeZone(identifier: event.timeZone)
+            calendarEvent.url = event.webpage
             calendarEvent.location = event.location
             
-            if let data = event.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            if let data = event.eventDescription.data(using: String.Encoding.utf8),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
             }
             
-            do { try calendarEventStore.saveEvent(calendarEvent, span: .ThisEvent, commit: true) }
+            do { try calendarEventStore.save(calendarEvent, span: .thisEvent, commit: true) }
                 
             catch { showErrorMessage(error) }
         }
@@ -284,17 +286,17 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     
     // MARK: - NSTextFieldDelegate
     
-    func textView(textView: NSTextView, clickedOnLink link: AnyObject, atIndex charIndex: Int) -> Bool {
+    func textView(_ textView: NSTextView, clickedOnLink link: Any, at charIndex: Int) -> Bool {
         
-        guard let url = link as? NSURL
+        guard let url = link as? URL
             else { return false }
         
-        return AppDelegate.shared.mainWindowController.openWebURL(url)
+        return AppDelegate.shared.mainWindowController.openWeb(url: url)
     }
     
     // MARK: - NSSharingServicePickerDelegate
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
         
         var customItems = [NSSharingService]()
         
@@ -308,14 +310,16 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             customItems.append(safariReadList)
         }
         
-        if let url = eventDetail.webpageURL.absoluteString {
+        do {
+            
+            let url = eventDetail.webpage.absoluteString
             
             let copyLink = NSSharingService(copyLink: url)
             
             customItems.append(copyLink)
         }
         
-        let calendarIcon = NSWorkspace.sharedWorkspace().iconForFile("/Applications/Calendar.app")
+        let calendarIcon = NSWorkspace.shared().icon(forFile: "/Applications/Calendar.app")
         
         let addToCalendar = NSSharingService(title: "Save to Calendar",
                                              image: calendarIcon,
@@ -327,21 +331,21 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         return customItems + proposedServices
     }
     
-    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, delegateFor sharingService: NSSharingService) -> NSSharingServiceDelegate? {
         
         return self
     }
     
     // MARK: - NSSharingServiceDelegate
     
-    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+    func sharingService(_ sharingService: NSSharingService, willShareItems items: [Any]) {
         
         sharingService.subject = eventDetail.name
     }
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -355,9 +359,11 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
-            let eventID = NSNumber(longLong: Int64(eventDetail.identifier))
+            let eventID = Expression.value(.int64(eventDetail.identifier))
             
-            speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
+            //speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
+            speakersViewController.predicate = (#keyPath(SpeakerManagedObject.presentationModerator.event.id)).compare(.contains, eventID)
+                || (#keyPath(SpeakerManagedObject.presentationSpeaker.event.id)).compare(.contains, eventID)
             
             let speakerCount = speakersViewController.fetchedResultsController.fetchedObjects?.count ?? 0
             

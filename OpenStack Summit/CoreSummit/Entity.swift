@@ -8,15 +8,16 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 /// Base CoreData Entity `NSManagedObject` subclass for CoreSummit.
-public class Entity: NSManagedObject {
+open class Entity: NSManagedObject {
     
     /// The unique identifier of this entity.
-    @NSManaged public var id: Int64
+    @NSManaged open var id: Int64
     
     /// The date this object was stored in its entirety.
-    @NSManaged public var cached: NSDate?
+    @NSManaged open var cached: Date?
 }
 
 // MARK: - Extensions
@@ -26,9 +27,9 @@ public extension NSManagedObjectModel {
     /// CoreData Managed Object Model for CoreSummit framework (OpenStack Foundation Summit).
     static var summitModel: NSManagedObjectModel {
         
-        guard let bundle = NSBundle(identifier: "org.openstack.CoreSummit"),
-            let modelURL = bundle.URLForResource("Model", withExtension: "momd"),
-            let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
+        guard let bundle = Bundle(identifier: "org.openstack.CoreSummit"),
+            let modelURL = bundle.url(forResource: "Model", withExtension: "momd"),
+            let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
             else { fatalError("Could not load managed object model") }
         
         return managedObjectModel
@@ -38,12 +39,10 @@ public extension NSManagedObjectModel {
 public extension Entity {
     
     static var identifierProperty: String { return "id" }
-    
-    var identifier: Int { return Int(self.id) }
-    
+        
     func didCache() {
         
-        self.cached = NSDate()
+        self.cached = Date()
     }
     
     static func entity(in context: NSManagedObjectContext) -> NSEntityDescription {
@@ -69,32 +68,32 @@ public extension Entity {
         return entity
     }
     
-    static func find(identifier: Identifier,
+    static func find(_ identifier: Identifier,
                      context: NSManagedObjectContext,
                      returnsObjectsAsFaults: Bool = true,
                      includesSubentities: Bool = true) throws -> Self? {
         
         let entity = self.entity(in: context)
         
-        let resourceID = NSNumber(longLong: Int64(identifier))
+        let resourceID = NSNumber(value: Int64(identifier) as Int64)
         
         return try context.find(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
     }
     
     /// Find or create.
-    static func cached(identifier: Identifier,
+    static func cached(_ identifier: Identifier,
                        context: NSManagedObjectContext,
                        returnsObjectsAsFaults: Bool = true,
                        includesSubentities: Bool = true) throws -> Self {
         
         let entity = self.entity(in: context)
         
-        let resourceID = NSNumber(longLong: Int64(identifier))
+        let resourceID = NSNumber(value: Int64(identifier) as Int64)
         
         return try context.findOrCreate(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
     }
     
-    static func filter(predicate: NSPredicate? = nil,
+    static func filter(_ predicate: NSPredicate? = nil,
                        sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
                        fetchLimit: Int? = nil,
                        returnsObjectsAsFaults: Bool = true,
@@ -103,7 +102,7 @@ public extension Entity {
         
         let entity = self.entity(in: context)
         
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let fetchRequest = NSFetchRequest<Entity>(entityName: entity.name!)
         
         if let limit = fetchLimit {
             
@@ -118,7 +117,7 @@ public extension Entity {
         
         fetchRequest.sortDescriptors = sort
         
-        return try context.executeFetchRequest(fetchRequest) as! [Entity]
+        return try context.fetch(fetchRequest)
     }
 }
 
@@ -134,20 +133,20 @@ public extension Fault where Value: CoreDataDecodable, Value.ManagedObject: Enti
             
         } else {
             
-            self = .identifier(managedObject.identifier)
+            self = .identifier(managedObject.id)
         }
     }
 }
 
-public extension CollectionType where Generator.Element: Entity {
+public extension Collection where Iterator.Element: Entity {
     
-    var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
+    var identifiers: Set<Identifier> { return Set(self.map({ $0.id })) }
 }
 
 public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
     
     @inline(__always)
-    static func find(identifier: Identifier,
+    static func find(_ identifier: Identifier,
                      context: NSManagedObjectContext,
                      includesSubentities: Bool = true) throws -> Self? {
         
@@ -160,7 +159,7 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
         return Self.init(managedObject: managedObject)
     }
     
-    static func filter(predicate: NSPredicate,
+    static func filter(_ predicate: NSPredicate,
                        sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
                        fetchLimit: Int? = nil,
                        context: NSManagedObjectContext) throws -> [Self] {
@@ -175,7 +174,7 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
         return Self.from(managedObjects: managedObjects)
     }
     
-    static func filter(predicate: Predicate,
+    static func filter(_ predicate: Predicate,
                        sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
                        fetchLimit: Int? = nil,
                        context: NSManagedObjectContext) throws -> [Self] {
@@ -190,7 +189,7 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
         return Self.from(managedObjects: managedObjects)
     }
     
-    static func all(context: NSManagedObjectContext) throws -> [Self] {
+    static func all(_ context: NSManagedObjectContext) throws -> [Self] {
         
         let managedObjects = try ManagedObject.filter(returnsObjectsAsFaults: false,
                                                       includesSubentities: true,
@@ -203,7 +202,7 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
 public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
     
     @inline(__always)
-    func cached(context: NSManagedObjectContext) throws -> ManagedObject {
+    func cached(_ context: NSManagedObjectContext) throws -> ManagedObject {
         
         return try ManagedObject.cached(self.identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: true)
     }
@@ -218,7 +217,7 @@ public extension EntityController {
         
         let entityName = entity.name!
         
-        let resourceID = NSNumber(longLong: Int64(identifier))
+        let resourceID = NSNumber(value: Int64(identifier) as Int64)
         
         self.init(entityName: entityName, identifier: (key: Entity.identifierProperty, value: resourceID), context: context)
     }
@@ -228,28 +227,28 @@ internal extension NSManagedObjectContext {
     
     /// Caches to-many relationship.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable>(encodables: Set<T>) throws -> Set<T.ManagedObject> {
+    func relationshipFault<T: CoreDataEncodable>(_ encodables: Set<T>) throws -> Set<T.ManagedObject> {
         
         return try encodables.save(self)
     }
     
     /// Caches to-one relationship.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable>(encodable: T?) throws -> T.ManagedObject? {
+    func relationshipFault<T: CoreDataEncodable>(_ encodable: T?) throws -> T.ManagedObject? {
         
         return try encodable?.save(self)
     }
     
     /// Caches to-one relationship.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable>(encodable: T) throws -> T.ManagedObject {
+    func relationshipFault<T: CoreDataEncodable>(_ encodable: T) throws -> T.ManagedObject {
         
         return try encodable.save(self)
     }
     
     /// Returns faults for to-many relationships.
     @inline(__always)
-    func relationshipFault<ManagedObject: Entity>(identifiers: Set<Identifier>) throws -> Set<ManagedObject> {
+    func relationshipFault<ManagedObject: Entity>(_ identifiers: Set<Identifier>) throws -> Set<ManagedObject> {
         
         let managedObjects = try identifiers.map { try ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
         
@@ -258,7 +257,7 @@ internal extension NSManagedObjectContext {
     
     /// Returns faults for to-one relationship.
     @inline(__always)
-    func relationshipFault<ManagedObject: Entity>(identifier: Identifier?) throws -> ManagedObject? {
+    func relationshipFault<ManagedObject: Entity>(_ identifier: Identifier?) throws -> ManagedObject? {
         
         guard let identifier = identifier
             else { return nil }
@@ -268,14 +267,15 @@ internal extension NSManagedObjectContext {
     
     /// Returns faults for to-one relationship.
     @inline(__always)
-    func relationshipFault<ManagedObject: Entity>(identifier: Identifier) throws -> ManagedObject {
+    func relationshipFault<ManagedObject: Entity>(_ identifier: Identifier) throws -> ManagedObject {
         
         return try ManagedObject.cached(identifier, context: self, returnsObjectsAsFaults: true, includesSubentities: true)
     }
     
     /// Returns managed object for fault value type.
     @inline(__always)
-    func relationshipFault<Encodable: Unique where Encodable: CoreDataEncodable, Encodable.ManagedObject: Entity>(fault: Fault<Encodable>) throws -> Encodable.ManagedObject {
+    func relationshipFault<Encodable: Unique>(_ fault: Fault<Encodable>) throws -> Encodable.ManagedObject
+        where Encodable: CoreDataEncodable, Encodable.ManagedObject: Entity {
         
         switch fault {
             

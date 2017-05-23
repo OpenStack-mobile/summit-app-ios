@@ -6,20 +6,23 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct PresentationDataUpdate: Unique {
+public extension Presentation {
     
-    public let identifier: Identifier
-    
-    public let level: Level?
-    
-    public let moderator: Identifier?
-    
-    public let speakers: Set<Speaker>
+    public struct DataUpdate: Unique {
+        
+        public let identifier: Identifier
+        
+        public let level: Level?
+        
+        public let moderator: Identifier?
+        
+        public let speakers: Set<Speaker>
+    }
 }
 
 // MARK: - Equatable
 
-public func == (lhs: PresentationDataUpdate, rhs: PresentationDataUpdate) -> Bool {
+public func == (lhs: Presentation.DataUpdate, rhs: Presentation.DataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.level == rhs.level

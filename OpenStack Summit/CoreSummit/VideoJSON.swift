@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Video {
     
@@ -18,18 +18,18 @@ public extension Video {
 
 extension Video: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let featured = JSONObject[JSONKey.featured.rawValue]?.rawValue as? Bool,
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
-            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.rawValue as? Identifier,
+            let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.integerValue,
             let youtube = JSONObject[JSONKey.youtube_id.rawValue]?.rawValue as? String,
-            let dataUploaded = JSONObject[JSONKey.data_uploaded.rawValue]?.rawValue as? Int,
+            let dataUploaded = JSONObject[JSONKey.data_uploaded.rawValue]?.integerValue,
             let highlighted = JSONObject[JSONKey.highlighted.rawValue]?.rawValue as? Bool,
-            let views = JSONObject[JSONKey.views.rawValue]?.rawValue as? Int,
-            let order = JSONObject[JSONKey.order.rawValue]?.rawValue as? Int
+            let views = JSONObject[JSONKey.views.rawValue]?.integerValue,
+            let order = JSONObject[JSONKey.order.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
@@ -45,8 +45,8 @@ extension Video: JSONDecodable {
         // optional
         self.name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String ?? ""
         
-        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-            where descriptionText.isEmpty == false {
+        if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
+            descriptionText.isEmpty == false {
             
             self.descriptionText = descriptionText
             

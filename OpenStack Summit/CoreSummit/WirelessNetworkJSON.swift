@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 private extension WirelessNetwork {
     
@@ -18,13 +18,13 @@ private extension WirelessNetwork {
 
 extension WirelessNetwork: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.ssid.rawValue]?.rawValue as? String,
             let password = JSONObject[JSONKey.password.rawValue]?.rawValue as? String,
-            let summit = JSONObject[JSONKey.summit_id.rawValue]?.rawValue as? Int
+            let summit = JSONObject[JSONKey.summit_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier

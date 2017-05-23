@@ -12,7 +12,7 @@ public protocol Unique: Equatable, Hashable, Comparable {
     var identifier: Identifier { get }
 }
 
-public typealias Identifier = Int
+public typealias Identifier = Int64
 
 // MARK: - Hashable
 
@@ -20,7 +20,7 @@ public extension Unique {
     
     var hashValue: Int {
         
-        return identifier
+        return Int(identifier)
     }
 }
 
@@ -33,7 +33,7 @@ public func < <T: Unique> (lhs: T, rhs: T) -> Bool {
 
 // MARK: - Extensions
 
-public extension CollectionType where Generator.Element: Unique {
+public extension Collection where Iterator.Element: Unique {
     
     var identifiers: [Identifier] {
         
@@ -41,8 +41,8 @@ public extension CollectionType where Generator.Element: Unique {
     }
     
     @inline(__always)
-    func with(identifier: Identifier) -> Self.Generator.Element? {
+    func with(_ identifier: Identifier) -> Self.Iterator.Element? {
         
-        return firstMatching { $0.identifier == identifier }
+        return self.first(where: { $0.identifier == identifier })
     }
 }

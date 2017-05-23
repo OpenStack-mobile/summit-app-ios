@@ -11,17 +11,17 @@ import enum CoreSummit.Environment
 import protocol CoreSummit.Configuration
 
 /// Version of the app.
-public let AppVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
+public let AppVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 
 /// Build of the app.
-public let AppBuild = Int(NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String)!
+public let AppBuild = Int(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)!
 
 #if os(iOS) || os(tvOS) || os(OSX)
     
 /// The app's environment.
 let AppEnvironment: Environment = {
     
-    let environmentString = NSBundle.mainBundle().infoDictionary!["SummitEnvironment"] as! String
+    let environmentString = Bundle.main.infoDictionary!["SummitEnvironment"] as! String
     
     guard let environment = Environment(rawValue: environmentString)
         else { fatalError("Invalid Environment: \(environmentString)") }
@@ -31,9 +31,9 @@ let AppEnvironment: Environment = {
 
 #elseif os(watchOS)
     #if Production
-    let AppEnvironment = Environment.Production
+    let AppEnvironment = Environment.production
     #elseif Staging
-    let AppEnvironment = Environment.Staging
+    let AppEnvironment = Environment.staging
     #endif
 #endif
 

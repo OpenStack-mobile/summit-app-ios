@@ -21,12 +21,12 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     var profile: PersonIdentifier = .currentUser {
         
-        didSet { configureView() }
+        didSet { if isViewLoaded { configureView() } }
     }
     
     var contextMenu: ContextMenu {
         
-        var items = [AnyObject]()
+        var items = [Any]()
         
         if let url = self.userActivity?.webpageURL {
             
@@ -81,10 +81,10 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         setupToolbar()
         
         // configure UI
-        configureView()
+        OperationQueue.main.addOperation { [weak self] in self?.configureView() }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // handoff
@@ -94,14 +94,14 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.navigationController?.setToolbarHidden(!showNonConfirmedWarning, animated: animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // setup after animation finished to prevent lag
         configureView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // handoff
@@ -111,16 +111,16 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.navigationController?.setToolbarHidden(true, animated: animated)
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         switch profile {
             
         case let .speaker(identifier):
             
             let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
-                            AppActivityUserInfo.identifier.rawValue: identifier]
+                            AppActivityUserInfo.identifier.rawValue: identifier] as [String : Any]
             
-            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+            userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
             
         default: break
         }
@@ -130,14 +130,14 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Actions
     
-    @IBAction func nonConfirmedWarningTapped(sender: AnyObject? = nil) {
+    @IBAction func nonConfirmedWarningTapped(_ sender: AnyObject? = nil) {
         
-        self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
+        self.performSegue(withIdentifier: R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         configureView()
     }
@@ -194,13 +194,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
-        headerView.titleLabel.hidden = (person.title ?? "").isEmpty
-        headerView.imageView.image = R.image.genericUserAvatar()!
-        
-        if let imageURL = NSURL(string: person.pictureURL) {
-            
-            headerView.imageView.hnk_setImageFromURL(imageURL)
-        }
+        headerView.titleLabel.isHidden = (person.title ?? "").isEmpty
+        headerView.imageView.hnk_setImageFromURL(person.picture.environmentScheme, placeholder: #imageLiteral(resourceName: "generic-user-avatar"))
         
         // configure cells
         
@@ -231,12 +226,12 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
         
         if let biography = person.biography,
-            let data = biography.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+            let data = biography.data(using: String.Encoding.unicode, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
+            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: range)
             
             self.data.append(.biography(attributedString))
         }
@@ -247,8 +242,6 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // set user activity for handoff
         
-        let personURL: NSURL?
-        
         if let speaker = person as? Speaker,
             let summitManagedObject = self.currentSummit {
             
@@ -256,8 +249,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            personURL = NSURL(string: speaker.toWebpageURL(summit))
-            userActivity.webpageURL = personURL
+            userActivity.webpageURL = speaker.webpage(for: summit)
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
@@ -275,47 +267,47 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     private func setupToolbar() {
         
         navigationController?.toolbar.barTintColor = UIColor(hexString: "#FAD438")!
-        navigationController?.toolbar.translucent = false
+        navigationController?.toolbar.isTranslucent = false
         
         let action = #selector(nonConfirmedWarningTapped)
         
         let imageBarButtonItem = UIBarButtonItem()
         imageBarButtonItem.target = self
         imageBarButtonItem.action = action
-        imageBarButtonItem.image = R.image.messageWarning()!
+        imageBarButtonItem.image = #imageLiteral(resourceName: "messageWarning")
         imageBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
         
         let textBarButtonItem = UIBarButtonItem()
         textBarButtonItem.title = "Don't forget to add your EventBrite Order #"
-        textBarButtonItem.style = .Plain
+        textBarButtonItem.style = .plain
         textBarButtonItem.target = self
         textBarButtonItem.action = action
         textBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
-        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], forState: .Normal)
+        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], for: UIControlState())
         
         toolbarItems = [imageBarButtonItem, textBarButtonItem]
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Profile")
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // WebKit or UIKit is causing the tableview cell to refresh without reloading.
         // http://stackoverflow.com/questions/23926541/how-can-initializing-nsattributedstring-in-tableviewheightforrowatindexpath-be
@@ -332,51 +324,51 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             if confirmed {
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
                 
             } else {
                 
-                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
             }
             
         case let .links(links):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailLinksCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell)!
             
-            cell.twitterView.hidden = links.twitter.isEmpty
+            cell.twitterView.isHidden = links.twitter.isEmpty
             cell.twitterView.label.text = links.twitter
             
-            cell.ircView.hidden = links.irc.isEmpty
+            cell.ircView.isHidden = links.irc.isEmpty
             cell.ircView.label.text = links.irc
             
-            cell.linkedInView.hidden = links.linkedIn.isEmpty
+            cell.linkedInView.isHidden = links.linkedIn.isEmpty
             cell.linkedInView.label.text = links.linkedIn
             
             return cell
             
         case let .biography(text):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailDescriptionCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell)!
             
             cell.textView.attributedText = text
-            cell.textView.textContainerInset = UIEdgeInsetsZero
+            cell.textView.textContainerInset = UIEdgeInsets.zero
             cell.textView.sizeToFit()
             
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         return headerView
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         
         return 128
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return UITableViewAutomaticDimension
     }

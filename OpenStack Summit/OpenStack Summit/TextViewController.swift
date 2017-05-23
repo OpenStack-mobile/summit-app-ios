@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import UIKit
 import CoreSummit
 
@@ -15,9 +15,9 @@ protocol TextViewController: class, UITextViewDelegate, SummitActivityHandlingVi
 
 extension TextViewController {
     
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWithURL URL: Foundation.URL, inRange characterRange: NSRange) -> Bool {
         
-        guard self.openWebURL(URL)
+        guard self.openWeb(url: URL)
             else { return true }
         
         return false

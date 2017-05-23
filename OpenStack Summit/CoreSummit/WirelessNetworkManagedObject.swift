@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class WirelessNetworkManagedObject: Entity {
     
@@ -27,17 +27,17 @@ extension WirelessNetwork: CoreDataDecodable {
     
     public init(managedObject: WirelessNetworkManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.password = managedObject.password
         self.descriptionText = managedObject.descriptionText
-        self.summit = managedObject.summit.identifier
+        self.summit = managedObject.summit.id
     }
 }
 
 extension WirelessNetwork: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> WirelessNetworkManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> WirelessNetworkManagedObject {
         
         let managedObject = try cached(context)
         

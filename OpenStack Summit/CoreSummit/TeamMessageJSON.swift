@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension TeamMessage {
     
@@ -18,14 +18,14 @@ public extension TeamMessage {
 
 extension TeamMessage: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let teamIdentifier = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
-            let fromMemberIdentifier = JSONObject[JSONKey.from_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let teamIdentifier = JSONObject[JSONKey.team_id.rawValue]?.integerValue,
+            let fromMemberIdentifier = JSONObject[JSONKey.from_id.rawValue]?.integerValue,
             let body = JSONObject[JSONKey.body.rawValue]?.rawValue as? String,
-            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int
+            let created = JSONObject[JSONKey.created_at.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier

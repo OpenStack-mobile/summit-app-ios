@@ -9,23 +9,26 @@
 import Haneke
 import ImageSlideshow
 
-public final class HanekeInputSource: InputSource {
+final class HanekeInputSource: InputSource {
     
-    public let url: NSURL
+    let url: URL
     
-    public init(url: NSURL) {
-        self.url = url
-    }
-    
-    public init?(urlString: String) {
-        
-        guard let url = NSURL(string: urlString)
-            else { return nil }
+    init(url: URL) {
         
         self.url = url
     }
     
-    @objc public func setToImageView(imageView: UIImageView) {
-        imageView.hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"))
+    /**
+     Load image from the source to image view.
+     - parameter imageView: The image view to load the image into.
+     - parameter callback: Callback called after the image was set to the image view.
+     - parameter image: Image that was set to the image view.
+     */
+    func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
+        
+        imageView.hnk_setImageFromURL(url.environmentScheme,
+                                      format: Format<UIImage>(name: "original"),
+                                      failure: { _ in callback(nil) },
+                                      success: { callback($0) })
     }
 }

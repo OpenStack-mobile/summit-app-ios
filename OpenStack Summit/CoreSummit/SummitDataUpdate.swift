@@ -6,38 +6,36 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public extension Summit {
     
-    typealias DataUpdate = SummitDataUpdate
-}
-
-/// The `DataUpdate` version of a `Summit`.
-public struct SummitDataUpdate: Named {
-    
-    public let identifier: Identifier
-    
-    public let name: String
-    
-    public let timeZone: String // should be `TimeZone` but would require Realm Schema migration
-    
-    public let datesLabel: String?
-    
-    public let start: Date
-    
-    public let end: Date
-    
-    public let active: Bool
-    
-    public let startShowingVenues: Date?
-    
-    public let ticketTypes: Set<TicketType>
-    
-    // Venue and Venue Rooms
-    public let locations: Set<Location>
-            
-    public let webpageURL: String
+    /// The `DataUpdate` version of a `Summit`.
+    public struct DataUpdate: Named {
+        
+        public let identifier: Identifier
+        
+        public let name: String
+        
+        public let timeZone: String // should be `TimeZone` but would require Realm Schema migration
+        
+        public let datesLabel: String?
+        
+        public let start: Date
+        
+        public let end: Date
+        
+        public let active: Bool
+        
+        public let startShowingVenues: Date?
+        
+        public let ticketTypes: Set<TicketType>
+        
+        // Venue and Venue Rooms
+        public let locations: Set<Location>
+        
+        public let webpageURL: String
+    }
 }
 
 // MARK: - Equatable

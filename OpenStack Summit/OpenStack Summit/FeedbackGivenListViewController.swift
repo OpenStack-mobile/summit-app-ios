@@ -14,7 +14,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - IB Outlet
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private(set) weak var tableView: UITableView!
     
     // MARK: - Properties
     
@@ -26,7 +26,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         super.viewDidLoad()
         
         // setup table view
-        tableView.registerNib(R.nib.feedbackTableViewCell)
+        tableView.register(R.nib.feedbackTableViewCell)
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
@@ -40,12 +40,12 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     private func reloadData() {
         
         // Get Logged Member Given Feedback
-        feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(managedObject: $0) }
+        feedbackList = (Store.shared.authenticatedMember?.feedback ?? []).map { FeedbackDetail(managedObject: $0) }
         
         tableView.reloadData()
     }
     
-    private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: FeedbackTableViewCell, at indexPath: IndexPath) {
         
         let feedback = feedbackList[indexPath.row]
         cell.eventName = feedback.eventName
@@ -54,25 +54,25 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         cell.review = feedback.review
         cell.date = feedback.date
         
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return feedbackList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.feedbackTableViewCell)!
         
         configure(cell: cell, at: indexPath)
         
@@ -81,7 +81,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Reviews")
     }

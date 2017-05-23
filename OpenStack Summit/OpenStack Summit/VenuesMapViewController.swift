@@ -10,13 +10,14 @@ import UIKit
 import XLPagerTabStrip
 //import GoogleMaps
 import CoreSummit
+import Predicate
 
 final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IndicatorInfoProvider {
     
     // MARK: - Properties
     
     var mapView: GMSMapView!
-    private(set) var dictionary = [GMSMarker: Int]()
+    private(set) var dictionary = [GMSMarker: Identifier]()
     
     // MARK: - Loading
     
@@ -24,11 +25,11 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         super.viewDidLoad()
         mapView = GMSMapView(frame: self.view.bounds)
         mapView.delegate = self
-        mapView.myLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         view = mapView
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.updateUI()
@@ -42,10 +43,10 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         
         let summit = SummitManager.shared.summit.value
         
-        let predicate: Predicate = "summit.id" == summit
-            &&& "locationType" == Venue.LocationType.Internal.rawValue
-            &&& .keyPath("latitude") != .value(.null)
-            &&& .keyPath("longitude") != .value(.null)
+        let predicate: Predicate = #keyPath(VenueManagedObject.summit.id) == summit
+            && "locationType" == Venue.LocationType.Internal.rawValue
+            && .keyPath("latitude") != .value(.null)
+            && .keyPath("longitude") != .value(.null)
         
         let venues = try! VenueListItem.filter(predicate, context: Store.shared.managedObjectContext)
         
@@ -57,7 +58,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
                 else { fatalError("Cannot show venue with no coordinates: \(venue)") }
             
             let marker = GMSMarker()
-            marker.icon = R.image.map_pin()!
+            marker.icon = #imageLiteral(resourceName: "map_pin")
             marker.position = location
             marker.title = venue.name
             marker.map = mapView
@@ -67,26 +68,27 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
             dictionary[marker] = venue.identifier
         }
         
-        let update = GMSCameraUpdate.fitBounds(bounds)
+        let update = GMSCameraUpdate.fit(bounds)
         mapView.moveCamera(update)
-        mapView.animateToZoom(mapView.camera.zoom - 1)
+        mapView.animate(toZoom: mapView.camera.zoom - 1)
     }
     
     // MARK: - GMSMapViewDelegate
     
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
         guard let venue = dictionary[marker]
             else { return false }
         
-        showLocationDetail(venue)
+        self.show(location: venue)
         
         return true
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: "Map")
     }
 }

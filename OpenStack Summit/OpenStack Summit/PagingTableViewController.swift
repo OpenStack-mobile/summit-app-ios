@@ -29,7 +29,7 @@ protocol PagingTableViewController: class, UITableViewDataSource, UITableViewDel
     
     func willLoadData()
     
-    func didLoadNextPage(response: ErrorValue<[PageControllerChange]>)
+    func didLoadNextPage(_ response: ErrorValue<[PageControllerChange]>)
 }
 
 extension PagingTableViewController {
@@ -42,9 +42,9 @@ extension PagingTableViewController {
         }
     }
     
-    func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
+    func didLoadNextPage(_ response: ErrorValue<[PageControllerChange]>) {
         
-        dismissActivityIndicator(animated: true)
+        dismissActivityIndicator(true)
         
         #if os(iOS)
         refreshControl?.endRefreshing()
@@ -52,11 +52,11 @@ extension PagingTableViewController {
         
         switch response {
             
-        case let .Error(error):
+        case let .error(error):
             
             showErrorMessage(error, fileName: #file, lineNumber: #line)
             
-        case let .Value(changes):
+        case let .value(changes):
             
             let wasCached = pageController.cached != nil && pageController.pages.count == 1
             
@@ -72,21 +72,21 @@ extension PagingTableViewController {
                 
                 for change in changes {
                     
-                    let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
+                    let indexPath = IndexPath(row: change.index, section: 0)
                     
                     switch change.change {
                         
                     case .delete:
                         
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
                         
                     case .insert:
                         
-                        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        tableView.insertRows(at: [indexPath], with: .fade)
                         
                     case .update:
                         
-                        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                        tableView.reloadRows(at: [indexPath], with: .none)
                     }
                 }
                 
@@ -94,22 +94,22 @@ extension PagingTableViewController {
                                         
                     for change in changes {
                         
-                         let indexSet = NSIndexSet(index: change.index)
+                        let indexSet = NSIndexSet(index: change.index) as IndexSet
                         
                         switch change.change {
                             
                         case .delete:
                             
-                            tableView.removeRowsAtIndexes(indexSet, withAnimation: .EffectFade)
+                            tableView.removeRows(at: indexSet, withAnimation: .effectFade)
                             
                         case .insert:
                             
-                            tableView.insertRowsAtIndexes(indexSet, withAnimation: .EffectFade)
+                            tableView.insertRows(at: indexSet, withAnimation: .effectFade)
                             
                         case .update:
                             
-                            tableView.removeRowsAtIndexes(indexSet, withAnimation: .EffectNone)
-                            tableView.insertRowsAtIndexes(indexSet, withAnimation: .EffectNone)
+                            tableView.removeRows(at: indexSet, withAnimation: [])
+                            tableView.insertRows(at: indexSet, withAnimation: [])
                         }
                     }
                     

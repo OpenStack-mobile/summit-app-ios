@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 import CoreSpotlight
 import MobileCoreServices
 import CoreSummit
@@ -43,23 +43,23 @@ extension Event: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
-        attributeSet.startDate = start.toFoundation()
-        attributeSet.endDate = end.toFoundation()
+        attributeSet.startDate = start
+        attributeSet.endDate = end
         
         let tags = self.tags.map { $0.name }
         attributeSet.keywords = tags
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -72,7 +72,7 @@ extension Speaker: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         attributeSet.contentDescription = title
@@ -86,7 +86,7 @@ extension Speaker: CoreSpotlightSearchable {
             attributeSet.thumbnailData = NSData(contentsOfURL: imageURL)
         }*/
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -99,20 +99,20 @@ extension Video: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
         
         attributeSet.local = false
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -125,24 +125,24 @@ extension Venue: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
         
         attributeSet.country = country
         attributeSet.city = city
-        attributeSet.longitude = location?.longitude
-        attributeSet.latitude = location?.latitude
+        attributeSet.longitude = location?.longitude as NSNumber?
+        attributeSet.latitude = location?.latitude as NSNumber?
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -155,20 +155,20 @@ extension VenueRoom: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
         
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -180,32 +180,32 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = SpotlightController()
     
-    let spotlightIndex = CSSearchableIndex.defaultSearchableIndex()
+    let spotlightIndex = CSSearchableIndex.default()
     
     var log: ((String) -> ())?
     
-    private let queue = dispatch_queue_create("CoreSpotlight Update Queue", nil)
+    private let queue = DispatchQueue(label: "CoreSpotlight Update Queue")
     
     deinit {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     private override init() {
         
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
-            name: NSManagedObjectContextObjectsDidChangeNotification,
+            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
             object: Store.shared.managedObjectContext)
         
     }
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         
-        func completionHandler(error: NSError?) {
+        func completionHandler(error: Swift.Error?) {
             
             if let error = error {
                 
@@ -223,12 +223,12 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
         
         if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as! Set<NSManagedObject>? {
             
-            indexableManagedObjects.appendContentsOf(updatedObjects)
+            indexableManagedObjects.append(contentsOf: updatedObjects)
         }
         
         if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as! Set<NSManagedObject>? {
             
-            indexableManagedObjects.appendContentsOf(insertedObjects)
+            indexableManagedObjects.append(contentsOf: insertedObjects)
         }
         
         if indexableManagedObjects.isEmpty == false {
@@ -253,7 +253,7 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
             
             if searchableItems.isEmpty == false {
                 
-                spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+                spotlightIndex.deleteSearchableItems(withIdentifiers: searchableItems, completionHandler: completionHandler)
             }
         }
     }

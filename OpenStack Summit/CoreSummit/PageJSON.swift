@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 enum PageJSONKey: String {
     
@@ -15,21 +15,21 @@ enum PageJSONKey: String {
 
 public extension Page where Item: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let currentPage = JSONObject[PageJSONKey.current_page.rawValue]?.rawValue as? Int,
-            let total = JSONObject[PageJSONKey.total.rawValue]?.rawValue as? Int,
-            let lastPage = JSONObject[PageJSONKey.last_page.rawValue]?.rawValue as? Int,
-            let perPage = JSONObject[PageJSONKey.per_page.rawValue]?.rawValue as? Int,
+            let currentPage = JSONObject[PageJSONKey.current_page.rawValue]?.integerValue,
+            let total = JSONObject[PageJSONKey.total.rawValue]?.integerValue,
+            let lastPage = JSONObject[PageJSONKey.last_page.rawValue]?.integerValue,
+            let perPage = JSONObject[PageJSONKey.per_page.rawValue]?.integerValue,
             let dataArray = JSONObject[PageJSONKey.data.rawValue]?.arrayValue,
-            let items = Item.fromJSON(dataArray)
+            let items = Item.from(json: dataArray)
             else { return nil }
         
-        self.currentPage = currentPage
-        self.total = total
-        self.lastPage = lastPage
-        self.perPage = perPage
+        self.currentPage = Int(currentPage)
+        self.total = Int(total)
+        self.lastPage = Int(lastPage)
+        self.perPage = Int(perPage)
         self.items = items
     }
 }

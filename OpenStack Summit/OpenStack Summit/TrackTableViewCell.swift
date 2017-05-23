@@ -10,5 +10,5 @@ import UIKit
 
 final class TrackTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet private(set) weak var nameLabel : UILabel!
 }

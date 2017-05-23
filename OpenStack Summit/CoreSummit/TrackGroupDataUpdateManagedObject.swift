@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-extension TrackGroupDataUpdate: CoreDataEncodable {
+extension TrackGroup.DataUpdate: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
         
         let managedObject = try cached(context)
         

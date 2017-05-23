@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
+import Predicate
 
 final class GeneralScheduleFilterViewController: UITableViewController {
     
@@ -36,7 +37,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
         
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
+        tableView.register(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // observe filter
         filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
@@ -45,7 +46,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         FilterManager.shared.filter.value.update()
@@ -53,25 +54,25 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func filterChanged(sender: UISwitch) {
+    @IBAction func filterChanged(_ sender: UISwitch) {
         
-        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
+        let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         let filter = self[indexPath].filter
         
-        if sender.on {
+        if sender.isOn {
             
-            FilterManager.shared.filter.value.enable(filter: filter)
+            FilterManager.shared.filter.value.enable(filter)
             
         } else {
             
-            FilterManager.shared.filter.value.disable(filter: filter)
+            FilterManager.shared.filter.value.disable(filter)
         }
     }
     
-    @IBAction func dismiss(sender: AnyObject? = nil) {
+    @IBAction func dismiss(_ sender: AnyObject? = nil) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -98,7 +99,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             
             switch filter {
             case .activeTalks: return "Hide Past Talks"
-            case let .level(level): return level
+            case let .level(level): return level.rawValue
             case .trackGroup, .venue: fatalError("Invalid filter: \(filter)")
             }
         }
@@ -113,9 +114,10 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = trackGroupsSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            let identifiers = trackGroupsSection.map { identifier(for: $0) }
             
-            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            //let predicate = NSPredicate(format: "id IN %@", identifiers)
+            let predicate: Predicate = (#keyPath(TrackGroupManagedObject.id)).in(identifiers)
             
             let trackGroups = try! context.managedObjects(TrackGroup.self, predicate: predicate, sortDescriptors: TrackGroup.ManagedObject.sortDescriptors)
             
@@ -134,9 +136,10 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let venuesSection = scheduleFilter.allFilters[.venue] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
-            let identifiers = venuesSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            let identifiers = venuesSection.map { identifier(for: $0) }
             
-            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            //let predicate = NSPredicate(format: "id IN %@", identifiers)
+            let predicate: Predicate = (#keyPath(VenueManagedObject.id)).in(identifiers)
             
             let venues = try! context.managedObjects(Venue.self, predicate: predicate, sortDescriptors: Venue.ManagedObject.sortDescriptors)
             
@@ -146,30 +149,30 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    private subscript (indexPath: NSIndexPath) -> Item {
+    private subscript (indexPath: IndexPath) -> Item {
         
         let section = self.filters[indexPath.section]
         
         return section.items[indexPath.row]
     }
     
-    private func configure(cell cell: GeneralScheduleFilterTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
         
         let item = self[indexPath]
         
         cell.nameLabel.text = item.name
-        cell.enabledSwitch.on = item.enabled
+        cell.enabledSwitch.isOn = item.enabled
         
         if let colorHex = item.color,
             let color = UIColor(hexString: colorHex) {
             
-            cell.circleContainerView.hidden = false
+            cell.circleContainerView.isHidden = false
             cell.circleView.backgroundColor = color
             
         } else {
             
-            cell.circleContainerView.hidden = true
-            cell.circleView.backgroundColor = .clearColor()
+            cell.circleContainerView.isHidden = true
+            cell.circleView.backgroundColor = .clear
         }
     }
     
@@ -191,30 +194,30 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return filters.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = self.filters[section]
         
         return section.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell, forIndexPath: indexPath)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.generalScheduleFilterTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
         
         configure(header: headerView, for: section)
         

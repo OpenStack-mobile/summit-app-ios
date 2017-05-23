@@ -14,14 +14,14 @@ public protocol CoreDataEncodable {
     
     associatedtype ManagedObject: NSManagedObject
     
-    func save(context: NSManagedObjectContext) throws -> ManagedObject
+    func save(_ context: NSManagedObjectContext) throws -> ManagedObject
 }
 
-public extension CollectionType where Generator.Element: CoreDataEncodable {
+public extension Collection where Iterator.Element: CoreDataEncodable {
     
-    func save(context: NSManagedObjectContext) throws -> Set<Self.Generator.Element.ManagedObject> {
+    func save(_ context: NSManagedObjectContext) throws -> Set<Self.Iterator.Element.ManagedObject> {
         
-        var managedObjects = ContiguousArray<Generator.Element.ManagedObject>()
+        var managedObjects = ContiguousArray<Iterator.Element.ManagedObject>()
         managedObjects.reserveCapacity(numericCast(self.count))
         
         for element in self {

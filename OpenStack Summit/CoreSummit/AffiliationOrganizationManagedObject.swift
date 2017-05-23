@@ -17,14 +17,14 @@ extension AffiliationOrganization: CoreDataDecodable {
     
     public init(managedObject: AffiliationOrganizationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }
 
 extension AffiliationOrganization: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> AffiliationOrganizationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> AffiliationOrganizationManagedObject {
         
         let managedObject = try cached(context)
         

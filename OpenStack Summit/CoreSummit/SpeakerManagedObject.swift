@@ -32,6 +32,10 @@ public final class SpeakerManagedObject: Entity {
     // Inverse Relationships
     
     @NSManaged public var summits: Set<SummitManagedObject>
+    
+    @NSManaged public var presentationModerator: Set<PresentationManagedObject>
+    
+    @NSManaged public var presentationSpeaker: Set<PresentationManagedObject>
 }
 
 // MARK: - Encoding
@@ -40,11 +44,11 @@ extension Speaker: CoreDataDecodable {
     
     public init(managedObject: SpeakerManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
         self.title = managedObject.title
-        self.pictureURL = managedObject.pictureURL
+        self.picture = URL(string: managedObject.pictureURL)!
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.biography = managedObject.biography
@@ -54,15 +58,15 @@ extension Speaker: CoreDataDecodable {
 
 extension Speaker: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SpeakerManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SpeakerManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.addressBookSectionName = addressBookSectionName
+        managedObject.addressBookSectionName = AddressBook.section(for: self)
         managedObject.title = title
-        managedObject.pictureURL = pictureURL
+        managedObject.pictureURL = picture.absoluteString
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography
@@ -78,70 +82,11 @@ extension Speaker: CoreDataEncodable {
 
 public extension SpeakerManagedObject {
     
-    public enum Property: String {
-        
-        case id, firstName, lastName, addressBookSectionName, title, pictureURL, twitter, irc, biography, member
-    }
-    
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: Property.addressBookSectionName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.firstName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.lastName.rawValue, ascending: true),
-                NSSortDescriptor(key: Property.id.rawValue, ascending: true)]
-    }
-}
-
-public extension Speaker {
-    
-    static func filter(searchTerm: String = "",
-                       page: Int, objectsPerPage: Int,
-                       summit: Identifier? = nil,
-                       context: NSManagedObjectContext) throws -> [Speaker] {
-        
-        var predicates = [NSPredicate]()
-        
-        if searchTerm.isEmpty == false {
-            
-            let searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
-            
-            predicates.append(searchPredicate)
-        }
-        
-        if let summitID = summit,
-            let summit = try SummitManagedObject.find(summitID, context: context) {
-            
-            let summitPredicate = NSPredicate(format: "%@ IN summits", summit)
-            
-            predicates.append(summitPredicate)
-        }
-        
-        let predicate: NSPredicate?
-        
-        if predicates.count > 1 {
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates.first
-        }
-        
-        let results = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
-        
-        var speakers = [ManagedObject]()
-        
-        let startRecord = (page - 1) * objectsPerPage
-        
-        let endRecord = (startRecord + (objectsPerPage - 1)) <= results.count ? startRecord + (objectsPerPage - 1) : results.count - 1
-        
-        if (startRecord <= endRecord) {
-            
-            for index in (startRecord...endRecord) {
-                speakers.append(results[index])
-            }
-        }
-        
-        return Speaker.from(managedObjects: speakers)
+        return [NSSortDescriptor(key: #keyPath(addressBookSectionName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.firstName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.lastName), ascending: true),
+                NSSortDescriptor(key:#keyPath(SpeakerManagedObject.id), ascending: true)]
     }
 }

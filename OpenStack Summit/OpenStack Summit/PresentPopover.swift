@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController {
     
-    func present(viewController viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil, sender: PopoverPresentingView) {
+    func present(viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil, sender: PopoverPresentingView) {
         
         switch sender {
             
@@ -25,7 +25,7 @@ extension UIViewController {
             viewController.popoverPresentationController?.barButtonItem = tabBarItem
         }
         
-        self.presentViewController(viewController, animated: animated, completion: completion)
+        self.present(viewController, animated: animated, completion: completion)
     }
 }
 

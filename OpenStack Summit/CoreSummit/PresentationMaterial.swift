@@ -14,17 +14,17 @@ public protocol PresentationMaterial: Named {
     
     var featured: Bool { get }
     
-    var order: Int { get }
+    var order: Int64 { get }
     
     var event: Identifier { get }
 }
 
 // MARK: - Extensions
 
-public extension CollectionType where Generator.Element: PresentationMaterial {
+public extension Collection where Iterator.Element: PresentationMaterial {
     
-    func ordered() -> [Generator.Element] {
+    func ordered() -> [Iterator.Element] {
         
-        return self.sort { $0.0.order < $0.1.order }
+        return self.sorted { $0.0.order < $0.1.order }
     }
 }

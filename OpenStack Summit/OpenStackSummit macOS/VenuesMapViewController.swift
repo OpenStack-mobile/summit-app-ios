@@ -12,6 +12,7 @@ import MapKit
 import CoreLocation
 import CoreData
 import CoreSummit
+import Predicate
 
 final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -21,17 +22,17 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - Properties
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     private var summitObserver: Int?
     
     private lazy var popover: (NSPopover, VenueDetailViewController) = {
         
-        let venueDetailViewController = self.storyboard!.instantiateControllerWithIdentifier("VenueDetailViewController") as! VenueDetailViewController
+        let venueDetailViewController = self.storyboard!.instantiateController(withIdentifier: "VenueDetailViewController") as! VenueDetailViewController
         self.addChildViewController(venueDetailViewController)
         
         let popover = NSPopover()
-        popover.behavior = .Transient
+        popover.behavior = .transient
         popover.animates = true
         popover.contentViewController = venueDetailViewController
         
@@ -65,21 +66,27 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     // MARK: - Private Methods
     
     private func configureView() {
+                
+        //let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        let predicate: Predicate = .keyPath(#keyPath(VenueManagedObject.latitude)) != .value(.null)
+            && .keyPath(#keyPath(VenueManagedObject.longitude)) != .value(.null)
+            && #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let sort = [NSSortDescriptor(key: #keyPath(VenueManagedObject.venueType), ascending: true),
+                    NSSortDescriptor(key: #keyPath(VenueManagedObject.name), ascending: true)]
         
-        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
-        
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
         // reload mapview
         self.mapView.removeAnnotations(self.mapView.annotations)
         
-        for venue in Venue.from(managedObjects: (self.fetchedResultsController.fetchedObjects as! [VenueManagedObject])) {
+        for venue in Venue.from(managedObjects: (self.fetchedResultsController.fetchedObjects ?? [])) {
             
             let annotation = VenueAnnotation(venue: venue)!
             
@@ -89,13 +96,13 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
         showSelectedVenue(nil)
     }
     
-    func showSelectedVenue(venue: Identifier?) {
+    func showSelectedVenue(_ venue: Identifier?) {
         
         mapView.showAnnotations(mapView.annotations, animated: true)
         
         if let venueID = venue,
             let venue = try! Venue.find(venueID, context: Store.shared.managedObjectContext),
-            let selectedAnnotation = mapView.annotations.firstMatching({ $0.coordinate.latitude == Double(venue.latitude ?? "") && $0.coordinate.longitude == Double(venue.longitude ?? "") }) {
+            let selectedAnnotation = mapView.annotations.first(where: { $0.coordinate.latitude == Double(venue.latitude ?? "") && $0.coordinate.longitude == Double(venue.longitude ?? "") }) {
             
             mapView.selectAnnotation(selectedAnnotation, animated: true)
         }
@@ -103,7 +110,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - MKMapViewDelegate
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is VenueAnnotation {
             
@@ -111,7 +118,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
             
             let annotationView: MKAnnotationView
             
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier) as? MKPinAnnotationView {
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView {
                 
                 annotationView = dequeuedView
                 
@@ -120,7 +127,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
                 let newAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
                 
                 newAnnotationView.canShowCallout = true
-                newAnnotationView.pinTintColor = .redColor()
+                newAnnotationView.pinTintColor = .red
                 
                 annotationView = newAnnotationView
             }
@@ -131,7 +138,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
         return nil
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView annotationView: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect annotationView: MKAnnotationView) {
         
         if let venueAnnotation = annotationView.annotation as? VenueAnnotation {
             
@@ -139,15 +146,15 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
             
             popover.1.venue = venueAnnotation.venue
             
-            popover.0.showRelativeToRect(annotationView.bounds,
-                                         ofView: annotationView,
-                                         preferredEdge: .MinX)
+            popover.0.show(relativeTo: annotationView.bounds,
+                                         of: annotationView,
+                                         preferredEdge: .minX)
         }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         let managedObject = anObject as! VenueManagedObject
         
@@ -158,22 +165,22 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
         
         switch type {
             
-        case .Insert:
+        case .insert:
             
             let annotation = VenueAnnotation(venue: venue)!
             
             mapView.addAnnotation(annotation)
             
-        case .Delete:
+        case .delete:
             
-            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier })
+            guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier })
                 else { return }
             
             mapView.removeAnnotation(annotation)
             
-        case .Update:
+        case .update:
             
-            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
+            guard let annotation = mapView.annotations.first(where: { ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
                 else { return }
             
             if annotation.coordinate.latitude == location.latitude
@@ -191,7 +198,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
                 mapView.addAnnotation(newAnnotation)
             }
             
-        case .Move: break
+        case .move: break
         }
     }
 }
@@ -204,9 +211,9 @@ final class VenueAnnotation: NSObject, MKAnnotation {
     
     let coordinate: CLLocationCoordinate2D
     
-    private(set) var title: String?
+    fileprivate(set) var title: String?
     
-    private(set) var subtitle: String?
+    fileprivate(set) var subtitle: String?
     
     init?(venue: Venue) {
         

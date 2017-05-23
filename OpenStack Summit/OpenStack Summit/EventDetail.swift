@@ -7,53 +7,54 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
-public struct EventDetail: CoreDataDecodable {
+struct EventDetail {
     
-    // MARK: - Properties
+    let identifier: Identifier
+    let name: String
+    let summit: Identifier
+    let start: Date
+    let end: Date
+    let timeZone: String
+    let dateTime: String
+    let day: String
+    let time: String
+    let location: String
+    let track: String
+    let sponsors: String
+    let eventType: String
+    let trackGroupColor: String
     
-    public let identifier: Identifier
-    public let name: String
-    public let summit: Identifier
-    public let start: Date
-    public let end: Date
-    public let timeZone: String
-    public let dateTime: String
-    public let day: String
-    public let time: String
-    public let location: String
-    public let track: String
-    public let sponsors: String
-    public let eventType: String
-    public let trackGroupColor: String
+    let venue: Location?
+    let eventDescription: String
+    let socialDescription: String
+    let tags: String
+    let speakers: [SpeakerDetail]
+    let finished: Bool
+    let allowFeedback: Bool
+    let level: String
+    let averageFeedback: Double
+    let video: Video?
+    let willRecord: Bool
+    let rsvp: URL?
+    let externalRSVP: Bool
+    let attachment: URL?
+    let webpage: URL
+}
+
+// MARK: - CoreData
+
+extension EventDetail: CoreDataDecodable {
     
-    public let venue: Location?
-    public let eventDescription: String
-    public let socialDescription: String
-    public let tags: String
-    public let speakers: [SpeakerDetail]
-    public let finished: Bool
-    public let allowFeedback: Bool
-    public let level: String
-    public let averageFeedback: Double
-    public let video: Video?
-    public let willRecord: Bool
-    public let rsvp: String
-    public let externalRSVP: Bool
-    public let attachment: String
-    public let webpageURL: NSURL
-    
-    // MARK: - Initialization
-    
-    public init(managedObject event: EventManagedObject) {
+    init(managedObject event: EventManagedObject) {
         
-        self.identifier = event.identifier
+        self.identifier = event.id
         self.name = event.name
-        self.summit = event.summit.identifier
-        self.start = Date(foundation: event.start)
-        self.end = Date(foundation: event.end)
+        self.summit = event.summit.id
+        self.start = event.start
+        self.end = event.end
         self.timeZone = event.summit.timeZone
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
@@ -63,10 +64,10 @@ public struct EventDetail: CoreDataDecodable {
         self.track = ScheduleItem.getTrack(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
-        self.rsvp = event.rsvp ?? ""
+        self.rsvp = URL(string: event.rsvp ?? "")
         self.externalRSVP = event.externalRSVP
         self.willRecord = event.willRecord
-        self.attachment = event.attachment ?? Slide.from(managedObjects: event.slides).ordered().first?.link ?? ""
+        self.attachment = URL(string: event.attachment ?? "") ?? Slide.from(managedObjects: event.slides).ordered().first?.link
         
         if let locationManagedObject = event.location {
             
@@ -77,7 +78,7 @@ public struct EventDetail: CoreDataDecodable {
             self.venue = nil
         }
         
-        self.finished = event.end.compare(NSDate()) == .OrderedAscending
+        self.finished = event.end.compare(NSDate() as Date) == .orderedAscending
         self.eventDescription = event.descriptionText ?? ""
         self.socialDescription = event.socialDescription ?? ""
         self.allowFeedback = event.allowFeedback
@@ -96,8 +97,8 @@ public struct EventDetail: CoreDataDecodable {
         
         var speakers = [SpeakerDetail]()
         
-        if let managedObject = event.presentation.moderator
-            where managedObject.id > 0 {
+        if let managedObject = event.presentation.moderator,
+            managedObject.id > 0 {
             
             let moderatorSpeaker = CoreSummit.Speaker(managedObject: managedObject)
             let speakerDetail = SpeakerDetail(speaker: moderatorSpeaker, isModerator: true)
@@ -110,61 +111,49 @@ public struct EventDetail: CoreDataDecodable {
         
         speakers += presentationSpeakers
         
-        self.speakers = speakers.sort()
+        self.speakers = speakers.sorted()
         
-        if let videoManagedObject = event.videos.first {
-            
-            self.video = Video(managedObject: videoManagedObject)
-            
-        } else {
-            
-            self.video = nil
-        }
+        self.video = Video.from(managedObjects: event.videos).sorted().first
         
         let summit = Summit(managedObject: event.summit)
         
-        let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
-        
-        guard let webpageURL = NSURL(string: webpageURLString)
-            else { fatalError("Invalid URL \(webpageURLString)") }
-        
-        self.webpageURL = webpageURL
+        self.webpage = Event(managedObject: event).webpage(for: summit)
     }
 }
 
 // MARK: - Supporting Types
 
-public extension EventDetail {
+extension EventDetail {
     
-    public struct SpeakerDetail: Person {
+    struct SpeakerDetail: Person {
         
-        public let identifier: Identifier
+        let identifier: Identifier
         
-        public let firstName: String
+        let firstName: String
         
-        public let lastName: String
+        let lastName: String
         
-        public let title: String?
+        let title: String?
         
-        public let pictureURL: String
+        let picture: URL
         
-        public let twitter: String?
+        let twitter: String?
         
-        public let irc: String?
+        let irc: String?
         
-        public var linkedIn: String? { return nil }
+        var linkedIn: String? { return nil }
         
-        public let biography: String?
+        let biography: String?
         
-        public let isModerator: Bool
+        let isModerator: Bool
                 
-        private init(speaker: Speaker, isModerator: Bool = false) {
+        fileprivate init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier
             self.firstName = speaker.firstName
             self.lastName = speaker.lastName
             self.title = speaker.title
-            self.pictureURL = speaker.pictureURL
+            self.picture = speaker.picture
             self.twitter = speaker.twitter
             self.irc = speaker.irc
             self.biography = speaker.biography
@@ -173,13 +162,13 @@ public extension EventDetail {
     }
 }
 
-public func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool {
+func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
         && lhs.title == rhs.title
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography

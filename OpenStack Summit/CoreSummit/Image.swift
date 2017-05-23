@@ -6,11 +6,13 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Image: Unique, Equatable {
+import struct Foundation.URL
+
+public struct Image: Unique {
     
     public let identifier: Identifier
     
-    public var url: String
+    public var url: URL
 }
 
 public func == (lhs: Image, rhs: Image) -> Bool {

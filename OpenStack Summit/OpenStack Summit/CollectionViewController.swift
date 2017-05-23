@@ -14,49 +14,49 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     
     // MARK: - Properties
     
-    final var fetchedResultsController: NSFetchedResultsController!
+    final var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     final private var changes = [Change]()
     
     // MARK: - UICollectionViewDataSource
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return self.fetchedResultsController?.sections?.count ?? 0
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.changes = []
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-        case .Insert:
+        case .insert:
             
             if let insertIndexPath = newIndexPath {
                 self.changes.append(.insert(insertIndexPath))
             }
-        case .Delete:
+        case .delete:
             
             if let deleteIndexPath = indexPath {
                 self.changes.append(.delete(deleteIndexPath))
             }
-        case .Update:
+        case .update:
             if let updateIndexPath = indexPath,
-                let _ = self.collectionView!.cellForItemAtIndexPath(updateIndexPath) {
+                let _ = self.collectionView!.cellForItem(at: updateIndexPath) {
                 
                 self.changes.append(.update(updateIndexPath))
             }
-        case .Move:
+        case .move:
             
             if let old = indexPath,
                 let new = newIndexPath {
@@ -66,12 +66,12 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         self.changes.append(.section(index: sectionIndex, type: type))
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.collectionView?.performBatchUpdates({ [weak self] in
             
@@ -87,32 +87,32 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
                     
                     switch type {
                         
-                    case .Insert:
+                    case .insert:
                         
-                        collectionView.insertSections(NSIndexSet(index: index))
+                        collectionView.insertSections(IndexSet(integer: index))
                         
-                    case .Delete:
+                    case .delete:
                         
-                        collectionView.deleteSections(NSIndexSet(index: index))
+                        collectionView.deleteSections(IndexSet(integer: index))
                         
                     default: break
                     }
                     
                 case let .insert(indexPath):
                     
-                    collectionView.insertItemsAtIndexPaths([indexPath])
+                    collectionView.insertItems(at: [indexPath])
                     
                 case let .delete(indexPath):
                     
-                    collectionView.deleteItemsAtIndexPaths([indexPath])
+                    collectionView.deleteItems(at: [indexPath])
                     
                 case let .update(indexPath):
                     
-                    collectionView.reloadItemsAtIndexPaths([indexPath])
+                    collectionView.reloadItems(at: [indexPath])
                     
                 case let .move(old, new):
                     
-                    collectionView.moveItemAtIndexPath(old, toIndexPath: new)
+                    collectionView.moveItem(at: old, to: new)
                 }
             }
             
@@ -127,9 +127,9 @@ private extension CollectionViewController {
     enum Change {
         
         case section(index: Int, type: NSFetchedResultsChangeType)
-        case insert(NSIndexPath)
-        case delete(NSIndexPath)
-        case update(NSIndexPath)
-        case move(old: NSIndexPath, new: NSIndexPath)
+        case insert(IndexPath)
+        case delete(IndexPath)
+        case update(IndexPath)
+        case move(old: IndexPath, new: IndexPath)
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public final class TrackManagedObject: Entity {
     
@@ -17,7 +18,9 @@ public final class TrackManagedObject: Entity {
     
     // Inverse Relationships
     
-    @NSManaged public var presentations: Set<PresentationManagedObject>
+    @NSManaged public var events: Set<EventManagedObject>
+    
+    @NSManaged public var summits: Set<SummitManagedObject>
 }
 
 // MARK: - Encoding
@@ -26,7 +29,7 @@ extension Track: CoreDataDecodable {
     
     public init(managedObject: TrackManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.groups = managedObject.groups.identifiers
     }
@@ -34,7 +37,7 @@ extension Track: CoreDataDecodable {
 
 extension Track: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TrackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TrackManagedObject {
         
         let managedObject = try cached(context)
         
@@ -49,7 +52,7 @@ extension Track: CoreDataEncodable {
 
 extension MemberResponse.Track: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TrackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TrackManagedObject {
         
         let managedObject = try cached(context)
         
@@ -68,43 +71,43 @@ public extension TrackManagedObject {
     
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: "name", ascending: true)]
+        return [NSSortDescriptor(key: #keyPath(TrackManagedObject.name), ascending: true)]
     }
 }
 
 public extension Track {
     
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Track] {
+    static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [Track] {
         
-        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        let predicate: Predicate = (#keyPath(TrackManagedObject.name)).compare(.contains, [.caseInsensitive], .value(.string(searchTerm)))
         
-        let managedObjects = try context.managedObjects(TrackManagedObject.self, predicate: predicate, sortDescriptors: TrackManagedObject.sortDescriptors)
-        
-        return Track.from(managedObjects: managedObjects)
+        return try Track.filter(predicate,
+                                sort: ManagedObject.sortDescriptors,
+                                context: context)
     }
     
     /// Get scheduled tracks that belong to track groups.
-    static func `for`(groups trackGroups: [Identifier], context: NSManagedObjectContext) throws -> [Track] {
+    static func `for`(groups trackGroups: [Identifier] = [], context: NSManagedObjectContext) throws -> [Track] {
         
-        let predicate: NSPredicate
+        let predicate: Predicate
         
-        let scheduledTracksPredicate = NSPredicate(format: "events.@count > 0")
+        // let scheduledTracksPredicate = Predicate(format: "events.@count > 0")
+        let scheduledTracks: Predicate = #keyPath(TrackManagedObject.events) + ".@count" > 0
         
         // optionally filter for track groups
         if trackGroups.isEmpty == false {
             
-            let trackGroupIdentifiers = trackGroups.map { NSNumber(longLong: Int64($0)) }
+            //let trackGroupsPredicate = NSPredicate(format: "ANY groups.id IN %@", [trackGroups])
+            let trackGroupsPredicate: Predicate = (#keyPath(TrackManagedObject.groups.id)).in(trackGroups)
             
-            let trackGroupsPredicate = NSPredicate(format: "ANY groups.id IN %@", [trackGroupIdentifiers])
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [scheduledTracksPredicate, trackGroupsPredicate])
+            predicate = .compound(.and([scheduledTracks, trackGroupsPredicate]))
             
         } else {
             
-            predicate = scheduledTracksPredicate
+            predicate = scheduledTracks
         }
         
-        return try context.managedObjects(Track.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }
 

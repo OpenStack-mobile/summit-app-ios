@@ -24,7 +24,7 @@ extension Group: CoreDataDecodable {
     
     public init(managedObject: GroupManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.title = managedObject.title
         self.descriptionText = managedObject.descriptionText
         self.code = managedObject.code
@@ -33,7 +33,7 @@ extension Group: CoreDataDecodable {
 
 extension Group: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> GroupManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> GroupManagedObject {
         
         let managedObject = try cached(context)
         

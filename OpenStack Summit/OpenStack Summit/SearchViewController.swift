@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import CoreData
 import EventKit
-import SwiftFoundation
 import CoreSummit
+import Predicate
 
 final class SearchViewController: UITableViewController, EventViewController, RevealViewController, UISearchBarDelegate {
     
@@ -63,9 +63,9 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 60
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.scheduleTableViewCell)
+        tableView.register(R.nib.scheduleTableViewCell)
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
+        tableView.register(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
         
         // execute search
         searchTermChanged()
@@ -73,10 +73,10 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     // MARK: - Actions
     
-    @IBAction func showEventContextMenu(sender: UIButton) {
+    @IBAction func showEventContextMenu(_ sender: UIButton) {
         
-        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
+        let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         let item = self[indexPath]
         
         guard case let .event(scheduleItem) = item
@@ -92,7 +92,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         self.show(contextMenu: contextMenu, sender: .view(sender))
     }
     
-    @IBAction func showMore(sender: Button) {
+    @IBAction func showMore(_ sender: Button) {
         
         switch self.data {
             
@@ -145,7 +145,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             var sections = [SearchResult]()
             
-            func search<T: SearchViewControllerItem>(type: T.Type, entity: Entity) throws {
+            func search<T: SearchViewControllerItem>(_ type: T.Type, entity: Entity) throws {
                 
                 let (items, extend) = try self.search(type, searchTerm: searchTerm, all: false)
                 
@@ -177,9 +177,9 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.reloadData()
         
         // scroll to top
-        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRows(inSection: 0) > 0 {
             
-            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
         
         let tableFooterView: UIView
@@ -200,7 +200,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.tableFooterView = tableFooterView
     }
     
-    private func search<T: SearchViewControllerItem>(type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
+    private func search<T: SearchViewControllerItem>(_ type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
         
         let context = Store.shared.managedObjectContext
         
@@ -237,7 +237,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return (items, extend)
     }
     
-    private subscript(indexPath: NSIndexPath) -> Item {
+    private subscript(indexPath: IndexPath) -> Item {
         
         let section: SearchResult
         
@@ -265,13 +265,13 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         return section
     }
     
-    private func configure(cell cell: ScheduleTableViewCell, with event: ScheduleItem) {
+    private func configure(cell: ScheduleTableViewCell, with event: ScheduleItem) {
         
         // set text
         cell.nameLabel.text = event.name
         cell.dateTimeLabel.text = event.dateTime
         cell.trackLabel.text = event.track
-        cell.trackLabel.hidden = event.track.isEmpty
+        cell.trackLabel.isHidden = event.track.isEmpty
         cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
         
         // set image
@@ -280,40 +280,40 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         if isScheduled {
             
-            cell.statusImageView.hidden = false
-            cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
+            cell.statusImageView.isHidden = false
+            cell.statusImageView.image = #imageLiteral(resourceName: "ContextMenuScheduleAdd")
             
         } else if isFavorite {
             
-            cell.statusImageView.hidden = false
-            cell.statusImageView.image = R.image.contextMenuWatchListAdd()!
+            cell.statusImageView.isHidden = false
+            cell.statusImageView.image = #imageLiteral(resourceName: "ContextMenuWatchListAdd")
             
         } else {
             
-            cell.statusImageView.hidden = true
+            cell.statusImageView.isHidden = true
             cell.statusImageView.image = nil
             
         }
         
         // configure button
-        cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), forControlEvents: .TouchUpInside)
+        cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), for: .touchUpInside)
     }
     
-    private func configure(cell cell: PeopleTableViewCell, with speaker: Speaker) {
+    private func configure(cell: PeopleTableViewCell, with speaker: Speaker) {
         
         cell.name = speaker.name
-        cell.title = speaker.title
-        cell.pictureURL = speaker.pictureURL
+        cell.title = speaker.title ?? ""
+        cell.picture = speaker.picture
     }
     
-    private func configure(cell cell: SearchResultTableViewCell, with track: Track) {
+    private func configure(cell: SearchResultTableViewCell, with track: Track) {
         
         cell.itemLabel.text = track.name
     }
     
     // MARK: - UISearchBarDelegate
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         let text = searchBar.text ?? ""
         
@@ -327,7 +327,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         switch data {
         case .none: return 0
@@ -336,14 +336,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
         
         let section = self[section: sectionIndex]
         
         return section.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = self[indexPath]
         
@@ -351,7 +351,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .event(event):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: event)
             
@@ -359,7 +359,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .speaker(speaker):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: speaker)
             
@@ -367,7 +367,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
         case let .track(track):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.searchResultTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchResultTableViewCell, for: indexPath)!
             
             configure(cell: cell, with: track)
             
@@ -375,7 +375,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
         
         let section = self[section: sectionIndex]
         
@@ -387,7 +387,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         case .track: sectionTitle = "TRACKS"
         }
         
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(SearchTableViewHeaderView.reuseIdentifier) as! SearchTableViewHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchTableViewHeaderView.reuseIdentifier) as! SearchTableViewHeaderView
         
         headerView.titleLabel.text = sectionTitle
         
@@ -398,25 +398,25 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         case .entity: buttonText = "See All"
         }
         
-        headerView.moreButton.setTitle(buttonText, forState: .Normal)
+        headerView.moreButton.setTitle(buttonText, for: UIControlState())
         
-        if headerView.moreButton.allTargets().isEmpty {
+        if headerView.moreButton.allTargets.isEmpty {
             
-            headerView.moreButton.addTarget(self, action: #selector(showMore), forControlEvents: .TouchUpInside)
+            headerView.moreButton.addTarget(self, action: #selector(showMore), for: .touchUpInside)
         }
         
         headerView.moreButton.tag = sectionIndex
         
-        headerView.moreButton.hidden = section.extend == .none
+        headerView.moreButton.isHidden = section.extend == .none
         
         return headerView
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let item = self[indexPath]
         
@@ -428,13 +428,13 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             eventDetailViewController.event = event.identifier
             
-            showViewController(eventDetailViewController, sender: self)
+            self.show(eventDetailViewController, sender: self)
             
         case let .speaker(speaker):
             
             let memberProfileViewController = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
             
-            showViewController(memberProfileViewController, sender: self)
+            show(memberProfileViewController, sender: self)
             
         case let .track(track):
             
@@ -442,7 +442,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             trackScheduleViewController.track = track
             
-            showViewController(trackScheduleViewController, sender: self)
+            self.show(trackScheduleViewController, sender: self)
         }
     }
 }
@@ -495,36 +495,54 @@ private protocol SearchViewControllerItem: CoreDataDecodable {
     
     func toItem() -> SearchViewController.Item
     
-    static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate
+    static func predicate(for searchTerm: String, summit: Identifier) -> Predicate
 }
 
 extension ScheduleItem: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .event(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        // NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
+        return #keyPath(EventManagedObject.summit.id) == summit
+            && ((#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.sponsors.name)).compare(.contains, [.caseInsensitive], value))
     }
 }
 
 extension Speaker: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .speaker(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        //return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        
+        return (#keyPath(SpeakerManagedObject.summits.id)).compare(.contains, .value(.int64(summit)))
+            && ((#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(SpeakerManagedObject.affiliations.organization.name)).compare(.contains, [.caseInsensitive], value))
     }
 }
 
 extension Track: SearchViewControllerItem {
     
-    private func toItem() -> SearchViewController.Item { return .track(self) }
+    fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
     
-    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+    fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(longLong: Int64(summit)), searchTerm)
+        let value: Expression = .value(.string(searchTerm))
+        
+        //return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(value: Int64(summit)), searchTerm)
+        
+        return (#keyPath(TrackManagedObject.summits.id)).compare(.contains, .value(.int64(summit)))
+            && (#keyPath(TrackManagedObject.name)).compare(.contains, [.caseInsensitive], value)
+        
     }
 }
 

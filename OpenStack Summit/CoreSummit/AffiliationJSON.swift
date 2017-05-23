@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Affiliation {
     
@@ -18,14 +18,14 @@ public extension Affiliation {
 
 extension Affiliation: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let isCurrent = JSONObject[JSONKey.is_current.rawValue]?.rawValue as? Bool,
             let organizationJSON = JSONObject[JSONKey.organization.rawValue],
-            let organization = AffiliationOrganization(JSONValue: organizationJSON),
-            let member = JSONObject[JSONKey.owner_id.rawValue]?.rawValue as? Int
+            let organization = AffiliationOrganization(json: organizationJSON),
+            let member = JSONObject[JSONKey.owner_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
@@ -35,7 +35,7 @@ extension Affiliation: JSONDecodable {
         
         // optional values
         
-        if let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int {
+        if let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue {
             
             self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
             
@@ -44,7 +44,7 @@ extension Affiliation: JSONDecodable {
             self.start = nil
         }
 
-        if let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int {
+        if let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue {
             
             self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
             

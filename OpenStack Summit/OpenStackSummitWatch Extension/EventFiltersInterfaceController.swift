@@ -16,7 +16,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
@@ -38,9 +38,9 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func search(sender: AnyObject? = nil) {
+    @IBAction func search(_ sender: AnyObject? = nil) {
         
-        presentTextInputControllerWithSuggestionsForLanguage({ self.autosuggestions(for: $0) }, allowedInputMode: .Plain) { (input) in
+        presentTextInputControllerWithSuggestions(forLanguage: { self.autosuggestions(for: $0) }, allowedInputMode: .plain) { (input) in
             
             guard let inputText = input as? [String]
                 else { return }
@@ -49,7 +49,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
                 
                 for string in inputText {
                     
-                    if $0.name.localizedCaseInsensitiveContainsString(string) {
+                    if $0.name.localizedCaseInsensitiveContains(string) {
                         
                         return true
                     }
@@ -59,7 +59,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
                 
             })
             
-            self.pushControllerWithName(EventsInterfaceController.identifier, context: Context(filteredEvents))
+            self.pushController(withName: EventsInterfaceController.identifier, context: Context(filteredEvents))
         }
     }
     

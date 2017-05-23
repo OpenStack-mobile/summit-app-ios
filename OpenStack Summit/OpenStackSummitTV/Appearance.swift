@@ -10,6 +10,6 @@ import UIKit
 
 func SetAppearance() {
     
-    UINavigationBar.appearance().translucent = true
+    UINavigationBar.appearance().isTranslucent = true
     UINavigationBar.appearance().tintColor = UIColor(hexString: "#214065")
 }

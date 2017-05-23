@@ -49,7 +49,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        window!.titleVisibility = .Hidden
+        window!.titleVisibility = .hidden
         
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
@@ -57,9 +57,9 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         
         // Show preferences
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
             
             if try! Summit.find(SummitManager.shared.summit.value, context: Store.shared.managedObjectContext) == nil {
                 
@@ -70,20 +70,20 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     // MARK: - Actions
     
-    @IBAction func contentTabChanged(sender: NSSegmentedControl) {
+    @IBAction func contentTabChanged(_ sender: NSSegmentedControl) {
         
         self.currentContent = Content(rawValue: sender.selectedSegment)!
     }
     
-    @IBAction func searchTermChanged(sender: NSSearchField) {
+    @IBAction func searchTermChanged(_ sender: NSSearchField) {
         
         self.searchTerm = sender.stringValue
     }
     
-    @IBAction func showPreferences(sender: AnyObject? = nil) {
+    @IBAction func showPreferences(_ sender: AnyObject? = nil) {
         
         preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateControllerWithIdentifier("Preferences") as? NSWindowController
+            .instantiateController(withIdentifier: "Preferences") as? NSWindowController
         
         preferencesWindowController?.showWindow(sender)
     }
@@ -92,7 +92,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     private func configureView() {
         
-        assert(windowLoaded)
+        assert(isWindowLoaded)
         
         // set window name
         
@@ -164,8 +164,8 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         
         // try to get existing window
         if let existingController = childContentWindowControllers
-            .firstMatching({ ($0 as? ContentController)?.contentIdentifier == identifier
-                && ($0 as? ContentController)?.dynamicType.contentType == contentType }) {
+            .first(where: { ($0 as? ContentController)?.contentIdentifier == identifier
+                && (type(of: $0) as? ContentController.Type)?.contentType == contentType }) {
             
             windowController = existingController
             
@@ -176,11 +176,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
                 
             case is Event.Type:
                 
-                windowController = NSStoryboard(name: "Events", bundle: nil).instantiateControllerWithIdentifier("EventWindowController") as! NSWindowController
+                windowController = NSStoryboard(name: "Events", bundle: nil).instantiateController(withIdentifier: "EventWindowController") as! NSWindowController
                 
             case is Speaker.Type:
                 
-                windowController = NSStoryboard(name: "Speakers", bundle: nil).instantiateControllerWithIdentifier("SpeakerWindowController") as! NSWindowController
+                windowController = NSStoryboard(name: "Speakers", bundle: nil).instantiateController(withIdentifier: "SpeakerWindowController") as! NSWindowController
                 
             default:
                 
@@ -199,9 +199,9 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             let window = windowController.window!
             
             // release when closed
-            NSNotificationCenter.defaultCenter().addObserver(self,
+            NotificationCenter.default.addObserver(self,
                                                              selector: #selector(windowWillClose),
-                                                             name: NSWindowWillCloseNotification,
+                                                             name: NSNotification.Name.NSWindowWillClose,
                                                              object: window)
         }
         
@@ -211,23 +211,23 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     // MARK: - NSSearchFieldDelegate
     
-    func searchFieldDidStartSearching(sender: NSSearchField) {
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
         
         
     }
     
-    func searchFieldDidEndSearching(sender: NSSearchField) {
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
         
         
     }
     
     // MARK: - SummitActivityHandling
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier)  {
         
          // find in cache
          guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
-         else { return false }
+            else { return }
          
          switch data {
          
@@ -243,10 +243,10 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
          
             let video = Video(managedObject: managedObject as! VideoManagedObject)
             
-            guard let url = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube)
-                else { return false }
+            guard let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube)
+                else { return }
          
-            return NSWorkspace.sharedWorkspace().openURL(url)
+            NSWorkspace.shared().open(url)
          
          case .venue:
             
@@ -256,8 +256,6 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             
             break
          }
- 
-        return true
     }
     
     func view(screen: AppActivityScreen) {
@@ -281,30 +279,34 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             
         case .about:
             
-            showPreferences()
+            self.showPreferences()
+            
+        case .inbox:
+            
+            break
         }
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         self.searchTerm = searchTerm
     }
     
     // MARK: - Notifications
     
-    @objc private func windowWillClose(notification: NSNotification) {
+    @objc private func windowWillClose(_ notification: Foundation.Notification) {
         
         let window = notification.object as! NSWindow
         
-        NSNotificationCenter.defaultCenter().removeObserver(self,
-                                                            name: NSWindowWillCloseNotification,
+        NotificationCenter.default.removeObserver(self,
+                                                            name: NSNotification.Name.NSWindowWillClose,
                                                             object: window)
         
-        guard let controllerIndex = childContentWindowControllers.indexOf({ $0.window === window })
+        guard let controllerIndex = childContentWindowControllers.index(where: { $0.window === window })
             else { fatalError("Invalid notification: \(notification)") }
         
         // will release controller, and window
-        childContentWindowControllers.removeAtIndex(controllerIndex)
+        childContentWindowControllers.remove(at: controllerIndex)
     }
 }
 

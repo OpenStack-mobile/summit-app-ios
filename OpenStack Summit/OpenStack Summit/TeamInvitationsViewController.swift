@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import JGProgressHUD
 
@@ -21,15 +21,15 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     var completion: ((TeamInvitationsViewController) -> ())?
     
-    lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    lazy var pageController: PageController<Invitation> = PageController(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    private lazy var dateFormatter: DateFormatter = {
         
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
         return formatter
     }()
     
@@ -40,7 +40,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         
         tableView.estimatedRowHeight = 98
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerNib(R.nib.loadingTableViewCell)
+        tableView.register(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
@@ -53,34 +53,34 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
         
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
         self.completion?(self)
     }
     
     // MARK: - Private Methods
     
-    private func configure(cell cell: TeamInvitationTableViewCell, with invitation: Invitation) {
+    private func configure(cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
         cell.teamLabel.text = invitation.team.name
         
         cell.inviterLabel.text = "Invited by: " + invitation.inviter.name
         
-        cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created.toFoundation())
+        cell.dateLabel.text = dateFormatter.string(from: invitation.created)
     }
     
-    private func accept(invitation: Invitation) {
+    private func accept(_ invitation: Invitation) {
         
         showActivityIndicator()
         
         Store.shared.accept(invitation: invitation.identifier) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -94,7 +94,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                     
                     Store.shared.fetch(team: invitation.team.identifier) { [weak self] (response) in
                         
-                        NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                        OperationQueue.main.addOperation { [weak self] in
                             
                             guard let controller = self else { return }
                             
@@ -102,11 +102,11 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                             
                             switch response {
                                 
-                            case let .Error(error):
+                            case let .error(error):
                                 
                                 controller.showErrorMessage(error)
                                 
-                            case .Value:
+                            case .value:
                                 
                                 controller.refresh()
                             }
@@ -117,13 +117,13 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         }
     }
     
-    private func decline(invitation: Invitation) {
+    private func decline(_ invitation: Invitation) {
         
         showActivityIndicator()
         
         Store.shared.decline(invitation: invitation.identifier) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.main.addOperation { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -143,17 +143,17 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = pageController.items[indexPath.row]
         
@@ -161,7 +161,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamInvitationCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamInvitationCell)!
             
             configure(cell: cell, with: item)
             
@@ -171,9 +171,9 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
             
             pageController.loadNextPage()
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.loadingTableViewCell, for: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -183,7 +183,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let data = pageController.items[indexPath.row]
         
@@ -191,9 +191,9 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
             
         case let .item(item):
             
-            let accept = UITableViewRowAction(style: .Normal, title: "Accept") { [weak self] (_,_) in self?.accept(item) }
+            let accept = UITableViewRowAction(style: .normal, title: "Accept") { [weak self] (_,_) in self?.accept(item) }
             
-            let decline = UITableViewRowAction(style: .Destructive, title: "Decline") { [weak self] (_,_) in self?.decline(item)  }
+            let decline = UITableViewRowAction(style: .destructive, title: "Decline") { [weak self] (_,_) in self?.decline(item)  }
             
             return [decline, accept]
             
@@ -208,9 +208,9 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
 
 final class TeamInvitationTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet private(set) weak var teamLabel: UILabel!
     
-    @IBOutlet weak var inviterLabel: UILabel!
+    @IBOutlet private(set) weak var inviterLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
 }

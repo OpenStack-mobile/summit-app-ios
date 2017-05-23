@@ -6,26 +6,26 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
-public extension PresentationDataUpdate {
+public extension Presentation.DataUpdate {
     
     typealias JSONKey = Presentation.JSONKey
 }
 
-extension PresentationDataUpdate: JSONDecodable {
+extension Presentation.DataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
         
         // optional
-        if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-            where moderator > 0 {
+        if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.integerValue,
+            moderator > 0 {
             
             self.moderator = moderator
             
@@ -48,7 +48,7 @@ extension PresentationDataUpdate: JSONDecodable {
         
         if let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue {
             
-            guard let speakers = Speaker.fromJSON(speakersJSONArray)
+            guard let speakers = Speaker.from(json: speakersJSONArray)
                 else { return nil }
             
             self.speakers = Set(speakers)

@@ -6,10 +6,11 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 import CoreData
+import Predicate
 
 public extension Store {
     
@@ -23,26 +24,26 @@ public extension Store {
             // delete member
             if let member = try self.authenticatedMember(context) {
                 
-                context.deleteObject(member)
+                context.delete(member)
             }
             
             // delete all notifications except 'EVERYBODY' type
-            let notifications = try context.managedObjects(NotificationManagedObject.self, predicate: "channel" != CoreSummit.Notification.Channel.everyone.rawValue)
+            let notifications = try context.managedObjects(NotificationManagedObject.self, predicate: #keyPath(NotificationManagedObject.channel) != CoreSummit.Notification.Channel.everyone.rawValue)
             
-            notifications.forEach { context.deleteObject($0) }
+            notifications.forEach { context.delete($0) }
             
             try context.validateAndSave()
         }
         
         session.clear()
         
-        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
+        NotificationCenter.default.post(name: Store.Notification.loggedOut, object: self)
     }
     
     /// Login via OAuth with OpenStack ID
-    func login(summit: Identifier, loginCallback: () -> (), completion: (ErrorType?) -> ()) {
-                
-        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
+    func login(_ summit: Identifier, loginCallback: @escaping () -> (), completion: @escaping (Swift.Error?) -> ()) {
+        
+        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIdClaim?, error: NSError?) in // [1]
             
             guard error == nil
                 else { completion(error!) ; return }
@@ -53,17 +54,17 @@ public extension Store {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     completion(error)
                     
-                case let .Value(member):
+                case let .value(member):
                     
                     self.session.member = member.identifier
                     
                     completion(nil)
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                    NotificationCenter.default.post(name: Store.Notification.loggedIn, object: self)
                 }
             }
         }

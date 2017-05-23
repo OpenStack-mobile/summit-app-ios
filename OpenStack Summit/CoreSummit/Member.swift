@@ -6,6 +6,8 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import struct Foundation.URL
+
 public struct Member: Named {
     
     public let identifier: Identifier
@@ -16,7 +18,7 @@ public struct Member: Named {
     
     public let gender: String?
     
-    public let pictureURL: String
+    public let picture: URL
         
     public let twitter: String?
     
@@ -48,7 +50,7 @@ public func == (lhs: Member, rhs: Member) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.linkedIn == rhs.linkedIn

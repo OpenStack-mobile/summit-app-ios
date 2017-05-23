@@ -9,7 +9,7 @@
 import XCTest
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 @testable import CoreSummit
 
 final class CoreDataTests: XCTestCase {
@@ -23,7 +23,7 @@ final class CoreDataTests: XCTestCase {
             // load test data
             let testJSON = loadJSON("Summit\(summitID)")
             
-            guard let summit = Summit(JSONValue: testJSON)
+            guard let summit = Summit(json: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
             // decode
@@ -59,7 +59,7 @@ final class CoreDataTests: XCTestCase {
             // load test data
             let testJSON = loadJSON("Member\(memberID)")
             
-            guard let member = MemberResponse.Member(JSONValue: testJSON)
+            guard let member = MemberResponse.Member(json: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
             // cache in CoreData
@@ -79,7 +79,7 @@ final class CoreDataTests: XCTestCase {
         
         let eventEntity = model[EventManagedObject.self]!
         
-        let _ = try! context.findOrCreate(eventEntity, resourceID: 1, identifierProperty: Entity.identifierProperty)
+        let _ = try! context.findOrCreate(eventEntity, resourceID: 1 as NSNumber, identifierProperty: Entity.identifierProperty)
         
         do { try context.validateAndSave() }
         
@@ -93,10 +93,10 @@ private extension CoreDataTests {
     
     func testContext() -> NSManagedObjectContext {
         
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.undoManager = nil
         managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
-        try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+        try! managedObjectContext.persistentStoreCoordinator!.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
         
         return managedObjectContext
     }

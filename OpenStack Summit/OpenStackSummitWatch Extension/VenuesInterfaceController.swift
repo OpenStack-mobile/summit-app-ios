@@ -16,13 +16,13 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
     let venues: [Venue] = {
         
-        let allVenues = Store.shared.cache?.locations.reduce([Venue](), combine: {
+        let allVenues = Store.shared.cache?.locations.reduce([Venue](), {
             
             guard case let .venue(venue) = $1
                 else { return $0 }
@@ -34,17 +34,17 @@ final class VenuesInterfaceController: WKInterfaceController {
             
         }) ?? []
         
-        let internalVenues = allVenues.filter({ $0.isInternal }).sort { $0.0.name > $0.1.name }
+        let internalVenues = allVenues.filter({ $0.isInternal }).sorted { $0.0.name > $0.1.name }
         
-        let externalVenues = allVenues.filter({ $0.isInternal == false }).sort { $0.0.name > $0.1.name }
+        let externalVenues = allVenues.filter({ $0.isInternal == false }).sorted { $0.0.name > $0.1.name }
         
         return internalVenues + externalVenues
     }()
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -56,7 +56,7 @@ final class VenuesInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/travel"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: summit.webpage.appendingPathComponent("travel"))
         }
     }
     
@@ -69,7 +69,7 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let venue = venues[rowIndex]
         
@@ -82,21 +82,20 @@ final class VenuesInterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(venues.count, withRowType: VenueCellController.identifier)
         
-        for (index, venue) in venues.enumerate() {
+        for (index, venue) in venues.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! VenueCellController
+            let cell = tableView.rowController(at: index) as! VenueCellController
             
             // set content
             
             cell.nameLabel.setText(venue.name)
             cell.addressLabel.setText(venue.fullAddress)
             
-            if let image = venue.images.first,
-                let imageURL = NSURL(string: image.url) {
+            if let imageURL = venue.images.sorted().first?.url {
                 
                 // show activity indicator
                 cell.activityIndicator.setImageNamed("Activity")
-                cell.activityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+                cell.activityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
                 cell.activityIndicator.setHidden(false)
                 cell.imageView.setHidden(true)
                 
@@ -107,7 +106,7 @@ final class VenuesInterfaceController: WKInterfaceController {
                     cell.activityIndicator.setHidden(true)
                     
                     // hide image view if no image
-                    guard case .Data = response else {
+                    guard case .data = response else {
                         
                         cell.imageView.setHidden(true)
                         return
@@ -135,15 +134,15 @@ final class VenueCellController: NSObject {
     
     static let identifier = "VenueCell"
     
-    @IBOutlet weak var headerGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var headerGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var contentGroup: WKInterfaceGroup!
+    @IBOutlet private(set) weak var contentGroup: WKInterfaceGroup!
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var addressLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var addressLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var imageView: WKInterfaceImage!
+    @IBOutlet private(set) weak var imageView: WKInterfaceImage!
     
-    @IBOutlet weak var activityIndicator: WKInterfaceImage!
+    @IBOutlet private(set) weak var activityIndicator: WKInterfaceImage!
 }

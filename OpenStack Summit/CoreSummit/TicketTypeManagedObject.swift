@@ -20,7 +20,7 @@ extension TicketType: CoreDataDecodable {
     
     public init(managedObject: TicketTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
     }
@@ -28,7 +28,7 @@ extension TicketType: CoreDataDecodable {
 
 extension TicketType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TicketTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TicketTypeManagedObject {
         
         let managedObject = try cached(context)
         

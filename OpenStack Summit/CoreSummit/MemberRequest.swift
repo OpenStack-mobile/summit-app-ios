@@ -6,43 +6,44 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func currentMember(for summit: Identifier, completion: (ErrorValue<MemberResponse.Member>) -> ()) {
+    func currentMember(for summit: Identifier, completion: @escaping (ErrorValue<MemberResponse.Member>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
+        let uri = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL, parameters: nil, completionHandler: { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let member = MemberResponse.Member(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let member = MemberResponse.Member(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try member.save(context)
+                let _ = try member.save(context)
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(member))
-        })
+            completion(.value(member))
+        }
     }
 }
 
@@ -60,7 +61,7 @@ public struct MemberResponse {
         
         public let gender: String?
         
-        public let pictureURL: String
+        public let picture: URL
         
         public let twitter: String?
         
@@ -115,7 +116,7 @@ public struct MemberResponse {
         
         public let willRecord: Bool
         
-        public let attachment: String?
+        public let attachment: URL?
         
         public let sponsors: [Company]
         
@@ -158,7 +159,7 @@ public struct MemberResponse {
         public let member: Identifier
     }
     
-    public typealias Presentation = PresentationDataUpdate
+    public typealias Presentation = CoreSummit.Presentation.DataUpdate
 }
 
 public extension MemberResponse.Member {
@@ -200,7 +201,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
     return lhs.identifier == rhs.identifier
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
-        && lhs.pictureURL == rhs.pictureURL
+        && lhs.picture == rhs.picture
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.linkedIn == rhs.linkedIn

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 internal extension Event {
     
@@ -16,24 +16,23 @@ internal extension Event {
     }
 }
 
-extension Event: JSONParametrizedDecodable {
+public extension Event {
     
-    public init?(JSONValue: JSON.Value, parameters summit: Identifier) {
+    public init?(json: JSON.Value, summit: Identifier) {
         
-        guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+        guard let JSONObject = json.objectValue,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
-            let eventType = Int(JSONValue: eventTypeJSON),
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
+            let eventType = JSONObject[JSONKey.type_id.rawValue]?.integerValue,
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.from(json: tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Identifier.fromJSON(sponsorsJSONArray),
+            let sponsors = Identifier.from(json: sponsorsJSONArray),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
-            let presentation = Presentation(JSONValue: JSONValue)
+            let presentation = Presentation(json: json)
             else { return nil }
         
         self.identifier = identifier
@@ -53,7 +52,7 @@ extension Event: JSONParametrizedDecodable {
             
             self.averageFeedback = doubleValue
             
-        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+        } else if let integerValue = averageFeedbackJSON.integerValue {
             
             self.averageFeedback = Double(integerValue)
             
@@ -66,9 +65,10 @@ extension Event: JSONParametrizedDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
-        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.urlValue
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
+            track > 0 {
             
             self.track = track
             
@@ -77,8 +77,8 @@ extension Event: JSONParametrizedDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.integerValue,
+            location > 0 {
             
             self.location = location
             
@@ -89,7 +89,7 @@ extension Event: JSONParametrizedDecodable {
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
-            guard let videos = Video.fromJSON(videosJSONArray)
+            guard let videos = Video.from(json: videosJSONArray)
                 else { return nil }
             
             self.videos = Set(videos)
@@ -99,24 +99,18 @@ extension Event: JSONParametrizedDecodable {
             self.videos = []
         }
         
-        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
-                else { return nil }
-            
-            self.slides = Set(slides)
+            self.slides = Set(Slide.forceDecode(json: jsonArray))
             
         } else {
             
             self.slides = []
         }
         
-        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+        if let jsonArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
-                else { return nil }
-            
-            self.links = Set(links)
+            self.links = Set(Link.forceDecode(json: jsonArray))
             
         } else {
             
@@ -132,25 +126,25 @@ extension MemberResponse.Event: JSONDecodable {
     
     private typealias JSONKey = Event.JSONKey
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let summit = JSONObject[JSONKey.summit_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let summit = JSONObject[JSONKey.summit_id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
             let eventTypeJSON = JSONObject[JSONKey.type.rawValue],
-            let eventType = EventType(JSONValue: eventTypeJSON),
+            let eventType = EventType(json: eventTypeJSON),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.from(json: tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
+            let sponsors = Company.from(json: sponsorsJSONArray),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
-            let presentation = MemberResponse.Presentation(JSONValue: JSONValue),
+            let presentation = MemberResponse.Presentation(json: JSONValue),
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Group.fromJSON(groupsJSONArray)
+            let groups = Group.from(json: groupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -171,7 +165,7 @@ extension MemberResponse.Event: JSONDecodable {
             
             self.averageFeedback = doubleValue
             
-        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+        } else if let integerValue = averageFeedbackJSON.integerValue {
             
             self.averageFeedback = Double(integerValue)
             
@@ -184,11 +178,11 @@ extension MemberResponse.Event: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
-        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.urlValue
         
         if let trackJSON = JSONObject[JSONKey.track.rawValue] {
             
-            guard let track = MemberResponse.Track(JSONValue: trackJSON)
+            guard let track = MemberResponse.Track(json: trackJSON)
                 else { return nil }
             
             self.track = track
@@ -200,7 +194,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let locationJSON = JSONObject[JSONKey.location.rawValue] {
             
-            guard let location = Location(JSONValue: locationJSON)
+            guard let location = Location(json: locationJSON)
                 else { return nil }
             
             self.location = location
@@ -212,7 +206,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
-            guard let videos = Video.fromJSON(videosJSONArray)
+            guard let videos = Video.from(json: videosJSONArray)
                 else { return nil }
             
             self.videos = videos
@@ -224,7 +218,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            guard let slides = Slide.fromJSON(slidesJSONArray)
+            guard let slides = Slide.from(json: slidesJSONArray)
                 else { return nil }
             
             self.slides = slides
@@ -236,7 +230,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
             
-            guard let links = Link.fromJSON(linksJSONArray)
+            guard let links = Link.from(json: linksJSONArray)
                 else { return nil }
             
             self.links = links
@@ -245,5 +239,27 @@ extension MemberResponse.Event: JSONDecodable {
             
             self.links = []
         }
+    }
+}
+
+// MARK: - Extensions
+
+public extension Event {
+    
+    /// Decodes from an array of JSON values.
+    static func from(json array: JSON.Array, summit: Identifier) -> [Event]? {
+        
+        var jsonDecodables: ContiguousArray<Event> = ContiguousArray()
+        
+        jsonDecodables.reserveCapacity(array.count)
+        
+        for jsonValue in array {
+            
+            guard let jsonDecodable = self.init(json: jsonValue, summit: summit) else { return nil }
+            
+            jsonDecodables.append(jsonDecodable)
+        }
+        
+        return Array(jsonDecodables)
     }
 }

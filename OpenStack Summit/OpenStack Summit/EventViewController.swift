@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import EventKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 protocol EventViewController: class, MessageEnabledViewController {
@@ -31,11 +31,11 @@ extension EventViewController {
     
     func canAddToCalendar() -> Bool {
         
-        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        let status = EKEventStore.authorizationStatus(for: .event)
         
         switch status {
-        case .NotDetermined, .Authorized: return true
-        case .Restricted, .Denied: return false
+        case .notDetermined, .authorized: return true
+        case .restricted, .denied: return false
         }
     }
     
@@ -45,13 +45,13 @@ extension EventViewController {
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
-        let url = event.webpageURL
+        let url = event.webpage
         
         var actions: [ContextMenu.Action] = []
         
         if Store.shared.isLoggedIn && canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: #imageLiteral(resourceName: "ContextMenuRate"), title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
                 
                 return self!.feedbackController(for: event) { _ in didComplete(true) }
                 }))
@@ -67,14 +67,14 @@ extension EventViewController {
             
             var title = newValue ? "Schedule" : "Unschedule"
             
-            if !event.rsvp.isEmpty {
+            if event.rsvp != nil {
                 
                 title = newValue ? "RSVP" : "unRSVP"
             }
             
-            let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
+            let image = newValue ? #imageLiteral(resourceName: "ContextMenuScheduleAdd") : #imageLiteral(resourceName: "ContextMenuScheduleRemove")
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { image }, title: title, handler: .background({ [weak self] (didComplete) in
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: image, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -94,7 +94,7 @@ extension EventViewController {
             
             let title = newValue ? "Watch Later" : "Don’t Watch Later"
             
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { R.image.contextMenuWatchListAdd()! }, title: title, handler: .background({ [weak self] (didComplete) in
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: #imageLiteral(resourceName: "ContextMenuWatchListAdd"), title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -106,17 +106,17 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
-        var shareItems = [url, message]
+        var shareItems = [url, message] as [Any]
         
         if event.socialDescription.isEmpty == false {
             
             shareItems.append(event.socialDescription)
         }
         
-        return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
+        return ContextMenu(actions: actions, shareItems: shareItems as [AnyObject], systemActions: false)
     }
     
-    func feedbackController(for event: EventDetail, rating: Int? = nil, completion: (FeedbackViewController -> ())? = nil) -> UINavigationController {
+    func feedbackController(for event: EventDetail, rating: Int? = nil, completion: ((FeedbackViewController) -> ())? = nil) -> UINavigationController {
         
         let feedbackViewController = R.storyboard.feedback.feedbackViewController()!
         
@@ -133,7 +133,7 @@ extension EventViewController {
         
         let navigationController = UINavigationController(rootViewController: feedbackViewController)
         
-        navigationController.modalPresentationStyle = .FormSheet
+        navigationController.modalPresentationStyle = .formSheet
         
         return navigationController
     }
@@ -142,7 +142,7 @@ extension EventViewController {
         
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
-        let rsvpURL = event.rsvp.isEmpty ? nil : NSURL(string: event.rsvp)
+        let rsvpURL = event.rsvp
         
         let externalRSVP = event.externalRSVP
         
@@ -152,7 +152,7 @@ extension EventViewController {
         switch (newValue, rsvpURL, externalRSVP) {
             
         // non-RSVP
-        case let (newValue, .None, externalRSVP):
+        case let (newValue, .none, externalRSVP):
             
             assert(externalRSVP == false, "External RSVP should always have RSVP urls")
             
@@ -164,7 +164,7 @@ extension EventViewController {
             setScheduledOnServer(request, for: event, cacheValue: newValue) { }
             
         // external RSVP
-        case let (newValue, .Some(url), true):
+        case let (newValue, .some(url), true):
             
             // rsvp_external (boolean) if true, then before redirect to WEBView, mobile app should add the event to my schedule calling API ( this is only for attendees)
             
@@ -174,16 +174,16 @@ extension EventViewController {
             let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
             
             // update cache immediately, add to schedule and open RSVP link
-            setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.sharedApplication().openURL(url) }
+            setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.shared.openURL(url) }
             
         // internal RSVPing
-        case let (true, .Some(url), false):
+        case let (true, .some(url), false):
             
             // just open RSVP link
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
           
         // internal unRSVPing
-        case (false, .Some, false):
+        case (false, .some, false):
             
             // When event has internal RSVP, clicking unRSVP button needs to ping the unRSVP endpoint 
             // (replacing the unSCHEDULE call since its done automatically by the server).
@@ -192,7 +192,7 @@ extension EventViewController {
         }
     }
     
-    private func setScheduledLocally(value: Bool, for event: Identifier) {
+    private func setScheduledLocally(_ value: Bool, for event: Identifier) {
         
         guard let attendee = Store.shared.authenticatedMember?.attendeeRole
             else { return }
@@ -211,13 +211,13 @@ extension EventViewController {
         }
     }
     
-    private typealias EventRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
+    private typealias EventRequest = (_ summit: Identifier?, _ event: Identifier, _ completion: @escaping (Error?) -> ()) -> ()
     
-    private func setScheduledOnServer(request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
+    private func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: @escaping () -> ()) {
         
-        let completion: ErrorType? -> () = { [weak self] (response) in
+        let completion: (Swift.Error?) -> () = { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -225,7 +225,7 @@ extension EventViewController {
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     // restore original value
                     if let cacheValue = cacheValue {
@@ -236,7 +236,7 @@ extension EventViewController {
                     // show error
                     controller.showErrorMessage(error)
                     
-                case .None:
+                case .none:
                     
                     // handle success
                     success()
@@ -253,7 +253,7 @@ extension EventViewController {
         eventRequestInProgress = true
         
         // make API request
-        request(summit: event.summit, event: event.identifier, completion: completion)
+        request(event.summit, event.identifier, completion)
     }
     
     func toggleFavorite(for event: EventDetail) {
@@ -264,7 +264,7 @@ extension EventViewController {
         
         eventRequestInProgress = true
         
-        func setFavorite(newValue: Bool) {
+        func setFavorite(_ newValue: Bool) {
             
             // update model
             if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
@@ -284,7 +284,7 @@ extension EventViewController {
         
         Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 guard let controller = self else { return }
                 
@@ -292,7 +292,7 @@ extension EventViewController {
                 
                 switch response {
                     
-                case let .Some(error):
+                case let .some(error):
                     
                     // show error
                     controller.showErrorMessage(error)
@@ -300,31 +300,31 @@ extension EventViewController {
                     // restore old value
                     setFavorite(isFavorite)
                     
-                case .None: break
+                case .none: break
                 }
             }
         }
     }
     
-    func addToCalendar(event: EventDetail) {
+    func addToCalendar(_ event: EventDetail) {
         
-        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        let status = EKEventStore.authorizationStatus(for: .event)
         
         switch status {
             
-        case .Restricted, .Denied:
+        case .restricted, .denied:
             
             break
             
-        case .NotDetermined:
+        case .notDetermined:
             
-            eventStore.requestAccessToEntityType(.Event) { [weak self] (granted, error) in
+            eventStore.requestAccess(to: .event) { [weak self] (granted, error) in
                 
                 // retry
                 self?.addToCalendar(event)
             }
         
-        case .Authorized:
+        case .authorized:
             
             let calendarListTitle = "OpenStack Summit"
             
@@ -332,13 +332,13 @@ extension EventViewController {
             
             let calendar: EKCalendar
             
-            if let existingCalendar = eventStore.calendarsForEntityType(.Event).firstMatching({ $0.title == calendarListTitle }) {
+            if let existingCalendar = eventStore.calendars(for: .event).first(where: { $0.title == calendarListTitle }) {
                 
                 calendar = existingCalendar
                 
             } else {
                 
-                calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
+                calendar = EKCalendar(for: .event, eventStore: eventStore)
                 
                 calendar.title = calendarListTitle
                 
@@ -359,19 +359,19 @@ extension EventViewController {
             
             calendarEvent.calendar = calendar
             calendarEvent.title = event.name
-            calendarEvent.startDate = event.start.toFoundation()
-            calendarEvent.endDate = event.end.toFoundation()
-            calendarEvent.timeZone = NSTimeZone(name: event.timeZone)
-            calendarEvent.URL = event.webpageURL
+            calendarEvent.startDate = event.start
+            calendarEvent.endDate = event.end
+            calendarEvent.timeZone = TimeZone(identifier: event.timeZone)
+            calendarEvent.url = event.webpage
             calendarEvent.location = event.location
             
-            if let data = event.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            if let data = event.eventDescription.data(using: String.Encoding.utf8),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
             }
             
-            do { try eventStore.saveEvent(calendarEvent, span: .ThisEvent, commit: true) }
+            do { try eventStore.save(calendarEvent, span: .thisEvent, commit: true) }
                 
             catch { showErrorMessage(error, fileName: #file, lineNumber: #line) }
         }

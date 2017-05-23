@@ -25,7 +25,7 @@ final class VideosViewController: UINavigationController {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Videos", bundle: nil)
-        searchResultsController = storyboard.instantiateViewControllerWithIdentifier("VideoSearchResults") as! VideoSearchResultsViewController
+        searchResultsController = storyboard.instantiateViewController(withIdentifier: "VideoSearchResults") as! VideoSearchResultsViewController
         
         /*
          Create a UISearchController, passing the `searchResultsController` to
@@ -43,7 +43,7 @@ final class VideosViewController: UINavigationController {
         self.setViewControllers([searchContainer], animated: false)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.searchController.searchBar.becomeFirstResponder()

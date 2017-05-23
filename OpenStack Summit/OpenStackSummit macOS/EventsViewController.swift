@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import Predicate
 
 final class EventsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -19,14 +20,14 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = Predicate.value(false) {
         
         didSet { configureView() }
     }
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<EventManagedObject>!
     
-    private lazy var cachedPredicate = NSPredicate(format: "cached != nil")
+    private lazy var cachedPredicate: Predicate = (.keyPath(#keyPath(Entity.cached)) != .value(.null))
     
     // MARK: - Loading
     
@@ -38,27 +39,26 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(_ sender: AnyObject) {
         
         guard tableView.selectedRow >= 0
             else { return }
         
         defer { tableView.deselectAll(sender) }
         
-        let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
+        let event = fetchedResultsController.fetchedObjects![tableView.selectedRow]
         
-        AppDelegate.shared.mainWindowController.view(.event, identifier: event.identifier)
+        AppDelegate.shared.mainWindowController.view(data: .event, identifier: event.id)
     }
     
     // MARK: - Private Methods
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        //let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        let summitPredicate: Predicate = #keyPath(EventManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, cachedPredicate])
+        let predicate: Predicate = .compound(.and([self.predicate, summitPredicate, cachedPredicate]))
         
         self.fetchedResultsController = NSFetchedResultsController(Event.self,
                                                                    delegate: self,
@@ -79,9 +79,9 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         }
     }
     
-    private func configure(cell cell: EventTableViewCell, at row: Int) {
+    private func configure(cell: EventTableViewCell, at row: Int) {
         
-        let eventManagedObject = self.fetchedResultsController.fetchedObjects![row] as! EventManagedObject
+        let eventManagedObject = self.fetchedResultsController.fetchedObjects![row]
         
         let eventDetail = ScheduleItem(managedObject: eventManagedObject)
         
@@ -90,19 +90,19 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         cell.locationLabel.stringValue = eventDetail.location
         cell.trackLabel.stringValue = eventDetail.track
         cell.typeLabel.stringValue = eventDetail.eventType
-        cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clearColor()
+        cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clear
     }
     
     // MARK: - NSTableViewDataSource
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! EventTableViewCell
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! EventTableViewCell
         
         configure(cell: cell, at: row)
         
@@ -111,12 +111,12 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         

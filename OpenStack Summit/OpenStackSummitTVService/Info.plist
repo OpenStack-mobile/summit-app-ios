@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
 	<string>GitVersion</string>
 	<key>NSExtension</key>
@@ -34,11 +34,11 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).ServiceProvider</string>
 	</dict>
+	<key>SummitEnvironment</key>
+	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
-	<key>SummitEnvironment</key>
-	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 </dict>
 </plist>

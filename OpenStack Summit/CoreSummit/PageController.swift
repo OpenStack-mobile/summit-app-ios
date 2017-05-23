@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 
 public final class PageController<Item> {
     
@@ -15,13 +15,13 @@ public final class PageController<Item> {
     
     public let perPage: Int
     
-    public var fetch: (page: Int, perPage: Int, response: (ErrorValue<Page<Item>>) -> ()) -> ()
+    public var fetch: (_ page: Int, _ perPage: Int, _ response: @escaping (ErrorValue<Page<Item>>) -> ()) -> ()
     
     public var cached: (() -> [Item])?
     
     public var callback = PageControllerCallback<Item>()
     
-    public let operationQueue: NSOperationQueue
+    public let operationQueue: OperationQueue
     
     public private(set) var pages = [Page<Item>]() {
         
@@ -39,9 +39,9 @@ public final class PageController<Item> {
     
     // MARK: - Initialization
     
-    public init(fetch: (page: Int, perPage: Int, response: (ErrorValue<Page<Item>>) -> ()) -> (),
+    public init(fetch: @escaping (_ page: Int, _ perPage: Int, _ response: @escaping (ErrorValue<Page<Item>>) -> ()) -> (),
                 perPage: Int = 10,
-                operationQueue: NSOperationQueue = NSOperationQueue.mainQueue()) {
+                operationQueue: OperationQueue = OperationQueue.main) {
         
         self.fetch = fetch
         self.perPage = perPage
@@ -71,21 +71,21 @@ public final class PageController<Item> {
         
         callback.willLoadData()
         
-        fetch(page: nextPage, perPage: perPage) { [weak self] (response) in
+        fetch(nextPage, perPage) { [weak self] (response) in
             
             guard let controller = self else { return }
             
-            controller.operationQueue.addOperationWithBlock {
+            controller.operationQueue.addOperation {
                 
                 controller.isLoading = false
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
-                    controller.callback.didLoadNextPage(.Error(error))
+                    controller.callback.didLoadNextPage(.error(error))
                     
-                case let .Value(value):
+                case let .value(value):
                     
                     if controller.cacheLoaded {
                         
@@ -108,7 +108,7 @@ public final class PageController<Item> {
                         
                         let removedRow = PageControllerChange(index: previousLastIndex, change: .delete)
                         
-                        controller.callback.didLoadNextPage(.Value([removedRow]))
+                        controller.callback.didLoadNextPage(.value([removedRow]))
                         
                         return
                     }
@@ -127,7 +127,7 @@ public final class PageController<Item> {
                         changes.append(PageControllerChange(index: index, change: .insert))
                     }
                     
-                    controller.callback.didLoadNextPage(.Value(changes))
+                    controller.callback.didLoadNextPage(.value(changes))
                 }
             }
         }
@@ -146,7 +146,7 @@ public final class PageController<Item> {
     // MARK: - Private Methods
     
     @inline(__always)
-    private func updateItems(oldValue: [Page<Item>]) {
+    private func updateItems(_ oldValue: [Page<Item>]) {
         
         // reset if loaded from cache previously
         if oldValue.isEmpty && items.isEmpty == false {
@@ -163,7 +163,7 @@ public final class PageController<Item> {
             
             // get items from pages
             
-            items = pages.reduce([Item](), combine: { $0.0 + $0.1.items }).map({ .item($0) })
+            items = pages.reduce([Item](), { $0.0 + $0.1.items }).map({ .item($0) })
             
             if dataLoaded == false && items.isEmpty == false {
                 

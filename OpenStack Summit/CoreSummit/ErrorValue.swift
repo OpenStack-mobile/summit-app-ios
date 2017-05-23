@@ -9,6 +9,6 @@
 /// Basic wrapper for error / value pairs.
 public enum ErrorValue<T> {
     
-    case Error(ErrorType)
-    case Value(T)
+    case error(Error)
+    case value(T)
 }

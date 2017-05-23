@@ -16,15 +16,15 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-     @IBOutlet weak var tableView: WKInterfaceTable!
+     @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
-    private(set) var dates = [NSDate]()
+    private(set) var dates = [Date]()
     
-    private static let dateFormatter: NSDateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MMMM d"
         
@@ -33,8 +33,8 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -61,13 +61,13 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         let summit = Store.shared.cache!
         
-        let dayCount = summit.end.toFoundation().mt_daysSinceDate(summit.start.toFoundation())
+        let dayCount = (summit.end as NSDate).mt_days(since: summit.start)
         
-        self.dates = [NSDate]()
+        self.dates = [Date]()
         
         for index in 0 ..< dayCount {
             
-            let date = summit.start.toFoundation().mt_dateDaysAfter(index)
+            let date = (summit.start as NSDate).mt_dateDays(after: index) as Date
             
             dates.append(date)
         }
@@ -76,11 +76,11 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(dates.count, withRowType: LabelCellController.identifier)
         
-        for (index, date) in dates.enumerate() {
+        for (index, date) in dates.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! LabelCellController
+            let cell = tableView.rowController(at: index) as! LabelCellController
             
-            let dateText = EventDatesInterfaceController.dateFormatter.stringFromDate(date)
+            let dateText = EventDatesInterfaceController.dateFormatter.string(from: date)
             
             cell.textLabel.setText(dateText)
         }
@@ -88,7 +88,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         // get value for selected row
         
@@ -96,12 +96,12 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         // get events for date
         
-        let startDate = selectedDate.mt_startOfCurrentDay()
-        let endDate = selectedDate.mt_endOfCurrentDay()
+        let startDate = (selectedDate as NSDate).mt_startOfCurrentDay()
+        let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()
         
         let events = Store.shared.cache?.schedule.filter({
             
-            return $0.start.toFoundation().mt_isBetweenDate(startDate, andDate: endDate)
+            return ($0.start as NSDate).mt_isBetweenDate(startDate, andDate: endDate)
         })
         
         return Context(events)

@@ -27,44 +27,44 @@ final class CopyableLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
     
     private func setup() {
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CopyableLabel.showMenu(_:))))
     }
     
     // MARK: - Actions
     
-    func showMenu(sender: AnyObject?) {
+    func showMenu(_ sender: AnyObject?) {
         
         becomeFirstResponder()
         
-        let menuController = UIMenuController.sharedMenuController()
-        if !menuController.menuVisible {
-            menuController.setTargetRect(bounds, inView: self)
+        let menuController = UIMenuController.shared
+        if !menuController.isMenuVisible {
+            menuController.setTargetRect(bounds, in: self)
             menuController.setMenuVisible(true, animated: true)
         }
     }
     
-    override func copy(sender: AnyObject?) {
+    override func copy(_ sender: Any?) {
         
-        let pasteBoard = UIPasteboard.generalPasteboard()
+        let pasteBoard = UIPasteboard.general
         pasteBoard.string = text
-        let menuController = UIMenuController.sharedMenuController()
+        let menuController = UIMenuController.shared
         menuController.setMenuVisible(false, animated: true)
     }
     
     // MARK: - Methods
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         
         return true
     }
     
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         
         switch action {
             

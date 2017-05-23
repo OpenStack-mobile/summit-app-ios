@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public struct Summit: Named, Equatable {
     
@@ -27,7 +27,7 @@ public struct Summit: Named, Equatable {
     
     public var active: Bool
     
-    public var webpageURL: String
+    public var webpage: URL
     
     public var sponsors: Set<Company>
     
@@ -71,6 +71,6 @@ public func == (lhs: Summit, rhs: Summit) -> Bool {
         && lhs.trackGroups == rhs.trackGroups
         && lhs.eventTypes == rhs.eventTypes
         && lhs.schedule == rhs.schedule
-        && lhs.webpageURL == rhs.webpageURL
+        && lhs.webpage == rhs.webpage
         && lhs.wirelessNetworks == rhs.wirelessNetworks
 }

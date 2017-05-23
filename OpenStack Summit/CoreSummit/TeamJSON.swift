@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Team {
     
@@ -18,18 +18,18 @@ public extension Team {
 
 extension Team: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let encodedName = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let name = String(openStackEncoded: encodedName),
-            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
-            let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
+            let created = JSONObject[JSONKey.created_at.rawValue]?.integerValue,
+            let updated = JSONObject[JSONKey.updated_at.rawValue]?.integerValue,
             let ownerJSON = JSONObject[JSONKey.owner.rawValue],
-            let owner = Member(JSONValue: ownerJSON),
+            let owner = Member(json: ownerJSON),
             let membersJSONArray = JSONObject[JSONKey.members.rawValue]?.arrayValue,
-            let members = TeamMember.fromJSON(membersJSONArray)
+            let members = TeamMember.from(json: membersJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -52,7 +52,7 @@ extension Team: JSONDecodable {
         
         if let invitationsJSONArray = JSONObject[JSONKey.invitations.rawValue]?.arrayValue {
             
-            guard let invitations = TeamInvitation.fromJSON(invitationsJSONArray)
+            guard let invitations = TeamInvitation.from(json: invitationsJSONArray)
                 else { return nil }
             
             self.invitations = Set(invitations)

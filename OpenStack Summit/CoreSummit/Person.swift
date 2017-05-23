@@ -12,7 +12,7 @@ public protocol Person: Named {
     
     var lastName: String { get }
         
-    var pictureURL: String { get }
+    var picture: URL { get }
     
     var title: String? { get }
     
@@ -30,22 +30,26 @@ public protocol Person: Named {
 public extension Person {
     
     var name: String { return firstName + " " + lastName }
+}
+
+// MARK: - Address Book 
+
+/// Type for organizing `Person` entities into an address book.
+public struct AddressBook {
+    
+    /// All the sections in the address book.
+    public static let sections = ["#","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
     /// Generate an uppercase letter to use as an address book section derived from the person's name.
-    var addressBookSectionName: String {
+    public static func section<T: Person>(for person: T) -> String {
         
-        let unknownLetter = "#"
+        let unknownLetter = sections[0] // "#"
         
-        guard let firstLetter = self.name.characters.first
+        guard let firstLetter = person.name.characters.first
             else { return unknownLetter }
         
-        let uppercaseLetter = String(firstLetter).uppercaseString
+        let uppercaseLetter = String(firstLetter).uppercased()
         
-        return Self.addressBookSections.contains(uppercaseLetter) ? uppercaseLetter : unknownLetter
-    }
-    
-    static var addressBookSections: [String] {
-        
-        return ["#","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        return sections.contains(uppercaseLetter) ? uppercaseLetter : unknownLetter
     }
 }

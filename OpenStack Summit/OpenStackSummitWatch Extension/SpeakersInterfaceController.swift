@@ -16,11 +16,11 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var searchButton: WKInterfaceButton!
+    @IBOutlet private(set) weak var searchButton: WKInterfaceButton!
     
-    @IBOutlet weak var tableView: WKInterfaceTable!
+    @IBOutlet private(set) weak var tableView: WKInterfaceTable!
     
-    @IBOutlet weak var emptyLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var emptyLabel: WKInterfaceLabel!
     
     // MARK: - Properties
     
@@ -31,8 +31,8 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // disable speaker search for selected speakers
         if let speakers = (context as? Context<[Speaker]>)?.value {
@@ -59,9 +59,9 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func search(sender: WKInterfaceButton) {
+    @IBAction func search(_ sender: WKInterfaceButton) {
         
-        presentTextInputControllerWithSuggestionsForLanguage({ self.autosuggestions(for: $0) }, allowedInputMode: .Plain) { (input) in
+        presentTextInputControllerWithSuggestions(forLanguage: { self.autosuggestions(for: $0) }, allowedInputMode: .plain) { (input) in
             
             guard let inputText = input as? [String]
                 else { return }
@@ -71,7 +71,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
                 
                 for string in inputText {
                     
-                    if $0.name.containsString(string) {
+                    if $0.name.contains(string) {
                         
                         return true
                     }
@@ -84,7 +84,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let speaker = speakers[rowIndex]
         
@@ -99,9 +99,9 @@ final class SpeakersInterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(speakers.count, withRowType: SpeakerCellController.identifier)
         
-        for (index, speaker) in speakers.enumerate() {
+        for (index, speaker) in speakers.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! SpeakerCellController
+            let cell = tableView.rowController(at: index) as! SpeakerCellController
             
             cell.nameLabel.setText(speaker.name)
             cell.titleLabel.setText(speaker.title)
@@ -135,7 +135,7 @@ final class SpeakerCellController: NSObject {
     
     static let identifier = "SpeakerCell"
     
-    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var nameLabel: WKInterfaceLabel!
     
-    @IBOutlet weak var titleLabel: WKInterfaceLabel!
+    @IBOutlet private(set) weak var titleLabel: WKInterfaceLabel!
 }

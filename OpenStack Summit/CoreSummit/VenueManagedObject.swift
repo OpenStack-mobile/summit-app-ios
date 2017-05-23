@@ -42,7 +42,7 @@ extension Venue: CoreDataDecodable {
     
     public init(managedObject: VenueManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.type = ClassName(rawValue: managedObject.venueType)!
@@ -62,7 +62,7 @@ extension Venue: CoreDataDecodable {
 
 extension Venue: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> VenueManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> VenueManagedObject {
         
         let managedObject = try cached(context)
         

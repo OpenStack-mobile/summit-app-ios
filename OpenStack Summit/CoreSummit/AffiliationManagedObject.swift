@@ -7,15 +7,15 @@
 //
 
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class AffiliationManagedObject: Entity {
     
     @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var start: NSDate?
+    @NSManaged public var start: Date?
     
-    @NSManaged public var end: NSDate?
+    @NSManaged public var end: Date?
     
     @NSManaged public var isCurrent: Bool
     
@@ -26,14 +26,14 @@ extension Affiliation: CoreDataDecodable {
     
     public init(managedObject: AffiliationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.isCurrent = managedObject.isCurrent
-        self.member =  managedObject.member.identifier
+        self.member =  managedObject.member.id
         self.organization = AffiliationOrganization(managedObject: managedObject.organization)
         
         if let startDate = managedObject.start {
             
-            self.start = Date(foundation: startDate)
+            self.start = startDate
             
         } else {
             
@@ -42,7 +42,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let endDate = managedObject.end {
             
-            self.end = Date(foundation: endDate)
+            self.end = endDate
             
         } else {
             
@@ -53,12 +53,12 @@ extension Affiliation: CoreDataDecodable {
 
 extension Affiliation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> AffiliationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> AffiliationManagedObject {
         
         let managedObject = try cached(context)
 
-        managedObject.start = start?.toFoundation()
-        managedObject.end = end?.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.isCurrent = isCurrent
         managedObject.member = try context.relationshipFault(member)
         managedObject.organization = try context.relationshipFault(organization)

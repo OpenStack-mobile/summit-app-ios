@@ -7,22 +7,23 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import CoreData
+import Predicate
 
 @objc(OSSTVVenueDirectoryViewController)
 final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<VenueManagedObject>!
     
     private var mapViewController: VenueMapViewController!
     
-    private var lastSelectedIndexPath: NSIndexPath?
+    private var lastSelectedIndexPath: IndexPath?
     
-    private let delayedSeguesOperationQueue = NSOperationQueue()
+    private let delayedSeguesOperationQueue = OperationQueue()
     
     // MARK: - Loading
     
@@ -44,24 +45,31 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         tableView.layoutMargins.right = 20
         
         // show map view controller
-        performSegueWithIdentifier("showVenueMap", sender: self)
+        performSegue(withIdentifier: "showVenueMap", sender: self)
         
         // setup fetched results controller
+                
+        //let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        let predicate: Predicate = .keyPath(#keyPath(VenueManagedObject.latitude)) != .value(.null)
+            && .keyPath(#keyPath(VenueManagedObject.longitude)) != .value(.null)
+            && #keyPath(VenueManagedObject.summit.id) == SummitManager.shared.summit.value
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let sort = [NSSortDescriptor(key: #keyPath(VenueManagedObject.venueType), ascending: true),
+                    NSSortDescriptor(key: #keyPath(VenueManagedObject.name), ascending: true)]
         
-        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
-        
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   sectionNameKeyPath: #keyPath(VenueManagedObject.venueType),
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
         self.tableView.reloadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.updateUI()
@@ -74,37 +82,37 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         self.title = self.isDataLoaded ? "Venues" : "Loading..."
     }
     
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: UITableViewCell, at indexPath: IndexPath) {
         
         let venue = self[indexPath]
         
         cell.textLabel!.text = venue.name
     }
     
-    private subscript (indexPath: NSIndexPath) -> Venue {
+    private subscript (indexPath: IndexPath) -> Venue {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! VenueManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! VenueManagedObject
         
         return Venue(managedObject: managedObject)
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return self.fetchedResultsController?.sections?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = self.fetchedResultsController.sections![section]
         
         return section.numberOfObjects
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("VenueTableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VenueTableViewCell", for: indexPath)
         
         configure(cell: cell, at: indexPath)
         
@@ -113,7 +121,7 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard let sectionString = self.fetchedResultsController.sections?[section].name,
             let locationType = Venue.LocationType(rawValue: sectionString)
@@ -126,33 +134,33 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         }
     }
         
-    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         // Check that the next focus view is a child of the table view.
-        guard let nextFocusedView = context.nextFocusedView where nextFocusedView.isDescendantOfView(tableView) else { return }
+        guard let nextFocusedView = context.nextFocusedView, nextFocusedView.isDescendant(of: tableView) else { return }
         guard let indexPath = context.nextFocusedIndexPath else { return }
         
         // Cancel any previously queued segues.
         delayedSeguesOperationQueue.cancelAllOperations()
         
         // Create an `NSBlockOperation` to perform the detail segue after a delay.
-        let performSegueOperation = NSBlockOperation()
+        let performSegueOperation = BlockOperation()
         
         performSegueOperation.addExecutionBlock { [weak self, unowned performSegueOperation] in
             
             guard let controller = self else { return }
             
             // Pause the block so the segue isn't immediately performed.
-            NSThread.sleepForTimeInterval(0.1)
+            Thread.sleep(forTimeInterval: 0.1)
             
             /*
              Check that the operation wasn't cancelled and that the segue identifier
              is different to the last performed segue identifier.
              */
-            guard performSegueOperation.cancelled == false
+            guard performSegueOperation.isCancelled == false
                 && indexPath != controller.lastSelectedIndexPath
                 else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
                 // Record the last performed segue identifier.
                 controller.lastSelectedIndexPath = indexPath
@@ -175,60 +183,60 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView.endUpdates()
         
         self.updateUI()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-        case .Insert:
+        case .insert:
             
             if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView.insertRows(at: [insertIndexPath], with: .fade)
             }
-        case .Delete:
+        case .delete:
             
             if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView.deleteRows(at: [deleteIndexPath], with: .fade)
             }
-        case .Update:
+        case .update:
             if let updateIndexPath = indexPath,
-                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
+                let cell = self.tableView.cellForRow(at: updateIndexPath) {
                 
                 self.configure(cell: cell, at: updateIndexPath)
             }
-        case .Move:
+        case .move:
             
             if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView.deleteRows(at: [deleteIndexPath], with: .fade)
             }
             
             if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView.insertRows(at: [insertIndexPath], with: .fade)
             }
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         switch type {
             
-        case .Insert:
+        case .insert:
             
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
             
-        case .Delete:
+        case .delete:
             
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
             
         default: break
         }
@@ -236,19 +244,19 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case "showVenueMap":
             
-            self.mapViewController = segue.destinationViewController as! VenueMapViewController
+            self.mapViewController = segue.destination as! VenueMapViewController
             
         case "showVenueDetail":
             
             let venue = self[tableView.indexPathForSelectedRow!]
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let venueDetailViewController = navigationController.topViewController as! VenueDetailViewController
             

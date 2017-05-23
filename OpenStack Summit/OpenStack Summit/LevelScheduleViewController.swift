@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class LevelScheduleViewController: ScheduleViewController {
     
     // MARK: - Properties
     
-    var level: String!
+    var level: Level!
     
     // MARK: - Loading
     
@@ -23,12 +23,12 @@ final class LevelScheduleViewController: ScheduleViewController {
         
         assert(level != nil, "Level not set")
         
-        self.title = level.uppercaseString
+        self.title = level.rawValue.uppercased()
     }
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -47,14 +47,14 @@ final class LevelScheduleViewController: ScheduleViewController {
             }
         }
         
-        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
+        let date = DateFilter.interval(start: startDate, end: endDate)
         
-        let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Date] = []
         for event in events {
-            let timeZone = NSTimeZone(name: event.summit.timeZone)!
-            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            let timeZone = TimeZone(identifier: event.summit.timeZone)!
+            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
             if !activeDates.contains(startDate) {
                 activeDates.append(startDate)
             }
@@ -63,7 +63,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -82,7 +82,7 @@ final class LevelScheduleViewController: ScheduleViewController {
             }
         }
         
-        let events = try! EventManagedObject.filter(filter, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(filter, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }

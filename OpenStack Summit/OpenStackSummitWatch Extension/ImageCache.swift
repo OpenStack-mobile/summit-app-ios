@@ -16,9 +16,9 @@ public final class ImageCache {
     
     // MARK: - Properties
     
-    private let internalCache = NSCache()
+    private let internalCache = NSCache<NSString, NSData>()
     
-    public var urlSession = NSURLSession.sharedSession()
+    public var urlSession = URLSession.shared
     
     // MARK: - Accessors
     
@@ -43,26 +43,26 @@ public final class ImageCache {
         internalCache.removeAllObjects()
     }
     
-    public func load(url: NSURL, completion: Response -> ()) {
+    public func load(_ url: URL, completion: @escaping (Response) -> ()) {
         
         // attempt to get from cache first
         if let cachedImageData = self[url] {
             
-            completion(.Data(cachedImageData))
+            completion(.data(cachedImageData))
             return
         }
         
-        let task = urlSession.dataTaskWithURL(url) { (data, response, error) in
+        let task = urlSession.dataTask(with: url, completionHandler: { (data, response, error) in
             
             guard error == nil else {
                 
-                completion(.Error(error!))
+                completion(.error(error!))
                 return
             }
             
             guard let data = data else {
                 
-                completion(.NoData(response!))
+                completion(.noData(response!))
                 return
             }
             
@@ -70,24 +70,26 @@ public final class ImageCache {
             self[url] = data
             
             // success!
-            completion(.Data(data))
-        }
+            completion(.data(data))
+        }) 
         
         task.resume()
     }
     
     // MARK: - Subscripting
     
-    public subscript (url: NSURL) -> NSData? {
+    public subscript (url: URL) -> Data? {
         
-        get { return internalCache.objectForKey(url.absoluteString!) as? NSData }
+        get { return internalCache.object(forKey: url.absoluteString as NSString) as Data? }
         
         set {
             
-            guard let newData = newValue
-                else { internalCache.removeObjectForKey(url.absoluteString!); return }
+            let key = url.absoluteString as NSString
             
-            internalCache.setObject(newData, forKey: url.absoluteString!)
+            guard let newData = newValue
+                else { internalCache.removeObject(forKey: key); return }
+            
+            internalCache.setObject(newData as NSData, forKey: key)
         }
     }
 }
@@ -98,30 +100,30 @@ public extension ImageCache {
     
     public enum Response {
         
-        case Error(ErrorType)
-        case NoData(NSURLResponse)
-        case Data(NSData)
+        case error(Swift.Error)
+        case noData(URLResponse)
+        case data(Foundation.Data)
     }
 }
 
 public protocol ImageCacheView: class, Hashable {
     
-    func loadCached(url: NSURL, placeholder: UIImage?, cache: ImageCache, completion: (ImageCache.Response -> ())?)
+    func loadCached(_ url: URL, placeholder: UIImage?, cache: ImageCache, completion: ((ImageCache.Response) -> ())?)
     
     #if os(watchOS)
-    func setImage(image: UIImage?)
+    func setImage(_ image: UIImage?)
     #else
     var image: UIImage? { get set }
     #endif
     
-    func setImageData(imageData: NSData?)
+    func setImageData(_ imageData: Data?)
 }
 
-private var InProgressCache = [Int: NSURL]()
+private var InProgressCache = [Int: URL]()
 
 public extension ImageCacheView {
     
-    public func loadCached(url: NSURL, placeholder: UIImage? = nil, cache: ImageCache = ImageCache.shared, completion: (ImageCache.Response -> ())? = nil) {
+    public func loadCached(_ url: URL, placeholder: UIImage? = nil, cache: ImageCache = ImageCache.shared, completion: ((ImageCache.Response) -> ())? = nil) {
         
         // set placeholder
         if let placeholder = placeholder {
@@ -148,9 +150,9 @@ public extension ImageCacheView {
             // remove from cache
             InProgressCache[hash] = nil
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 
-                if case let .Data(data) = response {
+                if case let .data(data) = response {
                     
                     view.setImageData(data)
                 }
@@ -174,12 +176,12 @@ extension WKInterfaceImage: ImageCacheView { }
 
 extension WKInterfaceGroup: ImageCacheView {
     
-    public func setImage(image: UIImage?) {
+    public func setImage(_ image: UIImage?) {
         
         setBackgroundImage(image)
     }
     
-    public func setImageData(imageData: NSData?) {
+    public func setImageData(_ imageData: Data?) {
         
         setBackgroundImageData(imageData)
     }
@@ -187,7 +189,7 @@ extension WKInterfaceGroup: ImageCacheView {
 
 extension WKInterfaceMovie: ImageCacheView {
     
-    public func setImage(image: UIImage?) {
+    public func setImage(_ image: UIImage?) {
         
         let watchImage: WKImage?
         
@@ -203,7 +205,7 @@ extension WKInterfaceMovie: ImageCacheView {
         setPosterImage(watchImage)
     }
     
-    public func setImageData(imageData: NSData?) {
+    public func setImageData(_ imageData: Data?) {
         
         let watchImage: WKImage?
         
@@ -226,7 +228,7 @@ import AppKit
 
 extension NSImageView: ImageCacheView {
     
-    public func setImageData(imageData: NSData?) {
+    public func setImageData(_ imageData: Data?) {
         
         if let data = imageData {
             

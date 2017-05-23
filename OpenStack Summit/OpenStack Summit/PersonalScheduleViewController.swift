@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
-import SwiftFoundation
+import Foundation
 
 final class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
@@ -23,20 +23,19 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
         let events = attendeeRole.schedule
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
-                && Date(foundation: $0.end) <= Date(foundation: endDate) })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ $0.start >= startDate && $0.end <= endDate })
+            .sorted(by: { $0.0.start < $0.1.start })
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Date] = []
         for event in events {
-            let timeZone = NSTimeZone(name: event.summit.timeZone)!
-            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            let timeZone = TimeZone(identifier: event.summit.timeZone)!
+            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
             if !activeDates.contains(startDate) {
                 activeDates.append(startDate)
             }
@@ -45,23 +44,23 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole,
             case .interval(let interval) = filter
             else { return [] }
         
         let events = attendeeRole.schedule
-            .filter({ Date(foundation: $0.start) >= interval.start
-                && Date(foundation: $0.end) <= interval.end })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ $0.start >= interval.start
+                && $0.end <= interval.end })
+            .sorted(by: { $0.0.start < $0.1.start })
         
         return ScheduleItem.from(managedObjects: events)
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Schedule")
     }

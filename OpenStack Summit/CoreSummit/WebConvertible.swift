@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 /// A type which can export a URL to open the summit data on the website.
 public protocol WebConvertible: Unique {
@@ -16,9 +16,12 @@ public protocol WebConvertible: Unique {
 
 public extension WebConvertible {
     
-    func toWebpageURL(summit: Summit) -> String {
+    func webpage(for summit: Summit) -> URL {
         
-        return summit.webpageURL + "/summit-schedule/" + Self.webPathComponent.rawValue + "/\(identifier)"
+        return summit.webpage
+            .appendingPathComponent("summit-schedule")
+            .appendingPathComponent(Self.webPathComponent.rawValue)
+            .appendingPathComponent("\(identifier)")
     }
 }
 

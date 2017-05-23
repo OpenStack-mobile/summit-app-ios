@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
 import CoreSummit
 
 extension Store {
@@ -33,38 +32,53 @@ extension Store {
         return store
     }
     
-    static let fileURL: NSURL = {
+    static let fileURL: URL = {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
+        
+        // get cache folder
         
         #if os(iOS) || os(watchOS) || os(OSX)
-        let folderURL = try! fileManager.URLForDirectory(NSSearchPathDirectory.CachesDirectory,
-                                                         inDomain: NSSearchPathDomainMask.UserDomainMask,
-                                                         appropriateForURL: nil,
-                                                         create: false)
+        let cacheURL = try! fileManager.url(for: .cachesDirectory,
+                                             in: .userDomainMask,
+                                             appropriateFor: nil,
+                                             create: false)
+        
         #elseif os(tvOS)
             
-        let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroup)!
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup)!
             
-        let folderURL = containerURL
-            .URLByAppendingPathComponent("Library", isDirectory: true)!
-            .URLByAppendingPathComponent("Caches", isDirectory: true)!
+        let cacheURL = containerURL
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Caches", isDirectory: true)
             
         #endif
         
-        let fileURL = folderURL.URLByAppendingPathComponent("data.sqlite", isDirectory: false)!
+        // get app folder
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
+        let folderURL = cacheURL.appendingPathComponent(bundleIdentifier, isDirectory: true)
+        
+        // create folder if doesnt exist
+        var folderExists: ObjCBool = false
+        if fileManager.fileExists(atPath: folderURL.path, isDirectory: &folderExists) == false
+            || folderExists.boolValue == false {
+            
+            try! fileManager.createDirectory(at: folderURL, withIntermediateDirectories: true)
+        }
+        
+        let fileURL = folderURL.appendingPathComponent("data.sqlite", isDirectory: false)
         
         return fileURL
     }()
     
-    static func createPersistentStore(coordinator: NSPersistentStoreCoordinator) throws -> NSPersistentStore {
+    static func createPersistentStore(_ coordinator: NSPersistentStoreCoordinator) throws -> NSPersistentStore {
         
         func createStore() throws -> NSPersistentStore {
             
-            return try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
-                                                              configuration: nil,
-                                                              URL: Store.fileURL,
-                                                              options: nil)
+            return try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+                                                      configurationName: nil,
+                                                      at: Store.fileURL,
+                                                      options: nil)
         }
         
         var store: NSPersistentStore!
@@ -83,19 +97,19 @@ extension Store {
         return store
     }
     
-    static func deletePersistentStore(store: (NSPersistentStoreCoordinator, NSPersistentStore)? = nil) throws {
+    static func deletePersistentStore(_ store: (NSPersistentStoreCoordinator, NSPersistentStore)? = nil) throws {
         
         let url = self.fileURL
         
-        if NSFileManager.defaultManager().fileExistsAtPath(url.path!) {
+        if FileManager.default.fileExists(atPath: url.path) {
             
             // delete file
-            try NSFileManager.defaultManager().removeItemAtURL(url)
+            try FileManager.default.removeItem(at: url)
         }
         
         if let (psc, persistentStore) = store {
             
-            try psc.removePersistentStore(persistentStore)
+            try psc.remove(persistentStore)
         }
     }
     

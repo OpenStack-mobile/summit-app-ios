@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension TeamMember {
     
@@ -18,15 +18,15 @@ public extension TeamMember {
 
 extension TeamMember: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let team = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let team = JSONObject[JSONKey.team_id.rawValue]?.integerValue,
             let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
             let permission = TeamPermission(rawValue: permissionString),
             let memberJSON = JSONObject[JSONKey.member.rawValue],
-            let member = Member(JSONValue: memberJSON)
+            let member = Member(json: memberJSON)
             else { return nil }
         
         self.identifier = identifier

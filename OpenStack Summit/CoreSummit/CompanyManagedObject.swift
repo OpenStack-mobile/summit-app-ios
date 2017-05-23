@@ -24,14 +24,14 @@ extension Company: CoreDataDecodable {
     
     public init(managedObject: CompanyManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }
 
 extension Company: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> CompanyManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> CompanyManagedObject {
         
         let managedObject = try cached(context)
         

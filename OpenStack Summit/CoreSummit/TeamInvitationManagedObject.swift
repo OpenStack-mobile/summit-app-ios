@@ -8,13 +8,13 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class TeamInvitationManagedObject: Entity {
     
-    @NSManaged public var created: NSDate
+    @NSManaged public var created: Date
     
-    @NSManaged public var updatedDate: NSDate
+    @NSManaged public var updatedDate: Date
     
     @NSManaged public var permission: String
     
@@ -33,25 +33,25 @@ extension TeamInvitation: CoreDataDecodable {
     
     public init(managedObject: TeamInvitationManagedObject) {
         
-        self.identifier = managedObject.identifier
-        self.created = Date(foundation: managedObject.created)
-        self.updated = Date(foundation: managedObject.updatedDate)
+        self.identifier = managedObject.id
+        self.created = managedObject.created
+        self.updated = managedObject.updatedDate
         self.accepted = managedObject.accepted
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)
         self.inviter = Member(managedObject: managedObject.inviter)
-        self.team = managedObject.team.identifier
+        self.team = managedObject.team.id
     }
 }
 
 extension TeamInvitation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
         
         let managedObject = try cached(context)
         
-        managedObject.created = created.toFoundation()
-        managedObject.updatedDate = updated.toFoundation()
+        managedObject.created = created
+        managedObject.updatedDate = updated
         managedObject.accepted = accepted
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)
@@ -66,12 +66,12 @@ extension TeamInvitation: CoreDataEncodable {
 
 extension ListTeamInvitations.Response.Invitation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
         
         let managedObject = try cached(context)
         
-        managedObject.created = created.toFoundation()
-        managedObject.updatedDate = updated.toFoundation()
+        managedObject.created = created
+        managedObject.updatedDate = updated
         managedObject.accepted = accepted
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)

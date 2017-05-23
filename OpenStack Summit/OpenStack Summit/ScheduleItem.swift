@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 import CoreData
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public struct ScheduleItem: CoreDataDecodable {
     
@@ -32,11 +32,11 @@ public struct ScheduleItem: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.identifier = event.identifier
+        self.identifier = event.id
         self.name = event.name
-        self.summit = event.summit.identifier
-        self.start = Date(foundation: event.start)
-        self.end = Date(foundation: event.end)
+        self.summit = event.summit.id
+        self.start = event.start
+        self.end = event.end
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
@@ -51,11 +51,11 @@ public struct ScheduleItem: CoreDataDecodable {
 
 public extension ScheduleItem {
     
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [ScheduleItem] {
+    static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [ScheduleItem] {
         
-        let predicate = NSPredicate(format: "name CONTAINS [c] %@ OR ANY presentation.speakers.firstName CONTAINS [c] %@ OR ANY presentation.speakers.lastName CONTAINS [c] %@ OR presentation.level CONTAINS [c] %@ OR ANY tags.name CONTAINS [c] %@ OR eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        let managedObjects = try EventManagedObject.search(searchTerm, context: context)
         
-        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
+        return ScheduleItem.from(managedObjects: managedObjects)
     }
 }
 
@@ -63,7 +63,7 @@ public extension ScheduleItem {
 
 internal extension ScheduleItem {
     
-    static func getSponsors(event: EventManagedObject) -> String {
+    static func getSponsors(_ event: EventManagedObject) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -78,50 +78,50 @@ internal extension ScheduleItem {
         return sponsors
     }
     
-    static func getTime(event: EventManagedObject) -> String {
+    static func getTime(_ event: EventManagedObject) -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone)
         dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) - \(stringDateTo)"
     }
     
-    static func getDay(event: EventManagedObject) -> String {
+    static func getDay(_ event: EventManagedObject) -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
-        dateFormatter.dateStyle = .MediumStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone)
+        dateFormatter.dateStyle = .medium
         
-        return dateFormatter.stringFromDate(event.start)
+        return dateFormatter.string(from: event.start)
     }
     
-    static func getDateTime(event: EventManagedObject) -> String {
+    static func getDateTime(_ event: EventManagedObject) -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        let stringDateFrom = dateFormatter.string(from: event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        let stringDateTo = dateFormatter.string(from: event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: EventManagedObject) -> String {
+    static func getLocation(_ event: EventManagedObject) -> String {
         
         // only show after date
-        guard let startShowingVenues = event.summit.startShowingVenues
-            where NSDate().mt_isAfter(startShowingVenues)
+        guard let startShowingVenues = event.summit.startShowingVenues,
+            NSDate().mt_is(after: startShowingVenues)
             else { return "" }
         
         var location = ""
@@ -130,8 +130,7 @@ internal extension ScheduleItem {
             
             location = room.venue.name
             
-            if let floorName = room.floor?.name
-                where floorName.isEmpty == false {
+            if let floorName = room.floor?.name, floorName.isEmpty == false {
                 
                 location += " - " + floorName
             }
@@ -150,19 +149,19 @@ internal extension ScheduleItem {
     }
     
     @inline(__always)
-    static func getTrack(event: EventManagedObject) -> String {
+    static func getTrack(_ event: EventManagedObject) -> String {
         
         return event.track?.name ?? ""
     }
     
     @inline(__always)
-    static func getTrackGroupColor(event: EventManagedObject) -> String {
+    static func getTrackGroupColor(_ event: EventManagedObject) -> String {
         
-        guard let track = event.track
-            where track.groups.isEmpty == false
+        guard let track = event.track,
+            track.groups.isEmpty == false
             else { return "" }
         
-        let trackGroups = track.groups.sort { $0.0.id < $0.1.id }
+        let trackGroups = track.groups.sorted { $0.0.id < $0.1.id }
         
         return trackGroups[0].color
     }

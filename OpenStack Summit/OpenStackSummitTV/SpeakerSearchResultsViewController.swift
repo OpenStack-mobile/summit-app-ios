@@ -11,6 +11,7 @@ import UIKit
 import CoreSummit
 import Haneke
 import CoreData
+import Predicate
 
 final class SpeakerSearchResultsViewController: TableViewController, UISearchResultsUpdating {
     
@@ -21,7 +22,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
         didSet {
             
             // Return if the filter string hasn't changed.
-            guard filterString != oldValue && isViewLoaded() else { return }
+            guard filterString != oldValue && isViewLoaded else { return }
             
             filterChanged()
         }
@@ -44,38 +45,28 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     private func filterChanged() {
         
-        var predicates = [NSPredicate]()
+        let summitID = SummitManager.shared.summit.value
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
-        
-        let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
-        
-        predicates.append(summitPredicate)
+        //let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
+        var predicate: Predicate = (#keyPath(SpeakerManagedObject.summits.id)).in([summitID])
         
         if filterString.isEmpty == false {
             
-            let filterPredicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            let value: Expression = .value(.string(filterString))
             
-            predicates.append(filterPredicate)
+            //let filterPredicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            let filterPredicate: Predicate = (#keyPath(SpeakerManagedObject.firstName)).compare(.contains, [.caseInsensitive], value)
+                || (#keyPath(SpeakerManagedObject.lastName)).compare(.contains, [.caseInsensitive], value)
+            
+            predicate = predicate && filterPredicate
         }
-        
-        let predicate: NSPredicate?
-        
-        if predicates.count > 0 {
-            
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates.first
-        }
-        
+                
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
                                                                    sortDescriptors: SpeakerManagedObject.sortDescriptors,
                                                                    sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext)
+                                                                   context: Store.shared.managedObjectContext) as! NSFetchedResultsController<NSManagedObject>
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
@@ -85,27 +76,27 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     }
     
     @inline(__always)
-    private func configure(cell cell: SpeakerTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell: SpeakerTableViewCell, at indexPath: IndexPath) {
         
         let speaker = self[indexPath]
         
         cell.nameLabel.text = speaker.name
         cell.titleLabel.text = speaker.title ?? ""
-        cell.speakerImageView.hnk_setImageFromURL(NSURL(string: speaker.pictureURL)!, placeholder: UIImage(named: "generic-user-avatar"))
+        cell.speakerImageView.hnk_setImageFromURL(speaker.picture.environmentScheme, placeholder: #imageLiteral(resourceName: "generic-user-avatar"))
         cell.speakerImageView.layer.cornerRadius = cell.speakerImageView.frame.size.width / 2
         cell.speakerImageView.clipsToBounds = true
     }
     
-    private subscript (indexPath: NSIndexPath) -> Speaker {
+    private subscript (indexPath: IndexPath) -> Speaker {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        let managedObject = self.fetchedResultsController.object(at: indexPath) as! SpeakerManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
     // MARK: - UISearchResultsUpdating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
         // update filter string
         filterString = searchController.searchBar.text ?? ""
@@ -113,9 +104,9 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(SpeakerTableViewCell.identifier, forIndexPath: indexPath) as! SpeakerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SpeakerTableViewCell.identifier, for: indexPath) as! SpeakerTableViewCell
         
         configure(cell: cell, at: indexPath)
         
@@ -124,7 +115,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -132,7 +123,7 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
             
             let speaker = self[tableView.indexPathForSelectedRow!]
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let speakerDetailViewController = navigationController.topViewController as! SpeakerDetailViewController
             
@@ -150,9 +141,9 @@ final class SpeakerTableViewCell: UITableViewCell {
     
     static let identifier = "SpeakerTableViewCell"
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
     
-    @IBOutlet weak var speakerImageView: UIImageView!
+    @IBOutlet private(set) weak var speakerImageView: UIImageView!
 }

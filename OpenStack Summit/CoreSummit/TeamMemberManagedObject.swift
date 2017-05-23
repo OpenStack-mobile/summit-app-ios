@@ -24,16 +24,16 @@ extension TeamMember: CoreDataDecodable {
     
     public init(managedObject: TeamMemberManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.permission = TeamPermission(rawValue: managedObject.permission)!
-        self.team = managedObject.team.identifier
+        self.team = managedObject.team.id
         self.member = Member(managedObject: managedObject.member)
     }
 }
 
 extension TeamMember: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamMemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamMemberManagedObject {
         
         let managedObject = try cached(context)
         

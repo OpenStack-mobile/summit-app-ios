@@ -13,7 +13,7 @@ import XCDYouTubeKit
 
 extension UIViewController {
     
-    func play(video video: Video) {
+    func play(video: Video, cachedImage: UIImage? = nil) {
         
         // add to recently played
         
@@ -21,19 +21,22 @@ extension UIViewController {
         
         // load video
         
-        XCDYouTubeClient.defaultClient().getVideoWithIdentifier(video.youtube) { [weak self] (youtubeVideo, error) in
+        XCDYouTubeClient.default().getVideoWithIdentifier(video.youtube) { [weak self] (youtubeVideo, error) in
             
             guard let controller = self else { return }
             
             guard error == nil
                 else { controller.showErrorAlert(error!.localizedDescription); return }
             
-            guard let streamURL = youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.HD720.rawValue as NSNumber]
-                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.Medium360.rawValue as NSNumber]
-                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.Small240.rawValue as NSNumber]
+            guard let streamURLs = youtubeVideo?.streamURLs as? [UInt: URL],
+                let highestResolution = streamURLs.keys.sorted().last,
+                let streamURL = streamURLs[XCDYouTubeVideoQuality.HD720.rawValue]
+                ?? streamURLs[XCDYouTubeVideoQuality.medium360.rawValue]
+                ?? streamURLs[XCDYouTubeVideoQuality.small240.rawValue]
+                ?? streamURLs[highestResolution]
                 else { controller.showErrorAlert("YouTube API Error"); return }
             
-            let asset = AVAsset(URL: streamURL)
+            let asset = AVAsset(url: streamURL)
             let playerItem = AVPlayerItem(asset: asset)
             playerItem.externalMetadata = {
                 
@@ -41,22 +44,23 @@ extension UIViewController {
                
                 let titleItem = AVMutableMetadataItem()
                 titleItem.identifier = AVMetadataCommonIdentifierTitle
-                titleItem.value = video.name
+                titleItem.value = video.name as NSCopying & NSObjectProtocol
                 titleItem.extendedLanguageTag = "und"
                 metadata.append(titleItem)
                 
-                if let data = video.descriptionText?.dataUsingEncoding(NSUTF8StringEncoding),
-                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                if let event = try! Event.find(video.event, context: Store.shared.managedObjectContext),
+                    let descriptionText = video.descriptionText ?? event.descriptionText,
+                    let data = descriptionText.data(using: String.Encoding.utf8),
+                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                     
                     let descriptionItem = AVMutableMetadataItem()
                     descriptionItem.identifier = AVMetadataCommonIdentifierDescription
-                    descriptionItem.value = attributedString.string
+                    descriptionItem.value = attributedString.string as NSCopying & NSObjectProtocol
                     descriptionItem.extendedLanguageTag = "und"
                     metadata.append(descriptionItem)
                 }
                 
-                if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube),
-                    let data = NSData(contentsOfURL: thumbnailURL) {
+                func setImage(data: NSData) {
                     
                     let item = AVMutableMetadataItem()
                     item.identifier = AVMetadataCommonIdentifierArtwork
@@ -66,6 +70,17 @@ extension UIViewController {
                     metadata.append(item)
                 }
                 
+                if let image = cachedImage,
+                    let data = UIImagePNGRepresentation(image) as NSData? {
+                    
+                    setImage(data: data)
+                    
+                } else if let thumbnailURL = URL(youtubeThumbnail: video.youtube),
+                    let data = NSData(contentsOf: thumbnailURL) {
+                    
+                    setImage(data: data)
+                }
+                
                 return metadata
             }()
             
@@ -73,7 +88,7 @@ extension UIViewController {
             let player = AVPlayer(playerItem: playerItem)
             playerViewController.player = player
             
-            controller.presentViewController(playerViewController, animated: true) { player.play() }
+            controller.present(playerViewController, animated: true) { player.play() }
         }
     }
 }

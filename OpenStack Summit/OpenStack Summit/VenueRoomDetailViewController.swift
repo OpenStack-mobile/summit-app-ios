@@ -13,9 +13,9 @@ final class VenueRoomDetailViewController: UIViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var capacityLabel: UILabel!
-    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var capacityLabel: UILabel!
+    @IBOutlet private(set) weak var pictureImageView: UIImageView!
     
     // MARK: - Properties
     
@@ -41,13 +41,12 @@ final class VenueRoomDetailViewController: UIViewController {
         }
     }
     
-    private(set) var pictureURL: String = "" {
+    private(set) var picture: URL? {
         
         didSet {
             
-            let picUrlInternal = pictureURL
-            if (!picUrlInternal.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+            if let url = picture {
+                pictureImageView.hnk_setImageFromURL(url.environmentScheme)
             }
             else {
                 pictureImageView.image = nil

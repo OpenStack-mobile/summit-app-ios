@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import CoreData
+import CoreSummit
 
 class TableViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -18,23 +19,23 @@ class TableViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     // MARK: - Properties
     
-    final var fetchedResultsController: NSFetchedResultsController!
+    final var fetchedResultsController: NSFetchedResultsController<CoreSummit.Entity>!
     
     // MARK: - UITableViewDataSource
     
-    final func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    final func numberOfRows(in tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    final func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    final func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.beginUpdates()
     }
     
-    final func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    final func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         //self.tableView.endUpdates()
         

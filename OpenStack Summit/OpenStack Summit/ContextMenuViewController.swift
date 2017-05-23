@@ -21,7 +21,7 @@ extension ContextMenuViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let barButtonItem = UIBarButtonItem(image: R.image.contextMenu(), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
+        let barButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "context-menu"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
         
         viewController.navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -29,7 +29,7 @@ extension ContextMenuViewController {
 
 private extension UIViewController {
     
-    @objc func showControllerContextMenu(sender: UIBarButtonItem) {
+    @objc func showControllerContextMenu(_ sender: UIBarButtonItem) {
         
         guard let contextMenuViewController = self as? ContextMenuViewController
             else { fatalError("\(self) is not a ContextMenuViewController") }
@@ -42,17 +42,17 @@ private extension UIViewController {
 
 extension UIViewController {
     
-    func show(contextMenu contextMenu: ContextMenu, sender: PopoverPresentingView) {
+    func show(contextMenu: ContextMenu, sender: PopoverPresentingView) {
         
         let menuViewController: UIViewController
         
         if contextMenu.shareItems.isEmpty {
             
-            let alertViewController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let alertViewController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             contextMenu.actions.forEach { (action) in
                 
-                let action = UIAlertAction(title: action.title, style: .Default, handler: { [weak self] _ in
+                let action = UIAlertAction(title: action.title, style: .default, handler: { [weak self] _ in
                 
                     switch action.handler {
                         
@@ -60,21 +60,21 @@ extension UIViewController {
                         
                         let viewController = handler { _ in
                             
-                            self?.dismissViewControllerAnimated(true, completion: nil)
+                            self?.dismiss(animated: true, completion: nil)
                         }
                         
                         self?.present(viewController: viewController, sender: sender)
                         
                     case let .background(handler):
                         
-                        alertViewController.dismissViewControllerAnimated(true, completion: { handler { _ in } })
+                        alertViewController.dismiss(animated: true, completion: { handler { _ in } })
                     }
                 })
                 
                 alertViewController.addAction(action)
             }
             
-            let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { _ in })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
             
             alertViewController.addAction(cancel)
             
@@ -90,8 +90,8 @@ extension UIViewController {
             
             if contextMenu.systemActions == false {
                 
-                activityViewController.excludedActivityTypes = [UIActivityTypeAddToReadingList,
-                                                                UIActivityTypeOpenInIBooks]
+                activityViewController.excludedActivityTypes = [UIActivityType.addToReadingList,
+                                                                UIActivityType.openInIBooks]
             }
             
             menuViewController = activityViewController
@@ -105,7 +105,7 @@ struct ContextMenu {
     
     var actions = [Action]()
     
-    var shareItems = [AnyObject]()
+    var shareItems = [Any]()
     
     var systemActions = true
 }
@@ -116,7 +116,7 @@ extension ContextMenu {
         
         let activityType: String
         
-        let image: (() -> UIImage)?
+        let image: UIImage?
         
         let title: String
         
@@ -124,8 +124,8 @@ extension ContextMenu {
         
         enum Handler {
             
-            case modal((Bool -> ()) -> UIViewController)
-            case background((Bool -> ()) -> ())
+            case modal((@escaping (Bool) -> ()) -> UIViewController)
+            case background((@escaping (Bool) -> ()) -> ())
         }
     }
 }
@@ -143,32 +143,32 @@ extension ContextMenu {
         super.init()
     }
     
-    override class func activityCategory() -> UIActivityCategory {
+    override class var activityCategory : UIActivityCategory {
         
-        return .Action
+        return .action
     }
     
-    override func activityType() -> String? {
+    override var activityType : UIActivityType {
         
-        return action.activityType
+        return UIActivityType(rawValue: action.activityType)
     }
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         
         return action.title
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         
-        return action.image?()
+        return action.image
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         
         return true
     }
     
-    override func activityViewController() -> UIViewController? {
+    override var activityViewController : UIViewController? {
         
         switch action.handler {
             
@@ -182,11 +182,11 @@ extension ContextMenu {
         }
     }
     
-    override func performActivity() {
+    override func perform() {
         
         switch action.handler {
             
-        case .modal: super.performActivity()
+        case .modal: super.perform()
             
         case let .background(handler):
             
@@ -197,50 +197,50 @@ extension ContextMenu {
 
 final class OpenInSafariActivity: UIActivity {
     
-    private var url: NSURL!
+    private var url: URL!
     
-    override class func activityCategory() -> UIActivityCategory {
+    override class var activityCategory : UIActivityCategory {
         
-        return .Action
+        return .action
     }
     
-    override func activityType() -> String? {
+    override var activityType : UIActivityType {
         
-        return "\(self.dynamicType)"
+        return UIActivityType(rawValue: "\(type(of: self))")
     }
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         
         return "Open in Safari"
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         
-        return R.image.openInSafariActivity()!
+        return #imageLiteral(resourceName: "OpenInSafariActivity")
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         
-        return url(from: activityItems) != nil
+        return self.url(from: activityItems) != nil
     }
     
-    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+    override func prepare(withActivityItems activityItems: [Any]) {
         
-        self.url = url(from: activityItems)!
+        self.url = self.url(from: activityItems)!
     }
     
-    override func performActivity() {
+    override func perform() {
         
-        let completed = UIApplication.sharedApplication().openURL(self.url)
+        let completed = UIApplication.shared.openURL(self.url)
         
         self.activityDidFinish(completed)
     }
     
-    private func url(from activityItems: [AnyObject]) -> NSURL? {
+    private func url(from activityItems: [Any]) -> URL? {
         
-        return activityItems.firstMatching({ (item) in
+        return activityItems.first(where: { (item) in
             
-            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+            if let url = item as? URL, UIApplication.shared.canOpenURL(url) {
                 
                 return true
                 
@@ -249,56 +249,56 @@ final class OpenInSafariActivity: UIActivity {
                 return false
             }
             
-        }) as! NSURL?
+        }) as! URL?
     }
 }
 
 final class CopyLinkActivity: UIActivity {
     
-    private var url: NSURL!
+    private var url: URL!
     
-    override class func activityCategory() -> UIActivityCategory {
+    override class var activityCategory : UIActivityCategory {
         
-        return .Action
+        return .action
     }
     
-    override func activityType() -> String? {
+    override var activityType : UIActivityType {
         
-        return "\(self.dynamicType)"
+        return UIActivityType(rawValue: "\(type(of: self))")
     }
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         
         return "Copy Link"
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         
-        return R.image.openInSafariActivity()!
+        return #imageLiteral(resourceName: "OpenInSafariActivity")
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         
-        return url(from: activityItems) != nil
+        return self.url(from: activityItems) != nil
     }
     
-    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+    override func prepare(withActivityItems activityItems: [Any]) {
         
-        self.url = url(from: activityItems)!
+        self.url = self.url(from: activityItems)!
     }
     
-    override func performActivity() {
+    override func perform() {
         
-        UIPasteboard.generalPasteboard().string = self.url.absoluteString ?? ""
+        UIPasteboard.general.string = self.url.absoluteString 
         
         self.activityDidFinish(true)
     }
     
-    private func url(from activityItems: [AnyObject]) -> NSURL? {
+    private func url(from activityItems: [Any]) -> URL? {
         
-        return activityItems.firstMatching({ (item) in
+        return activityItems.first(where: { (item) in
             
-            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+            if let url = item as? NSURL, UIApplication.shared.canOpenURL(url as URL) {
                 
                 return true
                 
@@ -307,6 +307,6 @@ final class CopyLinkActivity: UIActivity {
                 return false
             }
             
-        }) as! NSURL?
+        }) as! URL?
     }
 }

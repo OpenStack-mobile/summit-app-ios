@@ -6,9 +6,10 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import TVServices
 import CoreSummit
+import Predicate
 
 final class ServiceProvider: NSObject, TVTopShelfProvider {
 
@@ -21,28 +22,25 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
 
     // MARK: - TVTopShelfProvider
 
-    let topShelfStyle: TVTopShelfContentStyle = .Sectioned
+    let topShelfStyle: TVTopShelfContentStyle = .sectioned
 
     var topShelfItems: [TVContentItem] {
         
         print("Get Top Shelf Items")
         
-        return [Section.recentlyPlayed.toContentItem("Recently Played", items: recentlyPlayedItems)]
+        return [Section.recentlyPlayed.toContentItem(title: "Recently Played", items: recentlyPlayedItems)]
     }
     
     var recentlyPlayedItems: [TVContentItem] {
         
         let context = Store.shared.managedObjectContext
         
-        let recentlyPlayed = Preferences.shared.recentlyPlayed as [NSNumber]
+        let recentlyPlayed = Preferences.shared.recentlyPlayed
         
         print("Recently played videos: \(recentlyPlayed)")
         
         // fetch all videos from CoreData at once. Will be sorted by `id`.
-        let fetchedVideos = try! context.managedObjects(VideoManagedObject.self,predicate: NSPredicate(format: "id IN %@", recentlyPlayed))
-        
-        // sort videos
-        let videos = recentlyPlayed.map { playedVideo in fetchedVideos.firstMatching({ $0.identifier == playedVideo })! }
+        let videos = try! context.managedObjects(VideoManagedObject.self, predicate: (#keyPath(VideoManagedObject.id)).in(recentlyPlayed))
         
         return videos.map { $0.toContentItem() }
     }
@@ -75,9 +73,9 @@ extension VideoManagedObject {
     
     func toContentItem() -> TVContentItem {
         
-        let serviceURL = ServiceURL(identifier: self.identifier).url
+        let serviceURL = ServiceURL(identifier: self.id).url
         
-        let identifier = TVContentIdentifier(identifier: serviceURL.absoluteString!, container: nil)!
+        let identifier = TVContentIdentifier(identifier: serviceURL.absoluteString, container: nil)!
         
         let contentItem = TVContentItem(contentIdentifier: identifier)!
         
@@ -85,9 +83,9 @@ extension VideoManagedObject {
         
         contentItem.creationDate = event.start
         
-        contentItem.imageURL = NSURL(youtubeThumbnail: youtube)
+        contentItem.imageURL = URL(youtubeThumbnail: youtube)
         
-        contentItem.imageShape = .Square
+        contentItem.imageShape = .HDTV
         
         contentItem.displayURL = serviceURL
         

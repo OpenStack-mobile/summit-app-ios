@@ -6,32 +6,33 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func summits(page: Int = 1, objectsPerPage: Int = 30, completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
+    func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: @escaping (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
         
-        let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
+        let uri = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
-        let url = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let response = SummitsResponse(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let response = SummitsResponse(json: json)
+                else { completion(.error(Error.invalidResponse)); return }
             
             // success
-            completion(.Value(response.page))
+            completion(.value(response.page))
         }
     }
 }
@@ -42,9 +43,9 @@ public struct SummitsResponse: JSONDecodable {
     
     public let page: Page<Summit>
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
-        guard let page = Page<Summit>(JSONValue: JSONValue)
+        guard let page = Page<Summit>(json: JSONValue)
             else { return nil }
         
         self.page = page
@@ -71,15 +72,15 @@ public extension SummitsResponse {
         
         public let active: Bool
         
-        public init?(JSONValue: JSON.Value) {
+        public init?(json JSONValue: JSON.Value) {
             
             guard let JSONObject = JSONValue.objectValue,
-                let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+                let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
                 let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-                let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-                let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
+                let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+                let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
                 let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
-                let timeZone = TimeZone(JSONValue: timeZoneJSON),
+                let timeZone = TimeZone(json: timeZoneJSON),
                 let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool
                 else { return nil }
             

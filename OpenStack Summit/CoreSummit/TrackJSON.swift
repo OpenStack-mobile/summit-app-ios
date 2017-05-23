@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 private extension Track {
     
@@ -18,13 +18,13 @@ private extension Track {
 
 extension Track: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
-            let trackGroups = Int.fromJSON(trackGroupsJSONArray)
+            let trackGroups = Identifier.from(json: trackGroupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -37,13 +37,13 @@ extension MemberResponse.Track: JSONDecodable {
     
     private typealias JSONKey = Track.JSONKey
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
-            let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray)
+            let trackGroups = TrackGroup.from(json: trackGroupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
