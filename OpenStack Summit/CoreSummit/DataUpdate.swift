@@ -145,7 +145,7 @@ public extension Store {
             guard dataUpdate.className != .MySchedule else {
                 
                 // should only get for authenticated requests
-                guard let attendeeRole = authenticatedMember?.attendeeRole
+                guard let member = authenticatedMember
                     else { return false }
                 
                 switch dataUpdate.operation {
@@ -159,7 +159,7 @@ public extension Store {
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
-                    attendeeRole.schedule.insert(eventManagedObject)
+                    member.schedule.insert(eventManagedObject)
                     
                     return true
                     
@@ -171,7 +171,7 @@ public extension Store {
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
-                        attendeeRole.schedule.remove(eventManagedObject)
+                        member.schedule.remove(eventManagedObject)
                     }
                     
                     return true

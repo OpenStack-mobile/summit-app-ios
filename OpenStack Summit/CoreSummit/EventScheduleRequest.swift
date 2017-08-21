@@ -43,10 +43,10 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                if let member = try self.authenticatedMember(context),
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    attendee.schedule.insert(eventManagedObject)
+                    member.schedule.insert(eventManagedObject)
                     
                     try context.save()
                 }
@@ -86,10 +86,10 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                                 
-                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                if let member = try self.authenticatedMember(context),
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    attendee.schedule.remove(eventManagedObject)
+                    member.schedule.remove(eventManagedObject)
                     
                     try context.save()
                 }
@@ -129,10 +129,10 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                if let member = try self.authenticatedMember(context),
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    attendee.schedule.remove(eventManagedObject)
+                    member.schedule.remove(eventManagedObject)
                     
                     try context.save()
                 }

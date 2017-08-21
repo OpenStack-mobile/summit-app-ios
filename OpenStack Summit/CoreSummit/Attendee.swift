@@ -12,8 +12,6 @@ public struct Attendee: Unique {
     
     public var member: Identifier
     
-    public var schedule: Set<Identifier>
-    
     public var tickets: Set<Identifier>
 }
 
@@ -23,6 +21,5 @@ public func == (lhs: Attendee, rhs: Attendee) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.member == rhs.member
-        && lhs.schedule == rhs.schedule
         && lhs.tickets == rhs.tickets
 }

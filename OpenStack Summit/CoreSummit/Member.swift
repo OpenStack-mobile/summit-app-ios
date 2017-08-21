@@ -32,6 +32,8 @@ public struct Member: Named {
     
     public let attendeeRole: Attendee?
     
+    public var schedule: Set<Identifier>
+    
     public let groupEvents: Set<Identifier>
     
     public let favoriteEvents: Set<Identifier>
@@ -56,6 +58,7 @@ public func == (lhs: Member, rhs: Member) -> Bool {
         && lhs.linkedIn == rhs.linkedIn
         && lhs.speakerRole == rhs.speakerRole
         && lhs.attendeeRole == rhs.attendeeRole
+        && lhs.schedule == rhs.schedule
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
         && lhs.favoriteEvents == rhs.favoriteEvents

@@ -58,7 +58,7 @@ public final class EventManagedObject: Entity {
     
     // MARK: - Inverse Relationhips
     
-    @NSManaged public var attendees: Set<AttendeeManagedObject>
+    @NSManaged public var members: Set<MemberManagedObject>
 }
 
 // MARK: - Encoding
