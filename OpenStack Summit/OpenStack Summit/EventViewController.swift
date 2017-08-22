@@ -59,9 +59,7 @@ extension EventViewController {
             actions.append(rate)
         }
         
-        let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAttendee && eventRequestInProgress == false {
+        if Store.shared.isLoggedIn && eventRequestInProgress == false {
             
             let newValue = scheduled == false
             
