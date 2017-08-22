@@ -26,7 +26,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
+        let uri = "/api/v1/summits/\(summitID)/members/me/schedule/\(event)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -69,7 +69,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
+        let uri = "/api/v1/summits/\(summitID)/members/me/schedule/\(event)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -112,7 +112,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let uri = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)/rsvp"
+        let uri = "/api/v1/summits/\(summitID)/members/me/schedule/\(event)/rsvp"
         
         let url = environment.configuration.serverURL + uri
         
