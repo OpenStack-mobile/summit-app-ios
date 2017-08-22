@@ -13,7 +13,7 @@ private extension Member {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback, favorite_summit_events, affiliations
+        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule_summit_events, groups_events, groups, attendee, feedback, favorite_summit_events, affiliations
     }
 }
 
@@ -97,7 +97,7 @@ extension MemberResponse.Member: JSONDecodable {
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let picture = JSONObject[JSONKey.pic.rawValue]?.urlValue,
-            let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
+            let scheduledEventsJSONArray = JSONObject[JSONKey.schedule_summit_events.rawValue]?.arrayValue,
             let scheduledEvents = Identifier.from(json: scheduledEventsJSONArray),
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
             let groups = Group.from(json: groupsJSONArray),
