@@ -25,10 +25,10 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     
     override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
-        guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
+        guard let member = Store.shared.authenticatedMember
             else { return [] }
         
-        let events = attendeeRole.schedule
+        let events = member.schedule
             .filter({ $0.start >= startDate && $0.end <= endDate })
             .sorted(by: { $0.0.start < $0.1.start })
         
@@ -46,11 +46,11 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     
     override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
-        guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole,
+        guard let member = Store.shared.authenticatedMember,
             case .interval(let interval) = filter
             else { return [] }
         
-        let events = attendeeRole.schedule
+        let events = member.schedule
             .filter({ $0.start >= interval.start
                 && $0.end <= interval.end })
             .sorted(by: { $0.0.start < $0.1.start })

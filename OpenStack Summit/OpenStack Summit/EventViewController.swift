@@ -194,7 +194,7 @@ extension EventViewController {
     
     private func setScheduledLocally(_ value: Bool, for event: Identifier) {
         
-        guard let attendee = Store.shared.authenticatedMember?.attendeeRole
+        guard let member = Store.shared.authenticatedMember
             else { return }
         
         // update model
@@ -202,11 +202,11 @@ extension EventViewController {
             
             if value {
                 
-                attendee.schedule.insert(managedObject)
+                member.schedule.insert(managedObject)
                 
             } else {
                 
-                attendee.schedule.remove(managedObject)
+                member.schedule.remove(managedObject)
             }
         }
     }
