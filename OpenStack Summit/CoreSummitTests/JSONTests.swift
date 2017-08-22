@@ -12,7 +12,7 @@ import Foundation
 
 let SummitJSONIdentifiers: [Identifier] = [6, 7, 22]
 
-let MemberJSONIdentifiers: CountableClosedRange<Identifier> = 1 ... 3
+let MemberJSONIdentifiers: CountableClosedRange<Identifier> = 1 ... 2
 
 final class JSONTests: XCTestCase {
     

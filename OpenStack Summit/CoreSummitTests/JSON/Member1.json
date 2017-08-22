@@ -3,25 +3,16 @@
 	"first_name": "Jimmy",
 	"last_name": "McArthur",
 	"gender": "Male",
-	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. When I'm not working, I enjoy taking cooking and life lessons from my 6 year old daughter.</p>",
+	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. When I'm not working, I enjoy taking cooking and life lessons from my 6 year old daughter.<\/p>",
 	"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
 	"irc": "jamesmcarthur",
 	"twitter": "jimmymcarthur",
 	"state": "TX",
 	"country": "US",
-	"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+	"active": true,
+	"email_verified": true,
+	"pic": "https://feature-summit-calendar-sync.devbranch.openstack.orgprofile_images/members/1395",
 	"affiliations": [
-		{
-			"id": 61747,
-			"start_date": 1064361600,
-			"end_date": 1448841600,
-			"owner_id": 1395,
-			"is_current": true,
-			"organization": {
-				"id": 195,
-				"name": "Tipit"
-			}
-		},
 		{
 			"id": 96572,
 			"start_date": 1448928000,
@@ -90,15 +81,9 @@
 			"code": "openstack-foundation-staff"
 		},
 		{
-			"id": 9,
-			"title": "Track Chairs",
-			"description": null,
-			"code": "track-chairs"
-		},
-		{
 			"id": 38,
 			"title": "Working Groups",
-			"description": "Working Group list for Barcelona Summit",
+			"description": "Working Group list for Boston Summit",
 			"code": "working-groups"
 		},
 		{
@@ -106,171 +91,92 @@
 			"title": "Survey Testers",
 			"description": null,
 			"code": "survey-testers"
-		}
-	],
-	"groups_events": [
+		},
 		{
-			"id": 18577,
-			"title": "Test event for \"fresh CESPIN test group\" ",
-			"description": "<p>Need to see if cespin+2 can see this.</p>",
-			"social_description": "test social",
-			"start_date": 1477208700,
-			"end_date": 1477217700,
-			"summit_id": 7,
-			"class_name": "SummitGroupEvent",
-			"allow_feedback": false,
-			"avg_feedback_rate": 0,
-			"is_published": true,
-			"head_count": 19,
-			"rsvp_link": null,
-			"sponsors": [
-
-			],
-			"tags": [
-
-			],
-			"type": {
-				"id": 116,
-				"name": "Groups Events",
-				"color": "#f0f0ee",
-				"black_out_times": false
-			},
-			"location": {
-				"id": 177,
-				"name": "Born",
-				"description": null,
-				"location_type": "Internal",
-				"order": 0,
-				"class_name": "SummitVenueRoom",
-				"venue_id": 162,
-				"floor_id": 8,
-				"capacity": 16
-			},
-			"track": {
-				"id": 71,
-				"name": "Architectural Decisions",
-				"description": "If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.\t\t\t\t",
-				"code": "AD",
-				"track_groups": [
-					{
-						"id": 15,
-						"name": "Architecture & Operations",
-						"color": "#00cbea",
-						"description": "<p>The architecture &amp; operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.</p>",
-						"tracks": [
-							71,
-							68,
-							72,
-							73,
-							74,
-							75,
-							76,
-							77,
-							78,
-							69,
-							70
-						]
-					}
-				]
-			},
-			"groups": [
-				{
-					"id": 47,
-					"title": "fresh CESPIN test group",
-					"description": null,
-					"code": "fresh-cespin-test-group"
-				}
-			]
-		}
-	],
-	"team_memberships": [
+			"id": 54,
+			"title": "Open Source Days - OpenContrail",
+			"description": null,
+			"code": "open-source-days---opencontrail"
+		},
 		{
-			"id": 1,
-			"member_id": 1395,
-			"permission": "ADMIN",
-			"team": {
-				"id": 1,
-				"name": "test team",
-				"description": "this is the description of my team",
-				"owner_id": 1395,
-				"created_at": 1487107244,
-				"updated_at": 1487107244,
-				"members": [
-					{
-						"id": 1,
-						"team_id": 1,
-						"permission": "ADMIN",
-						"member": {
-							"id": 1395,
-							"first_name": "Jimmy",
-							"last_name": "McArthur",
-							"gender": "Male",
-							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. When I'm not working, I enjoy taking cooking and life lessons from my 6 year old daughter.</p>",
-							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
-							"irc": "jamesmcarthur",
-							"twitter": "jimmymcarthur",
-							"state": "TX",
-							"country": "US",
-							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
-							"groups": [
-								1,
-								2,
-								4,
-								5,
-								8,
-								30,
-								32,
-								31,
-								14,
-								9,
-								38,
-								45
-							],
-							"affiliations": [
-								{
-									"id": 61747,
-									"start_date": 1064361600,
-									"end_date": 1448841600,
-									"owner_id": 1395,
-									"is_current": true,
-									"organization": {
-										"id": 195,
-										"name": "Tipit"
-									}
-								},
-								{
-									"id": 96572,
-									"start_date": 1448928000,
-									"end_date": null,
-									"owner_id": 1395,
-									"is_current": true,
-									"organization": {
-										"id": 3,
-										"name": "OpenStack Foundation"
-									}
-								}
-							]
-						}
-					}
-				]
-			}
+			"id": 41,
+			"title": "Boston Sponsors - 4 Pres",
+			"description": null,
+			"code": "boston-sponsors---4-pres"
+		},
+		{
+			"id": 57,
+			"title": "Open Source Days - Kubernetes",
+			"description": null,
+			"code": "open-source-days---kubernetes"
+		},
+		{
+			"id": 55,
+			"title": "Open Source Days - OpenDaylight",
+			"description": null,
+			"code": "open-source-days---opendaylight"
+		},
+		{
+			"id": 56,
+			"title": "Open Source Days - FD.io",
+			"description": null,
+			"code": "open-source-days---fd.io"
+		},
+		{
+			"id": 59,
+			"title": "Mobile App Notification Testers",
+			"description": null,
+			"code": "mobile-app-notification-testers"
+		},
+		{
+			"id": 60,
+			"title": "Tipit Dev Group",
+			"description": "Group to test production push notifications.",
+			"code": "tipit-dev-group"
+		},
+		{
+			"id": 63,
+			"title": "MarketPlaceAdmin",
+			"description": "Super Admin for marketplace",
+			"code": "marketplaceadmin"
+		},
+		{
+			"id": 9,
+			"title": "Track Chairs",
+			"description": null,
+			"code": "track-chairs"
 		}
 	],
+	"groups_events": [],
+	"team_memberships": [],
 	"favorite_summit_events": [
-		17300
+		18623
+	],
+	"schedule_summit_events": [
+		18639,
+		18685,
+		18719,
+		18823,
+		18845
 	],
 	"attendee": {
-		"id": 5966,
+		"id": 8947,
 		"summit_hall_checked_in": false,
 		"summit_hall_checked_in_date": null,
-		"shared_contact_info": true,
+		"shared_contact_info": false,
 		"member_id": 1395,
 		"schedule": [
-			16889,
-			17300
+			18639,
+			18685,
+			18719,
+			18823,
+			18845
 		],
 		"tickets": [
-			14
+			26,
+			23,
+			24,
+			24
 		]
 	},
 	"speaker": {
@@ -278,18 +184,28 @@
 		"first_name": "Jimmy",
 		"last_name": "McArthur",
 		"title": "Senior Software Development Manager",
-		"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack.&nbsp;</p>",
+		"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack.&nbsp;<\/p>",
 		"irc": "jimmymcarthur",
 		"twitter": "jamesmcarthur",
 		"presentations": {
-			"2": 16645
+			"2": 16645,
+			"3": 18681
 		},
-		"moderated_presentations": [
-
-		],
-		"pic": "https://devbranch.openstack.org/profile_images/speakers/1"
+		"moderated_presentations": [],
+		"pic": "https://feature-summit-calendar-sync.devbranch.openstack.orgprofile_images/speakers/1",
+		"affiliations": [
+			{
+				"id": 96572,
+				"start_date": 1448928000,
+				"end_date": null,
+				"owner_id": 1395,
+				"is_current": true,
+				"organization": {
+					"id": 3,
+					"name": "OpenStack Foundation"
+				}
+			}
+		]
 	},
-	"feedback": [
-
-	]
+	"feedback": []
 }
