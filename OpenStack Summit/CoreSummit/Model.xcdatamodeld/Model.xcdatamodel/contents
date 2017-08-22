@@ -50,7 +50,7 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="events" inverseEntity="Group" syncable="YES"/>
         <relationship name="links" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Link" inverseName="event" inverseEntity="Link" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
-        <relationship name="members" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="schedule" inverseEntity="Member" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="schedule" inverseEntity="Member" syncable="YES"/>
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="event" inverseEntity="Notification" syncable="YES"/>
         <relationship name="presentation" maxCount="1" deletionRule="Cascade" destinationEntity="Presentation" inverseName="event" inverseEntity="Presentation" syncable="YES"/>
         <relationship name="slides" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Slide" inverseName="event" inverseEntity="Slide" syncable="YES"/>
@@ -131,7 +131,7 @@
         <relationship name="groupEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="groupMembers" inverseEntity="Event" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
         <relationship name="recievedInvites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="invitee" inverseEntity="TeamInvitation" syncable="YES"/>
-        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="members" inverseEntity="Event" syncable="YES"/>
+        <relationship name="schedule" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="members" inverseEntity="Event" syncable="YES"/>
         <relationship name="sentInvites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="inviter" inverseEntity="TeamInvitation" syncable="YES"/>
         <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMessage" inverseName="from" inverseEntity="TeamMessage" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
