@@ -75,6 +75,8 @@ public struct MemberResponse {
         
         public let attendeeRole: Attendee?
         
+        public var schedule: Set<Identifier>
+        
         public let groupEvents: [Event]
         
         public let groups: [Group]
@@ -207,6 +209,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
         && lhs.linkedIn == rhs.linkedIn
         && lhs.speakerRole == rhs.speakerRole
         && lhs.attendeeRole == rhs.attendeeRole
+        && lhs.schedule == rhs.schedule
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
         && lhs.feedback == rhs.feedback

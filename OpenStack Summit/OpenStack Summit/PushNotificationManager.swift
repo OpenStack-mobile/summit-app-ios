@@ -380,19 +380,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         if let memberID = member?.id {
             
             subscribe(to: .member(memberID))
-        }
-        
-        if member?.speakerRole != nil {
             
-            subscribe(to: .speakers)
-        }
-        
-        if let attendeeRole = member?.attendeeRole {
-            
-            subscribe(to: .attendees)
-            
-            //let predicate = NSPredicate(format: "attendees CONTAINS %@", attendeeRole)
-            let predicate: Predicate = (#keyPath(EventManagedObject.attendees.id)).compare(.contains, .value(.int64(attendeeRole.id)))
+            //let predicate = NSPredicate(format: "members CONTAINS %@", member)
+            let predicate: Predicate = (#keyPath(EventManagedObject.members.id)).compare(.contains, .value(.int64(memberID)))
             
             eventsFetchedResultsController = NSFetchedResultsController(Event.self,
                                                                         delegate: self,
@@ -406,6 +396,16 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         } else {
             
             eventsFetchedResultsController = nil
+        }
+        
+        if member?.speakerRole != nil {
+            
+            subscribe(to: .speakers)
+        }
+        
+        if member?.attendeeRole != nil {
+            
+            subscribe(to: .attendees)
         }
     }
     

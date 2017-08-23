@@ -23,15 +23,12 @@ extension Attendee: JSONDecodable {
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let member = JSONObject[JSONKey.member_id.rawValue]?.integerValue,
-            let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let scheduledEvents = Identifier.from(json: scheduledEventsJSONArray),
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
             let tickets = Identifier.from(json: ticketsJSONArray)
             else { return nil }
         
         self.identifier = identifier
         self.member = member
-        self.schedule = Set(scheduledEvents)
         self.tickets = Set(tickets)
     }
 }
