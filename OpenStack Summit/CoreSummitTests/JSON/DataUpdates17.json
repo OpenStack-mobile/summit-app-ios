@@ -1,0 +1,18 @@
+{
+	"id": 831235,
+	"entity_id": 291,
+	"class_name": "SummitVenueRoom",
+	"created": 1493374201,
+	"type": "INSERT",
+	"entity": {
+		"id": 291,
+		"name": "Marketplace Expo Hall (Hall D)",
+		"description": null,
+		"location_type": "Internal",
+		"order": 0,
+		"class_name": "SummitVenueRoom",
+		"venue_id": 214,
+		"floor_id": 0,
+		"capacity": 0
+	}
+}

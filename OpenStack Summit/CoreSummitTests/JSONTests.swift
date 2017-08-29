@@ -313,4 +313,15 @@ final class JSONTests: XCTestCase {
             let _ = Event.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
+    
+    func testDataUpdates17() {
+        
+        let testJSON = loadJSON("DataUpdates17")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = VenueRoom.DataUpdate(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }
