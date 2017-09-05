@@ -138,6 +138,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.biography = biography
         managedObject.gender = gender
         
+        managedObject.schedule = try context.relationshipFault(schedule)
         managedObject.speakerRole = try context.relationshipFault(speakerRole)
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         managedObject.groups = try context.relationshipFault(Set(groups))
