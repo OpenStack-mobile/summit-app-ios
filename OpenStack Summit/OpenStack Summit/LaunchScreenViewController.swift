@@ -57,23 +57,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if Store.shared.isLoggedIn {
-            
-            self.willTransition = true
-            
-        } else {
-            
-            self.loadSummits()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if Store.shared.isLoggedIn {
-            
-            showRevealController()
-        }
+        self.loadSummits()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -107,8 +91,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             self.summitActivityIndicatorView.isHidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.isHidden = self.isDataLoaded == false || self.willTransition
-            self.loginButton.isHidden = self.isDataLoaded == false || self.willTransition
+            self.guestButton.isHidden = true
+            self.loginButton.isHidden = true
             
             self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
@@ -140,6 +124,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
             self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
+            
+        case .transitioning:
+            
+            break
         }
         
         // show current summit info
@@ -211,21 +199,16 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     controller.summit = latestSummit
                     
-                    if SummitManager.shared.summit.value == 0 {
+                    #if DEBUG
+                        
+                        if SummitManager.shared.summit.value == 0 {
+                            
+                            SummitManager.shared.summit.value = latestSummit.identifier
+                        }
+                    #else
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
-                    }
-                    
-                    switch AppEnvironment {
-                        
-                    case .staging:
-                        
-                        break
-                        
-                    case .production:
-                        
-                        SummitManager.shared.summit.value = latestSummit.identifier
-                    }
+                    #endif
                     
                     controller.loadData()
                 }
@@ -236,7 +219,21 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     private func loadData() {
         
         guard isDataLoaded == false
-            else { state = .dataLoaded; return }
+            else {
+                
+                if Store.shared.isLoggedIn {
+                    
+                    showRevealController(self)
+                    
+                    state = .transitioning
+                }
+                else {
+                    
+                    state = .dataLoaded
+                }
+                
+                return
+        }
         
         state = .loadingData
         
@@ -265,7 +262,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     print("Loaded \(summit.name) summit")
                     
-                    controller.state = .dataLoaded
+                    controller.loadData()
                 }
             }
         }
@@ -316,5 +313,6 @@ private extension LaunchScreenViewController {
         case loadingSummits
         case loadingData
         case dataLoaded
+        case transitioning
     }
 }
