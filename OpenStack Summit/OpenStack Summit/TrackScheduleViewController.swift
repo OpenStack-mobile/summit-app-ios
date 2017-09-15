@@ -64,14 +64,20 @@ final class TrackScheduleViewController: ScheduleViewController {
         let events = try! EventManagedObject.filter(date, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [Date] = []
+        
         for event in events {
-            let timeZone = TimeZone(identifier: event.summit.timeZone)!
-            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
-            if !activeDates.contains(startDate) {
-                activeDates.append(startDate)
-            }
             
+            // no need to do timeZone adjustments
+            // NSDate.mt_setTimeZone(timeZone) set on base class alters mt_startOfCurrentDay() calculation
+            
+            let date = (event.start as NSDate).mt_startOfCurrentDay()!
+            
+            if !activeDates.contains(date) {
+                
+                activeDates.append(date)
+            }
         }
+        
         return activeDates
     }
     

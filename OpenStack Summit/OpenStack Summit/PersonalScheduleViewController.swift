@@ -33,14 +33,20 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
             .sorted(by: { $0.0.start < $0.1.start })
         
         var activeDates: [Date] = []
+        
         for event in events {
-            let timeZone = TimeZone(identifier: event.summit.timeZone)!
-            let startDate = ((event.start as NSDate).mt_dateSeconds(after: timeZone.secondsFromGMT()) as NSDate).mt_startOfCurrentDay()!
-            if !activeDates.contains(startDate) {
-                activeDates.append(startDate)
-            }
             
+            // no need to do timeZone adjustments
+            // NSDate.mt_setTimeZone(timeZone) set on base class alters mt_startOfCurrentDay() calculation
+            
+            let date = (event.start as NSDate).mt_startOfCurrentDay()!
+            
+            if !activeDates.contains(date) {
+                
+                activeDates.append(date)
+            }
         }
+        
         return activeDates
     }
     

@@ -105,9 +105,11 @@ struct ScheduleFilter: Equatable {
         
         // populate filter categories
         
-        let summitTimeZoneOffset = TimeZone(identifier: summit.timeZone)!.secondsFromGMT()
-        let startDate = ((summit.start as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_startOfCurrentDay()
-        let endDate = ((summit.end as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_dateDays(after: 1)
+        let timeZone = TimeZone(identifier: summit.timeZone)!
+        NSDate.mt_setTimeZone(timeZone)
+        
+        let startDate = (summit.start as NSDate).mt_startOfCurrentDay()
+        let endDate = (summit.end as NSDate).mt_startOfNextDay()
         let now = Date()
         
         if (now as NSDate).mt_isBetweenDate(startDate, andDate: endDate) {
@@ -145,9 +147,11 @@ struct ScheduleFilter: Equatable {
         guard let summit = try! SummitManagedObject.find(summitID, context: context)
             else { return }
         
-        let summitTimeZoneOffset = TimeZone(identifier: summit.timeZone)!.secondsFromGMT()
-        let startDate = ((summit.start as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_startOfCurrentDay()
-        let endDate = ((summit.end as NSDate).mt_dateSeconds(after: summitTimeZoneOffset) as NSDate).mt_dateDays(after: 1)
+        let timeZone = TimeZone(identifier: summit.timeZone)!
+        NSDate.mt_setTimeZone(timeZone)
+        
+        let startDate = (summit.start as NSDate).mt_startOfCurrentDay()
+        let endDate = (summit.end as NSDate).mt_startOfNextDay()
         let now = Date()
         
         if (now as NSDate).mt_isBetweenDate(startDate, andDate: endDate) {
