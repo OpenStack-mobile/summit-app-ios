@@ -58,7 +58,7 @@ public final class EventManagedObject: Entity {
     
     // MARK: - Inverse Relationhips
     
-    @NSManaged public var attendees: Set<AttendeeManagedObject>
+    @NSManaged public var members: Set<MemberManagedObject>
 }
 
 // MARK: - Encoding
@@ -205,14 +205,6 @@ public extension EventManagedObject {
         
         switch date {
             
-        case .now:
-            
-            let now = Date()
-            
-            //datePredicate = NSPredicate(format: "start <= %@ AND end >= %@", now, now)
-            datePredicate = #keyPath(EventManagedObject.start) <= now
-                && #keyPath(EventManagedObject.end) >= now
-            
         case let .interval(start, end):
             
             //datePredicate = NSPredicate(format: "end >= %@ AND end <= %@", start, end)
@@ -288,7 +280,6 @@ public extension EventManagedObject {
     
     public enum DateFilter {
         
-        case now
         case interval(start: Date, end: Date)
     }
 }

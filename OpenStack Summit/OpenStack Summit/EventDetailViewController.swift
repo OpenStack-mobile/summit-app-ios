@@ -145,8 +145,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         guard eventRequestInProgress == false else { return }
         
-        guard Store.shared.isLoggedInAndConfirmedAttendee
-            else { showErrorAlert("Only attendees can use this function. Enter your EventBrite order number in my summit if you are an attendee."); return }
+        guard Store.shared.isLoggedIn
+            else { showErrorAlert("Login to use this function."); return }
         
         self.toggleScheduledStatus(for: eventDetail)
     }
@@ -154,7 +154,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     @IBAction func rateAction(_ sender: UIButton) {
         
         guard Store.shared.isLoggedIn
-            else { showErrorAlert("Login to use this function"); return }
+            else { showErrorAlert("Login to use this function."); return }
         
         guard eventDetail.allowFeedback
             else { showErrorAlert("Feedback is not enabled for this event."); return }

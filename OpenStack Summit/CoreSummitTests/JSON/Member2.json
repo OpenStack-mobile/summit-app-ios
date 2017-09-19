@@ -9,7 +9,9 @@
 	"twitter": null,
 	"state": "BA",
 	"country": "AR",
-	"pic": "https://devbranch.openstack.org/profile_images/members/13867",
+	"active": true,
+	"email_verified": true,
+	"pic": "https://feature-summit-calendar-sync.devbranch.openstack.org/profile_images/members/13867",
 	"affiliations": [
 		{
 			"id": 54354,
@@ -40,111 +42,241 @@
 			"title": "Community Members",
 			"description": "Community Members",
 			"code": "community-members"
+		},
+		{
+			"id": 60,
+			"title": "Tipit Dev Group",
+			"description": "Group to test production push notifications.",
+			"code": "tipit-dev-group"
 		}
 	],
-	"groups_events": [
-
-	],
-	"team_memberships": [
-
-	],
+	"groups_events": [],
+	"team_memberships": [],
 	"favorite_summit_events": [
-
+		17632,
+		17683,
+		17693,
+		17723,
+		17732,
+		17763,
+		17785,
+		18021,
+		18079,
+		18389,
+		18390,
+		18399,
+		18513,
+		18591,
+		18631,
+		18641,
+		18652,
+		18668,
+		18718,
+		18823,
+		18844,
+		18845,
+		18846,
+		18847,
+		18848,
+		18849,
+		18852,
+		18855,
+		18908,
+		18944
+	],
+	"schedule_summit_events": [
+		17632,
+		18387,
+		18620,
+		18621,
+		18624,
+		18629,
+		18652,
+		18659,
+		18668,
+		18681,
+		18833,
+		18844,
+		18847,
+		18850,
+		18851,
+		18854,
+		18855,
+		18859,
+		18861,
+		18863,
+		18915,
+		18936
 	],
 	"attendee": {
-		"id": 6832,
+		"id": 9106,
 		"summit_hall_checked_in": false,
 		"summit_hall_checked_in_date": null,
 		"shared_contact_info": false,
 		"member_id": 13867,
 		"schedule": [
-			16888,
-			17415,
-			16840,
-			16870,
-			17300,
-			16842,
-			16919,
-			17297,
-			16846,
-			15418,
-			17373,
-			15568,
-			17265,
-			15358,
-			15584,
-			16823,
-			16774,
-			16781,
-			16627,
-			16786,
-			17312,
-			17052,
-			15185,
-			16929,
-			16910,
-			16980,
-			15652,
-			17119,
-			17069,
-			16985,
-			17374,
-			16889,
-			16638,
-			17326,
-			16636
+			17632,
+			18387,
+			18620,
+			18621,
+			18624,
+			18629,
+			18652,
+			18659,
+			18668,
+			18681,
+			18833,
+			18844,
+			18847,
+			18850,
+			18851,
+			18854,
+			18855,
+			18859,
+			18861,
+			18863,
+			18915,
+			18936
 		],
 		"tickets": [
-			14
+			23
 		]
 	},
 	"feedback": [
 		{
-			"id": 149,
+			"id": 457,
 			"rate": 5,
-			"note": "\"great presentation\"",
-			"created_date": 1477363390,
-			"event_id": 17300,
+			"note": "",
+			"created_date": 1490992968,
+			"event_id": 18639,
 			"owner_id": 13867
 		},
 		{
-			"id": 217,
-			"rate": 4,
-			"note": "\"good\"",
-			"created_date": 1477398795,
-			"event_id": 16636,
-			"owner_id": 13867
-		},
-		{
-			"id": 218,
-			"rate": 4,
-			"note": "\"interesting\"",
-			"created_date": 1477398831,
-			"event_id": 17295,
-			"owner_id": 13867
-		},
-		{
-			"id": 219,
-			"rate": 4,
-			"note": "\"interesting\"",
-			"created_date": 1477398872,
-			"event_id": 17296,
-			"owner_id": 13867
-		},
-		{
-			"id": 238,
+			"id": 461,
 			"rate": 5,
-			"note": "\"great presentation\"",
-			"created_date": 1477449319,
-			"event_id": 16637,
+			"note": "great review",
+			"created_date": 1494250182,
+			"event_id": 18844,
 			"owner_id": 13867
 		},
 		{
-			"id": 419,
+			"id": 484,
+			"rate": 2,
+			"note": "",
+			"created_date": 1494252148,
+			"event_id": 18845,
+			"owner_id": 13867
+		},
+		{
+			"id": 563,
 			"rate": 3,
-			"note": "\".\"",
-			"created_date": 1477580255,
-			"event_id": 17256,
+			"note": "destroy the box!!!",
+			"created_date": 1494256217,
+			"event_id": 18846,
+			"owner_id": 13867
+		},
+		{
+			"id": 569,
+			"rate": 5,
+			"note": "interesting looking to try with arduino",
+			"created_date": 1494256364,
+			"event_id": 18852,
+			"owner_id": 13867
+		},
+		{
+			"id": 964,
+			"rate": 5,
+			"note": "great keynote",
+			"created_date": 1494338031,
+			"event_id": 18652,
+			"owner_id": 13867
+		},
+		{
+			"id": 965,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494338071,
+			"event_id": 18850,
+			"owner_id": 13867
+		},
+		{
+			"id": 966,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494338088,
+			"event_id": 18854,
+			"owner_id": 13867
+		},
+		{
+			"id": 967,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494338098,
+			"event_id": 18859,
+			"owner_id": 13867
+		},
+		{
+			"id": 978,
+			"rate": 5,
+			"note": "great demo",
+			"created_date": 1494338914,
+			"event_id": 18861,
+			"owner_id": 13867
+		},
+		{
+			"id": 1008,
+			"rate": 3,
+			"note": "",
+			"created_date": 1494340338,
+			"event_id": 18862,
+			"owner_id": 13867
+		},
+		{
+			"id": 1303,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494365912,
+			"event_id": 18863,
+			"owner_id": 13867
+		},
+		{
+			"id": 1493,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494439484,
+			"event_id": 17632,
+			"owner_id": 13867
+		},
+		{
+			"id": 1671,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494510345,
+			"event_id": 18833,
+			"owner_id": 13867
+		},
+		{
+			"id": 1774,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494521348,
+			"event_id": 18936,
+			"owner_id": 13867
+		},
+		{
+			"id": 1997,
+			"rate": 5,
+			"note": "",
+			"created_date": 1494810098,
+			"event_id": 18681,
+			"owner_id": 13867
+		},
+		{
+			"id": 2015,
+			"rate": 5,
+			"note": "",
+			"created_date": 1495246070,
+			"event_id": 18821,
 			"owner_id": 13867
 		}
 	]

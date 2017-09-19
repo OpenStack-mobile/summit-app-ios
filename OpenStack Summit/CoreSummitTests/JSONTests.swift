@@ -12,7 +12,7 @@ import Foundation
 
 let SummitJSONIdentifiers: [Identifier] = [6, 7, 22]
 
-let MemberJSONIdentifiers: CountableClosedRange<Identifier> = 1 ... 3
+let MemberJSONIdentifiers: CountableClosedRange<Identifier> = 1 ... 2
 
 final class JSONTests: XCTestCase {
     
@@ -311,6 +311,17 @@ final class JSONTests: XCTestCase {
             let dataUpdateEntity = dataUpdate.entity,
             case let .json(entityJSON) = dataUpdateEntity,
             let _ = Event.DataUpdate(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates17() {
+        
+        let testJSON = loadJSON("DataUpdates17")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = VenueRoom.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
 }

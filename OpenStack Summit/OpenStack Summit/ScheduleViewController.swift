@@ -30,8 +30,6 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     final lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    final private(set) var summitTimeZoneOffset: Int = 0
-    
     final private(set) var dayEvents = [ScheduleItem]()
     
     final private(set) var nowSelected = false
@@ -221,13 +219,10 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let scheduleFilter = FilterManager.shared.filter.value
                 
         let timeZone = TimeZone(identifier: summit.timeZone)!
-        
         NSDate.mt_setTimeZone(timeZone)
         
-        self.summitTimeZoneOffset = timeZone.secondsFromGMT()
-        
-        self.startDate = ((summit.start as NSDate).mt_dateSeconds(after: self.summitTimeZoneOffset) as NSDate).mt_startOfCurrentDay()
-        self.endDate = ((summit.end as NSDate).mt_dateSeconds(after: self.summitTimeZoneOffset) as NSDate).mt_dateDays(after: 1)
+        self.startDate = (summit.start as NSDate).mt_startOfCurrentDay()
+        self.endDate = (summit.end as NSDate).mt_startOfNextDay()
         
         let today = Date()
         
@@ -273,11 +268,8 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         // fetch new events
         
-        let offsetLocalTimeZone = Foundation.NSTimeZone.local.secondsFromGMT()
-        
-        let startDate = (self.selectedDate! as NSDate).mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)!
-        let endDate = ((self.selectedDate! as NSDate).mt_endOfCurrentDay() as NSDate).mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)!
-        
+        let startDate = self.selectedDate!
+        let endDate = (self.selectedDate! as NSDate).mt_endOfCurrentDay()!
         let today = Date()
         
         let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)

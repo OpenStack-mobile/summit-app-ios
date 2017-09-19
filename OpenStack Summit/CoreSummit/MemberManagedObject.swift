@@ -32,6 +32,8 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var attendeeRole: AttendeeManagedObject?
     
+    @NSManaged public var schedule: Set<EventManagedObject>
+    
     @NSManaged public var groups: Set<GroupManagedObject>
     
     @NSManaged public var groupEvents: Set<EventManagedObject>
@@ -58,6 +60,7 @@ extension Member: CoreDataDecodable {
         self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
         self.gender = managedObject.gender
+        self.schedule = managedObject.schedule.identifiers
         self.groups = Group.from(managedObjects: managedObject.groups)
         self.feedback = managedObject.feedback.identifiers
         self.groupEvents = managedObject.groupEvents.identifiers
@@ -98,6 +101,7 @@ extension Member: CoreDataEncodable {
         managedObject.linkedIn = linkedIn
         managedObject.biography = biography
         managedObject.gender = gender
+        managedObject.schedule = try context.relationshipFault(schedule)
         managedObject.groups = try context.relationshipFault(groups)
         managedObject.affiliations = try context.relationshipFault(affiliations)
         
@@ -134,6 +138,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.biography = biography
         managedObject.gender = gender
         
+        managedObject.schedule = try context.relationshipFault(schedule)
         managedObject.speakerRole = try context.relationshipFault(speakerRole)
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         managedObject.groups = try context.relationshipFault(Set(groups))
@@ -155,7 +160,7 @@ public extension MemberManagedObject {
     @inline(__always)
     func isScheduled(event: Identifier) -> Bool {
         
-        return attendeeRole?.schedule.contains(where: { $0.id == event }) ?? false
+        return schedule.contains(where: { $0.id == event }) 
     }
     
     @inline(__always)
@@ -204,6 +209,6 @@ public extension Store {
     @inline(__always)
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
         
-        return self.authenticatedMember?.attendeeRole?.schedule.contains(where: { $0.id == eventID }) ?? false
+        return self.authenticatedMember?.schedule.contains(where: { $0.id == eventID }) ?? false
     }
 }
