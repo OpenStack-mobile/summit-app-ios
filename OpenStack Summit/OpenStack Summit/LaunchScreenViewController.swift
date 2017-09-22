@@ -186,9 +186,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 case let .error(error):
                     
                     print("Error getting summits: \(error)")
-                    
-                    // try again
-                    controller.loadSummits()
+
+                    if controller.isDataLoaded {
+                        
+                        // load stored summit
+                        controller.loadData()
+                    }
+                    else {
+                        
+                        // try again
+                        controller.loadSummits()
+                    }
                     
                 case let .value(page):
                     
