@@ -102,14 +102,12 @@ public final class Store {
         // config OAuth and HTTP
         configOAuthAccounts()
         
-        /* Removed from lib
         NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(revokedAccess),
             name: OAuth2Module.revokeNotification,
             object: nil)
-        */
     }
     
     // MARK: - Accessors

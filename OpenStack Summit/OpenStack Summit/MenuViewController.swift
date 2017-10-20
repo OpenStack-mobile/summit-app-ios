@@ -109,14 +109,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         // session notifications
-        /*
         NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
-        */
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
