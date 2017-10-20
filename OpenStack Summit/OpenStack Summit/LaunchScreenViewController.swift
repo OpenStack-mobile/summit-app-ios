@@ -151,6 +151,27 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 self.summitDateLabel.text = stringDateFrom + stringDateTo
             }
+            
+        } else if let currentSummit = currentSummit {
+            
+            self.summitNameLabel.text = currentSummit.name.uppercased()
+            
+            if let datesLabel = currentSummit.datesLabel {
+                
+                self.summitDateLabel.text = datesLabel
+            }
+            else {
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = TimeZone(identifier: currentSummit.timeZone)
+                dateFormatter.dateFormat = "MMMM d-"
+                let stringDateFrom = dateFormatter.string(from: currentSummit.start)
+                
+                dateFormatter.dateFormat = "d, yyyy"
+                let stringDateTo = dateFormatter.string(from: currentSummit.end)
+                
+                self.summitDateLabel.text = stringDateFrom + stringDateTo
+            }
         }
     }
     
