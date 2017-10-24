@@ -411,8 +411,56 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     private func nowEventIndex() -> Int? {
         
         let now = Date()
+        var candidatePos: Int? = nil
+        var candidateEndDate: Date? = nil
+        var candidateAlreadyStarted = false
+        var candidatePosFallback: Int? = nil
         
-        return self.dayEvents.index(where: { $0.end >= now && $0.track != "General" })
+        for (index, event) in self.dayEvents.enumerated() {
+            
+            let endDate = event.end as NSDate
+            
+            if endDate.mt_is(after: now) || endDate.isEqual(to: now) && event.eventType == "Presentation" {
+                
+                let startDate = event.start as NSDate
+                let oneHourAgo = (now as NSDate).mt_oneHourPrevious()
+                
+                // already started
+                let currentAlreadyStarted = startDate.mt_is(before: now) || startDate.mt_is(before: now)
+                // started over more than hour ago
+                if currentAlreadyStarted && startDate.mt_is(before: oneHourAgo) {
+                    
+                    candidatePosFallback = index
+                    continue
+                }
+                
+                if candidateAlreadyStarted && !currentAlreadyStarted {
+                    
+                    continue
+                }
+                
+                if candidateEndDate == nil || (candidateEndDate! as NSDate).mt_is(after: event.end) {
+                    
+                    candidatePos = index
+                    candidateAlreadyStarted = currentAlreadyStarted
+                    candidateEndDate = event.end
+                }
+            }
+        }
+        
+        if candidatePos == nil {
+            
+            candidatePos = candidatePosFallback
+        }
+        
+        if candidatePos == nil {
+            
+            return self.dayEvents.count - 1
+        }
+        else {
+            
+            return candidatePos
+        }
     }
     
     // MARK: - AFHorizontalDayPickerDelegate
