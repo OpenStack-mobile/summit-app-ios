@@ -236,8 +236,7 @@ public final class Store {
     private func createOAuthModule(_ config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
         var session: OAuth2Session
         
-        let prefix = config.isServiceAccount ? "SERVICE_" : ""
-        config.accountId = "\(prefix)ACCOUNT_FOR_CLIENTID_\(config.clientId)"
+        config.accountId = "ACCOUNT_FOR_CLIENT_ID_\(config.clientId)"
         
         if self.session.hadPasscode && !hasPasscode {
             
