@@ -33,14 +33,9 @@ public extension Fault {
 
 public func == <T: Unique> (lhs: Fault<T>, rhs: Fault<T>) -> Bool {
     
-    #if swift(>=3.2) && os(tvOS)
-    return false // FIXME: Compiler error in Xcode 9
-    #else
-    return false
     switch (lhs, rhs) {
     case let (.identifier(lhsValue), .identifier(rhsValue)): return lhsValue == rhsValue
     case let (.value(lhsValue), .value(rhsValue)): return lhsValue == rhsValue
     default: return false
     }
-    #endif
 }
