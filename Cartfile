@@ -11,6 +11,6 @@ github "OpenStack-Mobile/KTCenterFlowLayout" "master"
 github "OpenStack-Mobile/AFHorizontalDayPicker" "master"
 github "marketplacer/Cosmos"
 github "zvonicek/ImageSlideshow"
-github "OpenStack-Mobile/XCDYouTubeKit"
+github "0xced/XCDYouTubeKit" ~> 2.5
 github "OpenStack-Mobile/MTDates" "master"
 github "OpenStack-Mobile/SlackTextViewController"
