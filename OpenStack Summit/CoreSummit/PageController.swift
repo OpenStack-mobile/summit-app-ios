@@ -163,7 +163,7 @@ public final class PageController<Item> {
             
             // get items from pages
             
-            items = pages.reduce([Item](), { $0.0 + $0.1.items }).map({ .item($0) })
+            items = pages.reduce([Item](), { $0 + $1.items }).map({ .item($0) })
             
             if dataLoaded == false && items.isEmpty == false {
                 
