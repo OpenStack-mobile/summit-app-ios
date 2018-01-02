@@ -164,7 +164,7 @@ public extension Notification {
                 guard matchString == rawValue
                     else { return nil }
                 
-                let captureGroup = (rawValue as NSString).substring(with: match.rangeAt(1))
+                let captureGroup = (rawValue as NSString).substring(with: match.range(at: 1))
                 
                 guard let identifier = Identifier(captureGroup)
                     else { return nil }
