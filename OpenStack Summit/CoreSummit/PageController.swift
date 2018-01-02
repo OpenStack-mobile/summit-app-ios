@@ -197,9 +197,9 @@ public struct PageControllerChange {
 
 public struct PageControllerCallback<Item> {
     
-    public var reloadData: () -> () = { _ in }
+    public var reloadData: () -> () = {}
     
-    public var willLoadData: () -> () = { _ in }
+    public var willLoadData: () -> () = {}
     
     public var didLoadNextPage: (ErrorValue<[PageControllerChange]>) -> () = { _ in }
 }

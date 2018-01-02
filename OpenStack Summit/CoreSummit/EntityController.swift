@@ -57,7 +57,7 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
     
     public var updated: (Decodable) -> () = { _ in }
     
-    public var deleted: () -> () = { _ in }
+    public var deleted: () -> () = {}
 }
 
 // MARK: - Private
