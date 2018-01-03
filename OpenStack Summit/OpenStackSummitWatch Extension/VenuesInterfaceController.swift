@@ -34,9 +34,9 @@ final class VenuesInterfaceController: WKInterfaceController {
             
         }) ?? []
         
-        let internalVenues = allVenues.filter({ $0.isInternal }).sorted { $0.0.name > $0.1.name }
+        let internalVenues = allVenues.filter({ $0.isInternal }).sorted { $0.name > $1.name }
         
-        let externalVenues = allVenues.filter({ $0.isInternal == false }).sorted { $0.0.name > $0.1.name }
+        let externalVenues = allVenues.filter({ $0.isInternal == false }).sorted { $0.name > $1.name }
         
         return internalVenues + externalVenues
     }()
