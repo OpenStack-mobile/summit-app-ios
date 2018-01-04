@@ -212,8 +212,8 @@ struct ScheduleFilter: Equatable {
 
 func == (lhs: ScheduleFilter, rhs: ScheduleFilter) -> Bool {
     
-    let lhsFilters = lhs.allFilters.values.reduce([Filter](), { $0.0 + $0.1 })
-    let rhsFilters = rhs.allFilters.values.reduce([Filter](), { $0.0 + $0.1 })
+    let lhsFilters = lhs.allFilters.values.reduce([Filter](), { $0 + $1 })
+    let rhsFilters = rhs.allFilters.values.reduce([Filter](), { $0 + $1 })
     
     return lhs.activeFilters == rhs.activeFilters
         && lhsFilters == rhsFilters

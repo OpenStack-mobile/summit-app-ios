@@ -161,7 +161,7 @@ internal extension ScheduleItem {
             track.groups.isEmpty == false
             else { return "" }
         
-        let trackGroups = track.groups.sorted { $0.0.id < $0.1.id }
+        let trackGroups = track.groups.sorted { $0.id < $1.id }
         
         return trackGroups[0].color
     }
