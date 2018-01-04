@@ -109,7 +109,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         loadData()
         
         // filter notifications
-        filterObserver = FilterManager.shared.filter.observe { _ in self.filterUpdated() }
+        filterObserver = FilterManager.shared.filter.observe { _, _ in self.filterUpdated() }
     }
     
     // MARK: - Actions

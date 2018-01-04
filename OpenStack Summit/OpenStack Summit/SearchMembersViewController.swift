@@ -31,7 +31,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         didSet { configureView() }
     }
     
-    var selectedMember: (SearchMembersViewController, Member) -> () = { _ in }
+    var selectedMember: (SearchMembersViewController, Member) -> () = { _, _ in }
     
     private(set) var scope: Scope = .firstName
     

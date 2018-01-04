@@ -76,7 +76,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             controller.updateUI()
         }
         
-        entityController.event.deleted = { [weak self] _ in
+        entityController.event.deleted = { [weak self] in
             
             guard let controller = self else { return }
             

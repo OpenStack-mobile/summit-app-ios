@@ -422,7 +422,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let observable = Observable<Set<Identifier>>(Set(storedValue))
         
-        let _ = observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0.0, old: $0.1, key: preferenceKey) }
+        let _ = observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0, old: $1, key: preferenceKey) }
         
         return observable
     }

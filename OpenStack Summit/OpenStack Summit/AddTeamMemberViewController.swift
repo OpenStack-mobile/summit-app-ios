@@ -185,7 +185,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             
             let searchMembersViewController = R.storyboard.member.searchMembersViewController()!
             
-            searchMembersViewController.selectedMember = { [weak self] in self?.searchMembersViewController($0.0, didSelect: $0.1) }
+            searchMembersViewController.selectedMember = { [weak self] in self?.searchMembersViewController($0, didSelect: $1) }
             
             self.show(searchMembersViewController, sender: self)
             

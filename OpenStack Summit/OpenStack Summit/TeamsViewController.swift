@@ -17,7 +17,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     
     // MARK: - Properties
     
-    lazy var pageController: PageController<Team> = PageController(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    lazy var pageController: PageController<Team> = PageController(fetch: { Store.shared.teams(page: $0, perPage: $1, completion: $2) })
     
     lazy var contextMenu: ContextMenu = {
         
@@ -85,7 +85,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         pageController.cached = { [weak self] in self?.loadFromCache() ?? [] }
         
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
-            .observe { [weak self] _ in self?.tableView.reloadData() }
+            .observe { [weak self] _, _ in self?.tableView.reloadData() }
         
         refresh()
     }

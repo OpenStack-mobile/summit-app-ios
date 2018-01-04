@@ -21,7 +21,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     var completion: ((TeamInvitationsViewController) -> ())?
     
-    lazy var pageController: PageController<Invitation> = PageController(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    lazy var pageController: PageController<Invitation> = PageController(fetch: { Store.shared.invitations($0, perPage: $1, filter: .pending, completion: $2) })
     
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     

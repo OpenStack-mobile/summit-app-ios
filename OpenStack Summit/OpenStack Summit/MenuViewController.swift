@@ -118,9 +118,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
         unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
