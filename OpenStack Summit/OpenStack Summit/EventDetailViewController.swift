@@ -483,9 +483,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: OpenSans; font-size: 13\">%@</span>", eventDetail.eventDescription)
                 if let data = eventDescriptionHTML.data(using: String.Encoding.unicode, allowLossyConversion: false),
-                    let attrStr = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+                    let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                     
-                    cell.descriptionTextView.attributedText = attrStr
+                    cell.descriptionTextView.attributedText = attributedString
                     
                 } else {
                     

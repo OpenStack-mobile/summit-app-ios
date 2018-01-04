@@ -54,7 +54,7 @@ extension Event: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -105,7 +105,7 @@ extension Video: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -131,7 +131,7 @@ extension Venue: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -161,7 +161,7 @@ extension VenueRoom: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }

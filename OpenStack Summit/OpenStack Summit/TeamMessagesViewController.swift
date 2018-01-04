@@ -275,8 +275,8 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         let pointSize = MessageTableViewCell.defaultFontSize()
         
         let attributes = [
-            NSFontAttributeName : UIFont.systemFont(ofSize: pointSize),
-            NSParagraphStyleAttributeName : paragraphStyle
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: pointSize),
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
         ]
         
         var width = tableView.frame.width-kMessageTableViewCellAvatarHeight

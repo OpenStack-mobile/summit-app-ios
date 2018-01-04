@@ -64,7 +64,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         message.target = self
         message.action = #selector(clearFilters)
         message.tintColor = UIColor(hexString: "#4A4A4A")
-        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15)], for: UIControlState())
+        message.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)], for: UIControlState())
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: #selector(clearFilters))
         

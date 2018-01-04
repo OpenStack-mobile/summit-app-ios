@@ -364,7 +364,7 @@ extension EventViewController {
             calendarEvent.location = event.location
             
             if let data = event.eventDescription.data(using: String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
             }
