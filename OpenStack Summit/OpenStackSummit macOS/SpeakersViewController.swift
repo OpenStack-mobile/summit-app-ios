@@ -46,7 +46,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
         

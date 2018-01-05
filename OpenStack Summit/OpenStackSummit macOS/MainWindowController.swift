@@ -51,7 +51,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         
         window!.titleVisibility = .hidden
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
         

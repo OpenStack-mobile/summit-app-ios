@@ -142,7 +142,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.dismiss(nil) }
+        entityController.event.deleted = { [weak self] in self?.dismiss(nil) }
         
         entityController.enabled = true
         
