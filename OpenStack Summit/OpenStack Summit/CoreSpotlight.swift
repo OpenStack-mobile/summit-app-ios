@@ -43,7 +43,7 @@ extension Event: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: Swift.type(of: self).itemContentType)
         
         attributeSet.displayName = name
         attributeSet.startDate = start
@@ -59,7 +59,7 @@ extension Event: CoreSpotlightSearchable {
             attributeSet.contentDescription = attributedString.string
         }
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: Swift.type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -125,7 +125,7 @@ extension Venue: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: Swift.type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
@@ -142,7 +142,7 @@ extension Venue: CoreSpotlightSearchable {
         attributeSet.latitude = location?.latitude as NSNumber?
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: Swift.type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
