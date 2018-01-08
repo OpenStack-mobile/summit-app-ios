@@ -349,13 +349,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         switch segue.identifier! {
             
-        case "showEventVenue":
+        case .showEventVenue:
             
             let venueDetailViewController = segue.destinationController as! VenueDetailViewController
             
             venueDetailViewController.venue = eventDetail.venue!.venue
             
-        case "showEventSpeakers":
+        case .showEventSpeakers:
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
@@ -375,4 +375,10 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         default: fatalError()
         }
     }
+}
+
+extension NSStoryboardSegue.Identifier {
+    
+    static let showEventVenue = NSStoryboardSegue.Identifier("showEventVenue")
+    static let showEventSpeakers = NSStoryboardSegue.Identifier("showEventSpeakers")
 }
