@@ -74,7 +74,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -108,7 +108,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         if let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube) {
             
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
     
@@ -249,7 +249,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
                 
                 calendar.title = calendarListTitle
                 
-                calendar.source = calendarEventStore.defaultCalendarForNewEvents.source
+                calendar.source = calendarEventStore.defaultCalendarForNewEvents?.source
                 
                 do { try calendarEventStore.saveCalendar(calendar, commit: true) }
                     
@@ -300,12 +300,12 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
         
-        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+        if let safariReadList = NSSharingService(named: NSSharingService.Name.addToSafariReadingList) {
             
             customItems.append(safariReadList)
         }
@@ -319,7 +319,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             customItems.append(copyLink)
         }
         
-        let calendarIcon = NSWorkspace.shared().icon(forFile: "/Applications/Calendar.app")
+        let calendarIcon = NSWorkspace.shared.icon(forFile: "/Applications/Calendar.app")
         
         let addToCalendar = NSSharingService(title: "Save to Calendar",
                                              image: calendarIcon,

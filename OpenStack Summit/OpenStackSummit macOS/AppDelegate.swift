@@ -66,7 +66,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 else { return false }
             
             guard mainWindowController.openWeb(url: url)
-                else { NSWorkspace.shared().open(url); return false }
+                else { NSWorkspace.shared.open(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             

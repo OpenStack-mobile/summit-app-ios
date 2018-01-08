@@ -100,11 +100,11 @@ extension PagingTableViewController {
                             
                         case .delete:
                             
-                            tableView.removeRows(at: indexSet, withAnimation: .effectFade)
+                            tableView.removeRows(at: indexSet, withAnimation: NSTableView.AnimationOptions.effectFade)
                             
                         case .insert:
                             
-                            tableView.insertRows(at: indexSet, withAnimation: .effectFade)
+                            tableView.insertRows(at: indexSet, withAnimation: NSTableView.AnimationOptions.effectFade)
                             
                         case .update:
                             

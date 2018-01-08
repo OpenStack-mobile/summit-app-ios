@@ -94,7 +94,7 @@ final class SpeakersTableViewController: TableViewController {
     
     func tableView(_ tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! SpeakerTableViewCell
         
         configure(cell: cell, at: row)
         

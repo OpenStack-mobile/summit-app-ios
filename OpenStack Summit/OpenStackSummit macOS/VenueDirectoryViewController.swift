@@ -112,7 +112,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
         
         configure(cell: cell, at: row)
         

@@ -82,8 +82,8 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     @IBAction func showPreferences(_ sender: AnyObject? = nil) {
         
-        preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "Preferences") as? NSWindowController
+        preferencesWindowController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+            .instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Preferences")) as? NSWindowController
         
         preferencesWindowController?.showWindow(sender)
     }
@@ -142,7 +142,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             
         } else {
             
-            let storyboard = NSStoryboard(name: storyboardName, bundle: nil)
+            let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: storyboardName), bundle: nil)
             
             let viewController = storyboard.instantiateInitialController() as? NSViewController
             
@@ -176,11 +176,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
                 
             case is Event.Type:
                 
-                windowController = NSStoryboard(name: "Events", bundle: nil).instantiateController(withIdentifier: "EventWindowController") as! NSWindowController
+                windowController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Events"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "EventWindowController")) as! NSWindowController
                 
             case is Speaker.Type:
                 
-                windowController = NSStoryboard(name: "Speakers", bundle: nil).instantiateController(withIdentifier: "SpeakerWindowController") as! NSWindowController
+                windowController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Speakers"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SpeakerWindowController")) as! NSWindowController
                 
             default:
                 
@@ -201,7 +201,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             // release when closed
             NotificationCenter.default.addObserver(self,
                                                              selector: #selector(windowWillClose),
-                                                             name: NSNotification.Name.NSWindowWillClose,
+                                                             name: NSWindow.willCloseNotification,
                                                              object: window)
         }
         
@@ -246,7 +246,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
             guard let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube)
                 else { return }
          
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
          
          case .venue:
             
@@ -299,7 +299,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         let window = notification.object as! NSWindow
         
         NotificationCenter.default.removeObserver(self,
-                                                            name: NSNotification.Name.NSWindowWillClose,
+                                                            name: NSWindow.willCloseNotification,
                                                             object: window)
         
         guard let controllerIndex = childContentWindowControllers.index(where: { $0.window === window })

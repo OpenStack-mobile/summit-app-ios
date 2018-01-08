@@ -56,7 +56,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     // MARK: - Actions
@@ -218,7 +218,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItem(withIdentifier: "VenueImageCollectionViewItem", for: indexPath) as! VenueImageCollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "VenueImageCollectionViewItem"), for: indexPath) as! VenueImageCollectionViewItem
         
         configure(item: item, at: indexPath, collectionView: collectionView)
         
@@ -241,7 +241,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         default: fatalError()
         }
         
-        NSWorkspace.shared().open(imageURL)
+        NSWorkspace.shared.open(imageURL)
     }
     
     // MARK: - NSSharingServicePickerDelegate
@@ -250,7 +250,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
@@ -292,7 +292,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         }
     }
     
-    func sharingService(_ sharingService: NSSharingService, sourceWindowForShareItems items: [Any], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow? {
+    func sharingService(_ sharingService: NSSharingService, sourceWindowForShareItems items: [Any], sharingContentScope: UnsafeMutablePointer<NSSharingService.SharingContentScope>) -> NSWindow? {
         
         if self.view.window?.className == NSPopover.windowClassName {
             

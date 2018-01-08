@@ -133,7 +133,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItem(withIdentifier: "PersonCollectionViewItem", for: indexPath) as! CollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PersonCollectionViewItem"), for: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         

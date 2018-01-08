@@ -110,7 +110,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
         
         let date = (summitCache!.start as NSDate).mt_dateDays(after: row)!
         

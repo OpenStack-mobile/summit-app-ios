@@ -51,7 +51,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -218,12 +218,12 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
         
-        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+        if let safariReadList = NSSharingService(named: NSSharingService.Name.addToSafariReadingList) {
             
             customItems.append(safariReadList)
         }

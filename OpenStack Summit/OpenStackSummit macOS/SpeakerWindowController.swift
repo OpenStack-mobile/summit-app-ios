@@ -38,7 +38,7 @@ final class SpeakerWindowController: NSWindowController, ContentController {
                 view.wantsLayer = true
             }
             
-            window.styleMask.insert(.fullSizeContentView)
+            window.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
         }
