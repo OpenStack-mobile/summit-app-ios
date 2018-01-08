@@ -340,7 +340,7 @@ extension EventViewController {
                 
                 calendar.title = calendarListTitle
                 
-                calendar.source = eventStore.defaultCalendarForNewEvents.source
+                calendar.source = eventStore.defaultCalendarForNewEvents?.source
                 
                 do { try eventStore.saveCalendar(calendar, commit: true) }
                 
