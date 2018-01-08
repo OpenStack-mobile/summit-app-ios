@@ -167,13 +167,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         let htmlString = event.eventDescription
         
         if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
             
             self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
@@ -273,7 +273,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             calendarEvent.location = event.location
             
             if let data = event.eventDescription.data(using: String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
             }

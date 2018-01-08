@@ -119,14 +119,14 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         let htmlString = venue.descriptionText
         
         if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
             attributedString.string.isEmpty == false {
             
             self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
