@@ -51,7 +51,7 @@ extension UIViewController {
                 if let event = try! Event.find(video.event, context: Store.shared.managedObjectContext),
                     let descriptionText = video.descriptionText ?? event.descriptionText,
                     let data = descriptionText.data(using: String.Encoding.utf8),
-                    let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                    let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                     
                     let descriptionItem = AVMutableMetadataItem()
                     descriptionItem.identifier = AVMetadataCommonIdentifierDescription
