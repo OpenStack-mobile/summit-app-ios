@@ -43,7 +43,7 @@ extension UIViewController {
                 var metadata = [AVMutableMetadataItem]()
                
                 let titleItem = AVMutableMetadataItem()
-                titleItem.identifier = AVMetadataCommonIdentifierTitle
+                titleItem.identifier = AVMetadataIdentifier.commonIdentifierTitle
                 titleItem.value = video.name as NSCopying & NSObjectProtocol
                 titleItem.extendedLanguageTag = "und"
                 metadata.append(titleItem)
@@ -54,7 +54,7 @@ extension UIViewController {
                     let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                     
                     let descriptionItem = AVMutableMetadataItem()
-                    descriptionItem.identifier = AVMetadataCommonIdentifierDescription
+                    descriptionItem.identifier = AVMetadataIdentifier.commonIdentifierDescription
                     descriptionItem.value = attributedString.string as NSCopying & NSObjectProtocol
                     descriptionItem.extendedLanguageTag = "und"
                     metadata.append(descriptionItem)
@@ -63,7 +63,7 @@ extension UIViewController {
                 func setImage(data: NSData) {
                     
                     let item = AVMutableMetadataItem()
-                    item.identifier = AVMetadataCommonIdentifierArtwork
+                    item.identifier = AVMetadataIdentifier.commonIdentifierArtwork
                     item.dataType = kCMMetadataBaseDataType_PNG as String
                     item.value = data
                     item.extendedLanguageTag = "und"
