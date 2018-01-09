@@ -77,7 +77,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.peopleTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

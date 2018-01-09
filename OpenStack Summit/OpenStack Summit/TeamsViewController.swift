@@ -150,7 +150,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             
         case let .item(item):
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.teamCell, for: indexPath)!
             
             configure(cell: cell, with: item)
             

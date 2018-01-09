@@ -520,7 +520,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

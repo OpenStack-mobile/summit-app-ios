@@ -83,14 +83,14 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == VenueListSectionType.internal.rawValue {
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.internalVenuesTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.internalVenuesTableViewCell, for: indexPath)!
             configure(cell: cell, at: indexPath)
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
             return cell
         }
         else if indexPath.section == VenueListSectionType.external.rawValue {
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.externalVenuesTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.externalVenuesTableViewCell, for: indexPath)!
             configure(cell: cell, at: indexPath)
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero

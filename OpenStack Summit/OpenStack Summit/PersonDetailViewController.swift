@@ -324,16 +324,16 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             if confirmed {
                 
-                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell, for: indexPath)!
                 
             } else {
                 
-                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell, for: indexPath)!
             }
             
         case let .links(links):
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell, for: indexPath)!
             
             cell.twitterView.isHidden = links.twitter.isEmpty
             cell.twitterView.label.text = links.twitter
@@ -348,7 +348,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
         case let .biography(text):
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell, for: indexPath)!
             
             cell.textView.attributedText = text
             cell.textView.textContainerInset = UIEdgeInsets.zero

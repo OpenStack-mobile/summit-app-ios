@@ -7,7 +7,7 @@ github "OpenStack-Mobile/KTCenterFlowLayout" "603f33180563cfa4fcab99a0623bbde21e
 github "OpenStack-Mobile/MTDates" "def729947a5f07d6440ce9b97f2761af299bc13c"
 github "AliSoftware/OHHTTPStubs" "6.0.0"
 github "PureSwift/Predicate" "36141936dfcacd847f6b5a3a0a08b38e22354576"
-github "mac-cain13/R.swift.Library" "v3.0.2"
+github "mac-cain13/R.swift.Library" "v4.0.0"
 github "OpenStack-Mobile/SWRevealViewController" "c3113e1508597ee2d9ea7081d97caa5117dddf00"
 github "OpenStack-Mobile/SlackTextViewController" "v1.9.5"
 github "0xced/XCDYouTubeKit" "2.5.6"
