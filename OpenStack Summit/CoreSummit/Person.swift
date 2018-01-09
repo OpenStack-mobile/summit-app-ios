@@ -45,7 +45,7 @@ public struct AddressBook {
         
         let unknownLetter = sections[0] // "#"
         
-        guard let firstLetter = person.name.characters.first
+        guard let firstLetter = person.name.first
             else { return unknownLetter }
         
         let uppercaseLetter = String(firstLetter).uppercased()
