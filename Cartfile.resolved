@@ -1,4 +1,4 @@
-github "marketplacer/Cosmos" "9.0.0"
+github "evgenyneu/Cosmos" "13.0.0"
 github "OpenStack-Mobile/HanekeSwift" "e97c06307fd8cd5b3a03875d0950d73db688f2bd"
 github "zvonicek/ImageSlideshow" "1.4.1"
 github "JonasGessner/JGProgressHUD" "v1.4.1"

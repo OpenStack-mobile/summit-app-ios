@@ -9,7 +9,7 @@ github "mac-cain13/R.swift.Library" "v4.0.0"
 github "OpenStack-Mobile/HanekeSwift" "master"
 github "OpenStack-Mobile/KTCenterFlowLayout" "master"
 github "OpenStack-Mobile/AFHorizontalDayPicker" "master"
-github "marketplacer/Cosmos"
+github "evgenyneu/Cosmos" ~> 13.0
 github "zvonicek/ImageSlideshow"
 github "0xced/XCDYouTubeKit" ~> 2.5
 github "OpenStack-Mobile/MTDates" "master"
