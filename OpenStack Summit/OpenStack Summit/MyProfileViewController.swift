@@ -21,6 +21,8 @@ final class MyProfileViewController: RevealTabStripViewController {
     lazy var favoriteEventsViewController: FavoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
     lazy var personDetailViewController: PersonDetailViewController = R.storyboard.member.personDetailViewController()!
     
+    var defaultToMemberDetail = false
+    
     var collectionViewFlowLayout: UICollectionViewLayout!
     
     // MARK: - Loading
@@ -33,6 +35,17 @@ final class MyProfileViewController: RevealTabStripViewController {
         title = "MY SUMMIT"
         
         reloadPagerTabStripView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        if defaultToMemberDetail,
+        let index = viewControllers.index(where: { $0 is PersonDetailViewController }) {
+            
+            self.moveToViewController(at: index, animated: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,7 +79,7 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        var childViewControllers: [UIViewController] = [personDetailViewController]
+        var childViewControllers: [UIViewController] = []
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
@@ -76,7 +89,8 @@ final class MyProfileViewController: RevealTabStripViewController {
         }
         
         childViewControllers += [personalScheduleViewController,
-                                 favoriteEventsViewController]
+                                 favoriteEventsViewController,
+                                 personDetailViewController]
         
         updateButtonBarViewLayout()
         

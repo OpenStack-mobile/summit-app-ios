@@ -328,13 +328,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(teamsViewController)
     }
         
-    private func showMyProfile() {
+    private func showMyProfile(defaultToMemberDetail: Bool = false) {
         
         guard Store.shared.isLoggedIn else { return }
         
         highlight(.myProfile)
         
         let myProfileViewController = MyProfileViewController()
+        myProfileViewController.defaultToMemberDetail = defaultToMemberDetail
         
         show(myProfileViewController)
     }
@@ -398,7 +399,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                        
                     } else {
                         
-                        controller.showMyProfile()
+                        controller.showMyProfile(defaultToMemberDetail: true)
                         
                         let revealViewController = controller.revealViewController()
                         
