@@ -275,8 +275,8 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         let pointSize = MessageTableViewCell.defaultFontSize()
         
         let attributes = [
-            NSFontAttributeName : UIFont.systemFont(ofSize: pointSize),
-            NSParagraphStyleAttributeName : paragraphStyle
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: pointSize),
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
         ]
         
         var width = tableView.frame.width-kMessageTableViewCellAvatarHeight
@@ -286,7 +286,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         let bodyBounds = messageData.body.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
-        if messageData.body.characters.count == 0 {
+        if messageData.body.count == 0 {
             return 0
         }
         

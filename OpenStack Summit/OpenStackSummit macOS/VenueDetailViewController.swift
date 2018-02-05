@@ -56,7 +56,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     // MARK: - Actions
@@ -103,7 +103,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.dismiss(nil) }
+        entityController.event.deleted = { [weak self] in self?.dismiss(nil) }
         
         entityController.enabled = true
     }
@@ -119,14 +119,14 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         let htmlString = venue.descriptionText
         
         if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
             attributedString.string.isEmpty == false {
             
             self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
@@ -218,7 +218,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItem(withIdentifier: "VenueImageCollectionViewItem", for: indexPath) as! VenueImageCollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "VenueImageCollectionViewItem"), for: indexPath) as! VenueImageCollectionViewItem
         
         configure(item: item, at: indexPath, collectionView: collectionView)
         
@@ -241,7 +241,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         default: fatalError()
         }
         
-        NSWorkspace.shared().open(imageURL)
+        NSWorkspace.shared.open(imageURL)
     }
     
     // MARK: - NSSharingServicePickerDelegate
@@ -250,7 +250,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
@@ -292,7 +292,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         }
     }
     
-    func sharingService(_ sharingService: NSSharingService, sourceWindowForShareItems items: [Any], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow? {
+    func sharingService(_ sharingService: NSSharingService, sourceWindowForShareItems items: [Any], sharingContentScope: UnsafeMutablePointer<NSSharingService.SharingContentScope>) -> NSWindow? {
         
         if self.view.window?.className == NSPopover.windowClassName {
             

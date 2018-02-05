@@ -227,11 +227,11 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         if let biography = person.biography,
             let data = biography.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14), range: range)
             
             self.data.append(.biography(attributedString))
         }
@@ -283,7 +283,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         textBarButtonItem.target = self
         textBarButtonItem.action = action
         textBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
-        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], for: UIControlState())
+        textBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "OpenSans", size: 13)!], for: UIControlState())
         
         toolbarItems = [imageBarButtonItem, textBarButtonItem]
     }
@@ -324,16 +324,16 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             if confirmed {
                 
-                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailConfirmedAttendeeCell, for: indexPath)!
                 
             } else {
                 
-                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailNonConfirmedAttendeeCell, for: indexPath)!
             }
             
         case let .links(links):
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailLinksCell, for: indexPath)!
             
             cell.twitterView.isHidden = links.twitter.isEmpty
             cell.twitterView.label.text = links.twitter
@@ -348,7 +348,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
         case let .biography(text):
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.personDetailDescriptionCell, for: indexPath)!
             
             cell.textView.attributedText = text
             cell.textView.textContainerInset = UIEdgeInsets.zero

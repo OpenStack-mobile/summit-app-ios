@@ -21,10 +21,10 @@ public protocol PresentationMaterial: Named {
 
 // MARK: - Extensions
 
-public extension Collection where Iterator.Element: PresentationMaterial {
+public extension Collection where Element: PresentationMaterial {
     
-    func ordered() -> [Iterator.Element] {
+    func ordered() -> [Element] {
         
-        return self.sorted { $0.0.order < $0.1.order }
+        return self.sorted { $0.order < $1.order }
     }
 }

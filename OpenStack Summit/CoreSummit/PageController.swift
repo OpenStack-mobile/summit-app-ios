@@ -163,7 +163,7 @@ public final class PageController<Item> {
             
             // get items from pages
             
-            items = pages.reduce([Item](), { $0.0 + $0.1.items }).map({ .item($0) })
+            items = pages.reduce([Item](), { $0 + $1.items }).map({ .item($0) })
             
             if dataLoaded == false && items.isEmpty == false {
                 
@@ -197,9 +197,9 @@ public struct PageControllerChange {
 
 public struct PageControllerCallback<Item> {
     
-    public var reloadData: () -> () = { _ in }
+    public var reloadData: () -> () = {}
     
-    public var willLoadData: () -> () = { _ in }
+    public var willLoadData: () -> () = {}
     
     public var didLoadNextPage: (ErrorValue<[PageControllerChange]>) -> () = { _ in }
 }

@@ -102,7 +102,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! EventTableViewCell
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! EventTableViewCell
         
         configure(cell: cell, at: row)
         

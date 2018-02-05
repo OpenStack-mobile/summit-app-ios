@@ -279,7 +279,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Notifications
     
-    func tokenRefreshNotification(_ notification: Foundation.Notification) {
+    @objc func tokenRefreshNotification(_ notification: Foundation.Notification) {
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             

@@ -128,7 +128,8 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         
         if let descriptionText = speaker.biography,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options:
+                [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             biographyLabel.setText(attributedString.string)
             

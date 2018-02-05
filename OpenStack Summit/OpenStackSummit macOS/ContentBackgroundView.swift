@@ -21,6 +21,6 @@ import Cocoa
         super.draw(dirtyRect)
         
         backgroundColor.set()
-        NSRectFill(dirtyRect)
+        dirtyRect.fill()
     }
 }

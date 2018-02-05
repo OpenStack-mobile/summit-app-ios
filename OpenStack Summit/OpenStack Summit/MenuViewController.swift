@@ -100,7 +100,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.5)])
+        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSAttributedStringKey.foregroundColor: UIColor(white: 1, alpha: 0.5)])
         searchTextView.delegate = self
         
         // setup reveal VC
@@ -118,9 +118,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
         unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
     }
     
     override func viewWillAppear(_ animated: Bool) {

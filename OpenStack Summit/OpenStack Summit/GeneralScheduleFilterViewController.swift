@@ -40,7 +40,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         tableView.register(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // observe filter
-        filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
+        filterObserver = FilterManager.shared.filter.observe { [weak self] _, _ in self?.configureView() }
         
         //  setup UI
         configureView()

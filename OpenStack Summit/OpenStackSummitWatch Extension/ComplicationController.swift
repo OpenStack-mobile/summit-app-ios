@@ -148,7 +148,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sorted(by: { $0.0.start < $0.1.start }).first?.start
+        let date = Store.shared.cache?.schedule.sorted(by: { $0.start < $1.start }).first?.start
         
         print("Timeline Start Date: \(date?.description ?? "none")")
         
@@ -157,7 +157,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sorted(by: { $0.0.start > $0.1.start }).first?.end
+        let date = Store.shared.cache?.schedule.sorted(by: { $0.start > $1.start }).first?.end
         
         print("Timeline End Date: \(date?.description ?? "none")")
         
@@ -260,15 +260,15 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         // get sorted events
         var events = summit.schedule
+            .sorted(by: { $0.start < $1.start })
             .filter({ $0.start >= date }) // only events that start after the specified date
-            .sorted(by: { $0.0.start < $0.1.start })
         
         guard events.isEmpty == false
             else { return .none }
         
         // timeframe smallest and closest to requested date
         let startDate = events.first!.start
-        let endDate = events.sorted(by: { $0.0.end < $0.1.end }).first!.end
+        let endDate = events.sorted(by: { $0.end < $1.end }).first!.end
         
         // get events that are within the timeframe
         events = summit.schedule.filter { $0.start <= startDate && $0.end >= endDate }
@@ -345,16 +345,16 @@ extension Summit {
         
         return schedule.reduce([Date](), {
             
-            var newDates = $0.0
+            var newDates = $0
             
-            if $0.0.contains($0.1.start) {
+            if $0.contains($1.start) {
                 
-                newDates.append($0.1.start)
+                newDates.append($1.start)
             }
             
-            if $0.0.contains($0.1.end) {
+            if $0.contains($1.end) {
                 
-                newDates.append($0.1.end)
+                newDates.append($1.end)
             }
             
             return newDates
@@ -364,24 +364,24 @@ extension Summit {
     
     func dates(after date: Date, limit: Int = Int.max) -> [Date] {
         
-        var dates = self.schedule.reduce([Date](), { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = self.schedule.reduce([Date](), { $0 + [$1.start, $1.end] })
             .filter({ $0 > date })
         
-        dates = dates.reduce([Date](), { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+        dates = dates.reduce([Date](), { $0.contains($1) ? $0 : $0 + [$1] }) // remove duplicates
             .prefix(limit)
-            .sorted(by: { $0.0 > $0.1 })
+            .sorted(by: { $0 > $1 })
         
         return dates
     }
     
     func dates(before date: Date, limit: Int = Int.max) -> [Date] {
         
-        var dates = self.schedule.reduce([Date](), { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = self.schedule.reduce([Date](), { $0 + [$1.start, $1.end] })
             .filter({ $0 < date })
         
-        dates = dates.reduce([Date](), { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+        dates = dates.reduce([Date](), { $0.contains($1) ? $0 : $0 + [$1] }) // remove duplicates
             .prefix(limit)
-            .sorted(by: { $0.0 < $0.1 })
+            .sorted(by: { $0 < $1 })
         
         return dates
     }

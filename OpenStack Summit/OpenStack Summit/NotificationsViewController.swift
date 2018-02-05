@@ -155,7 +155,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.notificationCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

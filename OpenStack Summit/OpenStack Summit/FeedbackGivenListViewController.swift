@@ -72,7 +72,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.feedbackTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.feedbackTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

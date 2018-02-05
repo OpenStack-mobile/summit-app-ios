@@ -109,7 +109,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         loadData()
         
         // filter notifications
-        filterObserver = FilterManager.shared.filter.observe { _ in self.filterUpdated() }
+        filterObserver = FilterManager.shared.filter.observe { _, _ in self.filterUpdated() }
     }
     
     // MARK: - Actions
@@ -520,7 +520,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.scheduleTableViewCell, for: indexPath)!
         
         configure(cell: cell, at: indexPath)
         

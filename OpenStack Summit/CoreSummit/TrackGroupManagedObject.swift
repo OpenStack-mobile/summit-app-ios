@@ -79,8 +79,8 @@ public extension TrackGroup {
         
         let groups = events
             .flatMap({ $0.track?.groups })
-            .reduce([TrackGroupManagedObject](), { $0.0 + Array($0.1) })
-            .sorted(by: { $0.0.name < $0.1.name })
+            .reduce([TrackGroupManagedObject](), { $0 + Array($1) })
+            .sorted(by: { $0.name < $1.name })
         
         return TrackGroup.from(managedObjects: groups)
     }

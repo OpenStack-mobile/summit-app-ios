@@ -107,7 +107,7 @@ final class EventDetailViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventDescriptionCell", for: indexPath)
             
             if let data = eventDetail.eventDescription.data(using: String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 cell.textLabel!.text = attributedString.string
                 

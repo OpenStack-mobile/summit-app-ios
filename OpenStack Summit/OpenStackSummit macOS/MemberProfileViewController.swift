@@ -51,7 +51,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -186,14 +186,14 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         // set description
         if let htmlString = person.biography,
             let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
             attributedString.string.isEmpty == false {
             
             self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
@@ -218,12 +218,12 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
         
-        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+        if let safariReadList = NSSharingService(named: NSSharingService.Name.addToSafariReadingList) {
             
             customItems.append(safariReadList)
         }

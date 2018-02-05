@@ -13,13 +13,13 @@ extension NSSharingService {
     
     convenience init(copyLink link: String, title: String = "Copy Link") {
         
-        self.init(title: title, image: NSImage(named: "copyLink")!, alternateImage: nil) {
+        self.init(title: title, image: NSImage(named: NSImage.Name(rawValue: "copyLink"))!, alternateImage: nil) {
             
-            let pasteboard = NSPasteboard.general()
+            let pasteboard = NSPasteboard.general
             
-            pasteboard.declareTypes([NSPasteboardTypeString], owner: nil)
+            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
             
-            let success = pasteboard.setString(link, forType: NSPasteboardTypeString)
+            let success = pasteboard.setString(link, forType: NSPasteboard.PasteboardType.string)
             
             assert(success, "Could not copy to paste board")
         }
