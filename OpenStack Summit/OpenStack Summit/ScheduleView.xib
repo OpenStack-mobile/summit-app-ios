@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -31,6 +32,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0e-J9-8kd" userLabel="Now Button View">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="52"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wis-wA-eYi">
+                            <rect key="frame" x="11.5" y="9.5" width="38" height="33"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                            <state key="normal" title="NOW">
+                                <color key="titleColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="wis-wA-eYi" firstAttribute="centerY" secondItem="Q0e-J9-8kd" secondAttribute="centerY" id="Psh-oN-2pT"/>
+                        <constraint firstItem="wis-wA-eYi" firstAttribute="centerX" secondItem="Q0e-J9-8kd" secondAttribute="centerX" id="aKD-hV-vo4"/>
+                        <constraint firstAttribute="width" constant="60" id="xbY-Tq-wbw"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrO-92-FB5" customClass="AFHorizontalDayPicker">
                     <rect key="frame" x="60" y="0.0" width="260" height="52"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,56 +70,24 @@
                     <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0e-J9-8kd">
-                    <rect key="frame" x="0.0" y="0.0" width="60" height="52"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wis-wA-eYi">
-                            <rect key="frame" x="11.5" y="9.5" width="38" height="33"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
-                            <state key="normal" title="NOW">
-                                <color key="titleColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="wis-wA-eYi" firstAttribute="centerY" secondItem="Q0e-J9-8kd" secondAttribute="centerY" id="Psh-oN-2pT"/>
-                        <constraint firstItem="wis-wA-eYi" firstAttribute="centerX" secondItem="Q0e-J9-8kd" secondAttribute="centerX" id="aKD-hV-vo4"/>
-                        <constraint firstAttribute="width" constant="60" id="xbY-Tq-wbw"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="BrO-92-FB5" secondAttribute="bottom" id="0ud-k0-dfZ"/>
                 <constraint firstItem="7UD-xN-OK6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="219-cc-UhH"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="5dW-zO-rIF"/>
-                <constraint firstItem="Q0e-J9-8kd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6qi-ef-EsC"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8xh-VM-201"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="D1C-Kz-Lzn"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="Lnr-dn-VRU"/>
                 <constraint firstItem="7UD-xN-OK6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NCh-lu-Rm4"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="OY5-Io-kY5"/>
-                <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="OnT-C4-F9R"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VIB-Qb-xBv"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XA3-mI-tX6"/>
-                <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="gCa-td-BQf"/>
-                <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="gXE-IN-9Vs"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kcz-XP-jhS"/>
                 <constraint firstItem="7UD-xN-OK6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="m14-Cr-pqU"/>
-                <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="mkW-gG-xKm"/>
-                <constraint firstItem="Q0e-J9-8kd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oDo-px-ivP"/>
-                <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oax-sw-ShK"/>
-                <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oiz-WW-0ym"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="zzU-YO-hNf"/>
             </constraints>
             <point key="canvasLocation" x="506" y="296"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_0.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
