@@ -11,7 +11,7 @@ import AFHorizontalDayPicker
 
 final class ScheduleView: UIView {
     
-    @IBOutlet var view: UIView!
+    @IBOutlet var contentView: UIView!
     @IBOutlet private(set) weak var dayPicker: AFHorizontalDayPicker!
     @IBOutlet private(set) weak var tableView: UITableView!
     @IBOutlet private(set) weak var noEventsLabel: UILabel!
@@ -58,7 +58,9 @@ final class ScheduleView: UIView {
         dayPicker.backgroundInactiveColor = UIColor(hexString: "#E5E5E5")
         dayPicker.backgroundSelectedColor = UIColor(hexString: "#4A4A4A")
         
-        addSubview(self.view)
+        addSubview(self.contentView)
+        self.contentView.frame = self.bounds
+        self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
     func setInactiveAppearanceWithCell(_ cell: AFDayCell) {
