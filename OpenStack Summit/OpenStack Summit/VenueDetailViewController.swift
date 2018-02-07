@@ -64,7 +64,10 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         super.viewDidLoad()
         
         imagesSlideshow.contentScaleMode = .scaleAspectFill
+        
         mapsSlideshow.contentScaleMode = .scaleAspectFill
+        mapsSlideshow.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "#4A4A4A")
+        mapsSlideshow.pageControl.pageIndicatorTintColor = UIColor(hexString: "#E5E5E5")
         
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
@@ -77,20 +80,12 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     // MARK: - Action
     
     @IBAction func openInFullScreen(_ sender: UITapGestureRecognizer) {
+        
         let slideshow = sender.view as! ImageSlideshow
         
-        let ctr = FullScreenSlideshowViewController()
-        ctr.pageSelected = {(page: Int) in
-            slideshow.setScrollViewPage(page, animated: false)
-        }
-        
-        //ctr.initialImageIndex = slideshow.scrollViewPage
-        ctr.inputs = slideshow.images
-        self.transitionDelegate = ZoomAnimatedTransitioningDelegate.init(slideshowView: slideshow, slideshowController: ctr)
-        ctr.transitioningDelegate = self.transitionDelegate!
-        self.present(ctr, animated: true, completion: nil)
-        
-        ctr.closeButton.setImage(#imageLiteral(resourceName: "close"), for: UIControlState())
+        let fullScreenController = slideshow.presentFullScreenController(from: self)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+        fullScreenController.closeButton.setImage(#imageLiteral(resourceName: "close"), for: UIControlState())
     }
     
     @IBAction func navigateToVenueLocationDetail(_ sender: UITapGestureRecognizer) {
