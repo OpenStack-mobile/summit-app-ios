@@ -56,6 +56,8 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     var venue: Identifier!
     
+    var defaultMap: URL? = nil
+    
     var transitionDelegate: ZoomAnimatedTransitioningDelegate?
     
     // MARK: - Loading
@@ -167,5 +169,12 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         let imageInputs = imageURLs.map { CachedInputSource(url: $0) }
         
         slideshow.setImageInputs(imageInputs)
+        
+        if slideshow == self.mapsSlideshow,
+            let defaultMap = self.defaultMap,
+            let index = imageURLs.index(of: defaultMap) {
+            
+            slideshow.setCurrentPage(index, animated: false)
+        }
     }
 }

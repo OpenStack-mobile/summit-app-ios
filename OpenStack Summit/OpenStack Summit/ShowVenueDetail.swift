@@ -16,6 +16,7 @@ extension UIViewController {
     func show(location: Identifier) {
         
         let venue: Identifier
+        var defaultMap: URL? = nil
         
         if let venueManagedObject = try! VenueManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
@@ -24,6 +25,7 @@ extension UIViewController {
         } else if let venueRoomManagedObject = try! VenueRoomManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
             venue = venueRoomManagedObject.venue.id
+            defaultMap = URL(string: venueRoomManagedObject.floor?.imageURL ?? "")
             
         } else {
             
@@ -33,6 +35,7 @@ extension UIViewController {
         let venueDetailViewController = R.storyboard.venue.venueDetailViewController()!
         
         venueDetailViewController.venue = venue
+        venueDetailViewController.defaultMap = defaultMap
         
         self.show(venueDetailViewController, sender: self)
     }

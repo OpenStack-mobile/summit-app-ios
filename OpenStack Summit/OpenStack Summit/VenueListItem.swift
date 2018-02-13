@@ -68,6 +68,11 @@ extension VenueListItem: CoreDataDecodable {
             self.location = nil
         }
     }
+}
+
+// MARK: - Internal Extension
+
+internal extension VenueListItem {
     
     static func address(for venue: VenueManagedObject) -> String {
         
