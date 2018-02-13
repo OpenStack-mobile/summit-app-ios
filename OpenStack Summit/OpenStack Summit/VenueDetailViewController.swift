@@ -164,7 +164,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     @inline(__always)
     private func configure(slideshow: ImageSlideshow, with imageURLs: [URL]) {
         
-        let imageInputs = imageURLs.map { HanekeInputSource(url: $0) }
+        let imageInputs = imageURLs.map { CachedInputSource(url: $0) }
         
         slideshow.setImageInputs(imageInputs)
     }

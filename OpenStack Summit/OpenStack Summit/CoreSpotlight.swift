@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import Foundation
 import CoreSpotlight
 import MobileCoreServices
 import CoreSummit
-import Haneke
 import CoreData
 
 // MARK: - Model Extensions
