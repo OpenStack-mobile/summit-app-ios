@@ -78,8 +78,8 @@ public extension TrackGroup {
         let events = try context.managedObjects(EventManagedObject.self, predicate: eventsPredicate)
         
         let groups = events
-            .flatMap({ $0.track?.groups })
-            .reduce([TrackGroupManagedObject](), { $0 + Array($1) })
+            .flatMap { $0.track?.groups }
+            .reduce(Set<TrackGroupManagedObject>(), { $0.union($1) })
             .sorted(by: { $0.name < $1.name })
         
         return TrackGroup.from(managedObjects: groups)

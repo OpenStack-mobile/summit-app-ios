@@ -19,6 +19,41 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     private var filterObserver: Int?
     
+    private var trackGroup: Identifier? = nil
+    
+    // MARK: - Accesors
+    
+    private var sections: [Section] {
+        
+        get {
+            
+            return self.filters.filter {
+                
+                switch $0.category {
+                    
+                case .track: return self.trackGroup != nil
+                default: return self.trackGroup == nil
+                    
+                }
+            }
+        }
+    }
+    
+    var trackGroupItem: GroupItem? = nil {
+        
+        willSet {
+            
+            guard let groupItem = newValue else { return }
+            
+            switch groupItem.filter {
+                
+            case let .trackGroup(identifier): self.trackGroup = identifier
+            default: return
+                
+            }
+        }
+    }
+    
     // MARK: - Loading
     
     deinit {
@@ -43,6 +78,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         filterObserver = FilterManager.shared.filter.observe { [weak self] _, _ in self?.configureView() }
         
         //  setup UI
+        configureNavigationBar()
         configureView()
     }
     
@@ -50,6 +86,20 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         FilterManager.shared.filter.value.update()
+        
+        // reload table view data after returning sub filtering
+        if !isBeingPresented && !isMovingToParentViewController {
+            
+            self.tableView.reloadData()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.navigationController?.viewControllers.index(of: self) == nil {
+            
+            
+        }
     }
     
     // MARK: - Actions
@@ -57,16 +107,27 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     @IBAction func filterChanged(_ sender: UISwitch) {
         
         let buttonOrigin = sender.convert(CGPoint.zero, to: tableView)
-        let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
-        let filter = self[indexPath].filter
         
-        if sender.isOn {
+        let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
+        
+        let section = self.sections[indexPath.section]
+        
+        switch section.type {
             
-            FilterManager.shared.filter.value.enable(filter)
+        case let .filter(items):
             
-        } else {
+            let item = items[indexPath.row]
             
-            FilterManager.shared.filter.value.disable(filter)
+            if sender.isOn {
+                
+                FilterManager.shared.filter.value.enable(item.filter)
+                
+            } else {
+                
+                FilterManager.shared.filter.value.disable(item.filter)
+            }
+            
+        default: break
         }
     }
     
@@ -76,6 +137,16 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func configureNavigationBar() {
+        
+        if let groupItem = self.trackGroupItem {
+            
+            self.navigationItem.leftBarButtonItem = nil
+            self.title = groupItem.name.uppercased()
+        }
+        else { self.setBlankBackBarButtonItem() }
+    }
     
     private func configureView() {
         
@@ -89,9 +160,10 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         func identifier(for filter: Filter) -> Identifier {
             
             switch filter {
+            case let .track(identifier): return identifier
             case let .trackGroup(identifier): return identifier
             case let .venue(identifier): return identifier
-            case .activeTalks, .level: fatalError("Invalid filter: \(filter)")
+            default: fatalError("Invalid filter: \(filter)")
             }
         }
         
@@ -100,18 +172,36 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             switch filter {
             case .activeTalks: return "Hide Past Talks"
             case let .level(level): return level.rawValue
-            case .trackGroup, .venue: fatalError("Invalid filter: \(filter)")
+            default: fatalError("Invalid filter: \(filter)")
             }
         }
         
         if let activeTalksSection = scheduleFilter.allFilters[.activeTalks] {
             
-            let items = activeTalksSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
+            let items = activeTalksSection.map { Item(filter: $0, name: name(for: $0), enabled: scheduleFilter.activeFilters.contains($0)) }
             
-            filters.append(Section(category: .activeTalks, items: items))
+            filters.append(Section(category: .activeTalks, type: .filter(items)))
         }
         
         if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
+            
+            var tracks = [Track]()
+            
+            if let _ = scheduleFilter.allFilters[.track] {
+                
+                // fetch from CoreData because it caches fetch request results and is more efficient
+                let identifiers = scheduleFilter.activeFilters.filter {
+                    switch $0 {
+                    case .track: return true
+                    default: return false
+                    }
+                }.map { identifier(for: $0) }
+                
+                //let predicate = NSPredicate(format: "id IN %@", identifiers)
+                let predicate: Predicate = (#keyPath(TrackManagedObject.id)).in(identifiers)
+                
+                tracks = try! context.managedObjects(Track.self, predicate: predicate, sortDescriptors: Track.ManagedObject.sortDescriptors)
+            }
             
             // fetch from CoreData because it caches fetch request results and is more efficient
             let identifiers = trackGroupsSection.map { identifier(for: $0) }
@@ -121,16 +211,45 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             
             let trackGroups = try! context.managedObjects(TrackGroup.self, predicate: predicate, sortDescriptors: TrackGroup.ManagedObject.sortDescriptors)
             
-            let items = trackGroups.map { Item(filter: .trackGroup($0.identifier), enabled: scheduleFilter.activeFilters.contains(.trackGroup($0.identifier)), name: $0.name, color: $0.color) }
+            let groupItems = trackGroups.map { trackGroup in
+                
+                GroupItem(filter: .trackGroup(trackGroup.identifier),
+                          name: trackGroup.name,
+                          color: trackGroup.color,
+                          items: tracks
+                            .filter { $0.groups.contains(trackGroup.identifier) }
+                            .map { Item(filter: .track($0.identifier), name: $0.name, enabled: true ) } )
+            }
             
-            filters.append(Section(category: .trackGroup, items: items))
+            filters.append(Section(category: .trackGroup, type: .group(groupItems)))
         }
         
+        if let trackGroup = self.trackGroup,
+            let tracksSection = scheduleFilter.allFilters[.track] {
+            
+            // fetch from CoreData because it caches fetch request results and is more efficient
+            let identifiers = tracksSection.map { identifier(for: $0) }
+            
+            //let scheduledTracks = NSPredicate(format: "id IN %@", identifiers)
+            let filteredTracks: Predicate = (#keyPath(TrackManagedObject.id)).in(identifiers)
+            
+            //let trackGroupsPredicate = NSPredicate(format: "ANY groups.id IN %@", [trackGroups])
+            let trackGroupsPredicate: Predicate = (#keyPath(TrackManagedObject.groups.id)).any(in: [trackGroup])
+                
+            let predicate: Predicate = .compound(.and([filteredTracks, trackGroupsPredicate]))
+            
+            let tracks = try! context.managedObjects(Track.self, predicate: predicate, sortDescriptors: Track.ManagedObject.sortDescriptors)
+            
+            let items = tracks.map { Item(filter: .track($0.identifier), name: $0.name, enabled: scheduleFilter.activeFilters.contains(.track($0.identifier))) }
+            
+            filters.append(Section(category: .track, type: .filter(items)))
+        }
+ 
         if let levelsSection = scheduleFilter.allFilters[.level] {
             
-            let items = levelsSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
+            let items = levelsSection.map { Item(filter: $0, name: name(for: $0), enabled: scheduleFilter.activeFilters.contains($0)) }
             
-            filters.append(Section(category: .level, items: items))
+            filters.append(Section(category: .level, type: .filter(items)))
         }
         
         if let venuesSection = scheduleFilter.allFilters[.venue] {
@@ -143,76 +262,109 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             
             let venues = try! context.managedObjects(Venue.self, predicate: predicate, sortDescriptors: Venue.ManagedObject.sortDescriptors)
             
-            let items = venues.map { Item(filter: .venue($0.identifier), enabled: scheduleFilter.activeFilters.contains(.venue($0.identifier)), name: $0.name, color: nil) }
+            let items = venues.map { Item(filter: .venue($0.identifier), name: $0.name, enabled: scheduleFilter.activeFilters.contains(.venue($0.identifier))) }
             
-            filters.append(Section(category: .venue, items: items))
+            filters.append(Section(category: .venue, type: .filter(items)))
         }
     }
     
-    private subscript (indexPath: IndexPath) -> Item {
-        
-        let section = self.filters[indexPath.section]
-        
-        return section.items[indexPath.row]
-    }
-    
-    private func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
-        
-        let item = self[indexPath]
+    private func configure(cell: GeneralScheduleFilterTableViewCell, with item: Item) {
         
         cell.nameLabel.text = item.name
         cell.enabledSwitch.isOn = item.enabled
+    }
+    
+    private func configure(cell: GeneralScheduleGroupFilterTableViewCell, with groupItem: GroupItem) {
         
-        if let colorHex = item.color,
-            let color = UIColor(hexString: colorHex) {
+        cell.nameLabel.text = groupItem.name
+        
+        let color = UIColor(hexString: groupItem.color)
+        
+        if groupItem.items.count > 0 {
             
-            cell.circleContainerView.isHidden = false
             cell.circleView.backgroundColor = color
+            cell.activeFiltersLabel.text = activeFilters(for: groupItem)
             
         } else {
             
-            cell.circleContainerView.isHidden = true
+            cell.circleView.layer.borderWidth = 1
+            cell.circleView.layer.borderColor = color?.cgColor
             cell.circleView.backgroundColor = .clear
+            cell.activeFiltersLabel.text = ""
         }
+    }
+    
+    private func title(for category: FilterCategory) -> String {
+        
+        let title: String
+        
+        switch category {
+            
+        case .activeTalks: title = "ACTIVE TALKS"
+        case .trackGroup: title = "CATEGORIES"
+        case .track: title = "TRACKS"
+        case .level: title = "LEVELS"
+        case .venue: title = "VENUES"
+            
+        }
+        
+        return title
+    }
+    
+    private func activeFilters(for group: GroupItem) -> String {
+        
+        return group.items.map { $0.name.trimmingCharacters(in: .whitespaces) }.joined(separator: ", ")
     }
     
     private func configure(header headerView: TableViewHeaderView, for section: Int) {
         
-        let filterCategory = self.filters[section].category
+        let filterCategory = self.sections[section].category
         
-        let title: String
-        
-        switch filterCategory {
-        case .activeTalks: title = "ACTIVE TALKS"
-        case .trackGroup: title = "CATEGORIES"
-        case .level: title = "LEVELS"
-        case .venue: title = "VENUES"
-        }
-        
-        headerView.titleLabel.text = title
+        headerView.titleLabel.text = title(for: filterCategory)
     }
     
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return filters.count
+        return self.sections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let section = self.filters[section]
+        let section = self.sections[section]
         
-        return section.items.count
+        switch section.type {
+            
+        case let .filter(items): return items.count
+            
+        case let .group(items): return items.count
+            
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.generalScheduleFilterTableViewCell, for: indexPath)!
+        let section = self.sections[indexPath.section]
         
-        configure(cell: cell, at: indexPath)
-        
-        return cell
+        switch section.type {
+            
+        case let .filter(items):
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.generalScheduleFilterTableViewCell, for: indexPath)!
+            
+            configure(cell: cell, with: items[indexPath.row])
+            
+            return cell
+            
+        case let .group(groupItems):
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.generalScheduleGroupFilterTableViewCell, for: indexPath)!
+            
+            configure(cell: cell, with: groupItems[indexPath.row])
+            
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -223,32 +375,73 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         
         return headerView
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let section = self.sections[indexPath.section]
+        
+        switch section.type {
+            
+        case let .group(groupItems):
+            
+            let groupItem = groupItems[indexPath.row]
+            
+            let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
+            
+            generalScheduleFilterViewController.trackGroupItem = groupItem
+            
+            self.navigationController?.pushViewController(generalScheduleFilterViewController, animated: true)
+            
+        default: break
+            
+        }
+    }
 }
 
 // MARK: - Supporting Types
 
-private extension GeneralScheduleFilterViewController {
+extension GeneralScheduleFilterViewController {
+    
+    enum SectionType {
+        
+        case group([GroupItem])
+        case filter([Item])
+    }
     
     struct Section {
         
         let category: FilterCategory
+        let type: SectionType
+    }
+    
+    struct GroupItem {
+        
+        let filter: Filter
+        let name: String
+        let color: String
         let items: [Item]
     }
     
-    /// Item for each cell, to improve performance.
     struct Item {
         
         let filter: Filter
-        let enabled: Bool
         let name: String
-        let color: String?
+        let enabled: Bool
     }
+}
+
+final class GeneralScheduleGroupFilterTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var circleView: UIView!
+    @IBOutlet private(set) weak var circleContainerView: UIView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var activeFiltersLabel: UILabel!
 }
 
 final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var circleView: UIView!
-    @IBOutlet private(set) weak var circleContainerView: UIView!
     @IBOutlet private(set) weak var nameLabel: UILabel!
     @IBOutlet private(set) weak var enabledSwitch: UISwitch!
 }

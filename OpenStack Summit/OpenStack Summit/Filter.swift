@@ -19,6 +19,9 @@ enum FilterCategory {
     /// CATEGORIES
     case trackGroup
     
+    /// TRACK
+    case track
+    
     /// LEVEL
     case level
     
@@ -30,7 +33,7 @@ enum Filter {
     
     /// Hide Past Talks
     case activeTalks
-    
+    case track(Identifier)
     case trackGroup(Identifier)
     case level(Level)
     case venue(Identifier)
@@ -49,7 +52,7 @@ func == (lhs: Filter, rhs: Filter) -> Bool {
     switch (lhs, rhs) {
         
     case (.activeTalks, .activeTalks): return true
-    case let (.trackGroup(lhsValue), .trackGroup(rhsValue)): return lhsValue == rhsValue
+    case let (.track(lhsValue), .track(rhsValue)): return lhsValue == rhsValue
     case let (.level(lhsValue), .level(rhsValue)): return lhsValue == rhsValue
     case let (.venue(lhsValue), .venue(rhsValue)): return lhsValue == rhsValue
     default: return false
@@ -93,8 +96,12 @@ struct ScheduleFilter: Equatable {
             else { activeFilters.removeAll(); return }
         
         // fetch data
+        let tracks = try! Track.scheduled(for: summitID, context: context)
+        
         let trackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
-        let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: #keyPath(PresentationManagedObject.event.summit.id) == summitID)
+        
+        let levels = try! Set(context.managedObjects(PresentationManagedObject.self,
+                                                     predicate: #keyPath(PresentationManagedObject.event.summit.id) == summitID)
             .flatMap { $0.level })
             .flatMap { Level(rawValue: $0) }
             .sorted()
@@ -115,6 +122,11 @@ struct ScheduleFilter: Equatable {
         if (now as NSDate).mt_isBetweenDate(startDate, andDate: endDate) {
             
             allFilters[.activeTalks] = [.activeTalks]
+        }
+        
+        if tracks.isEmpty == false {
+            
+            allFilters[.track] = tracks.map { .track($0.identifier) }
         }
         
         if trackGroups.isEmpty == false {

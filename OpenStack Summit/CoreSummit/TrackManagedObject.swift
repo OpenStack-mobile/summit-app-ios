@@ -109,5 +109,20 @@ public extension Track {
         
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
+    
+    /// Fetch all tracks that have some event associated with them.
+    static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [Track] {
+        
+        // NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
+        let eventsPredicate: Predicate = .keyPath(#keyPath(EventManagedObject.track)) != .value(.null)
+            && #keyPath(EventManagedObject.summit.id) == summit
+        
+        let events = try context.managedObjects(EventManagedObject.self, predicate: eventsPredicate)
+        
+        let tracks = Set(events.flatMap({ $0.track }))
+            .sorted(by: { $0.name < $1.name })
+        
+        return Track.from(managedObjects: tracks)
+    }
 }
 
