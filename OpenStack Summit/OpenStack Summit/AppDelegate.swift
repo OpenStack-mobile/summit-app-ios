@@ -194,7 +194,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // HACK: async is needed in case app was not already opened
         DispatchQueue.main.async {
-            let _ = self.openScheme(url: url)
+            
+            let _ = self.openWeb(url: url)
         }
         
         return false
