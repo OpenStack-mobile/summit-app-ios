@@ -28,7 +28,7 @@ final class LevelScheduleViewController: ScheduleViewController {
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
+    override func scheduleActiveDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value

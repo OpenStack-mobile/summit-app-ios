@@ -23,7 +23,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
+    override func scheduleActiveDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         guard let member = Store.shared.authenticatedMember
             else { return [] }

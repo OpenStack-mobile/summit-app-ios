@@ -41,27 +41,35 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     // MARK: - Accessors
     
     var startDate: Date! {
+        
         get {
+            
             return scheduleView.dayPicker.startDate
         }
         set {
+            
             scheduleView.dayPicker.startDate = newValue
             scheduleView.dayPicker.firstActiveDate = newValue
         }
     }
     
     var endDate: Date! {
+        
         get {
+            
             return scheduleView.dayPicker.endDate
         }
         set {
+            
             scheduleView.dayPicker.endDate = newValue
             scheduleView.dayPicker.lastActiveDate = newValue
         }
     }
     
     var selectedDate: Date! {
+        
         get {
+            
             return scheduleView.dayPicker.selectedDate
         }
         set {
@@ -69,11 +77,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    var availableDates: [Date]! {
+    var activeDates: [Date]! {
+        
         get {
+            
             return scheduleView.activeDates
         }
         set {
+            
             scheduleView.activeDates = newValue
         }
     }
@@ -118,7 +129,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let now = Date()
         
-        guard let today = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: now) })
+        guard let today = self.activeDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: now) })
             else { return }
         
         (self.scheduleView.dayPicker.value(forKey: "daysCollectionView") as! UICollectionView).reloadData()
@@ -167,7 +178,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     func toggleNoConnectivityMessage(_ show: Bool) {} // override
     
-    func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
+    func scheduleActiveDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         fatalError("You must override this method")
     }
@@ -228,7 +239,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
         
-        self.availableDates = self.scheduleAvailableDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
+        self.activeDates = self.scheduleActiveDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
         
         let summitActive = (today as NSDate).mt_isBetweenDate(self.startDate, andDate: self.endDate)
         
@@ -239,14 +250,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let oldSelectedDate = self.selectedDate
         
         if  let defaultStart = summit.defaultStart,
-            let defaultDay = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: defaultStart) }),
+            let defaultDay = self.activeDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: defaultStart) }),
             summitActive == false && self.didSelectDate == false {
             
             self.selectedDate = defaultDay
             
-        } else if self.didSelectDate == false || self.availableDates.contains(self.selectedDate) == false {
+        } else if self.didSelectDate == false || self.activeDates.contains(self.selectedDate) == false {
             
-            self.selectedDate = self.availableDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: today) }) ?? self.availableDates.first
+            self.selectedDate = self.activeDates.first(where: { ($0 as NSDate).mt_is(withinSameDay: today) }) ?? self.activeDates.first
             
         } else {
             

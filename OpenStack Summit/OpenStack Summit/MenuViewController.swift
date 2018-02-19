@@ -301,6 +301,40 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         highlight(.events)
         
         show(generalScheduleViewController)
+        
+        /*
+        if let modifiers = modifiers {
+            
+            for modifier in modifiers {
+                
+                switch modifier {
+                    
+                case let .day(date):
+                    
+                    generalScheduleViewController.selectedDate = date
+                    
+                case let .track(identifier):
+                    
+                    let scheduleFilter = FilterManager.shared.filter.value
+                    
+                    if let trackFilters = scheduleFilter.allFilters[.track] {
+                        
+                        if trackFilters.contains(where: {
+                            
+                            switch $0 {
+                            case let .track(identifier): return identifier == identifier
+                            default: return false
+                            }
+                        }) {
+                            
+                            let filter: Filter = .track(identifier)
+                            
+                            FilterManager.shared.filter.value.enable(filter)
+                        }
+                    }
+                }
+            }
+        }*/
     }
     
     func showVenues() {
