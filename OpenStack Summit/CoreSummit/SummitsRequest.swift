@@ -15,7 +15,9 @@ public extension Store {
     
     func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: @escaping (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
         
-        let uri = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
+        // endpoint currently not supporting paging
+        // let uri = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)&relations=none&expand=none"
+        let uri = "/api/v1/summits?relations=none&expand=none"
         
         let http = self.createHTTP(.serviceAccount)
         
