@@ -56,10 +56,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hje-NR-jtt">
-                                        <rect key="frame" x="48" y="46" width="224" height="136"/>
+                                        <rect key="frame" x="64" y="57.5" width="192" height="113.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-dg-se7">
-                                        <rect key="frame" x="48" y="46" width="224" height="136"/>
+                                        <rect key="frame" x="64" y="57.5" width="192" height="113.5"/>
                                         <connections>
                                             <segue destination="He9-0n-Hpb" kind="presentation" identifier="showSummits" modalPresentationStyle="formSheet" id="scj-bP-kOo"/>
                                         </connections>
@@ -69,10 +69,10 @@
                                 <constraints>
                                     <constraint firstItem="zxS-dg-se7" firstAttribute="centerY" secondItem="hje-NR-jtt" secondAttribute="centerY" id="6Rg-AK-jkS"/>
                                     <constraint firstItem="zxS-dg-se7" firstAttribute="height" secondItem="hje-NR-jtt" secondAttribute="height" id="ACm-Bj-FeU"/>
-                                    <constraint firstItem="hje-NR-jtt" firstAttribute="width" secondItem="i0m-29-s0K" secondAttribute="width" multiplier="0.7" id="Ceg-2n-y7V"/>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="width" secondItem="i0m-29-s0K" secondAttribute="width" multiplier="0.6" id="Ceg-2n-y7V"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="centerY" secondItem="i0m-29-s0K" secondAttribute="centerY" id="GvW-pL-zv7"/>
                                     <constraint firstItem="zxS-dg-se7" firstAttribute="centerX" secondItem="hje-NR-jtt" secondAttribute="centerX" id="Loi-ZW-q3m"/>
-                                    <constraint firstItem="hje-NR-jtt" firstAttribute="height" secondItem="i0m-29-s0K" secondAttribute="height" multiplier="0.6" id="P8c-TM-i4y"/>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="height" secondItem="i0m-29-s0K" secondAttribute="height" multiplier="0.5" id="P8c-TM-i4y"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="centerX" secondItem="i0m-29-s0K" secondAttribute="centerX" id="RVF-0N-Rdc"/>
                                     <constraint firstItem="zxS-dg-se7" firstAttribute="width" secondItem="hje-NR-jtt" secondAttribute="width" id="acX-pF-ayg"/>
                                 </constraints>
