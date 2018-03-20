@@ -72,6 +72,8 @@ public extension SummitsResponse {
         
         public let end: Date
         
+        public let defaultStart: Date?
+        
         public let active: Bool
         
         public init?(json JSONValue: JSON.Value) {
@@ -94,6 +96,15 @@ public extension SummitsResponse {
             self.active = active
             
             self.datesLabel = JSONObject[JSONKey.dates_label.rawValue]?.rawValue as? String
+            
+            if let scheduleStartDate = JSONObject[JSONKey.schedule_start_date.rawValue]?.integerValue {
+                
+                self.defaultStart = Date(timeIntervalSince1970: TimeInterval(scheduleStartDate))
+                
+            } else {
+                
+                self.defaultStart = nil
+            }
         }
     }
 }
@@ -106,5 +117,6 @@ public func == (lhs: SummitsResponse.Summit, rhs: SummitsResponse.Summit) -> Boo
         && lhs.datesLabel == rhs.datesLabel
         && lhs.start == rhs.start
         && lhs.end == rhs.end
+        && lhs.defaultStart == rhs.defaultStart
         && lhs.active == rhs.active
 }
