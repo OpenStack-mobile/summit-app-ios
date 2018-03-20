@@ -137,7 +137,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
         case .transitioning:
             
-            break
+            assert(Store.shared.isLoggedIn, "Invalid State")
+            
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.isHidden = true
+            self.loginButton.isHidden = true
+            
+            self.dataLoadedActivityIndicatorView.isHidden = false
+            self.dataLoadedActivityIndicatorView.startAnimating()
         }
         
         if let summit = self.summit {
@@ -268,19 +278,28 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         return label
     }
     
-    private func showRevealController(_ sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
+    private func showRevealController(_ sender: AnyObject? = nil, delay: Double = 0, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
         let revealViewController = MainRevealViewController()
         
-        self.show(revealViewController, sender: sender)
+        self.willTransition = false
         
-        self.willTransition = false;
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay)) {
+            
+            self.show(revealViewController, sender: sender)
+        }
         
-        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay + 2)) {
+            
+            completion?(revealViewController)
+        }
+    }
+    
+    private func dispatchTime(from delay: Double) -> DispatchTime {
         
-        DispatchQueue.main.asyncAfter(deadline: delayTime) { completion?(revealViewController) }
+        return DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
     }
     
     private func loadSummits() {
@@ -345,7 +364,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 if Store.shared.isLoggedIn {
                     
-                    showRevealController(self)
+                    showRevealController(self, delay: 2)
                     
                     state = .transitioning
                 }
