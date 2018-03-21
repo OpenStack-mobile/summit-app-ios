@@ -242,7 +242,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             labelDigit.addBorders(edges: [.left, .bottom, .right], color: .white, thickness: 0.5)
             
             summitDaysStackView.addArrangedSubview(labelDigit)
-            digitLabels.append(label)
+            digitLabels.append(labelDigit)
             
             stackViewWidth = digitWidth
             stackViewHeight = digitHeight
