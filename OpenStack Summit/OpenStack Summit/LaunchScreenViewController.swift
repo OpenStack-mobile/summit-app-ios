@@ -181,6 +181,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         // show current summit info
         self.summitDateLabel.text = summit.summitDates
+        self.summitNameLabel.text = summit.name.uppercased()
         
         switch summit.phase {
             
