@@ -23,6 +23,12 @@ extension SummitActivityHandling {
     /// Opens URL of universal domain.
     func openWeb(url: URL) -> Bool {
         
+        if url.pathComponents.last == "summit-schedule" {
+            
+            self.view(screen: .events)
+            return true
+        }
+        
         // perform search
         if url.pathComponents.last == "global-search",
             let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -33,40 +39,31 @@ extension SummitActivityHandling {
             return true
         }
         
+        let typeString: String
+        let identifierString: String
+        
         let components = url.pathComponents
+        
+        if let scheme = url.scheme,
+            scheme == "http" || scheme == "https" {
+            
+            guard components.count >= 6
+                else { return false }
+            
+            typeString = components[4]
+            identifierString = components[5]
+            
+        } else {
+            
+            guard let host = url.host,
+                components.count >= 2
+                else { return false }
+            
+            typeString = host
+            identifierString = components[1]
+        }
         
         // show data
-        guard components.count >= 6
-            else { return false }
-        
-        let typeString = components[4]
-        let identifierString = components[5]
-        
-        guard let identifier = Identifier(identifierString),
-            let type = WebPathComponent(rawValue: typeString)
-            else { return false }
-        
-        let dataType = AppActivitySummitDataType(webPathComponent: type)
-        
-        guard self.canView(data: dataType, identifier: identifier)
-            else { return false }
-        
-        self.view(data: dataType, identifier: identifier)
-        
-        return true
-    }
-    
-    /// Opens URL of custom scheme.
-    func openScheme(url: URL) -> Bool {
-        
-        let components = url.pathComponents
-        
-        guard let typeString = url.host,
-            components.count >= 2
-            else { return false }
-        
-        let identifierString = components[1]
-        
         guard let identifier = Identifier(identifierString),
             let type = WebPathComponent(rawValue: typeString)
             else { return false }
@@ -134,8 +131,8 @@ extension UIViewController {
             
         case .speaker:
             
-            let MmmberProfileViewController = MemberProfileViewController(profile: .speaker(identifier))
-            self.show(MmmberProfileViewController, sender: nil)
+            let memberProfileViewController = MemberProfileViewController(profile: .speaker(identifier))
+            self.show(memberProfileViewController, sender: nil)
             
         case .video:
             

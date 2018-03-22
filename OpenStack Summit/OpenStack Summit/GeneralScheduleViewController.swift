@@ -64,7 +64,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         message.target = self
         message.action = #selector(clearFilters)
         message.tintColor = UIColor(hexString: "#4A4A4A")
-        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15)], for: UIControlState())
+        message.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)], for: UIControlState())
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: #selector(clearFilters))
         
@@ -171,28 +171,28 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         super.loadData()
     }
     
-    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
+    override func scheduleActiveDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
         
-        var trackGroups = [Identifier]()
+        var tracks = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
-            case let .trackGroup(identifier): trackGroups.append(identifier)
+            case let .track(identifier): tracks.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
-            case .activeTalks: break
+            default: break
             }
         }
         
         let date = DateFilter.interval(start: startDate, end: endDate)
         
-        let events = try! EventManagedObject.filter(date, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [Date] = []
         
@@ -217,21 +217,21 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
         
-        var trackGroups = [Identifier]()
+        var tracks = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
-            case let .trackGroup(identifier): trackGroups.append(identifier)
+            case let .track(identifier): tracks.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
-            case .activeTalks: break
+            default: break
             }
         }
         
-        let events = try! EventManagedObject.filter(filter, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }

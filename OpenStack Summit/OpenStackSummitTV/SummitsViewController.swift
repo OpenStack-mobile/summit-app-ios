@@ -66,7 +66,7 @@ final class SummitsViewController: UITableViewController {
                     
                 case let .value(value):
                     
-                    controller.summits = value.items.sorted { $0.0.start > $0.1.start }
+                    controller.summits = value.items.sorted { $0.start > $1.start }
                 }
             }
         }

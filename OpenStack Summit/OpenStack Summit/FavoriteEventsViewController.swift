@@ -23,14 +23,14 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
+    override func scheduleActiveDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         guard let member = Store.shared.authenticatedMember
             else { return [] }
         
         let events = member.favoriteEvents
+            .sorted(by: { $0.start < $1.start })
             .filter({ $0.start >= startDate && $0.end <= endDate })
-            .sorted(by: { $0.0.start < $0.1.start })
         
         var activeDates: [Date] = []
         
@@ -57,8 +57,8 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
             else { return [] }
         
         let events = member.favoriteEvents
+            .sorted(by: { $0.start < $1.start })
             .filter({ $0.start >= interval.start && $0.end <= interval.end })
-            .sorted(by: { $0.0.start < $0.1.start })
         
         return ScheduleItem.from(managedObjects: events)
     }

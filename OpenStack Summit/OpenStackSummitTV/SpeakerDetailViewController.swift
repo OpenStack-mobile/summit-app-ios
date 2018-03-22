@@ -141,7 +141,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerBiographyCell", for: indexPath)
             
             if let data = speakerCache.biography?.data(using: String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 cell.textLabel!.text = attributedString.string
                 

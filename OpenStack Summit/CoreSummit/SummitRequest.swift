@@ -13,13 +13,13 @@ import JSON
 
 public extension Store {
     #if MOCKED
-    func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
+    func summit(_ identifier: Identifier? = nil, completion: @escaping (ErrorValue<Summit>) -> ()) {
     
-        let resourcePath = NSBundle(forClass: Store.self).bundlePath + "/Summit7.json"
+        let resourcePath = Bundle(for: Store.self).bundlePath + "/Summit7.json"
     
         let JSONString = try! String(contentsOfFile: resourcePath)
     
-        let json = try? JSON.Value(string: JSONString)!
+        let json = try! JSON.Value(string: JSONString)
     
         let summit = Summit(json: json)!
         
@@ -30,12 +30,12 @@ public extension Store {
             
             let managedObject = try summit.save(context)
             
-            managedObject.initialDataLoad = NSDate()
+            managedObject.initialDataLoad = NSDate() as Date
             
             try context.validateAndSave()
         }
     
-        completion(.Value(summit))
+        completion(.value(summit))
     }
     #else
     func summit(_ identifier: Identifier? = nil, completion: @escaping (ErrorValue<Summit>) -> ()) {

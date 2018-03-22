@@ -269,13 +269,13 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
         case .order:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmOrderTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmOrderTableViewCell, for: indexPath)!
             
             return cell
             
         case .selection:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmSelectionTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmSelectionTableViewCell, for: indexPath)!
             
             cell.pickerView.reloadAllComponents()
             
@@ -283,7 +283,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
         case .action:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmActionTableViewCell)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.attendeeConfirmActionTableViewCell, for: indexPath)!
             
             let confirmEnabled: Bool
             

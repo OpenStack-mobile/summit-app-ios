@@ -74,7 +74,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shareButton.sendAction(on: .leftMouseDown)
+        shareButton.sendAction(on: NSEvent.EventTypeMask.leftMouseDown)
     }
     
     override func viewDidAppear() {
@@ -108,7 +108,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         if let url = URL(string: "https://www.youtube.com/watch?v=" + video.youtube) {
             
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
     
@@ -142,7 +142,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.dismiss(nil) }
+        entityController.event.deleted = { [weak self] in self?.dismiss(nil) }
         
         entityController.enabled = true
         
@@ -167,13 +167,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         let htmlString = event.eventDescription
         
         if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+            let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
             
             self.descriptionView.isHidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
-            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFont(ofSize: 14), range: range)
+            attributedString.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
             
@@ -249,7 +249,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
                 
                 calendar.title = calendarListTitle
                 
-                calendar.source = calendarEventStore.defaultCalendarForNewEvents.source
+                calendar.source = calendarEventStore.defaultCalendarForNewEvents?.source
                 
                 do { try calendarEventStore.saveCalendar(calendar, commit: true) }
                     
@@ -273,7 +273,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             calendarEvent.location = event.location
             
             if let data = event.eventDescription.data(using: String.Encoding.utf8),
-                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+                let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
                 
                 calendarEvent.notes = attributedString.string
             }
@@ -300,12 +300,12 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         var customItems = [NSSharingService]()
         
-        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+        if let airdrop = NSSharingService(named: NSSharingService.Name.sendViaAirDrop) {
             
             customItems.append(airdrop)
         }
         
-        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+        if let safariReadList = NSSharingService(named: NSSharingService.Name.addToSafariReadingList) {
             
             customItems.append(safariReadList)
         }
@@ -319,7 +319,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             customItems.append(copyLink)
         }
         
-        let calendarIcon = NSWorkspace.shared().icon(forFile: "/Applications/Calendar.app")
+        let calendarIcon = NSWorkspace.shared.icon(forFile: "/Applications/Calendar.app")
         
         let addToCalendar = NSSharingService(title: "Save to Calendar",
                                              image: calendarIcon,
@@ -349,13 +349,13 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         switch segue.identifier! {
             
-        case "showEventVenue":
+        case .showEventVenue:
             
             let venueDetailViewController = segue.destinationController as! VenueDetailViewController
             
             venueDetailViewController.venue = eventDetail.venue!.venue
             
-        case "showEventSpeakers":
+        case .showEventSpeakers:
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
@@ -375,4 +375,10 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         default: fatalError()
         }
     }
+}
+
+extension NSStoryboardSegue.Identifier {
+    
+    static let showEventVenue = NSStoryboardSegue.Identifier("showEventVenue")
+    static let showEventSpeakers = NSStoryboardSegue.Identifier("showEventSpeakers")
 }

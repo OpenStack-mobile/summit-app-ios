@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import Foundation
 import CoreSpotlight
 import MobileCoreServices
 import CoreSummit
-import Haneke
 import CoreData
 
 // MARK: - Model Extensions
@@ -43,7 +41,7 @@ extension Event: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: Swift.type(of: self).itemContentType)
         
         attributeSet.displayName = name
         attributeSet.startDate = start
@@ -54,12 +52,12 @@ extension Event: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: Swift.type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -105,7 +103,7 @@ extension Video: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -125,13 +123,13 @@ extension Venue: CoreSpotlightSearchable {
     
     func toSearchableItem() -> CSSearchableItem {
         
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: type(of: self).itemContentType)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: Swift.type(of: self).itemContentType)
         
         attributeSet.displayName = name
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }
@@ -142,7 +140,7 @@ extension Venue: CoreSpotlightSearchable {
         attributeSet.latitude = location?.latitude as NSNumber?
         attributeSet.namedLocation = name
         
-        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: type(of: self).searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: Swift.type(of: self).searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -161,7 +159,7 @@ extension VenueRoom: CoreSpotlightSearchable {
         
         if let descriptionText = self.descriptionText,
             let data = descriptionText.data(using: String.Encoding.utf8),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
             
             attributeSet.contentDescription = attributedString.string
         }

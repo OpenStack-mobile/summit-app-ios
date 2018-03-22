@@ -46,7 +46,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
     }
@@ -110,7 +110,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! NSTableCellView
         
         let date = (summitCache!.start as NSDate).mt_dateDays(after: row)!
         

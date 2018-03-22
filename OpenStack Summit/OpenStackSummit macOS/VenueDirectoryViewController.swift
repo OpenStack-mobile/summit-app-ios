@@ -44,7 +44,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
     }
@@ -112,7 +112,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: nil) as! VenueTableViewCell
         
         configure(cell: cell, at: row)
         

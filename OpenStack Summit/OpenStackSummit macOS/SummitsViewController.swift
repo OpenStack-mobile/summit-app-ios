@@ -91,11 +91,11 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         
         if currentSummit {
             
-            cell.indicatorImageView.image = NSImage(named: NSImageNameStatusAvailable)
+            cell.indicatorImageView.image = NSImage(named: NSImage.Name.statusAvailable)
             
         } else {
             
-            cell.indicatorImageView.image = NSImage(named: NSImageNameStatusNone)
+            cell.indicatorImageView.image = NSImage(named: NSImage.Name.statusNone)
         }
         
         cell.nameLabel!.stringValue = summit.name
@@ -146,7 +146,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
             
         case let .item(item):
             
-            let cell = tableView.make(withIdentifier: SummitTableViewCell.identifier, owner: nil) as! SummitTableViewCell
+            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: SummitTableViewCell.identifier), owner: nil) as! SummitTableViewCell
             
             configure(cell: cell, with: item)
             

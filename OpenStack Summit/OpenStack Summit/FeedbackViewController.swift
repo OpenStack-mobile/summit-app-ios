@@ -94,7 +94,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         if rate == 0 {
             validationErrorText = "You must provide a rate using stars at the top"
         }
-        else if (review?.characters.count)! > 500 {
+        else if (review?.count)! > 500 {
             validationErrorText = "Review exceeded 500 characters limit"
         }
         else {
@@ -227,7 +227,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text.characters.count == 1 {
+        if text.count == 1 {
             if let _ = text.rangeOfCharacter(from: .newlines, options: .backwards) {
                 textView.resignFirstResponder()
                 return false

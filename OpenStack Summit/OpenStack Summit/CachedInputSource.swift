@@ -1,5 +1,5 @@
  //
-//  HanekeInputSource.swift
+//  CachedInputSource.swift
 //  OpenStackSummit
 //
 //  Created by Gabriel Horacio Cutrini on 12/16/15.
@@ -9,7 +9,7 @@
 import Haneke
 import ImageSlideshow
 
-final class HanekeInputSource: InputSource {
+final class CachedInputSource: InputSource {
     
     let url: URL
     

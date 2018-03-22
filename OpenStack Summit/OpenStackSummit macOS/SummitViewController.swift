@@ -44,7 +44,7 @@ final class SummitViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.setupController() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.setupController() }
         
         setupController()
     }
@@ -65,7 +65,7 @@ final class SummitViewController: NSViewController {
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
-        entityController.event.deleted = { [weak self] _ in self?.configureView(nil) }
+        entityController.event.deleted = { [weak self] in self?.configureView(nil) }
         
         entityController.enabled = true
         

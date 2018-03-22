@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="avv-AY-7gS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="avv-AY-7gS">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,14 +26,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="nPm-KR-Fs7">
-                                        <rect key="frame" x="48.5" y="46" width="224" height="136"/>
+                                        <rect key="frame" x="64.5" y="57.5" width="192" height="113.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="nPm-KR-Fs7" firstAttribute="width" secondItem="oJB-D2-WEz" secondAttribute="width" multiplier="0.7" id="J3l-Z3-oLl"/>
+                                    <constraint firstItem="nPm-KR-Fs7" firstAttribute="width" secondItem="oJB-D2-WEz" secondAttribute="width" multiplier="0.6" id="J3l-Z3-oLl"/>
                                     <constraint firstItem="nPm-KR-Fs7" firstAttribute="centerX" secondItem="oJB-D2-WEz" secondAttribute="centerX" id="bg0-0w-eKN"/>
-                                    <constraint firstItem="nPm-KR-Fs7" firstAttribute="height" secondItem="oJB-D2-WEz" secondAttribute="height" multiplier="0.6" id="uYS-cc-tL4"/>
+                                    <constraint firstItem="nPm-KR-Fs7" firstAttribute="height" secondItem="oJB-D2-WEz" secondAttribute="height" multiplier="0.5" id="uYS-cc-tL4"/>
                                     <constraint firstItem="nPm-KR-Fs7" firstAttribute="centerY" secondItem="oJB-D2-WEz" secondAttribute="centerY" id="vTq-CK-j9j"/>
                                 </constraints>
                             </view>

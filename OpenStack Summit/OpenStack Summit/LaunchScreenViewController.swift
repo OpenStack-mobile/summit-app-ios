@@ -22,6 +22,14 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     @IBOutlet private(set) weak var summitNameLabel: UILabel!
     
+    @IBOutlet private(set) weak var summitDaysLeftLabel: UILabel!
+    
+    @IBOutlet private(set) weak var summitDaysStackView: UIStackView!
+    
+    @IBOutlet private(set) weak var summitDaysStackViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private(set) weak var summitDaysStackViewWidthConstraint: NSLayoutConstraint!
+    
     @IBOutlet private(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
     
     @IBOutlet private(set) weak var loginButton: UIButton!
@@ -31,6 +39,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     @IBOutlet private(set) weak var summitsButton: UIButton!
     
     // MARK: - Properties
+    
+    private var digitLabels = [UILabel]()
     
     private var willTransition = false  {
         
@@ -127,67 +137,170 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
         case .transitioning:
             
-            break
+            assert(Store.shared.isLoggedIn, "Invalid State")
+            
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.isHidden = true
+            self.loginButton.isHidden = true
+            
+            self.dataLoadedActivityIndicatorView.isHidden = false
+            self.dataLoadedActivityIndicatorView.startAnimating()
         }
         
-        // show current summit info
         if let summit = self.summit {
             
-            self.summitNameLabel.text = summit.name.uppercased()
+            let latestSummit = Summit(from: summit)
             
-            if let datesLabel = summit.datesLabel {
-                
-                self.summitDateLabel.text = datesLabel
-            }
-            else {
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.timeZone = TimeZone(identifier: summit.timeZone.name)
-                dateFormatter.dateFormat = "MMMM d-"
-                let stringDateFrom = dateFormatter.string(from: summit.start)
-                
-                dateFormatter.dateFormat = "d, yyyy"
-                let stringDateTo = dateFormatter.string(from: summit.end)
-                
-                self.summitDateLabel.text = stringDateFrom + stringDateTo
-            }
+            configureSummitView(summit: latestSummit)
+        }
+        else if let currentSummit = currentSummit {
             
-        } else if let currentSummit = currentSummit {
+            let current = Summit(from: currentSummit)
             
-            self.summitNameLabel.text = currentSummit.name.uppercased()
-            
-            if let datesLabel = currentSummit.datesLabel {
-                
-                self.summitDateLabel.text = datesLabel
-            }
-            else {
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.timeZone = TimeZone(identifier: currentSummit.timeZone)
-                dateFormatter.dateFormat = "MMMM d-"
-                let stringDateFrom = dateFormatter.string(from: currentSummit.start)
-                
-                dateFormatter.dateFormat = "d, yyyy"
-                let stringDateTo = dateFormatter.string(from: currentSummit.end)
-                
-                self.summitDateLabel.text = stringDateFrom + stringDateTo
-            }
+            configureSummitView(summit: current)
         }
     }
     
-    private func showRevealController(_ sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
+    private func configureSummitView(summit: Summit) {
+        
+        var digitWidth, digitHeight, stackViewWidth, stackViewHeight: CGFloat
+        
+        var stackViewAxix: UILayoutConstraintAxis = .horizontal
+        var stackViewDistribution: UIStackViewDistribution = .fillEqually
+        
+        for label in digitLabels {
+            
+            summitDaysStackView.removeArrangedSubview(label)
+            label.removeFromSuperview()
+        }
+        
+        digitLabels.removeAll()
+        
+        // show current summit info
+        self.summitDateLabel.text = summit.summitDates
+        self.summitNameLabel.text = summit.name.uppercased()
+        
+        switch summit.phase {
+            
+        case let .comingSoon(daysLeft: daysLeft):
+            
+            digitWidth = 30
+            digitHeight = 36
+            
+            let stringDaysLeft = String(daysLeft)
+            
+            for digit in stringDaysLeft {
+                
+                let label = styledLabel()
+                label.text = "\(digit)"
+                label.font = UIFont(name: "OpenSans", size: 18.0)
+                label.addBorders(edges: [.all], color: .white, thickness: 0.5)
+                
+                summitDaysStackView.addArrangedSubview(label)
+                digitLabels.append(label)
+            }
+            
+            stackViewWidth = CGFloat(stringDaysLeft.count) * digitWidth
+            stackViewHeight = digitHeight
+            
+            summitDaysLeftLabel.text = "Day\(daysLeft == 1 ? "" : "s") Left".uppercased()
+            
+        case let .during(day: day):
+            
+            digitWidth = 63
+            digitHeight = 83
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            paragraphStyle.minimumLineHeight = 20
+            
+            let attributes = [ NSAttributedStringKey.font: UIFont(name: "OpenSans", size: 11.0)!,
+                               NSAttributedStringKey.paragraphStyle: paragraphStyle ]
+            
+            let attributedString = NSAttributedString(string: "day".uppercased(), attributes: attributes)
+            
+            let label = styledLabel()
+            label.attributedText = attributedString
+            label.addBorders(edges: [.left, .top, .right], color: .white, thickness: 0.5)
+            
+            summitDaysStackView.addArrangedSubview(label)
+            digitLabels.append(label)
+            
+            let paragraphStyleDigit = NSMutableParagraphStyle()
+            paragraphStyleDigit.alignment = .center
+            paragraphStyleDigit.lineHeightMultiple = 0.9
+            
+            let attributesDigit = [ NSAttributedStringKey.font: UIFont(name: "OpenSans-Light", size: 60.0)!,
+                                    NSAttributedStringKey.paragraphStyle: paragraphStyleDigit ]
+            
+            let attributedStringDigit = NSAttributedString(string: "\(day)", attributes: attributesDigit)
+            
+            let labelDigit = styledLabel()
+            labelDigit.attributedText = attributedStringDigit
+            labelDigit.addBorders(edges: [.left, .bottom, .right], color: .white, thickness: 0.5)
+            
+            summitDaysStackView.addArrangedSubview(labelDigit)
+            digitLabels.append(labelDigit)
+            
+            stackViewWidth = digitWidth
+            stackViewHeight = digitHeight
+            
+            stackViewAxix = .vertical
+            stackViewDistribution = .fill
+            
+            summitDaysLeftLabel.text = ""
+            
+        case .finished:
+            
+            stackViewWidth = 0
+            stackViewHeight = 0
+            
+            summitDaysLeftLabel.text = ""
+        }
+        
+        summitDaysStackViewWidthConstraint.constant = stackViewWidth
+        summitDaysStackViewHeightConstraint.constant = stackViewHeight
+        
+        summitDaysStackView.axis = stackViewAxix
+        summitDaysStackView.distribution = stackViewDistribution
+        summitDaysStackView.setNeedsUpdateConstraints()
+    }
+    
+    private func styledLabel() -> UILabel {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.textAlignment = .center
+        
+        return label
+    }
+    
+    private func showRevealController(_ sender: AnyObject? = nil, delay: Double = 0, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
         let revealViewController = MainRevealViewController()
         
-        self.show(revealViewController, sender: sender)
+        self.willTransition = false
         
-        self.willTransition = false;
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay)) {
+            
+            self.show(revealViewController, sender: sender)
+        }
         
-        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay + 2)) {
+            
+            completion?(revealViewController)
+        }
+    }
+    
+    private func dispatchTime(from delay: Double) -> DispatchTime {
         
-        DispatchQueue.main.asyncAfter(deadline: delayTime) { completion?(revealViewController) }
+        return DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
     }
     
     private func loadSummits() {
@@ -252,7 +365,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 if Store.shared.isLoggedIn {
                     
-                    showRevealController(self)
+                    showRevealController(self, delay: 2)
                     
                     state = .transitioning
                 }
@@ -343,5 +456,97 @@ private extension LaunchScreenViewController {
         case loadingData
         case dataLoaded
         case transitioning
+    }
+    
+    struct Summit {
+        
+        // MARK: - Properties
+        
+        var name: String
+        var timeZone: Foundation.TimeZone?
+        var datesLabel: String?
+        var start, end: Date
+        var defaultStart: Date
+        
+        var summitDates: String {
+            
+            if let datesLabel = self.datesLabel {
+                
+                return datesLabel.uppercased()
+            }
+            else {
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = self.timeZone
+                dateFormatter.dateFormat = "MMMM d-"
+                let stringDateFrom = dateFormatter.string(from: self.start)
+                
+                dateFormatter.dateFormat = "d, yyyy"
+                let stringDateTo = dateFormatter.string(from: self.end)
+                
+                return stringDateFrom + stringDateTo
+            }
+        }
+        
+        var phase: SummitPhase {
+            
+            NSDate.mt_setTimeZone(self.timeZone)
+            
+            let today = NSDate()
+            
+            let defaultStart = self.defaultStart as NSDate
+            let end = self.end as NSDate
+            
+            let summitStart = defaultStart.mt_startOfCurrentDay()
+            let summitEnd = end.mt_startOfNextDay()
+            
+            if today.mt_is(before: summitStart) {
+                
+                let daysLeft = today.mt_days(until: summitStart) + 1
+                
+                return .comingSoon(daysLeft: daysLeft)
+            }
+            else if today.mt_isBetweenDate(summitStart, andDate: summitEnd) {
+                
+                let day = today.mt_days(since: summitStart) + 1
+                
+                return .during(day: day)
+            }
+            else {
+                
+                return .finished
+            }
+        }
+        
+        // MARK: - Initialization
+        
+        public init(from summit: SummitsResponse.Summit) {
+            
+            self.name = summit.name
+            self.timeZone = TimeZone(identifier: summit.timeZone.name)
+            self.datesLabel = summit.datesLabel
+            self.start = summit.start
+            self.end = summit.end
+            self.defaultStart = summit.defaultStart ?? summit.start
+        }
+        
+        public init(from summit: SummitManagedObject) {
+            
+            self.name = summit.name
+            self.timeZone = TimeZone(identifier: summit.timeZone)
+            self.datesLabel = summit.datesLabel
+            self.start = summit.start
+            self.end = summit.end
+            self.defaultStart = summit.defaultStart ?? summit.start
+        }
+        
+        // MARK: - Supporting Types
+        
+        enum SummitPhase {
+            
+            case comingSoon(daysLeft: Int)
+            case during(day: Int)
+            case finished
+        }
     }
 }

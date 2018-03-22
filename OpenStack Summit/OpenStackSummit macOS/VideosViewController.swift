@@ -45,7 +45,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
     }
@@ -107,7 +107,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItem(withIdentifier: "VideoCollectionViewItem", for: indexPath) as! CollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "VideoCollectionViewItem"), for: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         

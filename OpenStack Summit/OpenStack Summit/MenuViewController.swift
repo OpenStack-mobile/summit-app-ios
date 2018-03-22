@@ -100,7 +100,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.5)])
+        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSAttributedStringKey.foregroundColor: UIColor(white: 1, alpha: 0.5)])
         searchTextView.delegate = self
         
         // setup reveal VC
@@ -118,9 +118,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         // observe unread notifications
         unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
         unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications
-            .observe { [weak self] _ in self?.reloadInboxCounter() }
+            .observe { [weak self] _, _ in self?.reloadInboxCounter() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -301,6 +301,40 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         highlight(.events)
         
         show(generalScheduleViewController)
+        
+        /*
+        if let modifiers = modifiers {
+            
+            for modifier in modifiers {
+                
+                switch modifier {
+                    
+                case let .day(date):
+                    
+                    generalScheduleViewController.selectedDate = date
+                    
+                case let .track(identifier):
+                    
+                    let scheduleFilter = FilterManager.shared.filter.value
+                    
+                    if let trackFilters = scheduleFilter.allFilters[.track] {
+                        
+                        if trackFilters.contains(where: {
+                            
+                            switch $0 {
+                            case let .track(identifier): return identifier == identifier
+                            default: return false
+                            }
+                        }) {
+                            
+                            let filter: Filter = .track(identifier)
+                            
+                            FilterManager.shared.filter.value.enable(filter)
+                        }
+                    }
+                }
+            }
+        }*/
     }
     
     func showVenues() {
@@ -328,13 +362,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(teamsViewController)
     }
         
-    private func showMyProfile() {
+    private func showMyProfile(defaultToMemberDetail: Bool = false) {
         
         guard Store.shared.isLoggedIn else { return }
         
         highlight(.myProfile)
         
         let myProfileViewController = MyProfileViewController()
+        myProfileViewController.defaultToMemberDetail = defaultToMemberDetail
         
         show(myProfileViewController)
     }
@@ -398,7 +433,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                        
                     } else {
                         
-                        controller.showMyProfile()
+                        controller.showMyProfile(defaultToMemberDetail: true)
                         
                         let revealViewController = controller.revealViewController()
                         

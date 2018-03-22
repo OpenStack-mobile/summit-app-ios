@@ -7,7 +7,8 @@
 //
 
 /// A data type that can be uniquely identified.
-public protocol Unique: Equatable, Hashable, Comparable {
+// FIXME: Compiler in Xcode 9 enforces style, prevents redundant conformance. When constraint removed, make Equatable.
+public protocol Unique: Hashable, Comparable {
     
     var identifier: Identifier { get }
 }

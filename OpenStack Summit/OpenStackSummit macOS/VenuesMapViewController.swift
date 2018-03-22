@@ -28,7 +28,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     
     private lazy var popover: (NSPopover, VenueDetailViewController) = {
         
-        let venueDetailViewController = self.storyboard!.instantiateController(withIdentifier: "VenueDetailViewController") as! VenueDetailViewController
+        let venueDetailViewController = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VenueDetailViewController")) as! VenueDetailViewController
         self.addChildViewController(venueDetailViewController)
         
         let popover = NSPopover()
@@ -52,7 +52,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _, _ in self?.configureView() }
         
         configureView()
     }

@@ -3,14 +3,14 @@ github "PureSwift/Predicate" "master"
 github "OpenStack-Mobile/aerogear-ios-http" "master"
 github "OpenStack-Mobile/aerogear-ios-oauth2" "openstack"
 github "JonasGessner/JGProgressHUD"
-github "xmartlabs/XLPagerTabStrip"
+github "xmartlabs/XLPagerTabStrip" ~> 8.0
 github "OpenStack-Mobile/SWRevealViewController" "master"
-github "mac-cain13/R.swift.Library"
+github "mac-cain13/R.swift.Library" "v4.0.0"
 github "OpenStack-Mobile/HanekeSwift" "master"
 github "OpenStack-Mobile/KTCenterFlowLayout" "master"
 github "OpenStack-Mobile/AFHorizontalDayPicker" "master"
-github "marketplacer/Cosmos"
+github "evgenyneu/Cosmos" ~> 13.0
 github "zvonicek/ImageSlideshow"
-github "OpenStack-Mobile/XCDYouTubeKit"
+github "0xced/XCDYouTubeKit" ~> 2.5
 github "OpenStack-Mobile/MTDates" "master"
 github "OpenStack-Mobile/SlackTextViewController"

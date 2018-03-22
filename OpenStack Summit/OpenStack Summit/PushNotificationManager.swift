@@ -422,7 +422,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let observable = Observable<Set<Identifier>>(Set(storedValue))
         
-        let _ = observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0.0, old: $0.1, key: preferenceKey) }
+        let _ = observable.observe { [weak self] in self?.unreadNotificationsChanged(new: $0, old: $1, key: preferenceKey) }
         
         return observable
     }
@@ -628,7 +628,7 @@ public struct TeamMessageNotification: PushNotification {
             let fromID = Int(fromIDString),
             let fromFirstName = pushNotification[Key.from_first_name.rawValue] as? String,
             let fromLastName = pushNotification[Key.from_last_name.rawValue] as? String,
-            type == type(of: self).type
+            type == Swift.type(of: self).type
             else { return nil }
         
         self.identifier = Identifier(identifier)
@@ -689,7 +689,7 @@ public struct GeneralNotification: PushNotification {
             let summitID = Int(summitIDString),
             let channelString = pushNotification[Key.channel.rawValue] as? String,
             let channel = Notification.Channel(rawValue: channelString),
-            type == type(of: self).type
+            type == Swift.type(of: self).type
             else { return nil }
         
         self.identifier = Identifier(identifier)
