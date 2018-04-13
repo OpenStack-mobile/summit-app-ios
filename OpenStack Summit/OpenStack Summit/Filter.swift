@@ -52,6 +52,7 @@ func == (lhs: Filter, rhs: Filter) -> Bool {
     switch (lhs, rhs) {
         
     case (.activeTalks, .activeTalks): return true
+    case let (.trackGroup(lhsValue), .trackGroup(rhsValue)): return lhsValue == rhsValue
     case let (.track(lhsValue), .track(rhsValue)): return lhsValue == rhsValue
     case let (.level(lhsValue), .level(rhsValue)): return lhsValue == rhsValue
     case let (.venue(lhsValue), .venue(rhsValue)): return lhsValue == rhsValue
