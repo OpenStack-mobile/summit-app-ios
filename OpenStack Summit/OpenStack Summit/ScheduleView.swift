@@ -36,6 +36,8 @@ final class ScheduleView: UIView {
         
         Bundle.main.loadNibNamed("ScheduleView", owner: self, options: nil)
         
+        nowButton.superview?.addBorders(edges: [.bottom, .right], color: UIColor(hexString: "#9C9C9C")!, thickness: 0.5)
+        
         dayPicker.backgroundColor = UIColor(hexString: "#E5E5E5")
         
         dayPicker.dayNumberActiveColor = UIColor(hexString: "#4A4A4A")
