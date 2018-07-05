@@ -1,0 +1,217 @@
+{
+    "class_name": "Presentation",
+    "created": 1526899728,
+    "entity": {
+        "allow_feedback": true,
+        "attendees_expected_learnt": "<p>While Fog/Edge Cloud Infrastructures are becoming more recognised, the question of using OpenStack to operate such infrastructures, in particular the performance/scalability of the system, is often debated. In this presentation, we will present a reproducible way to evaluate the performance of Keystone at a WAN level.</p>\r\n<p>Attendees may expect to learn:</p>\r\n<ul>\r\n<li>scenarios to operate WANwide infrastructures</li>\r\n<li>how to perform reproducible experiments thanks to the Enoslib framework</li>\r\n<li>methodology to emulate network limitations in a WANwide deployment based on traffic shapping</li>\r\n<li>preliminary results of the impact of the latency on the behaviour of Keystone</li>\r\n</ul>",
+        "attending_media": false,
+        "avg_feedback_rate": 0,
+        "class_name": "Presentation",
+        "description": "<p>Since 2016, the FEMDC SiG has been investigating how OpenStack could operate Edge Cloud infrastructures. Among the challenges that have been identified by the SiG, dealing with latency issues and network split brains is important for most OpenStack services.</p>\r\n<p>In this presentation, we focus on how they impact the Keystone Identity Service. Keystone offers different deployment approaches, from a centralized one, to a federation, as well as a replication using database clustering. By varying the number of regions and latency between those regions, we compare the following deployments:</p>\r\n<ul>\r\n<li>One centralized Keystone handling requests of all regions</li>\r\n<li>A replicated Keystone using Galera Cluster to synchronize databases in the different regions</li>\r\n<li>A replicated Keystone leveraging the NewSQL CockroachDB database</li>\r\n<li>A federated Keystone</li>\r\n</ul>\r\n<p>We present the methodology, results and identification of possible improvements towards a more decentralized management of the OpenStack services.</p>\r\n<p>&nbsp;</p>",
+        "end_date": 1527183000,
+        "head_count": 0,
+        "id": 21212,
+        "is_published": true,
+        "level": "Intermediate",
+        "links": [
+                  {
+                  "created": 1518087218,
+                  "description": null,
+                  "display_on_site": false,
+                  "featured": false,
+                  "id": 43965,
+                  "last_edited": 1518087218,
+                  "link": "https://wiki.openstack.org/wiki/Fog_Edge_Massively_Distributed_Clouds",
+                  "name": "https://wiki.openstack.org/wiki/Fog_Edge_Massively_Distributed_Clouds",
+                  "order": 0,
+                  "presentation_id": 21212
+                  },
+                  {
+                  "created": 1518087218,
+                  "description": null,
+                  "display_on_site": false,
+                  "featured": false,
+                  "id": 43966,
+                  "last_edited": 1518087218,
+                  "link": "https://github.com/BeyondTheClouds/enoslib",
+                  "name": "https://github.com/BeyondTheClouds/enoslib",
+                  "order": 0,
+                  "presentation_id": 21212
+                  },
+                  {
+                  "created": 1518087218,
+                  "description": null,
+                  "display_on_site": false,
+                  "featured": false,
+                  "id": 43967,
+                  "last_edited": 1518087218,
+                  "link": "https://hal.archives-ouvertes.fr/hal-01689726v2",
+                  "name": "https://hal.archives-ouvertes.fr/hal-01689726v2",
+                  "order": 0,
+                  "presentation_id": 21212
+                  }
+                  ],
+        "location_id": 351,
+        "moderator_speaker_id": 0,
+        "problem_addressed": null,
+        "rsvp_external": false,
+        "rsvp_link": null,
+        "rsvp_max_user_number": 0,
+        "rsvp_max_user_wait_list_number": 0,
+        "rsvp_template_id": 0,
+        "slides": [],
+        "social_description": "A comparison of different Keystone deployments in the context of Fog/Edge Cloud Infrastructures.",
+        "speakers": [
+                     {
+                     "affiliations": [],
+                     "bio": "<p>Student at University of Nantes, intern at Stack Team for the Discovery Initiative</p>",
+                     "created": 1518083531,
+                     "first_name": "Marie",
+                     "gender": "Female",
+                     "id": 14255,
+                     "irc": null,
+                     "last_edited": 1519184170,
+                     "last_name": "Delavergne",
+                     "member_id": 68561,
+                     "pic": "https://devbranch.openstack.org/profile_images/speakers/14255",
+                     "title": "Intern -- Discovery Initiative",
+                     "twitter": null
+                     },
+                     {
+                     "affiliations": [
+                                      {
+                                      "created": 1487161721,
+                                      "end_date": null,
+                                      "id": 135903,
+                                      "is_current": true,
+                                      "job_title": null,
+                                      "last_edited": 1487161721,
+                                      "organization": {
+                                      "created": 1359485922,
+                                      "id": 863,
+                                      "last_edited": 1381703467,
+                                      "name": "INRIA"
+                                      },
+                                      "owner_id": 72666,
+                                      "start_date": 1487116800
+                                      }
+                                      ],
+                     "bio": "<p>Ronan-Alexandre Cherrueau&nbsp;is a Research Engineer at Inria. &nbsp;He received his Ph.D. from Ecole des Mines de Nantes in November 2016. <span>Passionate computer scientist interested in programming, software composition and distributed computing (further information at:&nbsp;https://rcherrueau.github.io)</span></p>",
+                     "created": 1485439252,
+                     "first_name": "Ronan-Alexandre",
+                     "gender": "Male",
+                     "id": 11238,
+                     "irc": "rcherrueau",
+                     "last_edited": 1518104373,
+                     "last_name": "Cherrueau",
+                     "member_id": 72666,
+                     "pic": "https://devbranch.openstack.org/profile_images/speakers/11238",
+                     "title": "Research Engineer - Discovery Project",
+                     "twitter": null
+                     },
+                     {
+                     "affiliations": [
+                                      {
+                                      "created": 1455051656,
+                                      "end_date": null,
+                                      "id": 87314,
+                                      "is_current": true,
+                                      "job_title": null,
+                                      "last_edited": 1455051656,
+                                      "organization": {
+                                      "created": 1359485922,
+                                      "id": 863,
+                                      "last_edited": 1381703467,
+                                      "name": "INRIA"
+                                      },
+                                      "owner_id": 52428,
+                                      "start_date": 1001894400
+                                      },
+                                      {
+                                      "created": 1517989891,
+                                      "end_date": null,
+                                      "id": 154064,
+                                      "is_current": true,
+                                      "job_title": "Associate Professor",
+                                      "last_edited": 1517989891,
+                                      "organization": {
+                                      "created": 1517989890,
+                                      "id": 25922,
+                                      "last_edited": 1517989890,
+                                      "name": "IMT Atlantique"
+                                      },
+                                      "owner_id": 52428,
+                                      "start_date": 1222819200
+                                      }
+                                      ],
+                     "bio": "<p>Dr. Adrien Lebre is an Associate Professor at IMT Atlantique. &nbsp;He received his Ph.D. from Grenoble Institute of Technologies in September 2006. His research interests are distributed and Internet computing. Since 2011, he is member of the Architect and Executive boards of Grid&rsquo;5000. Dr. Adrien Lebre has taken part to several program committees of conferences and workshops (such as ICFEC 2017/2016, HPDC 2017, CCGRID 2018/2017/2016/2015/2013, SC 2016/2015/2013... ). He is the PI of the Discovery Initiative, an Open-Science Initiative aiming at implementing a fully decentralized IaaS manager &nbsp;and the leader of the Stack Research Group,&nbsp;which focuses on software Stack for Massively Geo Distributed infrastuctures (further information respectively available at&nbsp;https://beyondtheclouds.github.io and http://stack.inria.fr).</p>\r\n<p>Adrien Lebre has been deeply involved in the OpenStack ecosystem since the Austin summit in 2016 where he created the OpenStack Fog/Edge/Massively Distributed Clouds WG.</p>",
+                     "created": 1453735273,
+                     "first_name": "Adrien",
+                     "gender": "Male",
+                     "id": 4192,
+                     "irc": "ad_ri3n_",
+                     "last_edited": 1518087637,
+                     "last_name": "Lebre",
+                     "member_id": 52428,
+                     "pic": "https://devbranch.openstack.org/profile_images/speakers/4192",
+                     "title": "Discovery Project Leader",
+                     "twitter": "BeyondClouds_io"
+                     }
+                     ],
+        "sponsors": [],
+        "start_date": 1527180600,
+        "status": "Accepted",
+        "summit_id": 24,
+        "tags": [
+                 {
+                 "created": 1419254959,
+                 "id": 36,
+                 "last_edited": 1515080833,
+                 "tag": "Keystone"
+                 },
+                 {
+                 "created": 1424428200,
+                 "id": 339,
+                 "last_edited": 1424428200,
+                 "tag": ""
+                 },
+                 {
+                 "created": 1515079110,
+                 "id": 4590,
+                 "last_edited": 1515408557,
+                 "tag": "Arch / Ops"
+                 },
+                 {
+                 "created": 1515081410,
+                 "id": 4612,
+                 "last_edited": 1515081410,
+                 "tag": "Rally"
+                 }
+                 ],
+        "title": "Keystone in the context of Fog/Edge Massively Distributed Clouds",
+        "to_record": true,
+        "track_id": 213,
+        "type_id": 158,
+        "videos": [
+                   {
+                   "created": 1527166453,
+                   "data_uploaded": 1527184453,
+                   "description": null,
+                   "display_on_site": true,
+                   "featured": false,
+                   "highlighted": false,
+                   "id": 45541,
+                   "last_edited": 1527757776,
+                   "name": "Keystone in the context of Fog/Edge Massively Distributed Clouds",
+                   "order": 0,
+                   "presentation_id": 21212,
+                   "views": 41,
+                   "youtube_id": "HqwaA_if9Kc"
+                   }
+                   ]
+    },
+    "entity_id": 21212,
+    "id": 1566925,
+    "last_edited": 1526899728,
+    "type": "UPDATE"
+}

@@ -335,4 +335,91 @@ final class JSONTests: XCTestCase {
             let _ = Summit.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
+    
+    func testDataUpdates19() {
+        
+        let testJSON = loadJSON("DataUpdates19")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Summit.DataUpdate(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates20() {
+        
+        let testJSON = loadJSON("DataUpdates20")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Presentation.DataUpdate(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates21() {
+        
+        let testJSON = loadJSON("DataUpdates21")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Speaker(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+
+    func testDataUpdates22() {
+        
+        let testJSON = loadJSON("DataUpdates22")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case .identifier(_) = dataUpdateEntity
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates23() {
+        
+        let testJSON = loadJSON("DataUpdates23")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Venue(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates24() {
+        
+        let testJSON = loadJSON("DataUpdates24")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = Event.DataUpdate(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates25() {
+        
+        let testJSON = loadJSON("DataUpdates25")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = WirelessNetwork(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates26() {
+        
+        let testJSON = loadJSON("DataUpdates26")
+        
+        guard let dataUpdate = DataUpdate(json: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .json(entityJSON) = dataUpdateEntity,
+            let _ = VenueFloor(json: .object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }

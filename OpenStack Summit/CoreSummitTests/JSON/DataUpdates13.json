@@ -1,20 +1,23 @@
 {
-	"id": 742698,
-	"entity_id": 36845,
-	"class_name": "PresentationVideo",
-	"created": 1493912955,
-	"type": "INSERT",
-	"entity": {
-		"id": 36845,
-		"name": null,
-		"description": "<p>OpenstackId Workshop</p>",
-		"display_on_site": false,
-		"featured": false,
-		"order": 1,
-		"presentation_id": 18632,
-		"youtube_id": "5EWnmg3OUsk",
-		"data_uploaded": 1493930955,
-		"highlighted": false,
-		"views": 0
-	}
+    "class_name": "PresentationVideo",
+    "created": 1526931177,
+    "entity": {
+        "created": 1526931177,
+        "data_uploaded": 1526949177,
+        "description": null,
+        "display_on_site": true,
+        "featured": false,
+        "highlighted": false,
+        "id": 45221,
+        "last_edited": 1527607724,
+        "name": "Attestable service identity with Copper Argos",
+        "order": 0,
+        "presentation_id": 21014,
+        "views": 58,
+        "youtube_id": "O6eLPPmsfp8"
+    },
+    "entity_id": 45221,
+    "id": 1576941,
+    "last_edited": 1526931177,
+    "type": "INSERT"
 }
