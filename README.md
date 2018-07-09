@@ -13,7 +13,7 @@ Supports iOS, watchOS and tvOS.
 	```
 	carthage bootstrap
 	```
-2. Download [Google Maps SDK](https://dl.google.com/dl/cpdc/f4086b0aa122de6c/GoogleMaps-2.7.0.tar.gz), [Firebase SDK](https://dl.google.com/firebase/sdk/ios/3_11_1/Firebase-3.11.1.zip) (frameworks in Analytics and Messaging folders), [Fabric](https://kit-downloads.fabric.io/cocoapods/fabric/1.6.9/fabric.zip), [Crashlytics](https://kit-downloads.fabric.io/cocoapods/crashlytics/3.8.1/crashlytics.zip) and copy to `Vendor` folder.
+2. Download [Google Maps SDK](https://dl.google.com/dl/cpdc/f4086b0aa122de6c/GoogleMaps-2.7.0.tar.gz), [Firebase SDK](https://dl.google.com/firebase/sdk/ios/3_11_1/Firebase-3.11.1.zip) (frameworks in Analytics and Messaging folders), [Fabric SDK and Crashlytics](https://s3.amazonaws.com/kits-crashlytics-com/ios/com.twitter.crashlytics.ios/3.10.5/com.crashlytics.ios-manual.zip) and copy to `Vendor` folder.
 
 3. Generate .swift out of sample configuration files
 
