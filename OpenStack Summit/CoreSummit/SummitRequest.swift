@@ -30,7 +30,7 @@ public extension Store {
             
             let managedObject = try summit.save(context)
             
-            managedObject.initialDataLoad = NSDate() as Date
+            managedObject.initialDataLoad = Date()
             
             try context.validateAndSave()
         }

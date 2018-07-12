@@ -354,7 +354,7 @@ final class JSONTests: XCTestCase {
         guard let dataUpdate = DataUpdate(json: testJSON),
             let dataUpdateEntity = dataUpdate.entity,
             case let .json(entityJSON) = dataUpdateEntity,
-            let _ = Presentation.DataUpdate(json: .object(entityJSON))
+            let _ = Event.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     

@@ -18,6 +18,8 @@ public final class DataUpdatePoller {
     
     // MARK: - Properties
     
+    public var polling = false
+    
     public var pollingInterval: Double = 60
     
     public var log: ((String) -> ())?
@@ -67,6 +69,9 @@ public final class DataUpdatePoller {
         #if os(iOS) || os(tvOS) || os(OSX)
         guard Reachability.connected else { return }
         #endif
+        
+        // dont poll if already polling
+        guard !polling else { return }
         
         // dont poll if no active summit
         guard let summitID = self.summit,
@@ -130,6 +135,8 @@ public final class DataUpdatePoller {
                     log?("Processed \(dataUpdates.count) data updates")
                 }
             }
+            
+            polling = false
         }
         
         // execute request
@@ -142,6 +149,8 @@ public final class DataUpdatePoller {
             
             store.dataUpdates(summit.id, from: summit.initialDataLoad ?? Date()) { process(response: $0) }
         }
+        
+        polling = true
     }
 }
 
