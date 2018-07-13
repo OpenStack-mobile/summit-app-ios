@@ -98,27 +98,23 @@ public final class DataUpdatePoller {
                                 
             case let .value(dataUpdates):
                 
-                for update in dataUpdates {
+                var processedCount = 0
+                
+                for index in 0..<dataUpdates.count {
+                    
+                    let update = dataUpdates[index]
                     
                     if store.process(dataUpdate: update, summit: summit.id) == false {
                         
                         // could not process update
                         
                         #if os(iOS)
-                            
-                            var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
-                            
-                            if let updateEntity = update.entity,
-                                case let .json(jsonObject) = updateEntity {
-                                
-                                let jsonString = try! JSON.Value.object(jsonObject).toString(options: .prettyPrint)
-                                
-                                errorUserInfo["JSON"] = jsonString
-                            }
                         
-                            let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
+                        let errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update.identifier)"]
                         
-                            Crashlytics.sharedInstance().recordError(friendlyError)
+                        let friendlyError = NSError(domain: "CoreSummit", code: -201, userInfo:errorUserInfo)
+                        
+                        Crashlytics.sharedInstance().recordError(friendlyError)
                         
                         #endif
                         
@@ -131,6 +127,15 @@ public final class DataUpdatePoller {
                     
                     // store latest data update
                     storage.latestDataUpdate = update.identifier
+                    
+                    processedCount = index
+                    
+                    // exit loop if data wiping
+                    if update.className == .WipeData &&
+                        update.operation == .truncate {
+                        
+                        break
+                    }
                 }
                 
                 if dataUpdates.isEmpty == false {
@@ -139,7 +144,7 @@ public final class DataUpdatePoller {
                     
                     try! context.performErrorBlockAndWait { try context.validateAndSave() }
                     
-                    log?("Processed \(dataUpdates.count) data updates")
+                    log?("Processed \(processedCount) data updates")
                 }
             }
             
