@@ -76,7 +76,14 @@ public final class DataUpdatePoller {
         // dont poll if no active summit
         guard let summitID = self.summit,
             let summit = try! SummitManagedObject.find(summitID, context: store.managedObjectContext)
-            else { return }
+            else {
+                // clear latest data update after wipe
+                if let latestDataUpdate = storage.latestDataUpdate {
+                    
+                    storage.clear()
+                }
+                return
+        }
         
         log?("Polling server for data updates for summit \(summitID)")
         
