@@ -6,14 +6,6 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
-import JSON
-
-#if os(iOS)
-import Crashlytics
-import Fabric
-#endif
-
 public final class DataUpdatePoller {
     
     // MARK: - Properties
@@ -85,7 +77,7 @@ public final class DataUpdatePoller {
                 return
         }
         
-        log?("Polling server for data updates for summit \(summitID)")
+        print("Polling server for data updates for summit \(summitID)")
         
         /// Handles the polling of the data updates
         func process(response: ErrorValue<[DataUpdate]>) {
@@ -94,7 +86,9 @@ public final class DataUpdatePoller {
                 
             case let .error(error):
                 
-                log?("Error polling server for data updates: \(error)")
+                let nsError = (error as NSError)
+                
+                log?("Error polling server: \(nsError.code) - \(nsError.localizedDescription)")
                                 
             case let .value(dataUpdates):
                 
@@ -108,17 +102,7 @@ public final class DataUpdatePoller {
                         
                         // could not process update
                         
-                        #if os(iOS)
-                        
-                        let errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update.identifier)"]
-                        
-                        let friendlyError = NSError(domain: "CoreSummit", code: -201, userInfo:errorUserInfo)
-                        
-                        Crashlytics.sharedInstance().recordError(friendlyError)
-                        
-                        #endif
-                        
-                        print("Could not process data update: \(update)")
+                        log?("Could not process: \(update.identifier)")
                         
                         #if DEBUG
                         return // block
@@ -144,7 +128,7 @@ public final class DataUpdatePoller {
                     
                     try! context.performErrorBlockAndWait { try context.validateAndSave() }
                     
-                    log?("Processed \(processedCount) data updates")
+                    print("Processed \(processedCount) data updates")
                 }
             }
             

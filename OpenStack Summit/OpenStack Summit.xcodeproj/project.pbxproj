@@ -822,7 +822,6 @@
 		6E9B6D071DBAA7780037865C /* EventDatesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D061DBAA7780037865C /* EventDatesInterfaceController.swift */; };
 		6E9B6D0D1DBAAABB0037865C /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D0A1DBAAABB0037865C /* NSDate+MTDates.m */; };
 		6E9B6D0E1DBAAABB0037865C /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D0C1DBAAABB0037865C /* NSDateComponents+MTDates.m */; };
-		6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
 		6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */; };
@@ -877,7 +876,6 @@
 		6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDF21E1C073E0048045D /* TeamInvitationRequest.swift */; };
 		6EB1FE001E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
-		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB2B3871EC746E900648958 /* Predicate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB2B3861EC746E900648958 /* Predicate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */; };
@@ -1070,6 +1068,8 @@
 		9D141FB020C977E00032FF6A /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D141FAF20C977E00032FF6A /* GoogleMaps.bundle */; };
 		9D141FB420C981DF0032FF6A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D141FB320C981DF0032FF6A /* CoreImage.framework */; };
 		9D141FB620C982620032FF6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D141FB520C982620032FF6A /* UIKit.framework */; };
+		9D360CF62110DB3400216ACA /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
+		9D360CF72110DB3400216ACA /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		9D4B1C251E84B05D00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
 		9D4B1C261E84B05E00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
 		9D4B1C271E84B05E00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
@@ -1915,6 +1915,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D360CF72110DB3400216ACA /* Fabric.framework in Frameworks */,
+				9D360CF62110DB3400216ACA /* Crashlytics.framework in Frameworks */,
 				6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
 				6E2D185D1E29431C0095508A /* FirebaseCore.framework in Frameworks */,
 				6E2D185E1E29431C0095508A /* FirebaseInstanceID.framework in Frameworks */,
@@ -1954,8 +1956,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */,
-				6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

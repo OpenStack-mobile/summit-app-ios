@@ -57,6 +57,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup data poller
         #if DEBUG
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #elseif !MOCKED
+        DataUpdatePoller.shared.log = { Answers.logCustomEvent(withName: "DataUpdatePoller", customAttributes: ["Error": $0]) }
         #endif
         #if !MOCKED
         DataUpdatePoller.shared.start()
