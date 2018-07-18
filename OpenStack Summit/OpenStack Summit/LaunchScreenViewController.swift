@@ -42,10 +42,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private var digitLabels = [UILabel]()
     
-    private var willTransition = false  {
-        
-        didSet { configureView() }
-    }
+    private var deepLinking = false
     
     private var state: State = .loadingSummits {
         
@@ -281,11 +278,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private func showRevealController(_ sender: AnyObject? = nil, delay: Double = 0, completion: ((MainRevealViewController) -> ())? = nil) {
         
-        self.willTransition = true
-        
         let revealViewController = MainRevealViewController()
-        
-        self.willTransition = false
         
         DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay)) {
             
@@ -342,14 +335,12 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     controller.summit = latestSummit
                     
                     #if DEBUG
-                        
-                        if SummitManager.shared.summit.value == 0 {
-                            
-                            SummitManager.shared.summit.value = latestSummit.identifier
-                        }
-                    #else
+                    if SummitManager.shared.summit.value == 0 {
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
+                    }
+                    #else
+                    SummitManager.shared.summit.value = latestSummit.identifier
                     #endif
                     
                     controller.loadData()
@@ -365,9 +356,9 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 
                 if Store.shared.isLoggedIn {
                     
-                    showRevealController(self, delay: 2)
-                    
                     state = .transitioning
+                    
+                    if !deepLinking { showRevealController(self, delay: 2) }
                 }
                 else {
                     
@@ -414,15 +405,23 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
-        showRevealController(self) { $0.view(data: data, identifier: identifier) }
+        deepLinking = true
+        
+        showRevealController(self) {
+            $0.view(data: data, identifier: identifier)
+        }
     }
     
     func view(screen: AppActivityScreen) {
+        
+        deepLinking = true
         
         showRevealController(self) { $0.view(screen: screen) }
     }
     
     func search(_ searchTerm: String) {
+        
+        deepLinking = true
         
         showRevealController(self) { $0.search(searchTerm) }
     }
