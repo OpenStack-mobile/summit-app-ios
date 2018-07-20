@@ -106,7 +106,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         // setup reveal VC
         revealViewController().delegate = self
         revealViewController().rearViewRevealWidth = 264
-        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+    revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         // session notifications
         NotificationCenter.default.removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
@@ -166,6 +166,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         default: fatalError("Invalid sender \(sender)")
         }
         
+        sender.isUserInteractionEnabled = false
+        
         highlight(item)
     }
     
@@ -207,6 +209,17 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         aboutButton.alpha = 0.5
         inboxButton.alpha = 0.5
     }
+    
+    private func enableMenuItemsUserInteraction() {
+        
+        eventsButton.isUserInteractionEnabled = true
+        venuesButton.isUserInteractionEnabled = true
+        peopleButton.isUserInteractionEnabled = true
+        myProfileButton.isUserInteractionEnabled = true
+        aboutButton.isUserInteractionEnabled = true
+        inboxButton.isUserInteractionEnabled = true
+    }
+
     
     private func highlight(_ item: MenuItem) {
         
@@ -498,7 +511,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         if let navigationController = revealController.frontViewController {
             if let viewController = navigationController.childViewControllers.first {
-                viewController.view.isUserInteractionEnabled = position != FrontViewPosition.right
+                
+                viewController.view.isUserInteractionEnabled = position != .right
+                
+                if position == .right {
+                    
+                    enableMenuItemsUserInteraction()
+                }
             }
         }
     }
