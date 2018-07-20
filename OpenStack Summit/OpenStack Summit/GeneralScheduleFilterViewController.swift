@@ -170,7 +170,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         func name(for filter: Filter) -> String {
             
             switch filter {
-            case .activeTalks: return "Hide Past Talks"
+            case .activeTalks: return "Hide Past Sessions"
             case let .level(level): return level.rawValue
             default: fatalError("Invalid filter: \(filter)")
             }
