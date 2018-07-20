@@ -376,10 +376,18 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     private func show(_ viewController: UIViewController) {
         
-        let revealViewController = self.revealViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        
-        revealViewController?.pushFrontViewController(navigationController, animated: true)
+        if let revealViewController = self.revealViewController() {
+            
+            guard viewController != revealViewController.frontViewController.childViewControllers.first
+                else {
+                    if revealViewController.frontViewPosition == .right { hideMenu() }
+                    return
+            }
+            
+            let navigationController = UINavigationController(rootViewController: viewController)
+            
+            revealViewController.pushFrontViewController(navigationController, animated: true)
+        }
     }
     
     // MARK: Login / Logout
