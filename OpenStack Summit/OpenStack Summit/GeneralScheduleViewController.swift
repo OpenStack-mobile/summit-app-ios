@@ -192,7 +192,12 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         let date = DateFilter.interval(start: startDate, end: endDate)
         
-        let events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        var events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        
+        if scheduleFilter.activeFilters.contains(.video) {
+            
+            events = events.filter { !$0.videos.isEmpty }
+        }
         
         var activeDates: [Date] = []
         
@@ -231,7 +236,12 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             }
         }
         
-        let events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        var events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        
+        if scheduleFilter.activeFilters.contains(.video) {
+            
+            events = events.filter { !$0.videos.isEmpty }
+        }
         
         return ScheduleItem.from(managedObjects: events)
     }

@@ -33,6 +33,7 @@ enum Filter {
     
     /// Hide Past Talks
     case activeTalks
+    case video
     case track(Identifier)
     case trackGroup(Identifier)
     case level(Level)
@@ -52,6 +53,7 @@ func == (lhs: Filter, rhs: Filter) -> Bool {
     switch (lhs, rhs) {
         
     case (.activeTalks, .activeTalks): return true
+    case (.video, .video): return true
     case let (.trackGroup(lhsValue), .trackGroup(rhsValue)): return lhsValue == rhsValue
     case let (.track(lhsValue), .track(rhsValue)): return lhsValue == rhsValue
     case let (.level(lhsValue), .level(rhsValue)): return lhsValue == rhsValue
@@ -120,10 +122,14 @@ struct ScheduleFilter: Equatable {
         let endDate = (summit.end as NSDate).mt_startOfNextDay()
         let now = Date()
         
+        allFilters[.activeTalks] = []
+        
         if (now as NSDate).mt_isBetweenDate(startDate, andDate: endDate) {
             
-            allFilters[.activeTalks] = [.activeTalks]
+            allFilters[.activeTalks]?.append(.activeTalks)
         }
+        
+        allFilters[.activeTalks]?.append(.video)
         
         if tracks.isEmpty == false {
             
