@@ -41,6 +41,9 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
+        guard canView(data: data, identifier: identifier)
+            else { return }
+        
         // change to menu item section first
         switch data {
         case .event: menuViewController.showEvents()

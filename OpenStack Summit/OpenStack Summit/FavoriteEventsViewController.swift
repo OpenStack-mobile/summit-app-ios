@@ -16,9 +16,8 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     // MARK: - Loading
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        
-        
     }
     
     // MARK: - Methods
