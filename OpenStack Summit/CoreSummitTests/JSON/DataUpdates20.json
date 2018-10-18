@@ -1,0 +1,168 @@
+{
+    "class_name": "Presentation",
+    "created": 1524061496,
+    "entity": {
+        "allow_feedback": true,
+        "attendees_expected_learnt": "<p>How to test Helm charts using \"helm test\"</p>\n<p>How to easily run Tempest and Rally in an OpenStack-Helm environment</p>\n<p>How to periodically validate functionality in Kubernetes using CronJobs</p>\n<p>The approach used in OpenStack-Helm to integrate QA functionality in Helm charts</p>",
+        "attending_media": false,
+        "avg_feedback_rate": 0,
+        "class_name": "Presentation",
+        "description": "<p>Kubernetes and Helm allow for near-effortless deployment and management of resilient resources.\u00a0 This talk will discuss bringing similar ease to test automation in a container-orchestrated context.</p>\n<p>OpenStack-Helm (OSH) is a Helm chart library that allows simple customization and deployment of OpenStack containers across k8s clusters, from laptop-scale to data center-scale.\u00a0 As OSH matures, it integrates robust and seamless testing via Tempest and Rally functionality.\u00a0 OSH leverages these tools in multiple contexts, from lightweight \"helm test\" validation to full-blown Helm charts with customizable container overrides.</p>\n<p>This talk will provide an overview of the OSH QA integration as currently implemented, as well as our vision for containerized testing efforts in the future. We hope it will serve as an informative talk as well as a collaboration point between others in the community to ultimately make containerized testing efforts as functional/robust/useful as possible.</p>",
+        "end_date": 1526940000,
+        "head_count": 0,
+        "id": 20891,
+        "is_published": true,
+        "level": "Intermediate",
+        "links": [],
+        "location_id": 348,
+        "moderator_speaker_id": 0,
+        "problem_addressed": null,
+        "rsvp_external": false,
+        "rsvp_link": null,
+        "rsvp_max_user_number": 0,
+        "rsvp_max_user_wait_list_number": 0,
+        "rsvp_template_id": 0,
+        "slides": [
+                   {
+                   "created": 1527839631,
+                   "description": null,
+                   "display_on_site": true,
+                   "featured": false,
+                   "id": 45731,
+                   "last_edited": 1527839631,
+                   "link": "https://devbranch.openstack.org/assets/presentation-media/QA-Automation-in-a-Kubernetes-World-v7-final5.pdf",
+                   "name": "QA automation in a Kubernetes world",
+                   "order": 0,
+                   "presentation_id": 20891
+                   }
+                   ],
+        "social_description": "We describe effortless test automation leveraging Kubernetes, OpenStack-Helm, Tempest, and Rally.",
+        "speakers": [
+                     {
+                     "affiliations": [
+                                      {
+                                      "created": 1460407728,
+                                      "end_date": null,
+                                      "id": 93891,
+                                      "is_current": true,
+                                      "job_title": null,
+                                      "last_edited": 1460407728,
+                                      "organization": {
+                                      "created": 1359485922,
+                                      "id": 12,
+                                      "last_edited": 1365000778,
+                                      "name": "AT&T"
+                                      },
+                                      "owner_id": 59756,
+                                      "start_date": 1460937600
+                                      }
+                                      ],
+                     "bio": "<p>Elise has been a key player in open source initiatives at AT&amp;T for the last three years. As a technical agile coach, she drove the transition to modern agile development practices. She also developed a company-wide practice to simplify employee-driven open source contributions and established a standard structure for AT&amp;T's GitHub presence.</p>\r\n<p>Currently, Elise works within AIC to interface with upstream OpenStack community and beyond. Contributing to AIC quality improvement and open source strategy in many ways, she currently leads an effort to repurpose unused hardware to create an accessible Open Source Lab, housed in the T-REX Innovation Center in downtown St. Louis.</p>",
+                     "created": 1468443653,
+                     "first_name": "Elise",
+                     "gender": "Female",
+                     "id": 10196,
+                     "irc": "eeiden",
+                     "last_edited": 1518116320,
+                     "last_name": "Eiden",
+                     "member_id": 59756,
+                     "pic": "https://devbranch.openstack.org/profile_images/speakers/10196",
+                     "title": "Professional System Engineer",
+                     "twitter": null
+                     },
+                     {
+                     "affiliations": [
+                                      {
+                                      "created": 1439373674,
+                                      "end_date": null,
+                                      "id": 78625,
+                                      "is_current": true,
+                                      "job_title": null,
+                                      "last_edited": 1439373674,
+                                      "organization": {
+                                      "created": 1434981210,
+                                      "id": 9750,
+                                      "last_edited": 1434981210,
+                                      "name": "AT&T Services"
+                                      },
+                                      "owner_id": 45370,
+                                      "start_date": 846547200
+                                      }
+                                      ],
+                     "bio": "<p>Lead developer of the AIC Quality Automation (AQuA) team. &nbsp;AQuA is a framework of frameworks for containerizing testing tools of our control plane. If you have any question please reach our to me.</p>",
+                     "created": 1468461811,
+                     "first_name": "Doug",
+                     "gender": "Male",
+                     "id": 10288,
+                     "irc": "bigdogstl",
+                     "last_edited": 1526997945,
+                     "last_name": "Schveninger",
+                     "member_id": 45370,
+                     "pic": "https://devbranch.openstack.org/profile_images/speakers/10288",
+                     "title": "Principal System Engineer",
+                     "twitter": "ishootsportsstl"
+                     }
+                     ],
+        "sponsors": [],
+        "start_date": 1526937600,
+        "status": "Accepted",
+        "summit_id": 24,
+        "tags": [
+                 {
+                 "created": 1515080651,
+                 "id": 4593,
+                 "last_edited": 1515672766,
+                 "tag": "Demo"
+                 },
+                 {
+                 "created": 1515079122,
+                 "id": 4591,
+                 "last_edited": 1515672822,
+                 "tag": "Technical"
+                 },
+                 {
+                 "created": 1517925010,
+                 "id": 4667,
+                 "last_edited": 1517925010,
+                 "tag": "Openstack-Helm"
+                 },
+                 {
+                 "created": 1515081410,
+                 "id": 4612,
+                 "last_edited": 1515081410,
+                 "tag": "Rally"
+                 },
+                 {
+                 "created": 1424774048,
+                 "id": 355,
+                 "last_edited": 1525699054,
+                 "tag": "Kubernetes"
+                 }
+                 ],
+        "title": "QA automation in a Kubernetes world",
+        "to_record": true,
+        "track_id": 212,
+        "type_id": 158,
+        "videos": [
+                   {
+                   "created": 1526923983,
+                   "data_uploaded": 1526941983,
+                   "description": null,
+                   "display_on_site": true,
+                   "featured": false,
+                   "highlighted": false,
+                   "id": 45206,
+                   "last_edited": 1530508994,
+                   "name": "QA automation in a Kubernetes world",
+                   "order": 0,
+                   "presentation_id": 20891,
+                   "views": 82,
+                   "youtube_id": "mcwLkOu1IHs"
+                   }
+                   ]
+    },
+    "entity_id": 20891,
+    "id": 1491008,
+    "last_edited": 1524061496,
+    "type": "UPDATE"
+}

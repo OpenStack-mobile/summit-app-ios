@@ -42,15 +42,12 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private var digitLabels = [UILabel]()
     
-    private var willTransition = false  {
-        
-        didSet { configureView() }
-    }
-    
     private var state: State = .loadingSummits {
         
         didSet { configureView() }
     }
+    
+    private var completionHandler: ((LaunchScreenViewController) -> ())?
     
     private var summit: SummitsResponse.Summit?
     
@@ -281,11 +278,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private func showRevealController(_ sender: AnyObject? = nil, delay: Double = 0, completion: ((MainRevealViewController) -> ())? = nil) {
         
-        self.willTransition = true
-        
         let revealViewController = MainRevealViewController()
-        
-        self.willTransition = false
         
         DispatchQueue.main.asyncAfter(deadline: dispatchTime(from: delay)) {
             
@@ -342,14 +335,12 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     controller.summit = latestSummit
                     
                     #if DEBUG
-                        
-                        if SummitManager.shared.summit.value == 0 {
-                            
-                            SummitManager.shared.summit.value = latestSummit.identifier
-                        }
-                    #else
+                    if SummitManager.shared.summit.value == 0 {
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
+                    }
+                    #else
+                    SummitManager.shared.summit.value = latestSummit.identifier
                     #endif
                     
                     controller.loadData()
@@ -358,24 +349,35 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    private func loadData() {
+    private func loadData(completion: ((LaunchScreenViewController) -> ())? = { controller in
+        
+            if Store.shared.isLoggedIn {
+                
+                controller.state = .transitioning
+                
+                controller.showRevealController(controller, delay: 2)
+            }
+            else {
+                
+                controller.state = .dataLoaded
+            }
+        
+        }) {
         
         guard isDataLoaded == false
             else {
                 
-                if Store.shared.isLoggedIn {
+                if let completionHandler = completionHandler {
                     
-                    showRevealController(self, delay: 2)
-                    
-                    state = .transitioning
+                    completionHandler(self)
                 }
                 else {
                     
-                    state = .dataLoaded
+                    completion?(self)
                 }
                 
                 return
-        }
+            }
         
         state = .loadingData
         
@@ -396,7 +398,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     print("Error loading summit \(summitID): \(error)")
                     
                     // try again
-                    controller.loadData()
+                    controller.loadData(completion: completion)
                     
                 case let .value(summit):
                     
@@ -404,7 +406,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     print("Loaded \(summit.name) summit")
                     
-                    controller.loadData()
+                    controller.loadData(completion: completion)
                 }
             }
         }
@@ -414,17 +416,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
-        showRevealController(self) { $0.view(data: data, identifier: identifier) }
+        completionHandler = { $0.showRevealController($0) { $0.view(data: data, identifier: identifier) } }
     }
     
     func view(screen: AppActivityScreen) {
         
-        showRevealController(self) { $0.view(screen: screen) }
+        completionHandler = { $0.showRevealController($0) { $0.view(screen: screen) } }
     }
     
     func search(_ searchTerm: String) {
         
-        showRevealController(self) { $0.search(searchTerm) }
+        completionHandler = { $0.showRevealController($0) { $0.search(searchTerm) } }
     }
     
     // MARK: - Segue

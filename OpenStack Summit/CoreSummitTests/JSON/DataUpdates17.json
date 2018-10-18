@@ -1,18 +1,48 @@
 {
-	"id": 831235,
-	"entity_id": 291,
-	"class_name": "SummitVenueRoom",
-	"created": 1493374201,
-	"type": "INSERT",
-	"entity": {
-		"id": 291,
-		"name": "Marketplace Expo Hall (Hall D)",
-		"description": null,
-		"location_type": "Internal",
-		"order": 0,
-		"class_name": "SummitVenueRoom",
-		"venue_id": 214,
-		"floor_id": 0,
-		"capacity": 0
-	}
+    "class_name": "SummitVenueRoom",
+    "created": 1526826259,
+    "entity": {
+        "capacity": 0,
+        "class_name": "SummitVenueRoom",
+        "created": 1520962776,
+        "description": null,
+        "floor": {
+            "created": 1520944639,
+            "description": null,
+            "id": 28,
+            "image": "https://devbranch.openstack.org/assets/summits/24/locations/338/floors/map-floor2.jpg",
+            "last_edited": 1526824991,
+            "name": "Level Two",
+            "number": 2,
+            "rooms": [
+                      350,
+                      351,
+                      352,
+                      353,
+                      354,
+                      355,
+                      356,
+                      357,
+                      358,
+                      359,
+                      360,
+                      367,
+                      368,
+                      370,
+                      373
+                      ],
+            "venue_id": 338
+        },
+        "id": 367,
+        "last_edited": 1526826618,
+        "location_type": "Internal",
+        "name": "Lightning Talk Theater sponsored by SUSE",
+        "order": 0,
+        "override_blackouts": true,
+        "venue_id": 338
+    },
+    "entity_id": 367,
+    "id": 1556228,
+    "last_edited": 1526826259,
+    "type": "UPDATE"
 }

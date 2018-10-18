@@ -93,14 +93,6 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if self.navigationController?.viewControllers.index(of: self) == nil {
-            
-            
-        }
-    }
     
     // MARK: - Actions
     
@@ -170,7 +162,8 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         func name(for filter: Filter) -> String {
             
             switch filter {
-            case .activeTalks: return "Hide Past Talks"
+            case .activeTalks: return "Hide Past Sessions"
+            case .video: return "Sessions With Video"
             case let .level(level): return level.rawValue
             default: fatalError("Invalid filter: \(filter)")
             }

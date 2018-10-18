@@ -57,6 +57,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup data poller
         #if DEBUG
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #elseif !MOCKED
+        DataUpdatePoller.shared.log = { Answers.logCustomEvent(withName: "DataUpdatePoller", customAttributes: ["Error": $0]) }
         #endif
         #if !MOCKED
         DataUpdatePoller.shared.start()
@@ -182,23 +184,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         if let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String {
             
             let bundleID = Bundle.main.bundleIdentifier
+            let redirectURL = AppEnvironment.configuration.openID.allowedRedirectURL
             
-            if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
+            if (sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService") &&
+                url.absoluteString.starts(with: redirectURL) {
                 
-                let notification = Foundation.Notification (name: Notification.Name(rawValue: AGAppLaunchedWithURLNotification), object: nil, userInfo: [UIApplicationLaunchOptionsKey.url:url])
+                let notification = Foundation.Notification (name: Notification.Name(rawValue: AGAppLaunchedWithURLNotification), object: nil, userInfo: [UIApplicationLaunchOptionsKey.url: url])
                 NotificationCenter.default.post(notification)
                 
                 return true
             }
         }
         
-        // HACK: async is needed in case app was not already opened
-        DispatchQueue.main.async {
-            
-            let _ = self.openWeb(url: url)
-        }
-        
-        return false
+        return self.openWeb(url: url)
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
@@ -219,8 +217,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let identifier = Identifier(identifierString)
                 else { return false }
             
-            guard self.canView(data: dataType, identifier: identifier)
-                else { return false }
+            /*guard self.canView(data: dataType, identifier: identifier)
+                else { return false }*/
             
             self.view(data: dataType, identifier: identifier)
         }
@@ -241,8 +239,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Identifier
                 else { return false }
             
-            guard self.canView(data: dataType, identifier: identifier)
-                else { return false }
+            /*guard self.canView(data: dataType, identifier: identifier)
+                else { return false }*/
             
             self.view(data: dataType, identifier: identifier)
             

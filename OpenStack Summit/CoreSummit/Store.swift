@@ -26,7 +26,7 @@ public final class Store {
     public let createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore
     
     /// Block for resetting the persistent store.
-    public let deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()
+    public let deletePersistentStore: ((NSPersistentStoreCoordinator, NSPersistentStore)?) throws -> ()
     
     /// The server targeted environment. 
     public let environment: Environment
@@ -71,7 +71,7 @@ public final class Store {
                  session: SessionStorage,
                  contextConcurrencyType: NSManagedObjectContextConcurrencyType = .mainQueueConcurrencyType,
                  createPersistentStore: @escaping (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
-                 deletePersistentStore: @escaping (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
+                 deletePersistentStore: @escaping ((NSPersistentStoreCoordinator, NSPersistentStore)?) throws -> ()) throws {
         
         // store values
         self.environment = environment
@@ -129,7 +129,7 @@ public final class Store {
     
     public func clear() throws {
         
-        try self.deletePersistentStore(persistentStoreCoordinator, persistentStore)
+        try self.deletePersistentStore((persistentStoreCoordinator, persistentStore))
         self.persistentStore = try self.createPersistentStore(persistentStoreCoordinator)
         
         self.managedObjectContext.reset()
@@ -205,7 +205,7 @@ public final class Store {
         var config = Config(
             base: environment.configuration.authenticationURL,
             authzEndpoint: "oauth2/auth",
-            redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
+            redirectURL: environment.configuration.openID.allowedRedirectURL,
             accessTokenEndpoint: "oauth2/token",
             clientId: environment.configuration.openID.client,
             refreshTokenEndpoint: "oauth2/token",
@@ -221,7 +221,8 @@ public final class Store {
         config = Config(
             base: environment.configuration.authenticationURL,
             authzEndpoint: "oauth2/auth",
-            redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
+            // redirectURL not needed for service account, constructors requires it though
+            redirectURL: "",
             accessTokenEndpoint: "oauth2/token",
             clientId: environment.configuration.serviceAccount.client,
             revokeTokenEndpoint: "oauth2/token/revoke",

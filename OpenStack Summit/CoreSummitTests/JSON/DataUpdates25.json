@@ -1,0 +1,18 @@
+{
+    "class_name": "SummitWIFIConnection",
+    "created": 1526742204,
+    "entity": {
+        "created": 1526742204,
+        "description": null,
+        "id": 2,
+        "last_edited": 1526742204,
+        "password": "OpenInfra",
+        "ssid": "OpenStackSummit",
+        "summit_id": 24
+    },
+    "entity_id": 2,
+    "id": 1551119,
+    "last_edited": 1526742204,
+    "type": "INSERT"
+}
+

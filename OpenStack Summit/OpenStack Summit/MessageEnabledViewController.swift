@@ -6,6 +6,9 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
+#if os(iOS)
+    import Crashlytics
+#endif
 #if os(iOS) || os(tvOS)
     import UIKit
 #elseif os(OSX)
@@ -47,13 +50,17 @@ extension MessageEnabledViewController {
         let nsError = (error as NSError)
         let message = nsError.localizedDescription
         
-        print("Error at \(fileName):\(lineNumber)\n\(error)")
-        
         if AppEnvironment == .staging {
+            
+            print("Error at \(fileName):\(lineNumber)\n\(error)")
             
             showInfoMessage(NSLocalizedString("Error", comment: "Error"), message: message)
         }
         else {
+            
+            #if os(iOS)
+            Answers.logCustomEvent(withName: "\(fileName):\(lineNumber)", customAttributes: ["Error": message])
+            #endif
             
             showInfoMessage(NSLocalizedString("We're sorry, there was an error.", comment: "Friendly error alert title"), message: "It has been reported to our dev team.")
         }

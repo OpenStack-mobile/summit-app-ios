@@ -1,0 +1,32 @@
+{
+    "class_name": "SummitEvent",
+    "created": 1526757986,
+    "entity": {
+        "allow_feedback": false,
+        "avg_feedback_rate": 0,
+        "class_name": "SummitEvent",
+        "description": "<p><strong>Monday</strong></p>\n<ul><li>Grab 'n' Go Lunches on all three levels (Level 1: Marketplace, Level 2: Room 211, Level 3: Foyer)</li>\n</ul><p><strong>Tuesday - Thursday</strong></p>\n<ul><li>Grab 'n' Go Lunches on all three levels</li>\n<li>Hot buffet on Level 1 (Ballrooms A/B)</li>\n</ul><p><a href=\"http://www.openstack.org/assets/summits/vancouver-2018/OSYVR18-Dig-Menu-for-web.pdf\">View the Menus</a></p>",
+        "end_date": 1526934600,
+        "head_count": 0,
+        "id": 21561,
+        "is_published": true,
+        "location_id": 0,
+        "rsvp_external": false,
+        "rsvp_link": null,
+        "rsvp_max_user_number": 0,
+        "rsvp_max_user_wait_list_number": 0,
+        "rsvp_template_id": 0,
+        "social_description": "Lunch",
+        "sponsors": [],
+        "start_date": 1526930100,
+        "summit_id": 24,
+        "tags": [],
+        "title": "Lunch",
+        "track_id": 221,
+        "type_id": 163
+    },
+    "entity_id": 21561,
+    "id": 1552098,
+    "last_edited": 1526757986,
+    "type": "UPDATE"
+}

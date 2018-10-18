@@ -1,0 +1,24 @@
+{
+    "class_name": "SummitVenueFloor",
+    "created": 1526825051,
+    "entity": {
+        "created": 1520944651,
+        "description": null,
+        "id": 29,
+        "image": "https://devbranch.openstack.org/assets/summits/24/locations/338/floors/map-floor3.jpg",
+        "last_edited": 1526825061,
+        "name": "Level Three",
+        "number": 3,
+        "rooms": [
+                  362,
+                  363,
+                  364,
+                  371
+                  ],
+        "venue_id": 338
+    },
+    "entity_id": 29,
+    "id": 1555969,
+    "last_edited": 1526825051,
+    "type": "UPDATE"
+}

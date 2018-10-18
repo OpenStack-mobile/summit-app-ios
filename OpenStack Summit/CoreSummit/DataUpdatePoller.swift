@@ -6,17 +6,11 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
-import JSON
-
-#if os(iOS)
-import Crashlytics
-import Fabric
-#endif
-
 public final class DataUpdatePoller {
     
     // MARK: - Properties
+    
+    public var polling = false
     
     public var pollingInterval: Double = 60
     
@@ -68,12 +62,22 @@ public final class DataUpdatePoller {
         guard Reachability.connected else { return }
         #endif
         
+        // dont poll if already polling
+        guard !polling else { return }
+        
         // dont poll if no active summit
         guard let summitID = self.summit,
             let summit = try! SummitManagedObject.find(summitID, context: store.managedObjectContext)
-            else { return }
+            else {
+                // clear latest data update after wipe
+                if let latestDataUpdate = storage.latestDataUpdate {
+                    
+                    storage.clear()
+                }
+                return
+        }
         
-        log?("Polling server for data updates for summit \(summitID)")
+        print("Polling server for data updates for summit \(summitID)")
         
         /// Handles the polling of the data updates
         func process(response: ErrorValue<[DataUpdate]>) {
@@ -82,35 +86,23 @@ public final class DataUpdatePoller {
                 
             case let .error(error):
                 
-                log?("Error polling server for data updates: \(error)")
+                let nsError = (error as NSError)
+                
+                log?("Error polling server: \(nsError.code) - \(nsError.localizedDescription)")
                                 
             case let .value(dataUpdates):
                 
-                for update in dataUpdates {
+                var processedCount = 0
+                
+                for index in 0..<dataUpdates.count {
+                    
+                    let update = dataUpdates[index]
                     
                     if store.process(dataUpdate: update, summit: summit.id) == false {
                         
                         // could not process update
                         
-                        #if os(iOS)
-                            
-                            var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
-                            
-                            if let updateEntity = update.entity,
-                                case let .json(jsonObject) = updateEntity {
-                                
-                                let jsonString = try! JSON.Value.object(jsonObject).toString(options: .prettyPrint)
-                                
-                                errorUserInfo["JSON"] = jsonString
-                            }
-                        
-                            let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
-                        
-                            Crashlytics.sharedInstance().recordError(friendlyError)
-                        
-                        #endif
-                        
-                        print("Could not process data update: \(update)")
+                        log?("Could not process: \(update.identifier)")
                         
                         #if DEBUG
                         return // block
@@ -119,6 +111,15 @@ public final class DataUpdatePoller {
                     
                     // store latest data update
                     storage.latestDataUpdate = update.identifier
+                    
+                    processedCount = index
+                    
+                    // exit loop if data wiping
+                    if update.className == .WipeData &&
+                        update.operation == .truncate {
+                        
+                        break
+                    }
                 }
                 
                 if dataUpdates.isEmpty == false {
@@ -127,9 +128,11 @@ public final class DataUpdatePoller {
                     
                     try! context.performErrorBlockAndWait { try context.validateAndSave() }
                     
-                    log?("Processed \(dataUpdates.count) data updates")
+                    print("Processed \(processedCount) data updates")
                 }
             }
+            
+            polling = false
         }
         
         // execute request
@@ -142,6 +145,8 @@ public final class DataUpdatePoller {
             
             store.dataUpdates(summit.id, from: summit.initialDataLoad ?? Date()) { process(response: $0) }
         }
+        
+        polling = true
     }
 }
 

@@ -516,7 +516,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.eventDetailTableViewCell, for: indexPath)!
                 
-                cell.sectionLabel.text = "LEVEL"
+                cell.sectionLabel.text = "DIFFICULTY LEVEL"
                 cell.valueLabel.text = eventDetail.level
                 
                 return cell

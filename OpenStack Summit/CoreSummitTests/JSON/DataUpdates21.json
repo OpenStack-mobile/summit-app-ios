@@ -1,0 +1,40 @@
+{
+    "class_name": "PresentationSpeaker",
+    "created": 1526853516,
+    "entity": {
+        "affiliations": [
+                         {
+                         "created": 1384269883,
+                         "end_date": null,
+                         "id": 48574,
+                         "is_current": true,
+                         "job_title": "",
+                         "last_edited": 1384269883,
+                         "organization": {
+                         "created": 1359485922,
+                         "id": 55,
+                         "last_edited": 1365012100,
+                         "name": "Ericsson"
+                         },
+                         "owner_id": 7644,
+                         "start_date": null
+                         }
+                         ],
+        "bio": "<p><span>A versatile Engineer with successful background in Information Technology, Design and Architecture for Infrastructure as a Service, Cloud Computing, Software Defined Network[SDN], Software Defined Storage[SDS] and High Availability solutions with open source technologies. He has rich IT experience with extensive and up-to-date technical background.</span></p>\r\n<p><span>&bull; 9 years of IT experience, 1 technical degree, 3 industry certifications and 4 industry trainings.</span><br /><span>&bull; Subject matter expert in several key disciplines ranging from Linux, Infrastructure as a Service with Software Defined Network, Software Defined Storage and Compute concentrations.</span><br /><span>&bull; DevOps and Reliability Engineering.</span><br /><span>&bull; CICD and Automation by Jenkins, Docker.</span><br /><span>&bull; Experience on open source datacenter solutions and automation ranging Redhat, CentOS, Ubuntu, LXC and Openstack.</span><br /><span>&bull; Configuration management and Orchestration through puppet.</span><br /><span>&bull; High Availability Solutions/Services.</span><br /><span>&bull; Distributed file system solutions.</span><br /><span>&bull; Design and Architecture for Infrastruture solutions</span><br /><span>&bull; 6 years of experience on cloud computing.</span><br /><span>&bull; 4 Years of US work Experience</span></p>",
+        "created": 1517941282,
+        "first_name": "Nirbhay",
+        "gender": "Male",
+        "id": 14110,
+        "irc": null,
+        "last_edited": 1526853515,
+        "last_name": "Tomar",
+        "member_id": 7644,
+        "pic": "https://devbranch.openstack.org/profile_images/speakers/14110",
+        "title": "Mr",
+        "twitter": null
+    },
+    "entity_id": 14110,
+    "id": 1560180,
+    "last_edited": 1526853516,
+    "type": "UPDATE"
+}

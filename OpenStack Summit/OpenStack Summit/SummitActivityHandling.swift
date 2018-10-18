@@ -70,8 +70,8 @@ extension SummitActivityHandling {
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        guard self.canView(data: dataType, identifier: identifier)
-            else { return false }
+        /*guard self.canView(data: dataType, identifier: identifier)
+            else { return false }*/
         
         self.view(data: dataType, identifier: identifier)
         

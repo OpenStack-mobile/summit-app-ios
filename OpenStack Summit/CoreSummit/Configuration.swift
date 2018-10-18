@@ -15,7 +15,7 @@ public protocol Configuration {
     /// URL of the OpenStack ID server.
     static var authenticationURL: String { get }
     
-    static var openID: (client: String, secret: String) { get }
+    static var openID: (client: String, secret: String, allowedRedirectURL: String) { get }
     
     static var serviceAccount: (client: String, secret: String) { get }
     

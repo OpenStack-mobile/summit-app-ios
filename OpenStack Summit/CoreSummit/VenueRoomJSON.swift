@@ -27,16 +27,33 @@ extension VenueRoom: JSONDecodable {
             classNameString == VenueRoom.JSONClassName,
             let identifier = JSONObject[LocationJSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
-            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.integerValue,
-            let floorIdentifier = JSONObject[JSONKey.floor_id.rawValue]?.integerValue
+            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
         self.name = name
         self.venue = venueIdentifier
-        self.floor = floorIdentifier > 0 ? floorIdentifier : nil
         
         // optional
+        if let floorIdentifier = JSONObject[JSONKey.floor_id.rawValue]?.integerValue {
+            
+            self.floor = floorIdentifier > 0 ? floorIdentifier : nil
+            
+        } else {
+            
+            if let floorJSON = JSONObject[JSONKey.floor.rawValue] {
+                
+                guard let floor = VenueFloor(json: floorJSON)
+                    else { return nil }
+                
+                self.floor = floor.identifier
+                
+            } else {
+                
+                self.floor = nil
+            }
+        }
+        
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
         
         if let capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue {

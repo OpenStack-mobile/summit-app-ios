@@ -30,7 +30,7 @@ public extension Store {
             
             let managedObject = try summit.save(context)
             
-            managedObject.initialDataLoad = NSDate() as Date
+            managedObject.initialDataLoad = Date()
             
             try context.validateAndSave()
         }
@@ -61,9 +61,28 @@ public extension Store {
         
         http.request(method: .get, path: url) { (responseObject, error) in
             
-            // forward error
             guard error == nil
-                else { completion(.error(error!)); return }
+                else {
+                    
+                    if error?.code == 401 {
+                        
+                        // revoke and retry
+                        http.authzModule?.revokeAccess { (responseObject, error) in
+                            
+                            guard error == nil
+                                else { completion(.error(error!)); return }
+                            
+                            self.summit(identifier, completion: completion)
+                        }
+                    }
+                    else {
+                        
+                        // forward error
+                        completion(.error(error!))
+                    }
+                    
+                    return
+            }
             
             guard let json = try? JSON.Value(string: responseObject as! String),
                 let summit = Summit(json: json)

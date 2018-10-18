@@ -20,9 +20,10 @@ unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFabric.zip
 unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFirebase.zip
 
 # Download and install Google Maps
-wget https://www.gstatic.com/cpdc/aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz
-tar -zxvf aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz Frameworks/GoogleMaps.framework
-cp -rf ./Frameworks/* ./Vendor
+wget https://dl.google.com/dl/cpdc/f4086b0aa122de6c/GoogleMaps-2.7.0.tar.gz
+tar -zxvf GoogleMaps-2.7.0.tar.gz Base/Frameworks/GoogleMapsBase.framework Maps/Frameworks/GoogleMaps.framework Maps/Frameworks/GoogleMapsCore.framework
+cp -rf ./Base/Frameworks/* ./Vendor
+cp -rf ./Maps/Frameworks/* ./Vendor
 
 # Install BuddyBuild SDK
 wget https://s3-us-west-2.amazonaws.com/buddybuild-sdk-builds/master/BuddyBuildSDK.framework.zip

@@ -509,7 +509,11 @@ extension ScheduleItem: SearchViewControllerItem {
         // NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(value: Int64(summit)), searchTerm, searchTerm)
         return #keyPath(EventManagedObject.summit.id) == summit
             && ((#keyPath(EventManagedObject.name)).compare(.contains, [.caseInsensitive], value)
-            || (#keyPath(EventManagedObject.sponsors.name)).compare(.contains, [.caseInsensitive], value))
+            || (#keyPath(EventManagedObject.sponsors.name)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.speakers.firstName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.speakers.lastName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.moderator.firstName)).compare(.contains, [.caseInsensitive], value)
+            || (#keyPath(EventManagedObject.presentation.moderator.lastName)).compare(.contains, [.caseInsensitive], value))
     }
 }
 
