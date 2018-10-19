@@ -210,7 +210,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         let predicate = type.predicate(for: searchTerm, summit: summit)
         
-        let results = try context.managedObjects(type, predicate: predicate, limit: limit)
+        let results = try context.managedObjects(type, predicate: predicate, sortDescriptors: type.sortDescriptors, limit: limit)
         
         let items = results.map { $0.toItem() }
         
@@ -493,12 +493,16 @@ private extension SearchViewController {
 
 private protocol SearchViewControllerItem: CoreDataDecodable {
     
+    static var sortDescriptors: [NSSortDescriptor] { get }
+    
     func toItem() -> SearchViewController.Item
     
     static func predicate(for searchTerm: String, summit: Identifier) -> Predicate
 }
 
 extension ScheduleItem: SearchViewControllerItem {
+    
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return EventManagedObject.sortDescriptors }
     
     fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
     
@@ -519,6 +523,8 @@ extension ScheduleItem: SearchViewControllerItem {
 
 extension Speaker: SearchViewControllerItem {
     
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return SpeakerManagedObject.sortDescriptors }
+    
     fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
     
     fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
@@ -535,6 +541,8 @@ extension Speaker: SearchViewControllerItem {
 }
 
 extension Track: SearchViewControllerItem {
+    
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return TrackManagedObject.sortDescriptors }
     
     fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
     
