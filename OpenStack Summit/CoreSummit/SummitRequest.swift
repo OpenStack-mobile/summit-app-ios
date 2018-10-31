@@ -30,7 +30,15 @@ public extension Store {
             
             let managedObject = try summit.save(context)
             
-            managedObject.initialDataLoad = Date()
+            if let JSONObject = json.objectValue,
+                let timeStamp = JSONObject["timestamp"]?.integerValue {
+                
+                managedObject.initialDataLoad = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+            }
+            else {
+                
+                managedObject.initialDataLoad = Date()
+            }
             
             try context.validateAndSave()
         }
@@ -93,7 +101,15 @@ public extension Store {
                 
                 let managedObject = try summit.save(context)
                 
-                managedObject.initialDataLoad = Date()
+                if let JSONObject = json.objectValue,
+                    let timeStamp = JSONObject["timestamp"]?.integerValue {
+                    
+                    managedObject.initialDataLoad = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+                }
+                else {
+                    
+                    managedObject.initialDataLoad = Date()
+                }
                 
                 try context.validateAndSave()
             }
