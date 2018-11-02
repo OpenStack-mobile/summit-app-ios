@@ -107,15 +107,21 @@ public extension DataUpdate {
 
 public extension Store {
     
+    enum DataUpdateProcessResult {
+        
+        case dataWipe
+        case success(Bool)
+    }
+    
     /// Processes the data update, but does not save the context.
-    func process(dataUpdate: DataUpdate, summit: Identifier) -> Bool {
+    func process(dataUpdate: DataUpdate, summit: Identifier) -> DataUpdateProcessResult {
         
         let context = privateQueueManagedObjectContext
         
         return try! context.performErrorBlockAndWait {
             
             guard let summit = try SummitManagedObject.find(summit, context: context)
-                else { return false }
+                else { return .success(false) }
             
             #if os(iOS)
             let authenticatedMember = try self.authenticatedMember(context)
@@ -123,30 +129,34 @@ public extension Store {
             let authenticatedMember: MemberManagedObject? = nil
             #endif
             
+            // truncate if dataupdate is older than a week
+            guard Calendar.current.isDate(dataUpdate.date, equalTo: Date(), toGranularity: .weekOfYear) else {
+                
+                try self.clear(forceLogout: false)
+                
+                return .dataWipe
+            }
+            
             // truncate
             guard dataUpdate.operation != .truncate else {
                 
                 guard dataUpdate.className == .WipeData
-                    else { return false }
+                    else { return .success(false) }
                 
                 try self.clear()
                 
-                #if os(iOS)
-                self.logout()
-                #endif
-                
-                return true
+                return .dataWipe
             }
             
             guard dataUpdate.className != .WipeData
-                else { return false }
+                else { return .success(false) }
             
             // add or remove to schedule
             guard dataUpdate.className != .MySchedule else {
                 
                 // should only get for authenticated requests
                 guard let member = authenticatedMember
-                    else { return false }
+                    else { return .success(false) }
                 
                 switch dataUpdate.operation {
                     
@@ -155,28 +165,28 @@ public extension Store {
                     guard let entityJSON = dataUpdate.entity,
                         case let .json(jsonObject) = entityJSON,
                         let event = Event.DataUpdate.init(json: .object(jsonObject))
-                        else { return false }
+                        else { return .success(false) }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
                     member.schedule.insert(eventManagedObject)
                     
-                    return true
+                    return .success(true)
                     
                 case .delete:
                     
                     guard let entityID = dataUpdate.entity,
                         case let .identifier(identifier) = entityID
-                        else { return false }
+                        else { return .success(false) }
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         member.schedule.remove(eventManagedObject)
                     }
                     
-                    return true
+                    return .success(true)
                     
-                default: return false
+                default: return .success(false)
                 }
             }
             
@@ -185,7 +195,7 @@ public extension Store {
                 
                 // should only get for authenticated requests
                 guard let member = authenticatedMember
-                    else { return false }
+                    else { return .success(false) }
                 
                 switch dataUpdate.operation {
                     
@@ -194,41 +204,41 @@ public extension Store {
                     guard let entityJSON = dataUpdate.entity,
                         case let .json(jsonObject) = entityJSON,
                         let event = Event.DataUpdate.init(json: .object(jsonObject))
-                        else { return false }
+                        else { return .success(false) }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
                     member.favoriteEvents.insert(eventManagedObject)
                     
-                    return true
+                    return .success(true)
                     
                 case .delete:
                     
                     guard let entityID = dataUpdate.entity,
                         case let .identifier(identifier) = entityID
-                        else { return false }
+                        else { return .success(false) }
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         member.favoriteEvents.remove(eventManagedObject)
                     }
                     
-                    return true
+                    return .success(true)
                     
-                default: return false
+                default: return .success(false)
                 }
             }
             
             /// we dont support all of the DataUpdate types, but thats ok
             guard let type = dataUpdate.className.type
-                else { return true }
+                else { return .success(true) }
             
             // delete
             guard dataUpdate.operation != .delete else {
                 
                 guard let entityID = dataUpdate.entity,
                     case let .identifier(identifier) = entityID
-                    else { return false }
+                    else { return .success(false) }
                 
                 // if it doesnt exist, dont delete it
                 if let foundEntity = try type.find(identifier, context: context) {
@@ -236,14 +246,14 @@ public extension Store {
                     context.delete(foundEntity)
                 }
                 
-                return true
+                return .success(true)
             }
             
             // parse JSON
             guard let entityJSON = dataUpdate.entity,
                 case let .json(jsonObject) = entityJSON,
                 let entity = type.init(json: .object(jsonObject))
-                else { return false }
+                else { return .success(false) }
             
             switch dataUpdate.className {
                 
@@ -252,13 +262,13 @@ public extension Store {
                  guard let image = entity as? Image
                  else { return false }
                  */
-                return true
+                return .success(true)
                 
             case .SummitGroupEvent:
                 
                 guard let member = authenticatedMember,
                     let event = entity as? GroupEventDataUpdate
-                    else { return false }
+                    else { return .success(false) }
                 
                 // insert or update
                 let managedObject = try event.save(context)
@@ -266,14 +276,14 @@ public extension Store {
                 // add to authenticated member's group events
                 member.groupEvents.insert(managedObject)
                 
-                return true
+                return .success(true)
                 
             default:
                 
                 // insert or update
                 let _ = try entity.write(context, summit: summit)
                 
-                return true
+                return .success(true)
             }
         }
     }

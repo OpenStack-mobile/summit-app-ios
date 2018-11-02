@@ -23,26 +23,40 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.request(method: .get, path: url) { (responseObject, error) in
+        if let authModule = http.authzModule {
             
-            // forward error
-            guard error == nil
-                else { completion(.error(error!)); return }
-            
-            guard let json = try? JSON.Value(string: responseObject as! String),
-                let member = MemberResponse.Member(json: json)
-                else { completion(.error(Error.invalidResponse)); return }
-            
-            // cache
-            try! context.performErrorBlockAndWait {
+            if authModule.isAuthorized() {
                 
-                let _ = try member.save(context)
-                
-                try context.validateAndSave()
+                http.request(method: .get, path: url) { (responseObject, error) in
+                    
+                    // forward error
+                    guard error == nil
+                        else { completion(.error(error!)); return }
+                    
+                    guard let json = try? JSON.Value(string: responseObject as! String),
+                        let member = MemberResponse.Member(json: json)
+                        else { completion(.error(Error.invalidResponse)); return }
+                    
+                    // cache
+                    try! context.performErrorBlockAndWait {
+                        
+                        let _ = try member.save(context)
+                        
+                        try context.validateAndSave()
+                    }
+                    
+                    // success
+                    completion(.value(member))
+                }
             }
+            else {
+                
+                completion(.error(Store.Error.unauthorized))
+            }
+        }
+        else {
             
-            // success
-            completion(.value(member))
+            completion(.error(Store.Error.customClientError("OAuth module not configured")))
         }
     }
 }

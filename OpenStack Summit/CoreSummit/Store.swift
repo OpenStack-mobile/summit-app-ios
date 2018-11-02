@@ -127,7 +127,7 @@ public final class Store {
     
     // MARK: - Methods
     
-    public func clear() throws {
+    public func clear(forceLogout: Bool = true) throws {
         
         try self.deletePersistentStore((persistentStoreCoordinator, persistentStore))
         self.persistentStore = try self.createPersistentStore(persistentStoreCoordinator)
@@ -139,8 +139,10 @@ public final class Store {
         NotificationCenter.default.post(name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext, userInfo: [:])
         
         #if os(iOS)
-        // logout
-        self.logout()
+        if forceLogout {
+            
+            self.logout()
+        }
         #endif
     }
     
@@ -292,6 +294,12 @@ public extension Store {
         
         /// A custom error from the server.
         case customServerError(String)
+        
+        /// A custom error from the client.
+        case customClientError(String)
+        
+        /// The client is unauthorized
+        case unauthorized
     }
 }
 
