@@ -37,6 +37,9 @@ public extension Store {
         
         session.clear()
         
+        // clear tokens
+        oauthModuleOpenID.oauth2Session.clearTokens()
+        
         NotificationCenter.default.post(name: Store.Notification.loggedOut, object: self)
     }
     
