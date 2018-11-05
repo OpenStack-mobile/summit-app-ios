@@ -12,7 +12,7 @@ public final class DataUpdatePoller {
     
     public var polling = false
     
-    public var pollingInterval: Double = 60
+    public var pollingInterval: Double = 30
     
     public var log: ((String) -> ())?
     
