@@ -138,6 +138,8 @@ public final class Store {
         // manually send notification
         NotificationCenter.default.post(name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext, userInfo: [:])
         
+        NotificationCenter.default.post(name: Store.Notification.dataWiping, object: self)
+        
         #if os(iOS)
         if forceLogout {
             
@@ -310,6 +312,7 @@ public extension Store {
         public static let loggedIn = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedIn")
         public static let loggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedOut")
         public static let forcedLoggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.ForcedLoggedOut")
+        public static let dataWiping = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.DataWiping")
     }
 }
 

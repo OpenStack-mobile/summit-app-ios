@@ -32,9 +32,16 @@ extension ActivityViewController {
     
     func showActivityIndicator() {
         
+        showActivityIndicator(withMessage: nil)
+    }
+    
+    func showActivityIndicator(withMessage message: String?) {
+        
         view.isUserInteractionEnabled = false
         
         progressHUD.show(in: view)
+        
+        progressHUD.textLabel.text = message
         
         view.bringSubview(toFront: progressHUD)
     }

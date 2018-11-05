@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import typealias CoreSummit.Identifier
+import CoreSummit
 
 final class MainRevealViewController: SWRevealViewController, SummitActivityHandlingViewController {
     
@@ -25,6 +26,8 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
         let frontViewController = UINavigationController(rootViewController: menuViewController.generalScheduleViewController)
         
         super.init(rearViewController: menuViewController, frontViewController: frontViewController)
+        
+        registerNotifications()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,5 +67,26 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
     func search(_ searchTerm: String) {
         
         menuViewController.search(searchTerm)
+    }
+    
+    // MARK: - Notifications
+    
+    private func registerNotifications() {
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dataWiping),
+            name: Store.Notification.dataWiping,
+            object: nil)
+    }
+    
+    @objc private func dataWiping(_ notification: Foundation.Notification) {
+        
+        menuViewController.view(screen: .events)
+        
+        guard let topViewController = (frontViewController as? UINavigationController)?.topViewController as? ActivityViewController
+            else { return }
+        
+        topViewController.showActivityIndicator(withMessage: "Updating...")
     }
 }
