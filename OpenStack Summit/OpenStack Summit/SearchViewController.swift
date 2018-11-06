@@ -389,6 +389,10 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchTableViewHeaderView.reuseIdentifier) as! SearchTableViewHeaderView
         
+        let backgroundView = UIView(frame: headerView.bounds)
+        backgroundView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        headerView.backgroundView = backgroundView
+        
         headerView.titleLabel.text = sectionTitle
         
         let buttonText: String
