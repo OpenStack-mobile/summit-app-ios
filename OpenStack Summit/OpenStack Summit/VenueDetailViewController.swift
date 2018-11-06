@@ -134,10 +134,8 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
             marker.icon = #imageLiteral(resourceName: "map_pin")
             bounds = bounds.includingCoordinate(marker.position)
             mapView.selectedMarker = marker
-            
-            let update = GMSCameraUpdate.fit(bounds)
-            mapView.moveCamera(update)
-            mapView.animate(toZoom: mapView.camera.zoom - 6)
+            mapView.moveCamera(GMSCameraUpdate.fit(bounds))
+            mapView.animate(toZoom: 15)
         }
     }
     

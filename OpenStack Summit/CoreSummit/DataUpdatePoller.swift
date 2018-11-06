@@ -12,7 +12,7 @@ public final class DataUpdatePoller {
     
     public var polling = false
     
-    public var pollingInterval: Double = 60
+    public var pollingInterval: Double = 30
     
     public var log: ((String) -> ())?
     
@@ -68,14 +68,7 @@ public final class DataUpdatePoller {
         // dont poll if no active summit
         guard let summitID = self.summit,
             let summit = try! SummitManagedObject.find(summitID, context: store.managedObjectContext)
-            else {
-                // clear latest data update after wipe
-                if let latestDataUpdate = storage.latestDataUpdate {
-                    
-                    storage.clear()
-                }
-                return
-        }
+            else { return }
         
         print("Polling server for data updates for summit \(summitID)")
         
@@ -98,25 +91,33 @@ public final class DataUpdatePoller {
                     
                     let update = dataUpdates[index]
                     
-                    if store.process(dataUpdate: update, summit: summit.id) == false {
+                    let result = store.process(dataUpdate: update, summit: summit.id)
+                    
+                    if case let .success(value) = result {
                         
-                        // could not process update
+                        if !value {
+                            
+                            // could not process update
+                            
+                            log?("Could not process: \(update.identifier)")
+                            
+                            #if DEBUG
+                            return // block
+                            #endif
+                        }
                         
-                        log?("Could not process: \(update.identifier)")
+                        // store latest data update
+                        storage.latestDataUpdate = update.identifier
                         
-                        #if DEBUG
-                        return // block
-                        #endif
+                        processedCount = index
                     }
                     
-                    // store latest data update
-                    storage.latestDataUpdate = update.identifier
-                    
-                    processedCount = index
-                    
-                    // exit loop if data wiping
-                    if update.className == .WipeData &&
-                        update.operation == .truncate {
+                    // clear data pooler storage and exit loop if data wiping
+                    if case .dataWipe = result {
+                        
+                        print("Data wiping")
+                        
+                        storage.clear()
                         
                         break
                     }
@@ -128,7 +129,7 @@ public final class DataUpdatePoller {
                     
                     try! context.performErrorBlockAndWait { try context.validateAndSave() }
                     
-                    print("Processed \(processedCount) data updates")
+                    if processedCount > 0 { print("Processed \(processedCount + 1) data updates") }
                 }
             }
             
@@ -136,6 +137,8 @@ public final class DataUpdatePoller {
         }
         
         // execute request
+        
+        polling = true
         
         if let latestDataUpdate = storage.latestDataUpdate {
             
@@ -145,8 +148,6 @@ public final class DataUpdatePoller {
             
             store.dataUpdates(summit.id, from: summit.initialDataLoad ?? Date()) { process(response: $0) }
         }
-        
-        polling = true
     }
 }
 

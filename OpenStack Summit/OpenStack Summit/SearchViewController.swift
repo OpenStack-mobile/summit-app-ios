@@ -210,7 +210,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         let predicate = type.predicate(for: searchTerm, summit: summit)
         
-        let results = try context.managedObjects(type, predicate: predicate, limit: limit)
+        let results = try context.managedObjects(type, predicate: predicate, sortDescriptors: type.sortDescriptors, limit: limit)
         
         let items = results.map { $0.toItem() }
         
@@ -389,6 +389,10 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchTableViewHeaderView.reuseIdentifier) as! SearchTableViewHeaderView
         
+        let backgroundView = UIView(frame: headerView.bounds)
+        backgroundView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        headerView.backgroundView = backgroundView
+        
         headerView.titleLabel.text = sectionTitle
         
         let buttonText: String
@@ -493,12 +497,16 @@ private extension SearchViewController {
 
 private protocol SearchViewControllerItem: CoreDataDecodable {
     
+    static var sortDescriptors: [NSSortDescriptor] { get }
+    
     func toItem() -> SearchViewController.Item
     
     static func predicate(for searchTerm: String, summit: Identifier) -> Predicate
 }
 
 extension ScheduleItem: SearchViewControllerItem {
+    
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return EventManagedObject.sortDescriptors }
     
     fileprivate func toItem() -> SearchViewController.Item { return .event(self) }
     
@@ -519,6 +527,8 @@ extension ScheduleItem: SearchViewControllerItem {
 
 extension Speaker: SearchViewControllerItem {
     
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return SpeakerManagedObject.sortDescriptors }
+    
     fileprivate func toItem() -> SearchViewController.Item { return .speaker(self) }
     
     fileprivate static func predicate(for searchTerm: String, summit: Identifier) -> Predicate {
@@ -535,6 +545,8 @@ extension Speaker: SearchViewControllerItem {
 }
 
 extension Track: SearchViewControllerItem {
+    
+    fileprivate static var sortDescriptors: [NSSortDescriptor] { return TrackManagedObject.sortDescriptors }
     
     fileprivate func toItem() -> SearchViewController.Item { return .track(self) }
     

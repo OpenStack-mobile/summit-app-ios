@@ -30,7 +30,15 @@ public extension Store {
             
             let managedObject = try summit.save(context)
             
-            managedObject.initialDataLoad = Date()
+            if let JSONObject = json.objectValue,
+                let timeStamp = JSONObject["timestamp"]?.integerValue {
+                
+                managedObject.initialDataLoad = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+            }
+            else {
+                
+                managedObject.initialDataLoad = Date()
+            }
             
             try context.validateAndSave()
         }
@@ -93,16 +101,35 @@ public extension Store {
                 
                 let managedObject = try summit.save(context)
                 
-                managedObject.initialDataLoad = Date()
+                if let JSONObject = json.objectValue,
+                    let timeStamp = JSONObject["timestamp"]?.integerValue {
+                    
+                    managedObject.initialDataLoad = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+                }
+                else {
+                    
+                    managedObject.initialDataLoad = Date()
+                }
                 
                 try context.validateAndSave()
             }
             
-            // success
-            completion(.value(summit))
+            self.currentMember(for: summit.identifier) { (response) in
+                
+                switch response {
+                    
+                case .error: break
+                    
+                case let .value(member):
+                    
+                    self.session.member = member.identifier
+                    
+                    NotificationCenter.default.post(name: Store.Notification.loggedIn, object: self)
+                }
+                
+                completion(.value(summit))
+            }
         }
     }
     #endif
 }
-
-

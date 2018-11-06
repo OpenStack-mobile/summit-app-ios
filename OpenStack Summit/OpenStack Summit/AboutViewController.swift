@@ -79,6 +79,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - Actions
     
+    @IBAction func refreshData(_ sender: UIButton) {
+        
+        sender.isEnabled = false
+        
+        try! Store.shared.clear(forceLogout: false)
+    }
+    
     @IBAction func showLink(_ sender: UIButton) {
         
         let link = Link(rawValue: sender.tag)!
@@ -160,7 +167,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         var aboutCells = [AboutCell]()
         
-        aboutCells += [.links, .description]
+        aboutCells += [.links, .description, .refreshData]
         
         sections.append(.about(aboutCells))
         
@@ -277,6 +284,10 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             case .description:
                 
                 return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.aboutDescriptionCell, for: indexPath)!
+                
+            case .refreshData:
+                
+                return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.refreshDataCell, for: indexPath)!
             }
         }
     }
@@ -352,6 +363,7 @@ private extension AboutViewController {
         
         case links
         case description
+        case refreshData
     }
     
     enum Link: Int {
