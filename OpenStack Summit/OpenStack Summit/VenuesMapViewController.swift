@@ -69,11 +69,8 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
             dictionary[marker] = venue.identifier
         }
         
-        let zoom: Float = venues.count == 1 ? 7 : 2
-        
-        let update = GMSCameraUpdate.fit(bounds)
-        mapView.moveCamera(update)
-        mapView.animate(toZoom: mapView.camera.zoom - zoom)
+        mapView.moveCamera(GMSCameraUpdate.fit(bounds))
+        mapView.animate(toZoom: 15)
     }
     
     // MARK: - GMSMapViewDelegate
