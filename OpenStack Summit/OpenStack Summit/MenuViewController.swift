@@ -35,7 +35,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     // Menu VCs
     lazy var generalScheduleViewController: GeneralScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
     lazy var venuesViewController: VenuesViewController = VenuesViewController()
-    lazy var speakersViewController: SpeakersViewController = R.storyboard.people.speakersViewController()!
     
     private var unreadNotificationsObserver: Int?
     private var unreadTeamMessagesObserver: Int?
@@ -305,6 +304,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     func showSpeakers() {
         
         highlight(.people)
+        
+        let speakersViewController = R.storyboard.people.speakersViewController()!
         
         show(speakersViewController)
     }
