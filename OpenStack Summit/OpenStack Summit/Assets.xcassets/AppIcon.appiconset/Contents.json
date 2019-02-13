@@ -1,49 +1,51 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "iPhone_Notification_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "iPhone_Notification_iOS7-12@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iPhone_Spotlight@2x.png",
+      "filename" : "iPhone_Settings_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iPhone_Spotlight@3x.png",
+      "filename" : "iPhone_Settings_iOS7-12@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iPhone_Spotlight_iOS7-9@2x.png",
+      "filename" : "iPhone_Spotlight_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iPhone_Spotlight_iOS7-9@3x.png",
+      "filename" : "iPhone_Spotlight_iOS7-12@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iPhone_App_iOS7-9@2x.png",
+      "filename" : "iPhone_App_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iPhone_App_iOS7-9@3x.png",
+      "filename" : "iPhone_App_iOS7-12@3x.png",
       "scale" : "3x"
     },
     {
@@ -52,8 +54,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "iPad_Notifications_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
@@ -71,37 +74,37 @@
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPad_Spotlight_iOS7-9.png",
+      "filename" : "iPad_Spotlight_iOS7-12.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPad_Spotlight_iOS7-9@2x.png",
+      "filename" : "iPad_Spotlight_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "iPad_App_iOS7-9.png",
+      "filename" : "iPad_App_iOS7-12.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "iPad_App_iOS7-9@2x.png",
+      "filename" : "iPad_App_iOS7-12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "iPad_ProApp_iOS9@2x.png",
+      "filename" : "iPad_ProApp_iOS12@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "AppStore.png",
+      "filename" : "AppStore.jpeg",
       "scale" : "1x"
     }
   ],
