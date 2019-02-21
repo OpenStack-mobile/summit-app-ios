@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public final class VenueRoomManagedObject: LocationManagedObject {
     
@@ -48,3 +49,42 @@ extension VenueRoom: CoreDataEncodable {
         return managedObject
     }
 }
+
+// MARK - Fetches
+
+public extension VenueRoomManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: #keyPath(VenueRoomManagedObject.name), ascending: true)]
+    }
+}
+
+public extension VenueRoom {
+    
+    /// Fetch all rooms that have some event associated with them.
+    static func scheduled(for summit: Identifier, context: NSManagedObjectContext) throws -> [VenueRoom] {
+        
+        // NSPredicate(format: "location != nil AND summit == %@", summitManagedObject))
+        let eventsPredicate: Predicate = .keyPath(#keyPath(EventManagedObject.location)) != .value(.null)
+            && #keyPath(EventManagedObject.summit.id) == summit
+        
+        let events = try context.managedObjects(EventManagedObject.self, predicate: eventsPredicate)
+        
+        let locations = Set(events.compactMap({ $0.location }))
+            .sorted(by: { $0.name < $1.name })
+        
+        var rooms = [VenueRoomManagedObject]()
+        
+        for location in locations {
+            
+            if let room = location as? VenueRoomManagedObject {
+                
+                rooms.append(room)
+            }
+        }
+        
+        return VenueRoom.from(managedObjects: rooms)
+    }
+}
+

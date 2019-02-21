@@ -45,12 +45,14 @@ final class TrackScheduleViewController: ScheduleViewController {
         let summit = SummitManager.shared.summit.value
         
         let tracks = [self.track.identifier]
+        var rooms = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
+            case let .room(identifier): rooms.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
             default: break
@@ -59,7 +61,7 @@ final class TrackScheduleViewController: ScheduleViewController {
         
         let date = DateFilter.interval(start: startDate, end: endDate)
         
-        let events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, rooms: rooms, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [Date] = []
         
@@ -85,19 +87,21 @@ final class TrackScheduleViewController: ScheduleViewController {
         let summit = SummitManager.shared.summit.value
         
         let tracks = [self.track.identifier]
+        var rooms = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
         for filter in scheduleFilter.activeFilters {
             
             switch filter {
+            case let .room(identifier): rooms.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
             default: break
             }
         }
         
-        let events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, rooms: rooms, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }
