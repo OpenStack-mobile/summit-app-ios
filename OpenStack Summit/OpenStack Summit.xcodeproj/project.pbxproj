@@ -5330,6 +5330,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DISPLAY_NAME = "Open Infrastructure Summit";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				IBSC_MODULE = OpenStackSummitWatch_Extension;
 				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
@@ -5518,6 +5519,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(CONFIGURATION).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DISPLAY_NAME = "Open Infrastracture Summit";
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
 					$SRCROOT/../Vendor,
