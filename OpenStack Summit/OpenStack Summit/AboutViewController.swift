@@ -88,19 +88,28 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     @IBAction func showLink(_ sender: UIButton) {
         
+        var summitWebsite = "https://www.openstack.org"
+        var codeOfConduct = "https://www.openstack.org/legal/community-code-of-conduct"
+        
+        if let summitManagedObject = self.currentSummit {
+            
+            summitWebsite = summitManagedObject.webpageURL
+            codeOfConduct = "\(summitWebsite)/code-of-conduct"
+        }
+        
         let link = Link(rawValue: sender.tag)!
         
         switch link {
             
-        case .openStackWebsite:
+        case .summitWebsite:
             
-            let url = URL(string: "https://openstack.org")!
+            let url = URL(string: summitWebsite)!
             
             open(url)
             
         case .codeOfConduct:
             
-            let url = URL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+            let url = URL(string: codeOfConduct)!
             
             open(url)
             
@@ -378,7 +387,7 @@ private extension AboutViewController {
     
     enum Link: Int {
         
-        case openStackWebsite
+        case summitWebsite
         case codeOfConduct
         case appSupport
         case generalInquiries
