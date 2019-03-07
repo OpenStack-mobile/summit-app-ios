@@ -478,12 +478,24 @@ private extension LaunchScreenViewController {
             }
             else {
                 
+                
+                let calendar = Calendar.current
+                
+                var startDateFormat = "MMMM dd-"
+                var endDateFormat = "dd, yyyy"
+                
+                if !calendar.isDate(self.end, equalTo: self.start, toGranularity: .month) {
+                    
+                    startDateFormat = "MMMM dd - "
+                    endDateFormat = "MMMM dd, yyyy"
+                }
+                
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = self.timeZone
-                dateFormatter.dateFormat = "MMMM d-"
+                dateFormatter.dateFormat = startDateFormat
                 let stringDateFrom = dateFormatter.string(from: self.start)
                 
-                dateFormatter.dateFormat = "d, yyyy"
+                dateFormatter.dateFormat = endDateFormat
                 let stringDateTo = dateFormatter.string(from: self.end)
                 
                 return stringDateFrom + stringDateTo

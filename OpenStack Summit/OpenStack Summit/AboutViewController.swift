@@ -198,12 +198,22 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
         else {
             
+            let calendar = Calendar.current
+            
+            var startDateFormat = "MMMM dd-"
+            var endDateFormat = "dd, yyyy"
+            
+            if !calendar.isDate(summit.end, equalTo: summit.start, toGranularity: .month) {
+                
+                startDateFormat = "MMMM dd - "
+                endDateFormat = "MMMM dd, yyyy"
+            }
+            
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
-            dateFormatter.dateFormat = "MMMM dd-"
+            dateFormatter.dateFormat = startDateFormat
             let stringDateFrom = dateFormatter.string(from: summit.start)
-            
-            dateFormatter.dateFormat = "dd, yyyy"
+            dateFormatter.dateFormat = endDateFormat
             let stringDateTo = dateFormatter.string(from: summit.end)
             
             cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
