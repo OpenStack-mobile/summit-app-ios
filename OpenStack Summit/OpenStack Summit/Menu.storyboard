@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -26,24 +26,24 @@
                         <viewControllerLayoutGuide type="bottom" id="UH9-fZ-W17"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VUv-0t-TMY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdL-Wt-VxC" userLabel="Header">
-                                <rect key="frame" x="0.0" y="20" width="320" height="158"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdL-Wt-VxC" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="44" width="375" height="158"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0kR-HX-6rq">
-                                        <rect key="frame" x="0.0" y="108" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="108" width="375" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAc-ho-eHs" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                                                <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                                                 <color key="backgroundColor" red="0.30621987581253052" green="0.40187403559684753" blue="0.5182686448097229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="MPb-U2-JjR"/>
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type to search..." minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="JSR-Gr-pit" userLabel="Search Text Field">
-                                                <rect key="frame" x="58" y="11.5" width="247" height="27"/>
+                                                <rect key="frame" x="58" y="11.666666666666657" width="302" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="TNN-PQ-LIb"/>
                                                 </constraints>
@@ -55,7 +55,7 @@
                                                 </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search" translatesAutoresizingMaskIntoConstraints="NO" id="15u-AH-e3O">
-                                                <rect key="frame" x="15" y="12.5" width="25" height="25"/>
+                                                <rect key="frame" x="15" y="12.666666666666657" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="15u-AH-e3O" secondAttribute="height" id="1a4-fl-1SY"/>
                                                     <constraint firstAttribute="height" constant="25" id="R0U-11-tMN"/>
@@ -83,10 +83,10 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEq-Mq-EFE" userLabel="Name &amp; Login View">
-                                        <rect key="frame" x="83" y="30" width="222" height="48"/>
+                                        <rect key="frame" x="83" y="30" width="277" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jimmy Mcarthur" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Is-LK-cIs" userLabel="Name Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="148.5" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="149" height="26"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="19"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -130,10 +130,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-1E-DCu">
-                                <rect key="frame" x="0.0" y="178" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="202" width="375" height="576"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-cO-heP" userLabel="Buttons">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-cO-heP" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="576"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhA-QB-4RU" userLabel="Events Button">
                                                 <rect key="frame" x="22" y="24" width="123" height="26"/>
@@ -209,40 +209,39 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Vexxhost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20B-Uo-X9H">
+                                                <rect key="frame" x="20.999999999999993" y="539" width="123.33333333333331" height="17"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="l3J-mz-oAp"/>
+                                            <constraint firstItem="20B-Uo-X9H" firstAttribute="leading" secondItem="Qhk-cO-heP" secondAttribute="leading" constant="21" id="8BD-V4-kRC"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="Z6A-V2-shF"/>
+                                            <constraint firstAttribute="bottom" secondItem="20B-Uo-X9H" secondAttribute="bottom" constant="20" id="skr-7E-tJ9"/>
                                         </constraints>
                                     </view>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hYC-on-4dU" userLabel="Summit Logo Image View">
-                                        <rect key="frame" x="30" y="323" width="168" height="68"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="168" id="1C6-I5-78G"/>
-                                            <constraint firstAttribute="height" constant="68" id="IQi-5O-Qck"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="leading" secondItem="wwI-1E-DCu" secondAttribute="leading" id="0WN-z0-Ocy"/>
-                                    <constraint firstItem="hYC-on-4dU" firstAttribute="top" secondItem="Qhk-cO-heP" secondAttribute="bottom" id="2EL-Yh-x2B"/>
-                                    <constraint firstAttribute="bottom" secondItem="hYC-on-4dU" secondAttribute="bottom" constant="20" id="693-fZ-z8J"/>
-                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="trailing" secondItem="wwI-1E-DCu" secondAttribute="trailing" id="L3A-jE-zac"/>
-                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="top" secondItem="wwI-1E-DCu" secondAttribute="top" id="ai8-RL-2hm"/>
-                                    <constraint firstItem="hYC-on-4dU" firstAttribute="leading" secondItem="wwI-1E-DCu" secondAttribute="leading" constant="30" id="kTh-qU-Dxv"/>
-                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="width" secondItem="wwI-1E-DCu" secondAttribute="width" id="xOh-32-tdO"/>
+                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="leading" secondItem="wwI-1E-DCu" secondAttribute="leading" id="LmB-Pz-7rr"/>
+                                    <constraint firstAttribute="height" secondItem="Qhk-cO-heP" secondAttribute="height" priority="750" id="NGy-Ug-wYd"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qhk-cO-heP" secondAttribute="trailing" id="Rq1-UP-xB2"/>
+                                    <constraint firstItem="Qhk-cO-heP" firstAttribute="top" secondItem="wwI-1E-DCu" secondAttribute="top" id="UFd-dq-d8d"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qhk-cO-heP" secondAttribute="bottom" id="kRR-GU-fCy"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="GdL-Wt-VxC" firstAttribute="leading" secondItem="VUv-0t-TMY" secondAttribute="leading" id="0Z6-3X-VUt"/>
                             <constraint firstItem="GdL-Wt-VxC" firstAttribute="top" secondItem="7cq-W6-3C8" secondAttribute="bottom" id="6wv-QV-2KS"/>
-                            <constraint firstItem="wwI-1E-DCu" firstAttribute="height" secondItem="VUv-0t-TMY" secondAttribute="height" constant="-152" id="F5M-A5-MJV"/>
-                            <constraint firstItem="Qhk-cO-heP" firstAttribute="height" secondItem="VUv-0t-TMY" secondAttribute="height" priority="750" constant="-245" id="Fs8-J8-WMC"/>
-                            <constraint firstItem="wwI-1E-DCu" firstAttribute="width" secondItem="VUv-0t-TMY" secondAttribute="width" id="Qdl-kD-pNd"/>
+                            <constraint firstItem="wwI-1E-DCu" firstAttribute="leading" secondItem="VUv-0t-TMY" secondAttribute="leading" id="89l-tM-eJx"/>
+                            <constraint firstItem="UH9-fZ-W17" firstAttribute="top" secondItem="wwI-1E-DCu" secondAttribute="bottom" id="C4a-37-PdA"/>
+                            <constraint firstItem="Qhk-cO-heP" firstAttribute="width" secondItem="VUv-0t-TMY" secondAttribute="width" id="KTH-0M-2d6"/>
                             <constraint firstItem="GdL-Wt-VxC" firstAttribute="width" secondItem="VUv-0t-TMY" secondAttribute="width" id="bbd-WE-MbQ"/>
-                            <constraint firstItem="wwI-1E-DCu" firstAttribute="top" secondItem="GdL-Wt-VxC" secondAttribute="bottom" id="crk-MT-NfS"/>
-                            <constraint firstItem="GdL-Wt-VxC" firstAttribute="leading" secondItem="VUv-0t-TMY" secondAttribute="leading" id="e0C-kh-v3W"/>
-                            <constraint firstItem="wwI-1E-DCu" firstAttribute="leading" secondItem="VUv-0t-TMY" secondAttribute="leading" id="ggZ-dr-9nU"/>
+                            <constraint firstItem="wwI-1E-DCu" firstAttribute="top" secondItem="GdL-Wt-VxC" secondAttribute="bottom" id="vBs-ZM-bzf"/>
+                            <constraint firstItem="wwI-1E-DCu" firstAttribute="trailing" secondItem="VUv-0t-TMY" secondAttribute="trailing" id="zjy-66-KrE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -262,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4H-U9-HZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191.25" y="470.07042253521126"/>
+            <point key="canvasLocation" x="191.19999999999999" y="469.95073891625617"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gu9-km-v08">
@@ -277,7 +276,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ex-rl-Lfa">
-                                <rect key="frame" x="0.0" y="20" width="600" height="1180"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="1122"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z13-6R-R9Z" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="828"/>
@@ -341,7 +340,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhW-rF-zd9" id="qqQ-ba-eD9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="oNa-qV-csu">
@@ -382,7 +381,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A6h-6z-xpB" id="rpb-OE-50j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -474,12 +473,12 @@
             <objects>
                 <tableViewController storyboardIdentifier="SearchViewController" id="WWd-xg-vZy" customClass="SearchViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="gkI-T6-mYo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="Hoj-9M-z7m">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -488,14 +487,14 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultTableViewCell" rowHeight="53" id="bTX-Am-h18" customClass="SearchResultTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTX-Am-h18" id="nd2-S3-QyR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="52.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Result Value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOh-BJ-hhH">
-                                            <rect key="frame" x="15" y="15" width="297" height="22.5"/>
+                                            <rect key="frame" x="15" y="15.000000000000002" width="352" height="22.666666666666671"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -513,30 +512,30 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="peopleTableViewCell" rowHeight="109" id="qQb-jq-6YF" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="125" width="320" height="109"/>
+                                <rect key="frame" x="0.0" y="125" width="375" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qQb-jq-6YF" id="5nD-75-u2o">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108.66666666666667"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cy8-51-cSb">
-                                            <rect key="frame" x="15" y="24.5" width="60" height="60"/>
+                                            <rect key="frame" x="15" y="24.333333333333329" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="8dn-hb-fvK"/>
                                                 <constraint firstAttribute="height" constant="60" id="UeU-B8-Qgr"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mm5-qU-yF3">
-                                            <rect key="frame" x="91" y="18" width="213" height="72.5"/>
+                                            <rect key="frame" x="91" y="18.333333333333336" width="268" height="72.333333333333314"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFP-fW-tpJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="23.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="268" height="23.333333333333332"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rw-8J-6yN">
-                                                    <rect key="frame" x="0.0" y="31.5" width="213" height="41"/>
+                                                    <rect key="frame" x="0.0" y="31.333333333333329" width="268" height="41"/>
                                                     <string key="text">Multiline Title
 iOS Developer</string>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
@@ -615,7 +614,7 @@ iOS Developer</string>
                                 <rect key="frame" x="0.0" y="28" width="320" height="175"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3lx-TO-cwS" id="3gw-L9-PLB">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Columbia, SC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myc-Ki-vnp" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
@@ -672,11 +671,11 @@ iOS Developer</string>
                                 <rect key="frame" x="0.0" y="203" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qbu-WP-gaU" id="h4U-0s-luK">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-fP-7cq">
-                                            <rect key="frame" x="16" y="0.0" width="140" height="45.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="140" height="45.666666666666664"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetwork" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
                                                     <rect key="frame" x="0.0" y="14" width="18" height="18"/>
@@ -686,7 +685,7 @@ iOS Developer</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PMv-Ui-qu4" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="26" y="14.5" width="114" height="17"/>
+                                                    <rect key="frame" x="26" y="14.333333333333336" width="114" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -703,17 +702,17 @@ iOS Developer</string>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcl-Ae-dHg">
-                                            <rect key="frame" x="164" y="0.0" width="140" height="45.5"/>
+                                            <rect key="frame" x="164" y="0.0" width="140" height="45.666666666666664"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetworkPassword" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
-                                                    <rect key="frame" x="0.0" y="14.5" width="15" height="15"/>
+                                                    <rect key="frame" x="0.0" y="14.333333333333336" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="qB3-zT-c2p" secondAttribute="height" id="jRq-Jy-5jt"/>
                                                         <constraint firstAttribute="height" constant="15" id="nI0-xa-jGB"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="r2j-0M-X2P" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="23" y="14.5" width="117" height="17"/>
+                                                    <rect key="frame" x="23" y="14.333333333333336" width="117" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -752,13 +751,13 @@ iOS Developer</string>
                                 <rect key="frame" x="0.0" y="249" width="320" height="208"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XAa-2G-uHD" id="vbC-yB-6z3">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="207.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="207.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-MN-Goa">
-                                            <rect key="frame" x="69" y="20" width="182" height="36"/>
+                                            <rect key="frame" x="85" y="20" width="150" height="36"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                            <state key="normal" title="OpenStack Website">
+                                            <state key="normal" title="Summit Website">
                                                 <color key="titleColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
@@ -814,18 +813,18 @@ iOS Developer</string>
                                 <rect key="frame" x="0.0" y="457" width="320" height="286"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9t1-Ni-kr1" id="ZmO-hx-5CG">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="285.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="285.66666666666669"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-kI-xaq">
-                                            <rect key="frame" x="8" y="8" width="304" height="19.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Open Infrastructure Summit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-kI-xaq">
+                                            <rect key="frame" x="8" y="8" width="304" height="20"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-iW-mpM">
-                                            <rect key="frame" x="24" y="35.5" width="272" height="234"/>
-                                            <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-iW-mpM">
+                                            <rect key="frame" x="24" y="36.000000000000014" width="272" height="217.33333333333337"/>
+                                            <string key="text">At the Open Infrastructure Summit (formerly the OpenStack Summit), collaborate directly with the people building and running open source infrastructure using OpenStack, Kubernetes and 30+ other technologies. Thousands of IT decision makers, operators and the developers will gather at the Summit to collaborate across common use cases including Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, and Security.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -847,11 +846,11 @@ iOS Developer</string>
                                 <rect key="frame" x="0.0" y="743" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="evU-Vy-LAD" id="YI6-Wc-PRH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8N-zz-Gwn" userLabel="Refresh Data Button">
-                                            <rect key="frame" x="60" y="30.5" width="200" height="40"/>
+                                            <rect key="frame" x="60" y="30.333333333333329" width="200" height="40"/>
                                             <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="L7d-bE-ASj"/>
@@ -899,13 +898,13 @@ iOS Developer</string>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-by-fxK">
-                            <rect key="frame" x="98.5" y="20" width="43" height="21"/>
+                            <rect key="frame" x="98.666666666666671" y="20" width="43.000000000000014" height="21"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Networks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05i-lg-zTr">
-                            <rect key="frame" x="47.5" y="49" width="145" height="21"/>
+                            <rect key="frame" x="47.666666666666657" y="49" width="145" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -939,9 +938,8 @@ iOS Developer</string>
         <image name="Venues" width="14" height="21"/>
         <image name="WirelessNetwork" width="18" height="13"/>
         <image name="WirelessNetworkPassword" width="12" height="15"/>
-        <image name="arrow" width="9" height="14"/>
-        <image name="generic-user-avatar" width="122" height="122"/>
-        <image name="menu" width="20" height="16"/>
-        <image name="summit-logo" width="335" height="135"/>
+        <image name="arrow" width="19" height="29"/>
+        <image name="generic-user-avatar" width="245" height="245"/>
+        <image name="menu" width="40" height="33"/>
     </resources>
 </document>

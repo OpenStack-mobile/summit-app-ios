@@ -195,6 +195,7 @@ public extension EventManagedObject {
                        tracks: [Identifier] = [],
                        trackGroups: [Identifier] = [],
                        levels: [Level] = [],
+                       rooms: [Identifier] = [],
                        venues: [Identifier] = [],
                        summit: Identifier,
                        context: NSManagedObjectContext) throws -> [EventManagedObject] {
@@ -236,6 +237,14 @@ public extension EventManagedObject {
             let levelsPredicate: Predicate = (#keyPath(EventManagedObject.presentation.level)).in(levels.rawValues)
             
             predicates.append(levelsPredicate)
+        }
+        
+        if rooms.isEmpty == false {
+
+            //let roomsPredicate = NSPredicate(format: "location.id IN %@", rooms)
+            let roomsPredicate: Predicate = (#keyPath(EventManagedObject.location.id)).in(rooms)
+            
+            predicates.append(roomsPredicate)
         }
         
         if venues.isEmpty == false {

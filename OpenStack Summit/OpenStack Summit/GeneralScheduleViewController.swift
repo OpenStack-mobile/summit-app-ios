@@ -177,6 +177,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let summit = SummitManager.shared.summit.value
         
         var tracks = [Identifier]()
+        var rooms = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
@@ -184,6 +185,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             
             switch filter {
             case let .track(identifier): tracks.append(identifier)
+            case let .room(identifier): rooms.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
             default: break
@@ -192,7 +194,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         let date = DateFilter.interval(start: startDate, end: endDate)
         
-        var events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        var events = try! EventManagedObject.filter(date, tracks: tracks, levels: levels, rooms: rooms, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         if scheduleFilter.activeFilters.contains(.video) {
             
@@ -223,6 +225,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let summit = SummitManager.shared.summit.value
         
         var tracks = [Identifier]()
+        var rooms = [Identifier]()
         var venues = [Identifier]()
         var levels = [Level]()
         
@@ -230,13 +233,14 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             
             switch filter {
             case let .track(identifier): tracks.append(identifier)
+            case let .room(identifier): rooms.append(identifier)
             case let .venue(identifier): venues.append(identifier)
             case let .level(level): levels.append(level)
             default: break
             }
         }
         
-        var events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        var events = try! EventManagedObject.filter(filter, tracks: tracks, levels: levels, rooms: rooms, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         if scheduleFilter.activeFilters.contains(.video) {
             

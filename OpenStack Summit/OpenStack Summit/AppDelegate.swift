@@ -32,7 +32,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // print app info
-        print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
+        print("Launching OpenInfrastructure Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
         // update app build preference

@@ -27,6 +27,9 @@ enum FilterCategory {
     
     /// VENUE
     case venue
+    
+    /// ROOM
+    case room
 }
 
 enum Filter {
@@ -38,6 +41,40 @@ enum Filter {
     case trackGroup(Identifier)
     case level(Level)
     case venue(Identifier)
+    case room(Identifier)
+    
+    public var identifier: Identifier? {
+        
+        switch self {
+        case let .track(identifier): return identifier
+        case let .trackGroup(identifier): return identifier
+        case let .venue(identifier): return identifier
+        case let .room(identifier): return identifier
+        default: return nil
+        }
+    }
+    
+    public var category: FilterCategory {
+        
+        switch self {
+        case .activeTalks: return .activeTalks
+        case .video: return .activeTalks
+        case .track: return .track
+        case .trackGroup: return .trackGroup
+        case .level: return .level
+        case .venue: return .venue
+        case .room: return .room
+        }
+    }
+    
+    public var parentCategory: FilterCategory? {
+        
+        switch self {
+        case .track: return .trackGroup
+        case .room: return .venue
+        default: return nil
+        }
+    }
 }
 
 extension Filter: Hashable {
@@ -58,6 +95,7 @@ func == (lhs: Filter, rhs: Filter) -> Bool {
     case let (.track(lhsValue), .track(rhsValue)): return lhsValue == rhsValue
     case let (.level(lhsValue), .level(rhsValue)): return lhsValue == rhsValue
     case let (.venue(lhsValue), .venue(rhsValue)): return lhsValue == rhsValue
+    case let (.room(lhsValue), .room(rhsValue)): return lhsValue == rhsValue
     default: return false
     }
 }
@@ -109,9 +147,18 @@ struct ScheduleFilter: Equatable {
             .flatMap { Level(rawValue: $0) }
             .sorted()
         
-        let venues = try! context.managedObjects(Venue.self,
-                                                 predicate: #keyPath(VenueManagedObject.summit.id) == summitID,
-                                                 sortDescriptors: VenueManagedObject.sortDescriptors)
+        var rooms = [VenueRoom]()
+        var venues = [Venue]()
+        
+        if let startShowingVenues = summit.startShowingVenues,
+            NSDate().mt_is(after: startShowingVenues) {
+            
+            rooms = try! VenueRoom.scheduled(for: summitID, context: context)
+            
+            venues = try! context.managedObjects(Venue.self,
+                                                     predicate: #keyPath(VenueManagedObject.summit.id) == summitID,
+                                                     sortDescriptors: VenueManagedObject.sortDescriptors)
+        }
         
         // populate filter categories
         
@@ -144,6 +191,11 @@ struct ScheduleFilter: Equatable {
         if levels.isEmpty == false {
             
             allFilters[.level] = levels.map { .level($0) }
+        }
+        
+        if rooms.isEmpty == false {
+            
+            allFilters[.room] = rooms.map { .room($0.identifier) }
         }
         
         if venues.isEmpty == false {

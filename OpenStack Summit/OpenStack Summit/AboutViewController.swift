@@ -88,19 +88,28 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     @IBAction func showLink(_ sender: UIButton) {
         
+        var summitWebsite = "https://www.openstack.org"
+        var codeOfConduct = "https://www.openstack.org/legal/community-code-of-conduct"
+        
+        if let summitManagedObject = self.currentSummit {
+            
+            summitWebsite = summitManagedObject.webpageURL
+            codeOfConduct = "\(summitWebsite)/code-of-conduct"
+        }
+        
         let link = Link(rawValue: sender.tag)!
         
         switch link {
             
-        case .openStackWebsite:
+        case .summitWebsite:
             
-            let url = URL(string: "https://openstack.org")!
+            let url = URL(string: summitWebsite)!
             
             open(url)
             
         case .codeOfConduct:
             
-            let url = URL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+            let url = URL(string: codeOfConduct)!
             
             open(url)
             
@@ -198,12 +207,22 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
         else {
             
+            let calendar = Calendar.current
+            
+            var startDateFormat = "MMMM dd-"
+            var endDateFormat = "dd, yyyy"
+            
+            if !calendar.isDate(summit.end, equalTo: summit.start, toGranularity: .month) {
+                
+                startDateFormat = "MMMM dd - "
+                endDateFormat = "MMMM dd, yyyy"
+            }
+            
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(identifier: summit.timeZone)
-            dateFormatter.dateFormat = "MMMM dd-"
+            dateFormatter.dateFormat = startDateFormat
             let stringDateFrom = dateFormatter.string(from: summit.start)
-            
-            dateFormatter.dateFormat = "dd, yyyy"
+            dateFormatter.dateFormat = endDateFormat
             let stringDateTo = dateFormatter.string(from: summit.end)
             
             cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
@@ -368,7 +387,7 @@ private extension AboutViewController {
     
     enum Link: Int {
         
-        case openStackWebsite
+        case summitWebsite
         case codeOfConduct
         case appSupport
         case generalInquiries
