@@ -99,11 +99,13 @@ final class EventDatesInterfaceController: WKInterfaceController {
         let startDate = (selectedDate as NSDate).mt_startOfCurrentDay()
         let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()
         
-        let events = Store.shared.cache?.schedule.filter({
+        guard let summit = Store.shared.cache else { return Context([Event]()) }
+        
+        let events = summit.schedule.filter({
             
             return ($0.start as NSDate).mt_isBetweenDate(startDate, andDate: endDate)
         })
         
-        return Context(events)
+        return Context(Array(events))
     }
 }
