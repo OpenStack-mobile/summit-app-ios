@@ -5519,7 +5519,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(CONFIGURATION).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DISPLAY_NAME = "Open Infrastracture Summit";
+				DISPLAY_NAME = "Open Infrastructure Summit";
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
 					$SRCROOT/../Vendor,
