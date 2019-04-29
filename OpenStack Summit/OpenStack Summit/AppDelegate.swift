@@ -230,7 +230,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 else { return false }
             
             guard self.openWeb(url: url)
-                else { UIApplication.shared.openURL(url); return false }
+                else {
+                    if #available(iOS 10.0, *) {
+                        
+                        UIApplication.shared.open(url, options: [:])
+                    }
+                    return false
+            }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
