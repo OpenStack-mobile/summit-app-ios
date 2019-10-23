@@ -62,7 +62,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     private var data = [Data]()
     
-    private var showNonConfirmedWarning = false
+    //private var showNonConfirmedWarning = false
     
     // MARK: - Loading
     
@@ -78,7 +78,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         tableView.tableFooterView = UIView()
         
         // setup toolbar
-        setupToolbar()
+        //setupToolbar()
         
         // configure UI
         defer { configureView() }
@@ -91,7 +91,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.userActivity?.becomeCurrent()
         
         // toolbar
-        self.navigationController?.setToolbarHidden(!showNonConfirmedWarning, animated: animated)
+        //self.navigationController?.setToolbarHidden(!showNonConfirmedWarning, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,7 +108,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.userActivity?.resignCurrent()
         
         // toolbar
-        self.navigationController?.setToolbarHidden(true, animated: animated)
+        //self.navigationController?.setToolbarHidden(true, animated: animated)
     }
     
     override func updateUserActivityState(_ userActivity: NSUserActivity) {
@@ -130,10 +130,10 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Actions
     
-    @IBAction func nonConfirmedWarningTapped(_ sender: AnyObject? = nil) {
+    /*@IBAction func nonConfirmedWarningTapped(_ sender: AnyObject? = nil) {
         
         self.performSegue(withIdentifier: R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
-    }
+    }*/
     
     // MARK: - Actions
     
@@ -203,7 +203,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         data = []
         
-        switch profile {
+        /*switch profile {
             
         case .currentUser:
             
@@ -216,7 +216,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         default:
             
             showNonConfirmedWarning = false
-        }
+        }*/
         
         let links = Links(twitter: person.twitter ?? "", irc: person.irc ?? "", linkedIn: person.linkedIn ?? "")
         
@@ -264,7 +264,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
-    private func setupToolbar() {
+    /*private func setupToolbar() {
         
         navigationController?.toolbar.barTintColor = UIColor(hexString: "#FAD438")!
         navigationController?.toolbar.isTranslucent = false
@@ -286,7 +286,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         textBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "OpenSans", size: 13)!], for: UIControlState())
         
         toolbarItems = [imageBarButtonItem, textBarButtonItem]
-    }
+    }*/
     
     // MARK: - IndicatorInfoProvider
     

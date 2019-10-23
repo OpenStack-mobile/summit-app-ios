@@ -181,13 +181,13 @@ public final class Store {
         
         let hasPasscode = deviceHasPasscode
         
-        var openIDScopes = ["openid",
+        var oauthScopes = ["openid",
                       "offline_access",
                       "\(environment.configuration.serverURL)/me/read",
                       "\(environment.configuration.serverURL)/summits/read",
                       "\(environment.configuration.serverURL)/summits/write",
-                      "\(environment.configuration.serverURL)/summits/read-external-orders",
-                      "\(environment.configuration.serverURL)/summits/confirm-external-orders",
+                      //"\(environment.configuration.serverURL)/summits/read-external-orders",
+                      //"\(environment.configuration.serverURL)/summits/confirm-external-orders",
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/add",
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/delete"]
         
@@ -195,9 +195,9 @@ public final class Store {
         
         if environment == .staging {
             
-            // openID staging scopes
+            // OAuth staging scopes
             
-            openIDScopes += ["\(environment.configuration.serverURL)/teams/read",
+            oauthScopes += ["\(environment.configuration.serverURL)/teams/read",
                               "\(environment.configuration.serverURL)/teams/write",
                               "\(environment.configuration.serverURL)/members/invitations/read",
                               "\(environment.configuration.serverURL)/members/invitations/write"]
@@ -216,7 +216,7 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: openIDScopes,
+            scopes: oauthScopes,
             clientSecret: environment.configuration.openID.secret,
             isWebView: true
         )
