@@ -19,12 +19,12 @@ struct Preference {
         set { set(object: newValue, for: .appBuild) }
     }
     
-    static var goingToSummit: Bool {
+    /*static var goingToSummit: Bool {
         
         get { return object(for: .goingToSummit) as? Bool ?? false }
         
         set { set(object: newValue, for: .goingToSummit) }
-    }
+    }*/
     
     /// Last time user has offered to review the app.
     static var lastAppReview: Date? {

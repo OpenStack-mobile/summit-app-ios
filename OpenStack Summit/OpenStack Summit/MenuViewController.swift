@@ -415,7 +415,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         showActivityIndicator()
         
-        Preference.goingToSummit = false
+        //Preference.goingToSummit = false
         
         Store.shared.login(summit, loginCallback: {
             
@@ -446,7 +446,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                     controller.showUserProfile()
                     controller.reloadMenu()
                     
-                    if Store.shared.isLoggedInAndConfirmedAttendee {
+                    // reload schedule
+                    controller.showEvents()
+                    
+                    /*if Store.shared.isLoggedInAndConfirmedAttendee {
                         
                         Preference.goingToSummit = true
                         
@@ -477,7 +480,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                         })
                         
                         revealViewController?.present(alert, animated: true) { }
-                    }
+                    }*/
                     
                     // log user email
                     if let userID = Store.shared.authenticatedMember?.id, AppEnvironment == .staging {
